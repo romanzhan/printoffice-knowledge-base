@@ -8,7 +8,7 @@
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--top) + 16px)}
 
 /* ── Скроллбары: минималистичные, почти невидимые, проявляются при наведении ── */
 /* Firefox */
@@ -108,12 +108,21 @@ body.cmdk-open{overflow:hidden}
 
 /* markdown */
 .md{max-width:var(--maxw)}
-.md h1{font-size:32px;line-height:1.2;letter-spacing:-.02em;margin:.2em 0 .5em;font-weight:700}
-.md h2{font-size:23px;margin:1.7em 0 .6em;font-weight:650;letter-spacing:-.01em;border-top:1px solid var(--line);padding-top:1.2em}
-/* если перед h2 уже стоит разделитель (---), не дублируем линию сверху */
-.md hr + h2{border-top:0;padding-top:.1em;margin-top:.4em}
-.md h3{font-size:18.5px;margin:1.4em 0 .5em;font-weight:650}
-.md h4{font-size:16px;margin:1.2em 0 .4em;font-weight:650;color:#333}
+.md h1,.md h2,.md h3,.md h4{scroll-margin-top:calc(var(--top) + 16px)}
+.md h1{font-size:33px;line-height:1.18;letter-spacing:-.02em;margin:.2em 0 .6em;font-weight:750}
+/* h2 — крупный «этап»: жирная верхняя линия и воздух сверху отделяют блоки */
+.md h2{font-size:25px;margin:2.3em 0 .8em;padding-top:1.4em;border-top:2px solid var(--line);font-weight:700;letter-spacing:-.01em;color:#0f0f12}
+.md hr + h2{border-top:0;padding-top:.1em;margin-top:.6em}
+/* h3 — «спринт/подраздел»: акцентная полоса слева */
+.md h3{font-size:19px;margin:1.9em 0 .7em;padding:1px 0 1px 13px;border-left:3px solid var(--accent);font-weight:650;color:#1a1a1f}
+/* h4 — третий уровень: компактная капс-метка */
+.md h4{font-size:13px;margin:1.6em 0 .5em;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#6a6a72}
+/* якорь «#» у заголовка — появляется при наведении, копирует ссылку */
+.md .hanchor{margin-left:.45em;color:var(--muted);opacity:0;text-decoration:none;font-weight:400;cursor:pointer;transition:opacity .12s,color .12s;user-select:none}
+.md h2:hover .hanchor,.md h3:hover .hanchor,.md h4:hover .hanchor{opacity:.45}
+.md .hanchor:hover{opacity:1;color:var(--accent)}
+.copy-toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(10px);background:#1d1d1f;color:#fff;padding:9px 16px;border-radius:10px;font-size:13px;box-shadow:0 8px 28px rgba(0,0,0,.25);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:200}
+.copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .md p{margin:.7em 0}
 .md a{color:var(--accent);text-decoration:none}
 .md a:hover{text-decoration:underline}

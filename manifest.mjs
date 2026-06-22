@@ -15,6 +15,7 @@ export const GROUPS = [
     title: 'Обзор',
     pages: [
       { src: '00-overview.md', label: 'О продукте' },
+      { src: 'roadmap.md', label: 'Дорожная карта', local: true },
     ],
   },
   {

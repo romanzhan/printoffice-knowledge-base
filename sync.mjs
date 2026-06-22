@@ -9,8 +9,9 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = join(here, '..');           // context/
 const contentDir = join(here, 'content');
 
-let ok = 0, miss = 0;
+let ok = 0, miss = 0, local = 0;
 for (const p of flatPages()) {
+  if (p.local) { local++; continue; } // авторская страница в content/ — не синхронизируется из исходников
   const from = join(root, p.src);
   const to = join(contentDir, p.src);
   if (!existsSync(from)) { console.warn('НЕТ ИСХОДНИКА:', p.src); miss++; continue; }
@@ -18,5 +19,5 @@ for (const p of flatPages()) {
   copyFileSync(from, to);
   ok++;
 }
-console.log(`Синхронизировано: ${ok}, отсутствует: ${miss}`);
+console.log(`Синхронизировано: ${ok}, авторских (пропущено): ${local}, отсутствует: ${miss}`);
 if (miss) process.exit(1);

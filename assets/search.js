@@ -128,6 +128,38 @@
              && !/^(input|textarea|select)$/i.test(document.activeElement.tagName)) { e.preventDefault(); open(); }
   });
 
+  // Копирование ссылки на раздел по клику на «#» у заголовка
+  const toast = document.createElement('div');
+  toast.className = 'copy-toast';
+  document.body.appendChild(toast);
+  let toastTimer;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1500);
+  }
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.focus(); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    ta.remove();
+  }
+  document.addEventListener('click', e => {
+    const a = e.target.closest('.hanchor');
+    if (!a) return;
+    e.preventDefault();
+    const id = decodeURIComponent(a.getAttribute('href').slice(1));
+    const url = location.origin + location.pathname + '#' + id;
+    history.replaceState(null, '', '#' + id);
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => showToast('Ссылка скопирована')).catch(() => { fallbackCopy(url); showToast('Ссылка скопирована'); });
+    } else { fallbackCopy(url); showToast('Ссылка скопирована'); }
+  });
+
   // Подсветка активного пункта правого оглавления при прокрутке
   const tocLinks = Array.from(document.querySelectorAll('.toc a'));
   if (tocLinks.length) {

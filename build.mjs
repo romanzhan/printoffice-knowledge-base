@@ -17,13 +17,21 @@ const includedSet = new Map(); // normalized src -> page
 for (const p of pages) includedSet.set(p.src.replace(/\\/g, '/'), p);
 
 // ---------- утилиты ----------
+const TRANSLIT = {
+  а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'e',ж:'zh',з:'z',и:'i',й:'y',к:'k',л:'l',м:'m',
+  н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'sch',
+  ъ:'',ы:'y',ь:'',э:'e',ю:'yu',я:'ya',
+};
+function translit(s) {
+  let out = '';
+  for (const ch of s) out += (ch in TRANSLIT) ? TRANSLIT[ch] : ch;
+  return out;
+}
+// ASCII-слаги: коротко, копируемо, без %-кодирования кириллицы.
 function slugify(s) {
-  return String(s).trim().toLowerCase()
-    .replace(/<[^>]+>/g, '')
-    .replace(/[^\p{L}\p{N}\s_-]/gu, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
+  let t = translit(String(s).trim().toLowerCase().replace(/<[^>]+>/g, ''));
+  t = t.replace(/[^a-z0-9\s_-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  return t || 'section';
 }
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -94,7 +102,10 @@ function renderArticle(md, rawSrc, currentSrc) {
     }
   }
   const title = sections.length ? sections[0].heading : '';
-  const html = md.renderer.render(tokens, md.options, env);
+  let html = md.renderer.render(tokens, md.options, env);
+  // Кнопка-якорь «#» у заголовков: клик копирует короткую ASCII-ссылку на раздел.
+  html = html.replace(/<h([2-4]) id="([^"]+)">([\s\S]*?)<\/h\1>/g,
+    (m, lvl, id, inner) => `<h${lvl} id="${id}">${inner}<a class="hanchor" href="#${id}" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h${lvl}>`);
   return { html, toc, title, sections };
 }
 

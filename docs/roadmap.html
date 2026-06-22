@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Дорожная карта проекта — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="roadmap">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li><li class="active"><a href="roadmap.html">Дорожная карта</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="dorozhnaya-karta-proekta">Дорожная карта проекта</h1>
+<h2 id="kak-my-rabotaem">Как мы работаем<a class="hanchor" href="#kak-my-rabotaem" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Разработка ведётся <strong>двухнедельными спринтами</strong>. Спринт — законченный отрезок работы с зафиксированной целью и составом задач; в конце спринта есть работающий, развёрнутый результат, который можно проверить.</p>
+<p>Двухнедельный ритм выбран как отраслевой стандарт: он даёт предсказуемость (понятно, что будет готово к концу спринта), раннюю обратную связь (результат виден каждые две недели, а не в конце проекта) и возможность менять приоритеты между спринтами без срыва общего плана. По итогам каждого спринта — демонстрация результата и приоритизация следующего.</p>
+<p>Каждый спринт закрывается по чётким <strong>критериям готовности</strong> (Definition of Done): функция считается сделанной, только когда она работает целиком, развёрнута и проверена.</p>
+<p><strong>Тестирование и безопасность — не отдельный этап, а часть критериев готовности каждого спринта:</strong> автотесты на критичную логику (формулы, цены), защита персональных данных, ограничение доступа по ролям, безопасный ввод.</p>
+<h2 id="poryadok-stroitelstva">Порядок строительства<a class="hanchor" href="#poryadok-stroitelstva" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>База данных закладывается первой: на её структуру опирается всё остальное, а изменение структуры позже — самая дорогая операция.</p>
+<p>Следом — фундамент доступа и каркас ролей: зоны директора, менеджера, клиента и партнёра, а также система прав. Это закладывается один раз, чтобы потом не переписывать навигацию и безопасность.</p>
+<p>Далее функциональность строится <strong>вертикальными срезами</strong>: каждая функция делается целиком — серверная логика и экран одновременно, — а не «весь фронт, потом весь бэк». Срез сразу работает от начала до конца и его можно показать.</p>
+<p>Ядро CRM (заказ, статусы, клиент) появляется рано: именно туда приземляется результат калькулятора и там живёт заказ. Насыщенная функциональность CRM (переписка в две ветки, автозадачи, шаблоны, аналитика) достраивается позже. Скелет — рано, наполнение — по мере готовности смежных модулей.</p>
+<p>Публичная витрина-сайт — это поздний этап. На ядре достаточно одного экрана калькулятора, а не всего маркетингового сайта; это даёт ценность раньше и экономит ресурсы.</p>
+<p>Дизайн-система и фронтенд не выносятся в отдельный финальный этап. Базовая дизайн-система — токены (цвета, типографика, отступы, сетка) и набор базовых компонентов — закладывается на фундаменте, чтобы все экраны были визуально едины с самого начала; далее она прирастает компонентами по мере появления новых экранов. Фронтенд каждой функции разрабатывается в её же вертикальном срезе, а не отдельной «фазой вёрстки» в конце.</p>
+<p>SEO закладывается в два приёма: технический фундамент (серверный рендеринг, мета-теги, человекочитаемые адреса, карта сайта, корректная индексация) — на этапе фундамента; полная поисковая оптимизация витрины (страницы категорий и услуг, микроразметка, скорость загрузки) — на этапе витрины.</p>
+<pre><code class="language-text">[ФУНДАМЕНТ: база данных + доступ + каркас ролей]   →   [дизайн-система + фронт-каркас + SEO-фундамент]
+        │
+        ▼
+[срез: калькулятор цифры]            серверный расчёт + экран + сохранение в заказ
+        │
+        ▼
+[срез: офсет / широкоформат / подрядчики / доставка]   логика + экраны
+        │
+        ▼
+[файлы и препресс] ──► [сайт и кабинет] ──► [самонастройка] ──► [производство] ──► [финансы] ──► [запуск]
+</code></pre>
+<p>Внедрение идёт параллельно со старой схемой (Excel, переписка): новые заказы постепенно переводятся в систему, старые дозакрываются по-старому, отказ от старой схемы — после стабилизации ядра CRM.</p>
+<h2 id="obzor-etapov">Обзор этапов<a class="hanchor" href="#obzor-etapov" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Ориентировочный объём — <strong>≈24 двухнедельных спринта</strong>. Оценка по спринтам уточняется перед началом каждого этапа.</p>
+<table>
+<thead>
+<tr>
+<th>Этап</th>
+<th>Спринтов</th>
+<th>Состав</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0. Фундамент</strong></td>
+<td>2</td>
+<td>Инфраструктура, БД, доступ и роли, скелет CRM-заказа; дизайн-система, фронт-каркас, SEO-фундамент</td>
+</tr>
+<tr>
+<td><strong>1. Ядро: расчёт и заказы</strong></td>
+<td>4</td>
+<td>Справочники, движок цены/маржи, калькулятор цифры, сроки и автовыбор технологии, карточка заказа, быстрый заказ B2C, поиск</td>
+</tr>
+<tr>
+<td><strong>2. Все расчёты и подрядчики</strong></td>
+<td>4</td>
+<td>Офсет, широкоформат, брошюры, наклейки, услуги, подбор подрядчика и валидация, доставка и курьеры</td>
+</tr>
+<tr>
+<td><strong>3. Файлы, препресс, общение</strong></td>
+<td>3</td>
+<td>Хранилище файлов, проверка макета и превью, коммуникации, боты, автозадачи</td>
+</tr>
+<tr>
+<td><strong>4. Витрина и кабинет</strong></td>
+<td>2</td>
+<td>Витрина (дизайн + полная SEO), кабинет клиента, брифы, кросс-продажи</td>
+</tr>
+<tr>
+<td><strong>5. Самонастройка (админка/конструкторы)</strong></td>
+<td>2</td>
+<td>Управление справочниками и ролями, конструкторы услуг/оборудования, редактор формул, конструктор витрины</td>
+</tr>
+<tr>
+<td><strong>6. Производство</strong></td>
+<td>3</td>
+<td>Планировщик загрузки, ТЗ участков, обратная связь и самообучение</td>
+</tr>
+<tr>
+<td><strong>7. Финансы и документы</strong></td>
+<td>2</td>
+<td>Оплаты, счета/УПД/ЭДО, бухгалтерия, отчётность</td>
+</tr>
+<tr>
+<td><strong>8. Запуск и эксплуатация</strong></td>
+<td>2</td>
+<td>Миграция данных, параллельное внедрение, прод-деплой, бэкапы, мониторинг, безопасность, приёмка</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Блокеры запуска (не код, но влияют на сроки):</strong> тексты оферты и политики обработки персональных данных — до публичной витрины (Этап 4); решения заказчика (мессенджер, ЭДО, статус налога, цветовая палитра) — до соответствующих спринтов.</p>
+<hr>
+<h2 id="etap-0-fundament-2-sprinta">Этап 0 — Фундамент · 2 спринта<a class="hanchor" href="#etap-0-fundament-2-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Каркас, на котором строится всё остальное: единая база данных, вход и роли, разметка зон и адресов, скелет заказа в CRM, а также базовая дизайн-система, фронт-каркас и SEO-фундамент. Расчётов и калькуляторов на этом этапе нет.</p>
+<h3 id="sprint-1-infrastruktura-baza-dannyh-i-dostup">Спринт 1 — Инфраструктура, база данных и доступ<a class="hanchor" href="#sprint-1-infrastruktura-baza-dannyh-i-dostup" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><strong>Длительность:</strong> 2 недели. <strong>Цель:</strong> развёрнутый каркас системы с раздельными зонами ролей и ядром данных.</p>
+<h4 id="rezultat-sprinta">Результат спринта<a class="hanchor" href="#rezultat-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li>Система разворачивается одной командой и доступна на тестовом стенде.</li>
+<li>Вход работает: сотрудники — по паролю, клиенты — по ссылке-входу.</li>
+<li>Каждая роль (директор, менеджер, клиент, партнёр) видит свою зону; чужие зоны закрыты.</li>
+<li>Заказ можно завести вручную (без расчёта), он получает корректный номер и статус и виден в CRM.</li>
+<li>Все ключевые действия пишутся в журнал.</li>
+</ul>
+<h4 id="stek">Стек<a class="hanchor" href="#stek" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Технология</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Next.js (React) + TypeScript</td>
+<td>Единое приложение: сайт, кабинеты, CRM, админка; серверный рендеринг и SEO</td>
+</tr>
+<tr>
+<td>PostgreSQL</td>
+<td>Основная база данных: связи, ограничения, JSON-поля</td>
+</tr>
+<tr>
+<td>Prisma</td>
+<td>Типобезопасный доступ к данным и управляемые миграции</td>
+</tr>
+<tr>
+<td>NextAuth</td>
+<td>Аутентификация: пароль для сотрудников, ссылка-вход для клиентов</td>
+</tr>
+<tr>
+<td>Tailwind CSS</td>
+<td>Единообразная вёрстка интерфейса</td>
+</tr>
+<tr>
+<td>Docker Compose</td>
+<td>Одинаковая среда при разработке и на сервере (БД + кэш)</td>
+</tr>
+<tr>
+<td>Redis</td>
+<td>Заготовка под фоновые задачи и кэш (используется со следующих этапов)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="arhitektura">Архитектура<a class="hanchor" href="#arhitektura" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<p>Модульный монолит на Next.js: одно приложение с чёткими внутренними границами и разделением на зоны по ролям. Доменные модули (расчёт, маржа, подрядчики, CRM) проектируются изолированно — с возможностью вынести «тяжёлые» из них в отдельный сервис при росте, без переделки остального.</p>
+<p>Зоны приложения:</p>
+<ul>
+<li><strong>Публичный сайт</strong> — для посетителей (на этом этапе минимум, развивается на Этапе 4);</li>
+<li><strong>Кабинет клиента</strong> — заказы, документы, повтор;</li>
+<li><strong>CRM</strong> — рабочее место менеджера и директора;</li>
+<li><strong>Портал партнёра</strong> — подрядчик видит только свои задания;</li>
+<li><strong>Админка</strong> — настройки (директор).</li>
+</ul>
+<p>Сквозные принципы: авторитетная бизнес-логика — на сервере; бизнес-правила и пороги — в данных и настройках, а не в коде; каждое значимое действие фиксируется в журнале.</p>
+<h4 id="roli-i-dostup">Роли и доступ<a class="hanchor" href="#roli-i-dostup" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<p>Гибкая система ролей и прав, расширяемая без переделки.</p>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Доступ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Директор (владелец)</td>
+<td>Полный: CRM, настройки, позже — аналитика</td>
+</tr>
+<tr>
+<td>Менеджер</td>
+<td>Заказы, клиенты, расчёты (со следующих спринтов)</td>
+</tr>
+<tr>
+<td>Клиент</td>
+<td>Свой кабинет: свои заказы, документы, повтор</td>
+</tr>
+<tr>
+<td>Партнёр</td>
+<td>Только свои задания и адрес отгрузки</td>
+</tr>
+</tbody>
+</table>
+<p>Роли технолога, отгрузчика, дизайнера, печатника закладываются в ту же модель прав и подключаются на этапе производства. Каждая зона защищена на уровне маршрутов и данных.</p>
+<h4 id="baza-dannyh">База данных<a class="hanchor" href="#baza-dannyh" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<p>Создаётся только ядро, на которое опирается каркас. Остальные таблицы (расчёты, файлы, производство, платежи) добавляются на своих этапах.</p>
+<table>
+<thead>
+<tr>
+<th>Таблица</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>users</code></td>
+<td>Пользователи (сотрудники и клиенты)</td>
+</tr>
+<tr>
+<td><code>roles</code>, <code>user_roles</code></td>
+<td>Роли и их назначение пользователям</td>
+</tr>
+<tr>
+<td><code>clients</code></td>
+<td>Клиенты: тип B2C/B2B, ИНН, контакты, сегмент</td>
+</tr>
+<tr>
+<td><code>orders</code></td>
+<td>Заказы: номер, тип, статус, ответственный (без расчёта цены)</td>
+</tr>
+<tr>
+<td><code>order_parameters</code></td>
+<td>Параметры продукции заказа (минимальный набор)</td>
+</tr>
+<tr>
+<td><code>partners</code></td>
+<td>Подрядчики (базовый справочник для портала партнёра)</td>
+</tr>
+<tr>
+<td><code>audit_log</code></td>
+<td>Журнал действий: кто и что менял</td>
+</tr>
+<tr>
+<td>служебные таблицы входа</td>
+<td>Сессии и учётные данные</td>
+</tr>
+</tbody>
+</table>
+<p>Правила фундамента: единый диалект PostgreSQL; денежные суммы хранятся в копейках (целыми) для исключения ошибок округления; номер заказа генерируется атомарно в формате <code>ДДММГГ-Порядковый-Офис-Партнёр-Сборка</code>, коды офиса и партнёра берутся из справочника (без коллизии букв).</p>
+<h4 id="karta-adresov-routing">Карта адресов (роутинг)<a class="hanchor" href="#karta-adresov-routing" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<table>
+<thead>
+<tr>
+<th>Зона</th>
+<th>Адреса</th>
+<th>Роли</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Публичный сайт</td>
+<td><code>/</code> (каталог — Этап 4)</td>
+<td>Все</td>
+</tr>
+<tr>
+<td>Кабинет клиента</td>
+<td><code>/cabinet</code>, <code>/cabinet/orders</code>, <code>/cabinet/orders/[id]</code></td>
+<td>Клиент</td>
+</tr>
+<tr>
+<td>CRM</td>
+<td><code>/crm</code>, <code>/crm/orders</code>, <code>/crm/orders/[id]</code>, <code>/crm/clients</code></td>
+<td>Менеджер, Директор</td>
+</tr>
+<tr>
+<td>Портал партнёра</td>
+<td><code>/partner</code>, <code>/partner/tasks</code></td>
+<td>Партнёр</td>
+</tr>
+<tr>
+<td>Админка</td>
+<td><code>/admin</code>, <code>/admin/users</code></td>
+<td>Директор</td>
+</tr>
+<tr>
+<td>Системные адреса</td>
+<td>вход/выход, проверка состояния, базовые операции с заказами и клиентами</td>
+<td>Система</td>
+</tr>
+</tbody>
+</table>
+<h4 id="chto-esche-vhodit-v-sprint">Что ещё входит в спринт<a class="hanchor" href="#chto-esche-vhodit-v-sprint" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li>Новый репозиторий <code>printoffice</code> (приложение отдельно от базы знаний) с понятной структурой.</li>
+<li>Docker Compose (база данных + кэш) — единая среда с самого начала.</li>
+<li>Конфигурация окружения и секретов (секреты вне кода).</li>
+<li>Схема БД, первая миграция и наполнение тестовыми данными (роли, пользователи, пример клиента и заказа).</li>
+<li>Минимальный служебный макет и навигация по ролям (визуальный слой — в Спринте 2).</li>
+<li>Логирование и отслеживание ошибок.</li>
+<li>Первичный деплой каркаса на тестовый стенд.</li>
+</ul>
+<h4 id="kriterii-gotovnosti">Критерии готовности<a class="hanchor" href="#kriterii-gotovnosti" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li>Развёртывание одной командой; миграции и тестовые данные применяются автоматически.</li>
+<li>Вход работает для сотрудника и клиента.</li>
+<li>Под каждой ролью открывается её зона; чужие зоны недоступны (проверено).</li>
+<li>Заказ создаётся вручную, получает корректный номер и статус, виден в CRM; действие попадает в журнал.</li>
+<li>Код в репозитории <code>printoffice</code>, проходит проверки типов и линтера, есть описание запуска.</li>
+</ul>
+<h3 id="sprint-2-dizayn-sistema-front-karkas-i-seo-fundament">Спринт 2 — Дизайн-система, фронт-каркас и SEO-фундамент<a class="hanchor" href="#sprint-2-dizayn-sistema-front-karkas-i-seo-fundament" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><strong>Длительность:</strong> 2 недели. <strong>Цель:</strong> единый визуальный слой поверх каркаса и технический SEO-фундамент.</p>
+<h4 id="dizayn-sistema-i-front-karkas">Дизайн-система и фронт-каркас<a class="hanchor" href="#dizayn-sistema-i-front-karkas" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li><strong>Дизайн-токены:</strong> палитра, типографика, отступы, радиусы, тени, сетка — по канону <code>homepage-ux</code> (палитра уточняется с заказчиком; токены позволяют сменить её централизованно).</li>
+<li><strong>Базовые компоненты:</strong> кнопки, поля и формы, таблицы, бейджи статусов, модальные окна, уведомления, навигация — переиспользуемые во всех зонах.</li>
+<li><strong>Каркас интерфейса:</strong> общий макет, шапка и навигация по ролям, адаптив (телефон/планшет/десктоп), пустые состояния разделов.</li>
+<li>Приведение экранов из Спринта 1 к дизайн-системе.</li>
+</ul>
+<p>Полноценный визуальный дизайн витрины — на Этапе 4; здесь — единый служебный интерфейс, на котором строятся все последующие экраны.</p>
+<h4 id="seo-fundament">SEO-фундамент<a class="hanchor" href="#seo-fundament" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li>серверный рендеринг публичных страниц;</li>
+<li>компонент мета-тегов (title/description/Open Graph) и человекочитаемые адреса;</li>
+<li><code>robots.txt</code> и заготовка карты сайта (<code>sitemap</code>);</li>
+<li>корректная индексация (служебные зоны закрыты, публичные открыты);</li>
+<li>базовые требования к скорости загрузки.</li>
+</ul>
+<p>Полная SEO-оптимизация витрины — на Этапе 4.</p>
+<h4 id="kriterii-gotovnosti-1">Критерии готовности<a class="hanchor" href="#kriterii-gotovnosti-1" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h4>
+<ul>
+<li>Все экраны используют компоненты дизайн-системы и корректно отображаются на телефоне и десктопе.</li>
+<li>Дизайн-токены централизованы: смена палитры — в одном месте.</li>
+<li>Публичная страница проходит базовую проверку SEO (мета-теги, индексация, серверный рендеринг).</li>
+<li>Визуальный каркас развёрнут на тестовом стенде.</li>
+</ul>
+<hr>
+<h2 id="etap-1-yadro-raschet-i-zakazy-4-sprinta">Этап 1 — Ядро: расчёт и заказы · 4 спринта<a class="hanchor" href="#etap-1-yadro-raschet-i-zakazy-4-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Первый работающий расчёт и полноценная карточка заказа в CRM. Калькулятор цифровой печати с учётом реального производства, расчёт сроков и автоматический выбор технологии.</p>
+<h3 id="sprint-3-spravochniki-i-dvizhok-tsenymarzhi">Спринт 3 — Справочники и движок цены/маржи<a class="hanchor" href="#sprint-3-spravochniki-i-dvizhok-tsenymarzhi" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка — детализируется перед стартом.</em> Справочники (оборудование, материалы, форматы, цветность) и единый механизм наценки/налога, на которых считают все калькуляторы.</p>
+<h3 id="sprint-4-kalkulyator-tsifrovoy-pechati">Спринт 4 — Калькулятор цифровой печати<a class="hanchor" href="#sprint-4-kalkulyator-tsifrovoy-pechati" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Серверный расчёт цифры — раскладка на листе, вылеты, поля принтера, себестоимость, маржа от числа листов, налог; покрытие тестами на эталонных примерах.</p>
+<h3 id="sprint-5-sroki-i-avtovybor-tehnologii">Спринт 5 — Сроки и автовыбор технологии<a class="hanchor" href="#sprint-5-sroki-i-avtovybor-tehnologii" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Конструктор сроков (время приёма заказов, рабочие дни, надбавки за тираж/услуги, зоны доставки) и автоматический выбор технологии печати (цифра/офсет/широкоформат) со сравнением вариантов по цене и срокам для клиента.</p>
+<h3 id="sprint-6-kartochka-zakaza-ekrany-i-bystryy-zakaz">Спринт 6 — Карточка заказа, экраны и быстрый заказ<a class="hanchor" href="#sprint-6-kartochka-zakaza-ekrany-i-bystryy-zakaz" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Карточка заказа в CRM (параметры, статусы, история, ручная корректировка цены с обоснованием), экран калькулятора на сайте, <strong>быстрый заказ B2C</strong> (минимум полей, оплата на месте), <strong>глобальный поиск</strong> по номеру/телефону/ИНН.</p>
+<hr>
+<h2 id="etap-2-vse-raschety-i-podryadchiki-4-sprinta">Этап 2 — Все расчёты и подрядчики · 4 спринта<a class="hanchor" href="#etap-2-vse-raschety-i-podryadchiki-4-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Остальные виды печати, подбор исполнителя и доставка — полный операционный цикл заказа через подрядчиков.</p>
+<h3 id="sprint-7-ofset">Спринт 7 — Офсет<a class="hanchor" href="#sprint-7-ofset" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Матрица цен партнёра, импорт прайса, интерполяция, плавная наценка, налог и доставка.</p>
+<h3 id="sprint-8-shirokoformat-broshyury-nakleyki-uslugi">Спринт 8 — Широкоформат, брошюры, наклейки, услуги<a class="hanchor" href="#sprint-8-shirokoformat-broshyury-nakleyki-uslugi" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Расчёт по площади, брошюры (скоба/пружина/КБС), наклейки и контурная резка, доп. услуги (ламинация/резка/биговка).</p>
+<h3 id="sprint-9-podbor-podryadchika-i-validatsiya">Спринт 9 — Подбор подрядчика и валидация<a class="hanchor" href="#sprint-9-podbor-podryadchika-i-validatsiya" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Единая форма и маршрутизация исполнителя с вариантами цен; отсечение несовместимых комбинаций (оборудование/материал/формат/операция) до производства.</p>
+<h3 id="sprint-10-dostavka-i-kurery">Спринт 10 — Доставка и курьеры<a class="hanchor" href="#sprint-10-dostavka-i-kurery" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Способы доставки и самовывоз, <strong>отгрузочная накладная с QR</strong>, <strong>пропуска</strong> (оформление, SMS/QR курьеру), вызов курьера (Яндекс.Доставка/Достависта), офисы самовывоза, расчёт стоимости доставки по зонам.</p>
+<hr>
+<h2 id="etap-3-fayly-prepress-obschenie-3-sprinta">Этап 3 — Файлы, препресс, общение · 3 спринта<a class="hanchor" href="#etap-3-fayly-prepress-obschenie-3-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Работа с макетами и коммуникации по заказу.</p>
+<h3 id="sprint-11-hranilische-faylov-i-zhiznennyy-tsikl">Спринт 11 — Хранилище файлов и жизненный цикл<a class="hanchor" href="#sprint-11-hranilische-faylov-i-zhiznennyy-tsikl" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Загрузка больших макетов (до 1.5 ГБ), объектное хранилище (S3/Я.Диск), дедупликация по хешу, версии, жизненный цикл файлов (временные/рабочие/архив/корзина), права доступа.</p>
+<h3 id="sprint-12-prepress-proverka-maketa-i-prevyu">Спринт 12 — Препресс: проверка макета и превью<a class="hanchor" href="#sprint-12-prepress-proverka-maketa-i-prevyu" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Автопроверка макета (формат, разрешение, цветовая модель, вылеты, шрифты), интерактивное превью с метками, согласование макета с клиентом.</p>
+<h3 id="sprint-13-kommunikatsii-boty-avtozadachi">Спринт 13 — Коммуникации, боты, автозадачи<a class="hanchor" href="#sprint-13-kommunikatsii-boty-avtozadachi" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Две ветки переписки (клиент/внутренняя), автоуведомления по смене статусов, мессенджер-бот (Telegram/Макс) для вопросов и создания заказов, разбор входящих писем, автозадачи и напоминания (неоплата 1/3/7 дней), шаблоны.</p>
+<hr>
+<h2 id="etap-4-vitrina-i-kabinet-2-sprinta">Этап 4 — Витрина и кабинет · 2 спринта<a class="hanchor" href="#etap-4-vitrina-i-kabinet-2-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Публичный сайт и самообслуживание клиента.</p>
+<h3 id="sprint-14-vitrina-sayta-dizayn-i-polnaya-seo">Спринт 14 — Витрина сайта, дизайн и полная SEO<a class="hanchor" href="#sprint-14-vitrina-sayta-dizayn-i-polnaya-seo" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Полноценный визуальный дизайн витрины, каталог и семейства товаров, страницы услуг, микроразметка, оптимизация скорости, адаптив.</p>
+<h3 id="sprint-15-kabinet-klienta-brify-kross-prodazhi">Спринт 15 — Кабинет клиента, брифы, кросс-продажи<a class="hanchor" href="#sprint-15-kabinet-klienta-brify-kross-prodazhi" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> История заказов, повтор в один клик, документы, конструктор брифов на дизайн, рекомендации/комплекты для увеличения чека.</p>
+<hr>
+<h2 id="etap-5-samonastroyka-adminka-i-konstruktory-2-sprinta">Этап 5 — Самонастройка (админка и конструкторы) · 2 спринта<a class="hanchor" href="#etap-5-samonastroyka-adminka-i-konstruktory-2-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Реализация принципа «настройка без программиста».</p>
+<h3 id="sprint-16-spravochniki-roli-i-konstruktory-uslugoborudovaniya">Спринт 16 — Справочники, роли и конструкторы услуг/оборудования<a class="hanchor" href="#sprint-16-spravochniki-roli-i-konstruktory-uslugoborudovaniya" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Управление справочниками (оборудование, материалы, форматы, цены), управление пользователями и ролями, конструктор услуг из блоков и конструктор оборудования.</p>
+<h3 id="sprint-17-redaktor-formul-i-konstruktor-vitriny">Спринт 17 — Редактор формул и конструктор витрины<a class="hanchor" href="#sprint-17-redaktor-formul-i-konstruktor-vitriny" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Визуальный редактор формул (безопасный вычислитель), конструктор страниц витрины и калькуляторов без программиста.</p>
+<hr>
+<h2 id="etap-6-proizvodstvo-3-sprinta">Этап 6 — Производство · 3 спринта<a class="hanchor" href="#etap-6-proizvodstvo-3-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Планирование загрузки и связь расчёта с реальным производством.</p>
+<h3 id="sprint-18-planirovschik-zagruzki">Спринт 18 — Планировщик загрузки<a class="hanchor" href="#sprint-18-planirovschik-zagruzki" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Календарь оборудования, приоритеты, буфер времени.</p>
+<h3 id="sprint-19-tehnicheskie-zadaniya-dlya-uchastkov">Спринт 19 — Технические задания для участков<a class="hanchor" href="#sprint-19-tehnicheskie-zadaniya-dlya-uchastkov" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Генерация ТЗ из заказа (раскладка, операции, стопы).</p>
+<h3 id="sprint-20-obratnaya-svyaz-i-samoobuchenie">Спринт 20 — Обратная связь и самообучение<a class="hanchor" href="#sprint-20-obratnaya-svyaz-i-samoobuchenie" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Факт против расчёта, корректировка нормативов, влияние на калькулятор.</p>
+<hr>
+<h2 id="etap-7-finansy-i-dokumenty-2-sprinta">Этап 7 — Финансы и документы · 2 спринта<a class="hanchor" href="#etap-7-finansy-i-dokumenty-2-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Деньги и закрывающие документы на автомате.</p>
+<h3 id="sprint-21-oplaty">Спринт 21 — Оплаты<a class="hanchor" href="#sprint-21-oplaty" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Платёжные ссылки и эквайринг, идемпотентная обработка, подтверждение статуса оплаты. Онлайн-касса (54-ФЗ) — по решению заказчика.</p>
+<h3 id="sprint-22-dokumenty-i-otchetnost">Спринт 22 — Документы и отчётность<a class="hanchor" href="#sprint-22-dokumenty-i-otchetnost" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Счета/УПД/акты, электронный документооборот (Диадок), связь с бухгалтерией (Эльба), отчётность и аналитика.</p>
+<hr>
+<h2 id="etap-8-zapusk-i-ekspluatatsiya-2-sprinta">Этап 8 — Запуск и эксплуатация · 2 спринта<a class="hanchor" href="#etap-8-zapusk-i-ekspluatatsiya-2-sprinta" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Перевод системы в боевую работу.</p>
+<h3 id="sprint-23-migratsiya-dannyh-i-parallelnoe-vnedrenie">Спринт 23 — Миграция данных и параллельное внедрение<a class="hanchor" href="#sprint-23-migratsiya-dannyh-i-parallelnoe-vnedrenie" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Импорт существующих клиентов, прайсов партнёров и материалов; режим двойного учёта со старой схемой; перевод новых заказов в систему.</p>
+<h3 id="sprint-24-prod-deploy-ekspluatatsiya-i-priemka">Спринт 24 — Прод-деплой, эксплуатация и приёмка<a class="hanchor" href="#sprint-24-prod-deploy-ekspluatatsiya-i-priemka" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h3>
+<p><em>Заглушка.</em> Продакшн-развёртывание на сервере заказчика, ежедневные бэкапы, мониторинг и алерты, нагрузочная и security-проверка, тексты оферты/политики ПДн, обучение и приёмка.</p>
+<hr>
+<h2 id="vne-scope-po-otdelnomu-resheniyu-zakazchika">Вне scope (по отдельному решению заказчика)<a class="hanchor" href="#vne-scope-po-otdelnomu-resheniyu-zakazchika" aria-label="Скопировать ссылку на раздел" tabindex="-1">#</a></h2>
+<p>Не запланировано в текущем плане; включается отдельным решением как дополнительные спринты:</p>
+<ul>
+<li>система лояльности и скидок для постоянных клиентов;</li>
+<li>расширенная аналитика и отчёты сверх базовых;</li>
+<li>учёт остатков материалов на складе;</li>
+<li>мобильное приложение для менеджеров;</li>
+<li>генерация дизайна нейросетью (ИИ-дизайн);</li>
+<li>онлайн-касса по 54-ФЗ (зависит от решения по платежам);</li>
+<li>SMS-канал уведомлений клиентам.</li>
+</ul>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#kak-my-rabotaem">Как мы работаем</a></li><li class="lvl2"><a href="#poryadok-stroitelstva">Порядок строительства</a></li><li class="lvl2"><a href="#obzor-etapov">Обзор этапов</a></li><li class="lvl2"><a href="#etap-0-fundament-2-sprinta">Этап 0 — Фундамент · 2 спринта</a></li><li class="lvl3"><a href="#sprint-1-infrastruktura-baza-dannyh-i-dostup">Спринт 1 — Инфраструктура, база данных и доступ</a></li><li class="lvl3"><a href="#sprint-2-dizayn-sistema-front-karkas-i-seo-fundament">Спринт 2 — Дизайн-система, фронт-каркас и SEO-фундамент</a></li><li class="lvl2"><a href="#etap-1-yadro-raschet-i-zakazy-4-sprinta">Этап 1 — Ядро: расчёт и заказы · 4 спринта</a></li><li class="lvl3"><a href="#sprint-3-spravochniki-i-dvizhok-tsenymarzhi">Спринт 3 — Справочники и движок цены/маржи</a></li><li class="lvl3"><a href="#sprint-4-kalkulyator-tsifrovoy-pechati">Спринт 4 — Калькулятор цифровой печати</a></li><li class="lvl3"><a href="#sprint-5-sroki-i-avtovybor-tehnologii">Спринт 5 — Сроки и автовыбор технологии</a></li><li class="lvl3"><a href="#sprint-6-kartochka-zakaza-ekrany-i-bystryy-zakaz">Спринт 6 — Карточка заказа, экраны и быстрый заказ</a></li><li class="lvl2"><a href="#etap-2-vse-raschety-i-podryadchiki-4-sprinta">Этап 2 — Все расчёты и подрядчики · 4 спринта</a></li><li class="lvl3"><a href="#sprint-7-ofset">Спринт 7 — Офсет</a></li><li class="lvl3"><a href="#sprint-8-shirokoformat-broshyury-nakleyki-uslugi">Спринт 8 — Широкоформат, брошюры, наклейки, услуги</a></li><li class="lvl3"><a href="#sprint-9-podbor-podryadchika-i-validatsiya">Спринт 9 — Подбор подрядчика и валидация</a></li><li class="lvl3"><a href="#sprint-10-dostavka-i-kurery">Спринт 10 — Доставка и курьеры</a></li><li class="lvl2"><a href="#etap-3-fayly-prepress-obschenie-3-sprinta">Этап 3 — Файлы, препресс, общение · 3 спринта</a></li><li class="lvl3"><a href="#sprint-11-hranilische-faylov-i-zhiznennyy-tsikl">Спринт 11 — Хранилище файлов и жизненный цикл</a></li><li class="lvl3"><a href="#sprint-12-prepress-proverka-maketa-i-prevyu">Спринт 12 — Препресс: проверка макета и превью</a></li><li class="lvl3"><a href="#sprint-13-kommunikatsii-boty-avtozadachi">Спринт 13 — Коммуникации, боты, автозадачи</a></li><li class="lvl2"><a href="#etap-4-vitrina-i-kabinet-2-sprinta">Этап 4 — Витрина и кабинет · 2 спринта</a></li><li class="lvl3"><a href="#sprint-14-vitrina-sayta-dizayn-i-polnaya-seo">Спринт 14 — Витрина сайта, дизайн и полная SEO</a></li><li class="lvl3"><a href="#sprint-15-kabinet-klienta-brify-kross-prodazhi">Спринт 15 — Кабинет клиента, брифы, кросс-продажи</a></li><li class="lvl2"><a href="#etap-5-samonastroyka-adminka-i-konstruktory-2-sprinta">Этап 5 — Самонастройка (админка и конструкторы) · 2 спринта</a></li><li class="lvl3"><a href="#sprint-16-spravochniki-roli-i-konstruktory-uslugoborudovaniya">Спринт 16 — Справочники, роли и конструкторы услуг/оборудования</a></li><li class="lvl3"><a href="#sprint-17-redaktor-formul-i-konstruktor-vitriny">Спринт 17 — Редактор формул и конструктор витрины</a></li><li class="lvl2"><a href="#etap-6-proizvodstvo-3-sprinta">Этап 6 — Производство · 3 спринта</a></li><li class="lvl3"><a href="#sprint-18-planirovschik-zagruzki">Спринт 18 — Планировщик загрузки</a></li><li class="lvl3"><a href="#sprint-19-tehnicheskie-zadaniya-dlya-uchastkov">Спринт 19 — Технические задания для участков</a></li><li class="lvl3"><a href="#sprint-20-obratnaya-svyaz-i-samoobuchenie">Спринт 20 — Обратная связь и самообучение</a></li><li class="lvl2"><a href="#etap-7-finansy-i-dokumenty-2-sprinta">Этап 7 — Финансы и документы · 2 спринта</a></li><li class="lvl3"><a href="#sprint-21-oplaty">Спринт 21 — Оплаты</a></li><li class="lvl3"><a href="#sprint-22-dokumenty-i-otchetnost">Спринт 22 — Документы и отчётность</a></li><li class="lvl2"><a href="#etap-8-zapusk-i-ekspluatatsiya-2-sprinta">Этап 8 — Запуск и эксплуатация · 2 спринта</a></li><li class="lvl3"><a href="#sprint-23-migratsiya-dannyh-i-parallelnoe-vnedrenie">Спринт 23 — Миграция данных и параллельное внедрение</a></li><li class="lvl3"><a href="#sprint-24-prod-deploy-ekspluatatsiya-i-priemka">Спринт 24 — Прод-деплой, эксплуатация и приёмка</a></li><li class="lvl2"><a href="#vne-scope-po-otdelnomu-resheniyu-zakazchika">Вне scope (по отдельному решению заказчика)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>
