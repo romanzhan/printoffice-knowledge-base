@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Конструктор брифов — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="03-site-client--brief-constructor">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li class="active"><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="конструктор-брифов">Конструктор брифов</h1>
+<p>Подсистема, позволяющая администратору собирать произвольные анкеты (брифы) из набора полей с условной логикой и валидацией, отправлять их клиенту уникальной ссылкой по нескольким каналам и принимать ответы как через веб-форму, так и через Telegram-бота. Бриф является частью этапа «Дизайн» жизненного цикла заказа (бриф + расчёт стоимости) и реализован как настраиваемый конструктор в админке.</p>
+<h2 id="концепция">Концепция</h2>
+<p>Бриф — это настраиваемая форма-анкета. Администратор создаёт шаблоны без участия программиста, система автоматически генерирует ссылки, рассылает их клиентам и хранит историю заполнения.</p>
+<p>Жизненный цикл:</p>
+<ol>
+<li><strong>Админка: создание шаблона брифа</strong>
+<ul>
+<li>Название, описание.</li>
+<li>Добавление полей (текст, выбор, файлы, чекбоксы и др.).</li>
+<li>Настройка правил валидации.</li>
+<li>Настройка логики показа полей (например, если ответ «да» → показать дополнительное поле).</li>
+</ul>
+</li>
+<li><strong>Отправка клиенту</strong>
+<ul>
+<li>Генерация уникальной ссылки.</li>
+<li>Отправка в Telegram / Email / Личный кабинет.</li>
+</ul>
+</li>
+<li><strong>Клиент заполняет</strong>
+<ul>
+<li>В веб-форме по ссылке.</li>
+<li>В Telegram-боте (интерактивно).</li>
+</ul>
+</li>
+<li><strong>Сохранение</strong>
+<ul>
+<li>В личном кабинете клиента.</li>
+<li>В истории заказа у менеджера.</li>
+<li>Уведомление менеджеру.</li>
+</ul>
+</li>
+</ol>
+<h3 id="место-в-процессе-дизайна-full-cycle">Место в процессе дизайна (full cycle)</h3>
+<p>Бриф — второй шаг полного цикла дизайна. Этапы:</p>
+<ol>
+<li><strong>Запрос на дизайн</strong> (от клиента).</li>
+<li><strong>Отправка брифа</strong> (анкета с вопросами).</li>
+<li><strong>Заполнение брифа клиентом</strong> (+ референсы, примеры).</li>
+<li><strong>Расчёт стоимости дизайна</strong>:
+<ul>
+<li>сложность;</li>
+<li>сроки;</li>
+<li>количество правок.</li>
+</ul>
+</li>
+<li><strong>Согласование и оплата</strong>:
+<ul>
+<li>счёт на дизайн.</li>
+</ul>
+</li>
+<li><strong>Разработка макета</strong>:
+<ul>
+<li>1–3 варианта.</li>
+</ul>
+</li>
+<li><strong>Отправка на согласование</strong> (PDF для утверждения).</li>
+<li><strong>Результат согласования</strong> — три исхода:
+<ul>
+<li>✅ <strong>УТВЕРЖДЁН</strong> → финальные правки;</li>
+<li>⚠️ <strong>НУЖНЫ ПРАВКИ</strong> → доработка (возврат к этапу разработки макета);</li>
+<li>❌ <strong>ОТКЛОНЁН</strong> → закрытие.</li>
+</ul>
+</li>
+<li><strong>Финальный макет</strong> (при утверждении):
+<ul>
+<li>подготовка к печати;</li>
+<li>проверка препресс.</li>
+</ul>
+</li>
+</ol>
+<h2 id="возможности-системы">Возможности системы</h2>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Конструктор брифов</td>
+<td>Создание любых форм без программиста</td>
+</tr>
+<tr>
+<td>Типы полей</td>
+<td>Текст, выбор, файлы, чекбоксы, дата, число</td>
+</tr>
+<tr>
+<td>Условная логика</td>
+<td>Показывать поля только при определённых ответах</td>
+</tr>
+<tr>
+<td>Валидация</td>
+<td>Проверка email, телефона, обязательных полей</td>
+</tr>
+<tr>
+<td>Отправка клиенту</td>
+<td>Email, Telegram, WhatsApp, ссылка</td>
+</tr>
+<tr>
+<td>Сохранение истории</td>
+<td>В личном кабинете клиента и в CRM менеджера</td>
+</tr>
+<tr>
+<td>Интеграция с Telegram</td>
+<td>Интерактивное заполнение в боте</td>
+</tr>
+<tr>
+<td>Отслеживание статуса</td>
+<td>Отправлен → Просмотрен → Заполнен</td>
+</tr>
+</tbody>
+</table>
+<h2 id="структура-базы-данных">Структура базы данных</h2>
+<h3 id="бриф-дизайна-design_briefs">Бриф дизайна (design_briefs)</h3>
+<p>Исходная таблица брифа дизайна, привязанная к конкретному заказу и клиенту (часть структуры БД для дизайна). Хранит основную информацию о проекте, контактные данные, сам бриф в JSON и референсы.</p>
+<pre><code class="language-sql">-- Таблица брифов
+CREATE TABLE design_briefs (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    client_id INT NOT NULL,
+
+    -- Основная информация
+    project_name VARCHAR(255),
+    product_type VARCHAR(50),              -- 'flyer', 'brochure', 'logo', 'business_card'
+
+    -- Контактные данные
+    contact_name VARCHAR(255),
+    contact_email VARCHAR(255),
+    contact_phone VARCHAR(50),
+
+    -- Бриф (JSON)
+    brief_data JSON NOT NULL,
+
+    -- Референсы
+    references JSON,                        -- массив ссылок на примеры
+
+    -- Статус
+    status ENUM('draft', 'sent', 'filled', 'processing', 'completed') DEFAULT 'draft',
+
+    -- Файлы
+    attachments JSON,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    filled_at TIMESTAMP,
+
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (client_id) REFERENCES clients(id)
+);
+</code></pre>
+<h3 id="версии-макетов-design_versions">Версии макетов (design_versions)</h3>
+<p>Таблица версий макетов дизайна, привязанных к заказу. Хранит номер версии, тип (черновик / правка / финал), файлы, комментарии и статус утверждения.</p>
+<pre><code class="language-sql">-- Таблица версий макетов
+CREATE TABLE design_versions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    version_number INT NOT NULL,
+
+    -- Тип версии
+    version_type ENUM('draft', 'revision', 'final') DEFAULT 'draft',
+
+    -- Файлы
+    files JSON,                             -- массив файлов (PDF, PNG, исходники)
+
+    -- Комментарии
+    comment TEXT,
+
+    -- Статус утверждения
+    status ENUM('pending', 'approved', 'rejected', 'revision_needed') DEFAULT 'pending',
+
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    approved_at TIMESTAMP,
+
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+</code></pre>
+<h3 id="шаблоны-брифов">Шаблоны брифов</h3>
+<pre><code class="language-sql">CREATE TABLE brief_templates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    product_type VARCHAR(50),                    -- 'flyer', 'logo', 'brochure'
+
+    -- Структура брифа (JSON)
+    form_schema JSON NOT NULL,                   -- поля, их типы, правила
+
+    -- Настройки
+    settings JSON,                                -- уведомления, темы и т.д.
+
+    -- Статус
+    is_active BOOLEAN DEFAULT true,
+
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+</code></pre>
+<h3 id="экземпляры-брифов-для-конкретных-заказов">Экземпляры брифов (для конкретных заказов)</h3>
+<pre><code class="language-sql">CREATE TABLE brief_instances (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    template_id INT NOT NULL,
+    order_id INT,
+    client_id INT NOT NULL,
+
+    -- Уникальная ссылка для клиента
+    token VARCHAR(64) UNIQUE NOT NULL,
+
+    -- Данные, заполненные клиентом
+    responses JSON,
+
+    -- Файлы, загруженные клиентом
+    attachments JSON,
+
+    -- Статус
+    status ENUM('draft', 'sent', 'viewed', 'in_progress', 'completed', 'expired') DEFAULT 'draft',
+
+    -- Временные метки
+    sent_at TIMESTAMP,
+    viewed_at TIMESTAMP,
+    completed_at TIMESTAMP,
+    expires_at TIMESTAMP,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (template_id) REFERENCES brief_templates(id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (client_id) REFERENCES clients(id),
+
+    INDEX idx_token (token),
+    INDEX idx_status (status)
+);
+</code></pre>
+<h3 id="уведомления-о-брифе">Уведомления о брифе</h3>
+<pre><code class="language-sql">CREATE TABLE brief_notifications (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    brief_instance_id INT NOT NULL,
+    channel ENUM('email', 'telegram', 'whatsapp') NOT NULL,
+    recipient VARCHAR(255) NOT NULL,
+    status ENUM('sent', 'delivered', 'failed') DEFAULT 'sent',
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (brief_instance_id) REFERENCES brief_instances(id)
+);
+</code></pre>
+<h3 id="история-брифов-журнал-изменений">История брифов (журнал изменений)</h3>
+<pre><code class="language-sql">CREATE TABLE brief_history (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    brief_instance_id INT NOT NULL,
+    action ENUM('created', 'sent', 'viewed', 'started', 'saved', 'completed', 'expired') NOT NULL,
+    data JSON,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (brief_instance_id) REFERENCES brief_instances(id)
+);
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: статусы брифа определены неоднозначно. В таблице <code>brief_instances</code> используется набор <code>draft, sent, viewed, in_progress, completed, expired</code>, а в исходной таблице проекта дизайна <code>design_briefs</code> (см. выше) — другой набор <code>draft, sent, filled, processing, completed</code>. В журнале <code>brief_history</code> действия: <code>created, sent, viewed, started, saved, completed, expired</code>. В итоговой таблице возможностей упрощённая цепочка отслеживания: «Отправлен → Просмотрен → Заполнен». Требуется единая модель статусов.</p>
+<h2 id="шаблоны-брифов-готовые-анкеты">Шаблоны брифов (готовые анкеты)</h2>
+<p>Базовые шаблоны хранятся в виде структуры <code>BRIEF_TEMPLATES</code> с разбивкой на секции и поля. Каждое поле описывается атрибутами: <code>name</code>, <code>label</code>, <code>type</code>, <code>required</code>, <code>options</code>, <code>placeholder</code>, <code>accept</code>, <code>multiple</code>, <code>min</code>, <code>max</code> и т.д.</p>
+<pre><code class="language-javascript">const BRIEF_TEMPLATES = {
+    // Для листовок / флаеров
+    flyer: {
+        sections: [
+            {
+                title: &quot;Основная информация&quot;,
+                fields: [
+                    { name: &quot;product_name&quot;, label: &quot;Название продукта/акции&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;target_audience&quot;, label: &quot;Целевая аудитория&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;purpose&quot;, label: &quot;Цель (информирование, продажа, приглашение)&quot;, type: &quot;select&quot;, options: [&quot;Информирование&quot;, &quot;Продажа&quot;, &quot;Приглашение&quot;, &quot;Другое&quot;] }
+                ]
+            },
+            {
+                title: &quot;Содержание&quot;,
+                fields: [
+                    { name: &quot;headline&quot;, label: &quot;Заголовок&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;subheadline&quot;, label: &quot;Подзаголовок&quot;, type: &quot;text&quot; },
+                    { name: &quot;body_text&quot;, label: &quot;Основной текст&quot;, type: &quot;textarea&quot; },
+                    { name: &quot;cta&quot;, label: &quot;Призыв к действию&quot;, type: &quot;text&quot;, placeholder: &quot;Позвоните, Закажите, Узнайте...&quot; }
+                ]
+            },
+            {
+                title: &quot;Визуальные предпочтения&quot;,
+                fields: [
+                    { name: &quot;color_scheme&quot;, label: &quot;Цветовая гамма&quot;, type: &quot;select&quot;, options: [&quot;Светлая&quot;, &quot;Темная&quot;, &quot;Яркая&quot;, &quot;Сдержанная&quot;, &quot;По фирменному стилю&quot;] },
+                    { name: &quot;brand_colors&quot;, label: &quot;Фирменные цвета (коды)&quot;, type: &quot;text&quot;, placeholder: &quot;#FFFFFF, #000000&quot; },
+                    { name: &quot;style&quot;, label: &quot;Стиль&quot;, type: &quot;select&quot;, options: [&quot;Минимализм&quot;, &quot;Классический&quot;, &quot;Современный&quot;, &quot;Креативный&quot;, &quot;Строгий&quot;] },
+                    { name: &quot;mood&quot;, label: &quot;Настроение&quot;, type: &quot;select&quot;, options: [&quot;Деловой&quot;, &quot;Дружелюбный&quot;, &quot;Энергичный&quot;, &quot;Спокойный&quot;, &quot;Праздничный&quot;] }
+                ]
+            },
+            {
+                title: &quot;Логотип и элементы&quot;,
+                fields: [
+                    { name: &quot;has_logo&quot;, label: &quot;Есть ли логотип?&quot;, type: &quot;boolean&quot; },
+                    { name: &quot;logo_file&quot;, label: &quot;Логотип (файл)&quot;, type: &quot;file&quot;, accept: &quot;.ai,.eps,.pdf,.png&quot; },
+                    { name: &quot;additional_elements&quot;, label: &quot;Дополнительные элементы (иконки, рамки)&quot;, type: &quot;textarea&quot; }
+                ]
+            }
+        ]
+    },
+
+    // Для логотипов
+    logo: {
+        sections: [
+            {
+                title: &quot;Основная информация&quot;,
+                fields: [
+                    { name: &quot;company_name&quot;, label: &quot;Название компании&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;industry&quot;, label: &quot;Сфера деятельности&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;tagline&quot;, label: &quot;Слоган (если есть)&quot;, type: &quot;text&quot; }
+                ]
+            },
+            {
+                title: &quot;Визуальные предпочтения&quot;,
+                fields: [
+                    { name: &quot;style&quot;, label: &quot;Стиль логотипа&quot;, type: &quot;select&quot;, options: [&quot;Знак + текст&quot;, &quot;Только текст&quot;, &quot;Только знак&quot;, &quot;Эмблема&quot;, &quot;Абстрактный&quot;] },
+                    { name: &quot;color_preference&quot;, label: &quot;Цвета&quot;, type: &quot;text&quot;, placeholder: &quot;Назовите предпочтительные цвета&quot; },
+                    { name: &quot;forbidden_colors&quot;, label: &quot;Цвета, которые не нужно использовать&quot;, type: &quot;text&quot; },
+                    { name: &quot;fonts&quot;, label: &quot;Предпочтения по шрифтам&quot;, type: &quot;text&quot;, placeholder: &quot;Строгие, рукописные, гротески...&quot; }
+                ]
+            },
+            {
+                title: &quot;Контекст использования&quot;,
+                fields: [
+                    { name: &quot;usage&quot;, label: &quot;Где будет использоваться логотип?&quot;, type: &quot;checkbox&quot;, options: [&quot;Сайт&quot;, &quot;Печать&quot;, &quot;Соцсети&quot;, &quot;Вывеска&quot;, &quot;Сувенирная продукция&quot;] },
+                    { name: &quot;competitors&quot;, label: &quot;Ссылки на логотипы конкурентов&quot;, type: &quot;textarea&quot;, placeholder: &quot;Что нравится/не нравится&quot; }
+                ]
+            }
+        ]
+    },
+
+    // Для брошюр
+    brochure: {
+        sections: [
+            {
+                title: &quot;Основная информация&quot;,
+                fields: [
+                    { name: &quot;product_name&quot;, label: &quot;Название брошюры/каталога&quot;, type: &quot;text&quot;, required: true },
+                    { name: &quot;pages&quot;, label: &quot;Количество страниц&quot;, type: &quot;number&quot;, min: 4, max: 64 },
+                    { name: &quot;format&quot;, label: &quot;Формат&quot;, type: &quot;select&quot;, options: [&quot;A4&quot;, &quot;A5&quot;, &quot;A6&quot;] }
+                ]
+            },
+            {
+                title: &quot;Содержание по страницам&quot;,
+                fields: [
+                    { name: &quot;content_structure&quot;, label: &quot;Структура содержания&quot;, type: &quot;textarea&quot;, placeholder: &quot;1 страница — обложка\n2-3 страницы — о компании\n4-5 — услуги...&quot; }
+                ]
+            },
+            {
+                title: &quot;Изображения&quot;,
+                fields: [
+                    { name: &quot;provide_images&quot;, label: &quot;Предоставляете ли вы изображения?&quot;, type: &quot;boolean&quot; },
+                    { name: &quot;images&quot;, label: &quot;Изображения (файлы)&quot;, type: &quot;file&quot;, multiple: true },
+                    { name: &quot;stock_photos&quot;, label: &quot;Нужны ли стоковые фото?&quot;, type: &quot;boolean&quot; }
+                ]
+            }
+        ]
+    }
+};
+</code></pre>
+<h2 id="админка-конструктор-брифов">Админка: конструктор брифов</h2>
+<h3 id="список-шаблонов">Список шаблонов</h3>
+<p>Экран <code>ШАБЛОНЫ БРИФОВ</code> отображает активные шаблоны. По каждому шаблону показываются: системный код, описание, количество полей, число заполнений, количество использований и действия <code>[РЕДАКТИРОВАТЬ] [КЛОНИРОВАТЬ] [ПРЕДПРОСМОТР] [ОТКЛЮЧИТЬ]</code>. Доступна кнопка <code>[ + СОЗДАТЬ ШАБЛОН ]</code>.</p>
+<p>Примеры (метрики иллюстративны):</p>
+<table>
+<thead>
+<tr>
+<th>Шаблон</th>
+<th>Системный код</th>
+<th>Поля</th>
+<th>Использован</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бриф на листовку</td>
+<td><code>flyer_brief</code></td>
+<td>12</td>
+<td>45 раз</td>
+<td>Активен</td>
+</tr>
+<tr>
+<td>Бриф на логотип</td>
+<td><code>logo_brief</code></td>
+<td>18</td>
+<td>23 раза</td>
+<td>Активен</td>
+</tr>
+<tr>
+<td>Бриф на брошюру</td>
+<td><code>brochure_brief</code></td>
+<td>15</td>
+<td>67 раз</td>
+<td>Активен</td>
+</tr>
+</tbody>
+</table>
+<h3 id="редактор-шаблона-основные-настройки">Редактор шаблона: основные настройки</h3>
+<p>Редактор шаблона имеет три вкладки: <strong>Основные настройки</strong>, <strong>Поля</strong>, <strong>Логика и правила</strong>.</p>
+<p>Основные настройки:</p>
+<ul>
+<li><strong>Название</strong> — отображаемое имя шаблона (например, «Бриф на листовку»).</li>
+<li><strong>Системный код</strong> (slug) — например, <code>flyer_brief</code>.</li>
+<li><strong>Тип продукции</strong> — например, «Листовка».</li>
+<li><strong>Описание</strong> — пояснение назначения шаблона.</li>
+<li>Опции (настройки шаблона):
+<ul>
+<li>Автоудаление через N дней (например, 30).</li>
+<li>Уведомлять менеджера при заполнении.</li>
+<li>Сохранять в личном кабинете клиента.</li>
+<li>Требовать подтверждение перед отправкой.</li>
+</ul>
+</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: срок жизни брифа указан в двух местах по-разному. Настройка шаблона предлагает «Автоудаление через 30 дней», тогда как срок действия ссылки экземпляра брифа жёстко задан как 7 дней (<code>expires_at = NOW() + INTERVAL '7 days'</code>, <code>expiresIn = 7 * 24 * 60 * 60 * 1000</code>). Нужно уточнить, как соотносятся срок жизни ссылки (7 дней) и срок автоудаления данных (30 дней).</p>
+<h3 id="редактор-шаблона-вкладка-поля-конструктор-формы">Редактор шаблона: вкладка «Поля» (конструктор формы)</h3>
+<p>Поля добавляются кнопкой <code>[ + ДОБАВИТЬ ПОЛЕ ]</code> и могут переупорядочиваться перетаскиванием. У каждого поля доступны действия <code>[СОХРАНИТЬ] [УДАЛИТЬ] [ДУБЛИРОВАТЬ] [ВВЕРХ] [ВНИЗ]</code>.</p>
+<p>Типы полей и их настройки:</p>
+<table>
+<thead>
+<tr>
+<th>Тип поля</th>
+<th>Тип (код)</th>
+<th>Настраиваемые атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Текстовое поле</td>
+<td><code>text</code></td>
+<td>Метка, Код, Плейсхолдер, Обязательное, Показывать в отчёте</td>
+</tr>
+<tr>
+<td>Выбор из списка</td>
+<td><code>select</code></td>
+<td>Метка, Код, Варианты (список значений), Обязательное</td>
+</tr>
+<tr>
+<td>Загрузка файла</td>
+<td><code>file</code></td>
+<td>Метка, Код, Допустимые форматы, Макс. размер (MB), Обязательное</td>
+</tr>
+<tr>
+<td>Чекбокс</td>
+<td><code>checkbox</code></td>
+<td>Метка, Код, Текст чекбокса</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры конфигурации полей:</p>
+<ul>
+<li><strong>Текстовое поле:</strong> Метка «Название компании», Код <code>company_name</code>, Тип <code>text</code>, Плейсхолдер «Например, ООО &quot;Ромашка&quot;», Обязательное — да, Показывать в отчёте — да.</li>
+<li><strong>Выбор из списка:</strong> Метка «Тип продукции», Код <code>product_type</code>, Тип <code>select</code>, Варианты: Листовка / Визитка / Брошюра / Наклейка, Обязательное — да.</li>
+<li><strong>Загрузка файла:</strong> Метка «Загрузить логотип», Код <code>logo_file</code>, Тип <code>file</code>, Допустимые форматы <code>.ai, .eps, .pdf, .png, .jpg</code>, Макс. размер 20 MB, Обязательное — нет.</li>
+<li><strong>Чекбокс:</strong> Метка «Есть фирменный стиль?», Код <code>has_brand_style</code>, Тип <code>checkbox</code>, Текст чекбокса «Да, у нас есть фирменный стиль».</li>
+</ul>
+<p>Полный набор типов полей: текст, выбор, файлы, чекбоксы, дата, число.</p>
+<h3 id="редактор-шаблона-вкладка-логика-и-правила">Редактор шаблона: вкладка «Логика и правила»</h3>
+<h4 id="условная-логика">Условная логика</h4>
+<p>Поля могут отображаться только при определённых ответах. Правило добавляется кнопкой <code>[ + ДОБАВИТЬ ПРАВИЛО ]</code>, формат: «ЕСЛИ [поле] [оператор] [значение] ТО ПОКАЗАТЬ поле(я) [...]».</p>
+<p>Примеры:</p>
+<ul>
+<li>ЕСЛИ <code>Есть фирменный стиль?</code> равно <code>Да</code> ТО ПОКАЗАТЬ поле <code>Загрузить файл стиля</code>.</li>
+<li>ЕСЛИ <code>Тип продукции</code> равно <code>Брошюра</code> ТО ПОКАЗАТЬ поля <code>Количество страниц</code>, <code>Тип переплёта</code>.</li>
+</ul>
+<h4 id="правила-валидации">Правила валидации</h4>
+<p>Правила проверки ответов, каждое с собственным сообщением об ошибке.</p>
+<p>Примеры:</p>
+<ul>
+<li>Поле <code>Название компании</code> не может быть пустым. Сообщение: «Пожалуйста, укажите название компании».</li>
+<li>Поле <code>Email</code> должно быть корректным email-адресом. Сообщение: «Введите корректный email».</li>
+</ul>
+<p>Поддерживается проверка email, телефона и обязательных полей.</p>
+<h2 id="отправка-брифа-клиенту">Отправка брифа клиенту</h2>
+<h3 id="интерфейс-менеджера">Интерфейс менеджера</h3>
+<p>Из карточки заказа (<code>ЗАКАЗ №12345 | Клиент: ООО &quot;Ромашка&quot;</code>) менеджер:</p>
+<ol>
+<li>Выбирает шаблон брифа (например, «Бриф на листовку», «Бриф на логотип», «Бриф на брошюру»).</li>
+<li>Выбирает каналы отправки (можно несколько одновременно):
+<ul>
+<li><strong>Email</strong> — например, <code>client@example.com</code>.</li>
+<li><strong>Telegram</strong> — например, <code>@client_username</code>.</li>
+<li><strong>WhatsApp</strong> — например, <code>+7 999 123 45 67</code>.</li>
+</ul>
+</li>
+<li>При необходимости вводит сопроводительное сообщение (например: «Для ускорения работы, пожалуйста, заполните бриф. Ссылка действительна 7 дней.»).</li>
+<li>Нажимает <code>[ ОТПРАВИТЬ БРИФ ]</code>.</li>
+</ol>
+<h3 id="история-отправок">История отправок</h3>
+<p>В карточке заказа ведётся журнал событий брифа, например:</p>
+<pre><code>15.03.2026 14:30 | Отправлен бриф &quot;Бриф на листовку&quot; (Email, Telegram)
+15.03.2026 15:45 | Клиент открыл ссылку
+16.03.2026 10:20 | Клиент начал заполнение
+16.03.2026 11:30 | Бриф заполнен и отправлен
+</code></pre>
+<h3 id="сообщение-клиенту-telegram-email">Сообщение клиенту (Telegram / Email)</h3>
+<p>Пример текста уведомления:</p>
+<pre><code>📋 НОВЫЙ БРИФ ОТ ТИПОГРАФИИ
+
+Здравствуйте!
+
+Для оформления заказа №12345 нам нужно заполнить небольшой бриф.
+
+🔗 Ссылка на бриф:
+https://printoffice.ru/brief/f7e8d9a0c1b2
+
+⏰ Ссылка действительна 7 дней.
+
+Если у вас есть вопросы — напишите нам.
+
+—
+Типография PrintOffice
+</code></pre>
+<h2 id="интерфейс-брифа-для-клиента-пример-заполнения">Интерфейс брифа для клиента (пример заполнения)</h2>
+<p>Базовый интерфейс брифа на дизайн (<code>БРИФ НА ДИЗАЙН</code>, продукт «Листовка») с примером заполненных значений по секциям шаблона <code>flyer</code>:</p>
+<ul>
+<li><strong>📝 Основная информация:</strong>
+<ul>
+<li>Название продукта/акции: «Летняя распродажа 2026».</li>
+<li>Целевая аудитория: «Молодежь 18-25 лет».</li>
+<li>Цель: «Продажа».</li>
+</ul>
+</li>
+<li><strong>📄 Содержание:</strong>
+<ul>
+<li>Заголовок: «Скидка 50% на всё!».</li>
+<li>Подзаголовок: «Только до 31 августа».</li>
+<li>Основной текст: «В нашем магазине стартовала летняя распродажа...».</li>
+<li>Призыв к действию: «Успейте купить!».</li>
+</ul>
+</li>
+<li><strong>🎨 Визуальные предпочтения:</strong>
+<ul>
+<li>Цветовая гамма: «Яркая».</li>
+<li>Фирменные цвета: <code>#FF6600, #FFFFFF</code>.</li>
+<li>Стиль: «Современный».</li>
+<li>Настроение: «Энергичный».</li>
+</ul>
+</li>
+<li><strong>🖼️ Логотип и элементы:</strong>
+<ul>
+<li>чекбокс <code>[✓] Есть логотип</code>;</li>
+<li>Логотип: «Файл не выбран» <code>[ ВЫБРАТЬ ]</code>;</li>
+<li>Дополнительные элементы: «Иконки скидок, звёздочки».</li>
+</ul>
+</li>
+<li><strong>📎 Референсы (примеры того, что нравится):</strong> <code>[ + ДОБАВИТЬ ССЫЛКУ ]</code>, например:
+<ul>
+<li><code>https://www.behance.net/gallery/123456/Пример-листовки</code>;</li>
+<li><code>https://pinterest.com/pin/987654/Пример-2</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Действия внизу формы: <code>[ ОТПРАВИТЬ БРИФ ]</code> и <code>[ СОХРАНИТЬ ЧЕРНОВИК ]</code>.</p>
+<h2 id="страница-брифа-для-клиента-веб">Страница брифа для клиента (веб)</h2>
+<p>Страница <code>БРИФ НА ЛИСТОВКУ</code> привязана к заказу (<code>Заказ №12345 | Типография PrintOffice</code>) и содержит:</p>
+<ul>
+<li><strong>Индикатор прогресса заполнения</strong> — например, «25% (3 из 12 полей)» с прогресс-баром.</li>
+<li>Секции с полями, в т.ч.:
+<ul>
+<li><strong>Основная информация:</strong> Название компании, Контактное лицо, Email, Телефон.</li>
+<li><strong>Параметры продукции:</strong> Тип продукции, Формат, Количество страниц, Тираж.</li>
+<li><strong>Визуальные предпочтения:</strong> чекбокс «У нас есть фирменный стиль» (при включении показывается блок загрузки файлов стиля — логотип, фирменные цвета, шрифты; допустимые форматы <code>.ai, .eps, .pdf, .png, .jpg</code> до 20 MB), Цветовая гамма, Фирменные цвета, Стиль.</li>
+<li><strong>Содержание:</strong> Заголовок, Подзаголовок, Основной текст, Призыв к действию.</li>
+<li><strong>Референсы (что нравится):</strong> добавление ссылок кнопкой <code>[ + ДОБАВИТЬ ССЫЛКУ ]</code> (например, ссылки Behance, Pinterest).</li>
+<li><strong>Комментарий:</strong> свободный текст (например: «Хотелось бы сделать яркий дизайн, привлекающий внимание.»).</li>
+</ul>
+</li>
+<li>Действия внизу страницы: <code>[ СОХРАНИТЬ ЧЕРНОВИК ]</code> и <code>[ ОТПРАВИТЬ БРИФ ]</code>.</li>
+</ul>
+<p>Поведение визуального блока «фирменный стиль» реализует условную логику: блок загрузки файлов появляется только при отмеченном чекбоксе.</p>
+<h2 id="личный-кабинет-клиента-история-брифов">Личный кабинет клиента (история брифов)</h2>
+<p>В разделе <code>ИСТОРИЯ БРИФОВ</code> отображаются брифы по заказам с их статусами. Примеры:</p>
+<ul>
+<li>Заказ №12345, ООО «Ромашка» — «Бриф на листовку», статус «Заполнен» (заполнен 16.03.2026 11:30). Действия: <code>[ ПРОСМОТРЕТЬ ОТВЕТЫ ]</code>, <code>[ СКАЧАТЬ PDF ]</code>.</li>
+<li>Заказ №12344, ИП Иванов — «Бриф на логотип», статус «В процессе (60% заполнено)». Действие: <code>[ ПРОДОЛЖИТЬ ЗАПОЛНЕНИЕ ]</code>.</li>
+</ul>
+<h2 id="генерация-и-серверная-логика-briefmanager">Генерация и серверная логика (BriefManager)</h2>
+<p>Класс <code>BriefManager</code> отвечает за генерацию ссылок, создание экземпляров, рассылку и приём ответов.</p>
+<p>Ключевые правила:</p>
+<ul>
+<li>Токен ссылки генерируется как <code>crypto.randomBytes(32).toString('hex')</code>.</li>
+<li>URL брифа: <code>https://printoffice.ru/brief/{token}</code>.</li>
+<li>Срок жизни ссылки: 7 дней.</li>
+</ul>
+<pre><code>expiresIn = 7 * 24 * 60 * 60 * 1000   // 7 дней в миллисекундах
+expires_at = NOW() + INTERVAL '7 days'  // на стороне БД
+</code></pre>
+<pre><code class="language-javascript">class BriefManager {
+    constructor() {
+        this.briefTemplates = [];
+    }
+
+    /** Генерация уникальной ссылки для брифа */
+    generateBriefLink(orderId, templateId, clientId) {
+        const token = crypto.randomBytes(32).toString('hex');
+        return {
+            url: `https://printoffice.ru/brief/${token}`,
+            token: token,
+            expiresIn: 7 * 24 * 60 * 60 * 1000  // 7 дней
+        };
+    }
+
+    /** Создание экземпляра брифа */
+    async createBriefInstance(orderId, templateId, clientId, channels) {
+        const { url, token, expiresIn } = this.generateBriefLink(orderId, templateId, clientId);
+
+        const brief = await db.query(`
+            INSERT INTO brief_instances
+            (template_id, order_id, client_id, token, status, sent_at, expires_at)
+            VALUES ($1, $2, $3, $4, 'sent', NOW(), NOW() + INTERVAL '7 days')
+            RETURNING id
+        `, [templateId, orderId, clientId, token]);
+
+        const briefId = brief.rows[0].id;
+
+        // Отправляем клиенту
+        await this.sendBriefToClient(briefId, channels);
+
+        return { briefId, url };
+    }
+
+    /** Отправка брифа клиенту по выбранным каналам */
+    async sendBriefToClient(briefId, channels) {
+        const brief = await db.query(`
+            SELECT bi.*, bt.name, bt.product_type, c.email, c.telegram, c.phone
+            FROM brief_instances bi
+            JOIN brief_templates bt ON bt.id = bi.template_id
+            JOIN clients c ON c.id = bi.client_id
+            WHERE bi.id = $1
+        `, [briefId]);
+
+        const data = brief.rows[0];
+        const briefUrl = `https://printoffice.ru/brief/${data.token}`;
+
+        for (const channel of channels) {
+            if (channel === 'email' &amp;&amp; data.email) {
+                await this.sendBriefEmail(data.email, briefUrl, data.name);
+                await this.logNotification(briefId, 'email', data.email);
+            }
+            if (channel === 'telegram' &amp;&amp; data.telegram) {
+                await this.sendBriefTelegram(data.telegram, briefUrl, data.name);
+                await this.logNotification(briefId, 'telegram', data.telegram);
+            }
+        }
+    }
+
+    /** Получение брифа по токену (только не истёкшие) */
+    async getBriefByToken(token) {
+        const brief = await db.query(`
+            SELECT bi.*, bt.form_schema, bt.name, bt.description,
+                   o.order_number, c.name as client_name
+            FROM brief_instances bi
+            JOIN brief_templates bt ON bt.id = bi.template_id
+            JOIN orders o ON o.id = bi.order_id
+            JOIN clients c ON c.id = bi.client_id
+            WHERE bi.token = $1 AND bi.status != 'expired'
+        `, [token]);
+
+        if (brief.rows.length === 0) {
+            throw new Error('Бриф не найден или истек срок действия');
+        }
+        return brief.rows[0];
+    }
+
+    /** Сохранение ответов клиента */
+    async saveBriefResponses(token, responses, attachments) {
+        const brief = await db.query(`
+            UPDATE brief_instances
+            SET responses = $1, attachments = $2,
+                status = 'completed', completed_at = NOW()
+            WHERE token = $3 AND status != 'expired'
+            RETURNING id, order_id, client_id
+        `, [JSON.stringify(responses), JSON.stringify(attachments), token]);
+
+        if (brief.rows.length === 0) {
+            throw new Error('Бриф не найден');
+        }
+
+        // Уведомляем менеджера
+        await this.notifyManager(brief.rows[0].order_id, 'Бриф заполнен');
+
+        return { success: true };
+    }
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в коде <code>sendBriefToClient</code> обрабатываются только каналы <code>email</code> и <code>telegram</code>, хотя в интерфейсе менеджера и в таблице <code>brief_notifications</code> предусмотрен также <code>whatsapp</code>. Отправка по WhatsApp не реализована в серверной логике — требуется доработка.</p>
+<h2 id="интеграция-с-telegram-ботом">Интеграция с Telegram-ботом</h2>
+<p>Telegram-бот поддерживает два сценария: отправку ссылки на веб-форму и полностью интерактивное пошаговое заполнение прямо в чате (бот задаёт вопросы по очереди по полям из <code>form_schema</code>, накапливая ответы в сессии).</p>
+<pre><code class="language-javascript">class TelegramBriefHandler {
+    /** Отправка брифа в Telegram (ссылка + inline-кнопки) */
+    async sendBrief(chatId, briefUrl, briefName) {
+        const keyboard = {
+            inline_keyboard: [
+                [{ text: &quot;📋 ЗАПОЛНИТЬ БРИФ&quot;, url: briefUrl }],
+                [{ text: &quot;❓ Задать вопрос&quot;, callback_data: &quot;help&quot; }]
+            ]
+        };
+
+        await bot.sendMessage(chatId, `📋 *Новый бриф: ${briefName}*
+Для оформления заказа нам нужно заполнить небольшой бриф.
+🔗 Нажмите на кнопку ниже, чтобы открыть форму.
+⏰ Ссылка действительна 7 дней.`,
+            { reply_markup: keyboard, parse_mode: 'Markdown' });
+    }
+
+    /** Интерактивное заполнение брифа в Telegram (старт) */
+    async startBriefInTelegram(chatId, briefId) {
+        const brief = await db.query(`
+            SELECT * FROM brief_instances WHERE id = $1
+        `, [briefId]);
+
+        const schema = brief.rows[0].form_schema;
+        const firstField = schema.fields[0];
+
+        // Сохраняем состояние сессии
+        await this.setSession(chatId, {
+            briefId: briefId,
+            step: 0,
+            answers: {}
+        });
+
+        await bot.sendMessage(chatId,
+            `📋 *${firstField.label}*\n\n${firstField.placeholder || 'Введите ответ:'}`,
+            { parse_mode: 'Markdown' });
+    }
+
+    /** Обработка ответов в Telegram (пошагово) */
+    async handleBriefAnswer(chatId, message) {
+        const session = await this.getSession(chatId);
+        if (!session || !session.briefId) return;
+
+        const brief = await db.query(`
+            SELECT * FROM brief_instances WHERE id = $1
+        `, [session.briefId]);
+
+        const schema = brief.rows[0].form_schema;
+        const currentField = schema.fields[session.step];
+
+        // Сохраняем ответ
+        session.answers[currentField.code] = message.text;
+
+        // Переходим к следующему полю
+        session.step++;
+
+        if (session.step &gt;= schema.fields.length) {
+            // Бриф завершен
+            await this.completeBrief(session.briefId, session.answers);
+            await bot.sendMessage(chatId, '✅ Спасибо! Бриф успешно заполнен. Менеджер свяжется с вами.');
+            await this.clearSession(chatId);
+        } else {
+            const nextField = schema.fields[session.step];
+            await bot.sendMessage(chatId,
+                `📋 *${nextField.label}*\n\n${nextField.placeholder || 'Введите ответ:'}`,
+                { parse_mode: 'Markdown' });
+            await this.saveSession(chatId, session);
+        }
+    }
+}
+</code></pre>
+<h2 id="статусы-брифа">Статусы брифа</h2>
+<p>Полный набор статусов экземпляра брифа (поле <code>status</code> таблицы <code>brief_instances</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>draft</code></td>
+<td>Черновик (создан, не отправлен)</td>
+</tr>
+<tr>
+<td><code>sent</code></td>
+<td>Отправлен клиенту</td>
+</tr>
+<tr>
+<td><code>viewed</code></td>
+<td>Просмотрен (клиент открыл ссылку)</td>
+</tr>
+<tr>
+<td><code>in_progress</code></td>
+<td>В процессе заполнения</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td>Заполнен и отправлен</td>
+</tr>
+<tr>
+<td><code>expired</code></td>
+<td>Истёк срок действия</td>
+</tr>
+</tbody>
+</table>
+<p>Действия журнала <code>brief_history</code>: <code>created</code>, <code>sent</code>, <code>viewed</code>, <code>started</code>, <code>saved</code>, <code>completed</code>, <code>expired</code>.</p>
+<p>Упрощённая цепочка отслеживания для отчётности: <strong>Отправлен → Просмотрен → Заполнен</strong>.</p>
+<p>См. также открытый вопрос о расхождении наборов статусов в разделе «Структура базы данных».</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#концепция">Концепция</a></li><li class="lvl3"><a href="#место-в-процессе-дизайна-full-cycle">Место в процессе дизайна (full cycle)</a></li><li class="lvl2"><a href="#возможности-системы">Возможности системы</a></li><li class="lvl2"><a href="#структура-базы-данных">Структура базы данных</a></li><li class="lvl3"><a href="#бриф-дизайна-design_briefs">Бриф дизайна (design_briefs)</a></li><li class="lvl3"><a href="#версии-макетов-design_versions">Версии макетов (design_versions)</a></li><li class="lvl3"><a href="#шаблоны-брифов">Шаблоны брифов</a></li><li class="lvl3"><a href="#экземпляры-брифов-для-конкретных-заказов">Экземпляры брифов (для конкретных заказов)</a></li><li class="lvl3"><a href="#уведомления-о-брифе">Уведомления о брифе</a></li><li class="lvl3"><a href="#история-брифов-журнал-изменений">История брифов (журнал изменений)</a></li><li class="lvl2"><a href="#шаблоны-брифов-готовые-анкеты">Шаблоны брифов (готовые анкеты)</a></li><li class="lvl2"><a href="#админка-конструктор-брифов">Админка: конструктор брифов</a></li><li class="lvl3"><a href="#список-шаблонов">Список шаблонов</a></li><li class="lvl3"><a href="#редактор-шаблона-основные-настройки">Редактор шаблона: основные настройки</a></li><li class="lvl3"><a href="#редактор-шаблона-вкладка-поля-конструктор-формы">Редактор шаблона: вкладка «Поля» (конструктор формы)</a></li><li class="lvl3"><a href="#редактор-шаблона-вкладка-логика-и-правила">Редактор шаблона: вкладка «Логика и правила»</a></li><li class="lvl2"><a href="#отправка-брифа-клиенту">Отправка брифа клиенту</a></li><li class="lvl3"><a href="#интерфейс-менеджера">Интерфейс менеджера</a></li><li class="lvl3"><a href="#история-отправок">История отправок</a></li><li class="lvl3"><a href="#сообщение-клиенту-telegram-email">Сообщение клиенту (Telegram / Email)</a></li><li class="lvl2"><a href="#интерфейс-брифа-для-клиента-пример-заполнения">Интерфейс брифа для клиента (пример заполнения)</a></li><li class="lvl2"><a href="#страница-брифа-для-клиента-веб">Страница брифа для клиента (веб)</a></li><li class="lvl2"><a href="#личный-кабинет-клиента-история-брифов">Личный кабинет клиента (история брифов)</a></li><li class="lvl2"><a href="#генерация-и-серверная-логика-briefmanager">Генерация и серверная логика (BriefManager)</a></li><li class="lvl2"><a href="#интеграция-с-telegram-ботом">Интеграция с Telegram-ботом</a></li><li class="lvl2"><a href="#статусы-брифа">Статусы брифа</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

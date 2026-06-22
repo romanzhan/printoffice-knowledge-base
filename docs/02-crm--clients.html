@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Клиенты — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="02-crm--clients">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li class="active"><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="клиенты">Клиенты</h1>
+<p>Модуль управления клиентами CRM PrintOffice: карточка клиента (контакты, мессенджеры, адреса, ИНН, скидка, история заказов), типология клиентов и работа с постоянными клиентами.</p>
+<h2 id="карточка-клиента">Карточка клиента</h2>
+<p>Карточка клиента содержит следующие поля.</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ФИО / Название организации</td>
+<td>Имя физлица или наименование юрлица</td>
+</tr>
+<tr>
+<td>Телефон</td>
+<td>Основной и дополнительный</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Электронная почта</td>
+</tr>
+<tr>
+<td>Никнеймы в мессенджерах</td>
+<td>Telegram, WhatsApp, Макс</td>
+</tr>
+<tr>
+<td>Адрес</td>
+<td>Фактический и адрес доставки</td>
+</tr>
+<tr>
+<td>ИНН</td>
+<td>Для юридических лиц</td>
+</tr>
+<tr>
+<td>История заказов</td>
+<td>Список заказов с номерами, суммами и статусами</td>
+</tr>
+<tr>
+<td>Договор</td>
+<td>Ссылка на файл</td>
+</tr>
+<tr>
+<td>Персональная скидка</td>
+<td>Опционально</td>
+</tr>
+</tbody>
+</table>
+<h3 id="мессенджеры">Мессенджеры</h3>
+<p>Никнеймы в мессенджерах (Telegram, WhatsApp, Макс) кликабельны, доступно копирование. Перед ответом можно выбрать, с какого аккаунта или номера отвечать клиенту.</p>
+<h3 id="адреса">Адреса</h3>
+<p>В карточке хранятся два типа адресов:</p>
+<ul>
+<li>Фактический адрес.</li>
+<li>Адрес доставки.</li>
+</ul>
+<h3 id="реквизиты-юрлиц">Реквизиты юрлиц</h3>
+<p>Для юридических лиц фиксируется ИНН. ИНН используется в том числе как один из критериев глобального поиска.</p>
+<h2 id="поиск-по-клиентам">Поиск по клиентам</h2>
+<p>Глобальная строка поиска расположена вверху экрана и выполняет одновременный поиск по нескольким критериям.</p>
+<p>Поиск ведётся по:</p>
+<ul>
+<li>Номеру заказа (включая буквенные части).</li>
+<li>Телефону клиента.</li>
+<li>Email.</li>
+<li>Никнейму в Telegram / Макс / WhatsApp.</li>
+<li>Адресу доставки.</li>
+<li>ИНН.</li>
+<li>Названию организации.</li>
+<li>Номеру счёта (из Эльбы).</li>
+</ul>
+<p>Результат поиска — список заказов либо переход в карточку клиента.</p>
+<h2 id="постоянные-клиенты">Постоянные клиенты</h2>
+<p>Постоянные клиенты выделяются отдельной отметкой и получают расширенные возможности обслуживания.</p>
+<ul>
+<li>Отметка «постоянный» → возможность отсрочки платежа.</li>
+<li>Автоматическое создание УПД (через интеграцию с Эльбой по API).</li>
+<li>Доступ к истории заказов клиента.</li>
+<li>Повторный заказ в 1 клик.</li>
+</ul>
+<p>Статусы заказа отображаются в личном кабинете клиента: оплачен, в работе, готов, доставлен.</p>
+<h2 id="типы-клиентов">Типы клиентов</h2>
+<p>Тип клиента определяется на сайте по наличию cookie, авторизации и параметров URL. Типология используется для адаптации интерфейса и логики оформления заказа.</p>
+<h3 id="определение-типа-клиента">Определение типа клиента</h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Новый</td>
+<td>Нет cookie, нет авторизации</td>
+</tr>
+<tr>
+<td>Возвращающийся (cookie)</td>
+<td>Есть cookie <code>returning_user</code>, нет авторизации</td>
+</tr>
+<tr>
+<td>Авторизованный</td>
+<td>Есть JWT-токен в cookies</td>
+</tr>
+<tr>
+<td>По ссылке</td>
+<td>Параметр <code>ref=order&amp;id=12345</code> в URL</td>
+</tr>
+</tbody>
+</table>
+<h3 id="различия-в-интерфейсе">Различия в интерфейсе</h3>
+<p>Интерфейс адаптируется в зависимости от того, новый клиент или постоянный.</p>
+<table>
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Новый клиент</th>
+<th>Постоянный клиент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Приветствие</td>
+<td>«Привет! Макет готов?»</td>
+<td>«С возвращением, Иван!»</td>
+</tr>
+<tr>
+<td>Кнопки в герое</td>
+<td>3 кнопки (макет / дизайн / не уверен)</td>
+<td>3 кнопки (повторить / статус / новый)</td>
+</tr>
+<tr>
+<td>Подсказки в калькуляторе</td>
+<td>Полные</td>
+<td>Сокращённые или отсутствуют</td>
+</tr>
+<tr>
+<td>Предложение офсета</td>
+<td>Показывать</td>
+<td>Не показывать (если уже знает)</td>
+</tr>
+<tr>
+<td>Финальный CTA</td>
+<td>Стандартный</td>
+<td>Сокращённый</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b2c-b2b-и-сегментация-заказов">B2C / B2B и сегментация заказов</h3>
+<p>Признак клиента (новый / постоянный, B2C / B2B) влияет на маршрутизацию заказа между автоматической обработкой (простой заказ) и менеджером (сложный заказ).</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Простой заказ (авто)</th>
+<th>Сложный заказ (менеджер)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тип продукции</td>
+<td>Листовки, визитки, наклейки</td>
+<td>Брошюры, каталоги, стикерпаки</td>
+</tr>
+<tr>
+<td>Тираж</td>
+<td>До 500 шт</td>
+<td>От 500 шт</td>
+</tr>
+<tr>
+<td>Макет</td>
+<td>Есть</td>
+<td>Нет макета</td>
+</tr>
+<tr>
+<td>Срочность</td>
+<td>Обычная</td>
+<td>Срочная (менее 24 часов)</td>
+</tr>
+<tr>
+<td>Клиент</td>
+<td>Новый</td>
+<td>Постоянный, B2B</td>
+</tr>
+<tr>
+<td>Доп. услуги</td>
+<td>1–2</td>
+<td>Сложные (вырубка, фальцовка)</td>
+</tr>
+</tbody>
+</table>
+<p>Тип клиента (<code>b2b</code>) добавляет балл к оценке сложности заказа в логике принятия решения. Это <strong>вторая, отдельная система типизации заказа</strong> — балльная оценка сложности (<code>complexityScore</code>) для маршрутизации «авто vs менеджер», не путать с основным автоопределением типа заказа в ядре CRM (класс <code>OrderTypeDetector</code>, признаки <code>isFastB2C</code> / <code>isComplexB2B</code>) — см. <a href="02-crm--crm-overview.html#%D1%82%D0%B8%D0%BF%D1%8B-%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%BE%D0%B2-%D0%B8-%D0%B8%D1%85-%D0%B0%D0%B2%D1%82%D0%BE%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5">CRM: обзор → Типы заказов и их автоопределение</a>. Две системы пока не сведены между собой (см. открытый вопрос ниже).</p>
+<pre><code class="language-javascript">function getOrderType(orderParams) {
+  let complexityScore = 0;
+  if (['brochure', 'catalog'].includes(orderParams.productType)) complexityScore += 2;
+  if (orderParams.quantity &gt; 500) complexityScore += 1;
+  if (!orderParams.hasMaket) complexityScore += 2;
+  if (orderParams.isUrgent) complexityScore += 1;
+  if (orderParams.clientType === 'b2b') complexityScore += 1;
+  return complexityScore &gt;= 3 ? 'complex' : 'simple';
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В источниках используются две разные системы типизации клиента, не сведённые между собой. На сайте тип определяется техническими признаками (новый / возвращающийся по cookie / авторизованный / по ссылке), а в логике сегментации заказов и в карточке CRM применяются бизнес-категории (новый / постоянный, B2C / B2B). Не определено соответствие между технической типизацией и бизнес-категориями, а также способ установки признаков «постоянный» и «B2B» в карточке клиента (вручную менеджером или автоматически по истории заказов).</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#карточка-клиента">Карточка клиента</a></li><li class="lvl3"><a href="#мессенджеры">Мессенджеры</a></li><li class="lvl3"><a href="#адреса">Адреса</a></li><li class="lvl3"><a href="#реквизиты-юрлиц">Реквизиты юрлиц</a></li><li class="lvl2"><a href="#поиск-по-клиентам">Поиск по клиентам</a></li><li class="lvl2"><a href="#постоянные-клиенты">Постоянные клиенты</a></li><li class="lvl2"><a href="#типы-клиентов">Типы клиентов</a></li><li class="lvl3"><a href="#определение-типа-клиента">Определение типа клиента</a></li><li class="lvl3"><a href="#различия-в-интерфейсе">Различия в интерфейсе</a></li><li class="lvl3"><a href="#b2c-b2b-и-сегментация-заказов">B2C / B2B и сегментация заказов</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

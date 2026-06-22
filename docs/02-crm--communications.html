@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Коммуникации и задачи — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="02-crm--communications">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li class="active"><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="коммуникации-и-задачи">Коммуникации и задачи</h1>
+<p>Подсистема CRM для обмена сообщениями с клиентами и сотрудниками, ведения единой истории взаимодействий по заказу, постановки задач менеджерам и рассылки уведомлений. Включает чат-центр с разделением на внутреннюю и клиентскую ветки, мультиканальность (Макс, Telegram, WhatsApp, email, SMS) и шаблоны типовых ответов.</p>
+<h2 id="каналы-связи">Каналы связи</h2>
+<p>В карточке заказа доступны несколько внешних каналов, сообщения из которых CRM автоматически подтягивает (через API ботов и email-парсер) и привязывает к заказу.</p>
+<table>
+<thead>
+<tr>
+<th>Канал</th>
+<th>Назначение</th>
+<th>Интеграция</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email</td>
+<td>B2B: счета, договоры, УПД, коммерческие предложения. B2C: чеки, подтверждения, уведомления</td>
+<td>SMTP / SendGrid / Яндекс.Почта</td>
+</tr>
+<tr>
+<td>Telegram / WhatsApp / Макс</td>
+<td>B2C: быстрые заказы — принять заказ, отправить чек, уведомить о готовности. B2B: коммуникация по макетам, правкам, согласованиям</td>
+<td>Bot API / WhatsApp Business API</td>
+</tr>
+<tr>
+<td>Телефон (звонки)</td>
+<td>B2C: быстрые консультации, уточнение адреса и времени. B2B: обсуждение крупных заказов</td>
+<td>Запись звонков, привязка к заказу</td>
+</tr>
+<tr>
+<td>Офис (личное присутствие)</td>
+<td>Только B2C: моментальные заказы, оплата на месте, выдача</td>
+<td>Терминал самообслуживания (киоск)</td>
+</tr>
+<tr>
+<td>SMS</td>
+<td>Уведомления о статусе/готовности</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Внутренний чат (<code>internal_chat</code>)</td>
+<td>Переписка между сотрудниками</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>В модели сообщений канал хранится в поле <code>channel ENUM('email', 'telegram', 'whatsapp', 'sms', 'internal_chat')</code>.</p>
+<h2 id="две-ветки-переписки">Две ветки переписки</h2>
+<p>В карточке заказа располагаются две вкладки чата, между которыми можно переключаться.</p>
+<h3 id="чат-с-клиентом">Чат с клиентом</h3>
+<ul>
+<li>Отображаются сообщения из Макс, Telegram, WhatsApp, email, связанные с этим заказом.</li>
+<li>CRM автоматически подтягивает входящие сообщения через API ботов и email-парсер.</li>
+<li>Менеджер может писать клиенту прямо из CRM: набранный текст отправляется через выбранный канал.</li>
+<li>Клиент не видит внутренних комментариев.</li>
+</ul>
+<h3 id="внутренние-комментарии">Внутренние комментарии</h3>
+<ul>
+<li>Видят только сотрудники.</li>
+<li>Сообщение можно адресовать конкретному сотруднику (например, <code>@Паша</code>).</li>
+<li>Адресату приходит уведомление в рабочий чат (Макс, Telegram).</li>
+</ul>
+<p>Разделение веток на уровне БД обеспечивается полем <code>direction ENUM('incoming', 'outgoing', 'internal')</code> в таблице <code>communications</code> и типом отправителя <code>sender_type ENUM('client', 'manager', 'system')</code> в таблице <code>messages</code>.</p>
+<h2 id="переключение-канала">Переключение канала</h2>
+<p>Менеджер выбирает канал отправки прямо в интерфейсе чата; одно и то же сообщение может уйти клиенту через любой подключённый канал. Список каналов отправки фиксируется в данных (например, поле <code>sent_via JSON</code> хранит <code>['email', 'telegram', 'whatsapp']</code>). Для каждого шаблона задаётся перечень поддерживаемых каналов в поле <code>channels JSON</code>.</p>
+<h2 id="бот-обработка-входящих">Бот (обработка входящих)</h2>
+<p>Настройка бота выполняется в разделе «Бот» в админке.</p>
+<ul>
+<li>Бот отвечает на стандартные вопросы: график работы, адреса офисов, как проехать, условия оплаты и доставки.</li>
+<li>Может выяснять формальности («Какой формат?», «Тираж?») и создавать предварительный заказ; функцию можно отключить.</li>
+<li>Входящие сообщения парсятся: извлекается телефон, адрес, никнейм → автоматически создаётся или находится клиент и привязывается к заказу.</li>
+<li>Автоматическое создание заказа по сообщению: например, при сообщении «Хочу листовки А5, 100 шт» бот задаёт уточняющие вопросы, затем создаёт заказ в статусе «Новый» и уведомляет менеджера.</li>
+</ul>
+<h2 id="архитектура-базы-данных">Архитектура базы данных</h2>
+<p>Коммуникации построены вокруг центральной таблицы <code>communications</code>, к которой привязаны все сущности.</p>
+<h3 id="схема-связей">Схема связей</h3>
+<pre><code class="language-text">┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
+│    clients      │   │     orders      │   │    managers     │
+│   (клиенты)     │◄──┤    (заказы)     │──►│  (менеджеры)    │
+└─────────────────┘   └─────────────────┘   └─────────────────┘
+         │                     │                     │
+         ▼                     ▼                     ▼
+        ┌──────────────────────────────────────────────────┐
+        │   ЦЕНТРАЛЬНАЯ ТАБЛИЦА                              │
+        │   communications                                  │
+        │   • Связывает всё воедино                         │
+        │   • Хранит историю всех взаимодействий            │
+        │   • Каждая запись имеет тип, направление, статус  │
+        └──────────────────────────────────────────────────┘
+         │                     │                     │
+         ▼                     ▼                     ▼
+┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
+│   proposals     │   │   messages      │   │   tasks         │
+│  (предложения)  │   │  (сообщения)    │   │  (задачи)       │
+└─────────────────┘   └─────────────────┘   └─────────────────┘
+         │                     │                     │
+         ▼                     ▼                     ▼
+┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
+│   versions      │   │   channels      │   │  notifications  │
+│(версии расчётов)│   │ (каналы связи)  │   │  (уведомления)  │
+└─────────────────┘   └─────────────────┘   └─────────────────┘
+</code></pre>
+<p>Третий уровень схемы — детализация центральных сущностей: <code>versions</code> (история версий расчётов в составе подсистемы предложений), <code>channels</code> (каналы связи) и <code>notifications</code> (уведомления). Сущность <code>channels</code> отдельной таблицей не реализуется — канал хранится в поле <code>messages.channel ENUM(...)</code> (см. раздел «Каналы связи»); <code>versions</code> и <code>proposals</code> относятся к подсистеме коммерческих предложений и описаны в соответствующем документе.</p>
+<blockquote>
+<p>Примечание о нумерации. В исходной модели <code>architecture.md</code> таблицы пронумерованы сквозным списком из семи позиций: <code>1. communications</code>, <code>2. proposals</code>, <code>3. versions</code>, <code>4. messages</code>, <code>5. tasks</code>, <code>6. templates</code>, <code>7. notifications</code>. Позиции 2 (<code>proposals</code>) и 3 (<code>proposal_versions</code>) относятся к подсистеме коммерческих предложений и вынесены в отдельный документ, поэтому в данном файле описаны только пять таблиц подсистемы коммуникаций. Ниже они перенумерованы по порядку (1–5); в скобках указан исходный номер из <code>architecture.md</code>, чтобы при сверке с первоисточником было видно соответствие.</p>
+</blockquote>
+<h3 id="1-communications-ядро-системы-исходный-1">1. communications (ядро системы) — исходный № 1</h3>
+<p>Главная таблица: в неё пишется каждое событие по заказу.</p>
+<pre><code class="language-sql">CREATE TABLE communications (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+
+    -- Ключевые связи (к чему относится)
+    client_id INT NOT NULL,        -- Клиент (обязательно)
+    order_id INT,                  -- Заказ (может быть NULL для общих вопросов)
+    manager_id INT,                -- Менеджер (кто создал/обработал)
+
+    -- Тип коммуникации (что это за событие)
+    comm_type ENUM(
+        'proposal_sent',        -- Отправлено предложение
+        'proposal_viewed',      -- Клиент посмотрел
+        'proposal_accepted',    -- Согласовано
+        'proposal_rejected',    -- Отклонено
+        'proposal_modified',    -- Изменено менеджером
+        'message_received',     -- Сообщение от клиента
+        'message_sent',         -- Сообщение менеджера
+        'price_changed',        -- Изменилась цена
+        'status_changed',       -- Изменился статус
+        'file_uploaded',        -- Загружен файл
+        'task_created',         -- Создана задача
+        'payment_received',     -- Получена оплата
+        'system_notification'   -- Системное уведомление
+    ) NOT NULL,
+
+    -- Направление
+    direction ENUM('incoming', 'outgoing', 'internal') DEFAULT 'internal',
+
+    -- Содержимое
+    content TEXT,         -- Текст сообщения/комментарий
+    content_json JSON,    -- Структурированные данные (для предложений)
+
+    -- Статус
+    status ENUM(
+        'draft',      -- Черновик
+        'sent',       -- Отправлено
+        'delivered',  -- Доставлено
+        'viewed',     -- Просмотрено
+        'responded',  -- Получен ответ
+        'expired',    -- Истекло
+        'cancelled'   -- Отменено
+    ) DEFAULT 'draft',
+
+    -- Временные метки
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    -- Дополнительно
+    metadata JSON,                       -- Любые дополнительные данные
+    is_important BOOLEAN DEFAULT false,  -- Пометить как важное
+    is_read BOOLEAN DEFAULT false,       -- Прочитано ли менеджером
+
+    FOREIGN KEY (client_id) REFERENCES clients(id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (manager_id) REFERENCES managers(id),
+
+    INDEX idx_client (client_id),
+    INDEX idx_order (order_id),
+    INDEX idx_created (created_at),
+    INDEX idx_type (comm_type),
+    INDEX idx_status (status)
+);
+</code></pre>
+<h3 id="2-messages-сообщения-исходный-4">2. messages (сообщения) — исходный № 4</h3>
+<p>Хранит все сообщения в чатах с клиентами.</p>
+<pre><code class="language-sql">CREATE TABLE messages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    communication_id INT,
+
+    -- Связь с предложением (если сообщение по конкретному КП)
+    proposal_id INT,
+
+    -- Текст сообщения
+    message_text TEXT NOT NULL,
+    message_html TEXT,   -- Для форматированных сообщений
+
+    -- Медиафайлы
+    attachments JSON,    -- [{url, name, size, type}]
+
+    -- Данные отправителя/получателя
+    sender_type ENUM('client', 'manager', 'system') NOT NULL,
+    sender_id INT,       -- ID клиента или менеджера
+    recipient_type ENUM('client', 'manager', 'system'),
+    recipient_id INT,
+
+    -- Канал
+    channel ENUM('email', 'telegram', 'whatsapp', 'sms', 'internal_chat') NOT NULL,
+
+    -- Внешние ID (для интеграции с мессенджерами)
+    external_message_id VARCHAR(255),  -- ID в Telegram/WhatsApp
+    external_chat_id VARCHAR(255),     -- ID чата
+
+    -- Статус доставки
+    delivery_status ENUM(
+        'pending', 'sent', 'delivered', 'read', 'failed'
+    ) DEFAULT 'pending',
+
+    -- Временные метки
+    sent_at TIMESTAMP NULL,
+    delivered_at TIMESTAMP NULL,
+    read_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (communication_id) REFERENCES communications(id),
+    FOREIGN KEY (proposal_id) REFERENCES proposals(id),
+
+    INDEX idx_sender (sender_type, sender_id),
+    INDEX idx_channel (channel),
+    INDEX idx_external (external_message_id)
+);
+</code></pre>
+<h3 id="3-communication_tasks-задачи-для-менеджеров-исходный-5">3. communication_tasks (задачи для менеджеров) — исходный № 5</h3>
+<p>Автоматически создаваемые задачи по коммуникациям.</p>
+<pre><code class="language-sql">CREATE TABLE communication_tasks (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    communication_id INT,
+
+    -- Тип задачи
+    task_type ENUM(
+        'review_proposal',  -- Проверить предложение
+        'follow_up',        -- Связаться через N часов
+        'price_check',      -- Проверить цену
+        'client_call',      -- Позвонить клиенту
+        'send_documents',   -- Отправить документы
+        'clarify_details'   -- Уточнить детали
+    ) NOT NULL,
+
+    -- Описание
+    description TEXT,
+
+    -- Приоритет
+    priority ENUM('low', 'normal', 'high', 'urgent') DEFAULT 'normal',
+
+    -- Назначено
+    assigned_to INT,   -- ID менеджера
+    assigned_by INT,   -- Кто создал
+
+    -- Сроки
+    due_at TIMESTAMP,            -- Когда выполнить
+    completed_at TIMESTAMP NULL,
+
+    -- Статус
+    status ENUM('pending', 'in_progress', 'completed', 'cancelled') DEFAULT 'pending',
+
+    -- Результат
+    result TEXT,                     -- Что сделано
+    result_communication_id INT,     -- Какая коммуникация создана в результате
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (communication_id) REFERENCES communications(id),
+    FOREIGN KEY (assigned_to) REFERENCES managers(id),
+    FOREIGN KEY (assigned_by) REFERENCES managers(id),
+
+    INDEX idx_assigned (assigned_to, status),
+    INDEX idx_due (due_at)
+);
+</code></pre>
+<p><strong>Параметры задачи:</strong> тип (<code>task_type</code>), приоритет (<code>low / normal / high / urgent</code>), исполнитель (<code>assigned_to</code>), дедлайн (<code>due_at</code>), статус выполнения и результат.</p>
+<h3 id="4-message_templates-шаблоны-ответов-исходный-6">4. message_templates (шаблоны ответов) — исходный № 6</h3>
+<p>Для быстрой отправки типовых сообщений без участия программиста.</p>
+<pre><code class="language-sql">CREATE TABLE message_templates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,   -- Название шаблона
+    code VARCHAR(100) UNIQUE,     -- Уникальный код
+
+    -- Категория
+    category ENUM(
+        'proposal',    -- По предложениям
+        'payment',     -- По оплате
+        'production',  -- По производству
+        'general'      -- Общие
+    ) NOT NULL,
+
+    -- Содержимое
+    subject VARCHAR(255),  -- Тема (для email)
+    body TEXT NOT NULL,    -- Текст сообщения
+    body_html TEXT,        -- HTML-версия
+
+    -- Переменные
+    variables JSON,        -- Список доступных переменных
+
+    -- Для каких каналов подходит
+    channels JSON,         -- ['email', 'telegram', 'whatsapp']
+
+    -- Автоматическое использование
+    auto_apply_conditions JSON,  -- При каких условиях предлагать
+
+    is_active BOOLEAN DEFAULT true,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
+    INDEX idx_category (category),
+    INDEX idx_code (code)
+);
+</code></pre>
+<h3 id="5-notifications-уведомления-исходный-7">5. notifications (уведомления) — исходный № 7</h3>
+<p>Внутрисистемные уведомления для менеджеров и администраторов.</p>
+<pre><code class="language-sql">CREATE TABLE notifications (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    communication_id INT,
+
+    -- Кому
+    user_id INT NOT NULL,  -- ID менеджера
+    user_type ENUM('manager', 'admin') DEFAULT 'manager',
+
+    -- Тип уведомления
+    type ENUM(
+        'new_proposal',       -- Новое предложение
+        'proposal_accepted',  -- Клиент согласился
+        'proposal_rejected',  -- Клиент отказал
+        'new_message',        -- Новое сообщение
+        'task_assigned',      -- Назначена задача
+        'price_changed',      -- Цена изменилась
+        'system_alert'        -- Системное
+    ) NOT NULL,
+
+    -- Заголовок и текст
+    title VARCHAR(255),
+    message TEXT,
+
+    -- Ссылка (куда перейти)
+    link VARCHAR(255),
+
+    -- Статус
+    is_read BOOLEAN DEFAULT false,
+    read_at TIMESTAMP NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (communication_id) REFERENCES communications(id),
+
+    INDEX idx_user (user_id, is_read),
+    INDEX idx_created (created_at)
+);
+</code></pre>
+<blockquote>
+<p>Примечание. Таблицы <code>proposals</code> (предложения) и <code>proposal_versions</code> (история версий расчётов) также завязаны на <code>communications</code>, но относятся к подсистеме коммерческих предложений и описываются в соответствующем документе. Здесь они упомянуты как смежные сущности через поля <code>proposal_id</code> и <code>communication_id</code>.</p>
+</blockquote>
+<h2 id="многоканальная-отправка-коммерческого-предложения">Многоканальная отправка коммерческого предложения</h2>
+<p>Современный подход к отправке КП — не «отправить файл», а «поделиться ссылкой» на интерактивный документ. Email с PDF остаётся официальным каналом документооборота, но дублируется ссылкой на «живую» страницу, где клиент переключает варианты расчёта, видит раскладку и сразу подтверждает выбор.</p>
+<h3 id="каналы-и-форматы">Каналы и форматы</h3>
+<table>
+<thead>
+<tr>
+<th>Канал</th>
+<th>Формат</th>
+<th>Когда использовать</th>
+<th>Плюсы</th>
+<th>Минусы</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email</td>
+<td>PDF + ссылка на просмотр</td>
+<td>Основной канал, документооборот</td>
+<td>Официально, файл в приложении, сохраняется в переписке</td>
+<td>Может попасть в спам, не моментально</td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td>Текст + ссылка</td>
+<td>Срочные согласования, молодые клиенты</td>
+<td>Мгновенно, высокий % прочтения</td>
+<td>Неофициально, ссылка может потеряться</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>Текст + ссылка</td>
+<td>B2C, быстрые заказы</td>
+<td>Максимальный охват</td>
+<td>Требуется API для интеграции</td>
+</tr>
+<tr>
+<td>СМС</td>
+<td>Короткая ссылка</td>
+<td>Когда клиент не в сети</td>
+<td>100% доставка</td>
+<td>Дорого, ограничение по символам</td>
+</tr>
+<tr>
+<td>Личный кабинет</td>
+<td>Уведомление + ссылка</td>
+<td>Постоянные клиенты</td>
+<td>Безопасно, история в одном месте</td>
+<td>Требует регистрации</td>
+</tr>
+</tbody>
+</table>
+<p>На основе скорректированного расчёта система генерирует три формата одного предложения: <strong>PDF</strong> (для email и печати), <strong>HTML-страница</strong> (интерактивная: переключатель вариантов, визуализация раскладки, кнопки «Согласен» / «Предложить свой вариант» / «Задать вопрос») и <strong>текстовая версия</strong> (для мессенджеров).</p>
+<h3 id="json-структура-предложения">JSON-структура предложения</h3>
+<p>Скорректированное предложение — это структурированный объект, который сохраняется в <code>communications.content_json</code> (и в <code>proposals.calculation_snapshot</code>). Он содержит исходный и скорректированный расчёты, перечень корректировок, сравнение и набор вариантов для клиента.</p>
+<pre><code class="language-javascript">// Структура скорректированного предложения
+const adjustedProposal = {
+  id: &quot;PROP-2026-03-08-001&quot;,
+  date: &quot;2026-03-08&quot;,
+  client: {
+    name: &quot;ООО Ромашка&quot;,
+    contact: &quot;Иван Петрович&quot;,
+    email: &quot;ivan@romashka.ru&quot;,
+    phone: &quot;+7 999 123-45-67&quot;,
+    telegram: &quot;@ivan_romashka&quot;
+  },
+  originalCalculation: {
+    total: 6050,
+    items: [/* позиции */]
+  },
+  adjustedCalculation: {
+    total: 3650,
+    items: [/* позиции с корректировками */],
+    adjustments: [
+      { type: &quot;make_ready&quot;, value: 500,  reason: &quot;Приладка (сложная настройка)&quot; },
+      { type: &quot;discount&quot;,   value: -350, reason: &quot;Скидка 10% на позицию&quot; }
+    ]
+  },
+  comparison: {
+    difference: -2400,
+    percent: -39.7,
+    reason: &quot;Нестандартная раскладка под ламинацию (20 шт на листе вместо 24)&quot;
+  },
+  options: [
+    {
+      id: 1,
+      name: &quot;Базовый (как на сайте)&quot;,
+      total: 6050,
+      description: &quot;Стандартная раскладка 24 шт/лист, без приладки&quot;
+    },
+    {
+      id: 2,
+      name: &quot;Оптимальный для производства&quot;,
+      total: 3650,
+      description: &quot;Раскладка 20 шт/лист (подходит для ламинации) + приладка&quot;
+    }
+  ]
+};
+</code></pre>
+<p>Поле <code>adjustments[].type</code> использует тот же каталог корректировок, что и <code>order_adjustments</code> (<code>make_ready</code> / <code>urgency</code> / <code>discount</code>) — см. модель ценообразования. Каждый вариант в <code>options</code> имеет собственный итог, чтобы клиент мог выбрать на интерактивной странице.</p>
+<h3 id="логика-автоматического-выбора-канала">Логика автоматического выбора канала</h3>
+<p>При отправке система подбирает каналы автоматически: учитывает предпочтительный канал клиента, его активность в Telegram, открываемость email, срочность и важность предложения. Для важных предложений (большая сумма или значительное отклонение от цены сайта) отправка дублируется минимум в два канала.</p>
+<pre><code class="language-javascript">function selectCommunicationChannel(client, proposal) {
+  const channels = [];
+
+  // Анализируем историю взаимодействий
+  if (client.preferredChannel) {
+    // Если клиент указал предпочтительный канал
+    channels.push(client.preferredChannel);
+  } else {
+    // Автоматический выбор на основе данных
+    if (client.telegram &amp;&amp; client.telegramActivity &gt; 0.7) {
+      channels.push('telegram');   // Активный Telegram-пользователь
+    }
+    if (client.email &amp;&amp; client.emailOpenRate &gt; 0.3) {
+      channels.push('email');      // Читает email
+    }
+    if (client.phone &amp;&amp; proposal.urgency === 'high') {
+      channels.push('sms');        // Срочно — дублируем СМС
+    }
+  }
+
+  // Для важных предложений — дублируем в 2 канала
+  if (proposal.total &gt; 10000 || proposal.deviation &gt; 20) {
+    // Большая сумма или значительное отклонение
+    return [...new Set([...channels, 'email', 'telegram'])];
+  }
+
+  return channels;
+}
+</code></pre>
+<p>Пороги логики: активность в Telegram <code>&gt; 0.7</code>, открываемость email <code>&gt; 0.3</code>, дублирование в email + Telegram при сумме <code>&gt; 10 000</code> руб или отклонении <code>&gt; 20%</code>. Итоговый набор каналов фиксируется в <code>messages.sent_via JSON</code> (например, <code>['email', 'telegram']</code>).</p>
+<h3 id="рекомендуемая-гибридная-схема">Рекомендуемая (гибридная) схема</h3>
+<ul>
+<li><strong>Базовая (автоматическая):</strong> Email с PDF (документооборот) + Telegram со ссылкой (быстрое согласование); в обоих каналах — ссылка на интерактивную версию.</li>
+<li><strong>Расширенная (для сложных случаев):</strong> WhatsApp через официальный API, СМС для срочных уведомлений, личный кабинет для постоянных клиентов.</li>
+<li><strong>Ключевая фишка — «живая» ссылка:</strong> вместо простого файла клиент получает ссылку на интерактивную страницу, где переключается между вариантами расчёта, видит визуализацию раскладки, сразу подтверждает выбор или задаёт вопрос в контексте заказа.</li>
+</ul>
+<p>При обратной связи от клиента (по ссылке) возможны действия: <strong>согласиться</strong> (автоматически создаётся счёт, заказ → «Подтверждён», менеджер получает уведомление); <strong>выбрать другой вариант</strong> (фиксируется выбор, пересчитывается итог); <strong>задать вопрос</strong> (попадает в карточку заказа, менеджер отвечает в том же канале); <strong>отказаться</strong> (фиксируется причина, заказ → «Отклонён», можно отправить альтернативу).</p>
+<h2 id="сценарии-работы-чат-центр">Сценарии работы (чат-центр)</h2>
+<h3 id="пример-1-отправка-предложения">Пример 1. Отправка предложения</h3>
+<pre><code class="language-javascript">// 1. Менеджер создаёт предложение
+const proposal = {
+    clientId: 123,
+    orderId: 456,
+    calculationSnapshot: {...},
+    totalAdjusted: 3250,
+    changes: [...],
+    justifications: [...]
+};
+
+// 2. Система создаёт запись в communications
+const comm = await db.communications.create({
+    client_id: 123,
+    order_id: 456,
+    manager_id: currentManager.id,
+    comm_type: 'proposal_sent',
+    direction: 'outgoing',
+    content_json: proposal,
+    status: 'sent'
+});
+
+// 3. Создаёт proposal
+const proposalDb = await db.proposals.create({
+    communication_id: comm.id,
+    proposal_number: 'КП-2026-03-08-001',
+    calculation_snapshot: proposal.calculationSnapshot,
+    total_adjusted: proposal.totalAdjusted,
+    changes: proposal.changes,
+    justifications: proposal.justifications,
+    status: 'sent',
+    sent_at: new Date()
+});
+
+// 4. Создаёт задачу на follow-up
+await db.communication_tasks.create({
+    communication_id: comm.id,
+    task_type: 'follow_up',
+    description: 'Перезвонить клиенту через 2 часа после отправки КП',
+    assigned_to: currentManager.id,
+    due_at: new Date(Date.now() + 2 * 60 * 60 * 1000)
+});
+
+// 5. Создаёт уведомление менеджеру
+await db.notifications.create({
+    communication_id: comm.id,
+    user_id: currentManager.id,
+    type: 'new_proposal',
+    title: 'Предложение отправлено',
+    message: `КП №${proposalDb.proposal_number} отправлено клиенту`
+});
+</code></pre>
+<h3 id="пример-2-клиент-посмотрел-предложение">Пример 2. Клиент посмотрел предложение</h3>
+<pre><code class="language-javascript">// Когда клиент переходит по ссылке
+app.get('/proposal/:token', async (req, res) =&gt; {
+    const proposal = await db.proposals.findOne({ token: req.params.token });
+
+    // Обновляем статус
+    await db.proposals.update({
+        id: proposal.id,
+        status: 'viewed',
+        viewed_at: new Date()
+    });
+
+    // Обновляем коммуникацию
+    await db.communications.update({
+        id: proposal.communication_id,
+        status: 'viewed'
+    });
+
+    // Создаём уведомление менеджеру
+    await db.notifications.create({
+        communication_id: proposal.communication_id,
+        user_id: proposal.created_by,
+        type: 'proposal_viewed',
+        title: 'Клиент посмотрел предложение',
+        message: `Клиент открыл КП №${proposal.proposal_number}`
+    });
+
+    res.render('proposal', { proposal });
+});
+</code></pre>
+<h3 id="пример-3-клиент-согласовал">Пример 3. Клиент согласовал</h3>
+<pre><code class="language-javascript">// Клиент нажал &quot;Согласен&quot;
+async function acceptProposal(proposalId) {
+    const proposal = await db.proposals.findById(proposalId);
+
+    // Обновляем статус
+    await db.proposals.update({
+        id: proposalId,
+        status: 'accepted',
+        total_agreed: proposal.total_adjusted,
+        responded_at: new Date()
+    });
+
+    // Обновляем коммуникацию
+    await db.communications.update({
+        id: proposal.communication_id,
+        status: 'responded'
+    });
+
+    // Создаём запись о согласовании
+    await db.communications.create({
+        client_id: proposal.client_id,
+        order_id: proposal.order_id,
+        comm_type: 'proposal_accepted',
+        direction: 'incoming',
+        content: 'Клиент согласовал предложение',
+        status: 'delivered'
+    });
+
+    // Обновляем заказ
+    await db.orders.update({
+        id: proposal.order_id,
+        status: 'approved',
+        agreed_price: proposal.total_adjusted
+    });
+
+    // Создаём задачу на выставление счёта
+    await db.communication_tasks.create({
+        communication_id: proposal.communication_id,
+        task_type: 'send_documents',
+        description: 'Выставить счёт клиенту',
+        assigned_to: proposal.created_by,
+        due_at: new Date(),
+        priority: 'high'
+    });
+
+    // Уведомляем менеджера
+    await db.notifications.create({
+        communication_id: proposal.communication_id,
+        user_id: proposal.created_by,
+        type: 'proposal_accepted',
+        title: 'Клиент согласился!',
+        message: `КП №${proposal.proposal_number} принято. Сумма: ${proposal.total_adjusted} руб`
+    });
+}
+</code></pre>
+<h2 id="индексы-для-производительности">Индексы для производительности</h2>
+<pre><code class="language-sql">-- Составные индексы для частых запросов
+CREATE INDEX idx_client_comm_type ON communications(client_id, comm_type, created_at);
+CREATE INDEX idx_order_comm_type ON communications(order_id, comm_type, created_at);
+CREATE INDEX idx_manager_tasks ON communication_tasks(assigned_to, status, due_at);
+CREATE INDEX idx_proposal_client ON proposals(proposal_number, status, valid_until);
+CREATE INDEX idx_messages_chat ON messages(sender_type, sender_id, channel, created_at);
+</code></pre>
+<h2 id="готовые-sql-запросы-для-аналитики">Готовые SQL-запросы для аналитики</h2>
+<h3 id="история-по-клиенту">История по клиенту</h3>
+<pre><code class="language-sql">SELECT
+    c.id,
+    c.comm_type,
+    c.direction,
+    c.status,
+    c.created_at,
+    p.proposal_number,
+    p.total_adjusted,
+    m.message_text,
+    t.task_type
+FROM communications c
+LEFT JOIN proposals p ON p.communication_id = c.id
+LEFT JOIN messages m ON m.communication_id = c.id
+LEFT JOIN communication_tasks t ON t.communication_id = c.id
+WHERE c.client_id = 123
+ORDER BY c.created_at DESC;
+</code></pre>
+<h3 id="активные-предложения">Активные предложения</h3>
+<pre><code class="language-sql">SELECT
+    p.proposal_number,
+    p.total_adjusted,
+    p.valid_until,
+    cl.name AS client_name,
+    m.name AS manager_name,
+    TIMESTAMPDIFF(HOUR, p.sent_at, NOW()) AS hours_ago
+FROM proposals p
+JOIN clients cl ON cl.id = p.client_id
+JOIN managers m ON m.id = p.created_by
+WHERE p.status IN ('sent', 'viewed')
+  AND p.valid_until &gt; CURDATE()
+ORDER BY p.sent_at;
+</code></pre>
+<h3 id="задачи-на-сегодня">Задачи на сегодня</h3>
+<pre><code class="language-sql">SELECT
+    ct.*,
+    cl.name AS client_name,
+    o.order_number,
+    p.proposal_number
+FROM communication_tasks ct
+LEFT JOIN communications c ON c.id = ct.communication_id
+LEFT JOIN clients cl ON cl.id = c.client_id
+LEFT JOIN orders o ON o.id = c.order_id
+LEFT JOIN proposals p ON p.communication_id = c.id
+WHERE ct.assigned_to = 456
+  AND ct.status = 'pending'
+  AND DATE(ct.due_at) = CURDATE()
+ORDER BY ct.priority DESC, ct.due_at;
+</code></pre>
+<h2 id="преимущества-структуры">Преимущества структуры</h2>
+<ul>
+<li>Полная история — ни одно действие не теряется.</li>
+<li>Связность — любое сообщение привязано к клиенту и заказу.</li>
+<li>Аналитика — можно отследить воронку: отправлено → просмотрено → согласовано.</li>
+<li>Контроль — все задачи менеджеров фиксируются.</li>
+<li>Шаблоны — быстрые ответы без программиста.</li>
+<li>Масштабирование — можно добавлять любые типы коммуникаций.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: канал «Макс» упоминается в требованиях к интерфейсу чата и в настройках уведомлений сотрудникам, но в перечислении <code>channel ENUM('email', 'telegram', 'whatsapp', 'sms', 'internal_chat')</code> в таблице <code>messages</code> он отсутствует. Нужно либо добавить значение <code>max</code> в ENUM, либо уточнить, маппится ли «Макс» на одно из существующих значений.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#каналы-связи">Каналы связи</a></li><li class="lvl2"><a href="#две-ветки-переписки">Две ветки переписки</a></li><li class="lvl3"><a href="#чат-с-клиентом">Чат с клиентом</a></li><li class="lvl3"><a href="#внутренние-комментарии">Внутренние комментарии</a></li><li class="lvl2"><a href="#переключение-канала">Переключение канала</a></li><li class="lvl2"><a href="#бот-обработка-входящих">Бот (обработка входящих)</a></li><li class="lvl2"><a href="#архитектура-базы-данных">Архитектура базы данных</a></li><li class="lvl3"><a href="#схема-связей">Схема связей</a></li><li class="lvl3"><a href="#1-communications-ядро-системы-исходный-1">1. communications (ядро системы) — исходный № 1</a></li><li class="lvl3"><a href="#2-messages-сообщения-исходный-4">2. messages (сообщения) — исходный № 4</a></li><li class="lvl3"><a href="#3-communication_tasks-задачи-для-менеджеров-исходный-5">3. communication_tasks (задачи для менеджеров) — исходный № 5</a></li><li class="lvl3"><a href="#4-message_templates-шаблоны-ответов-исходный-6">4. message_templates (шаблоны ответов) — исходный № 6</a></li><li class="lvl3"><a href="#5-notifications-уведомления-исходный-7">5. notifications (уведомления) — исходный № 7</a></li><li class="lvl2"><a href="#многоканальная-отправка-коммерческого-предложения">Многоканальная отправка коммерческого предложения</a></li><li class="lvl3"><a href="#каналы-и-форматы">Каналы и форматы</a></li><li class="lvl3"><a href="#json-структура-предложения">JSON-структура предложения</a></li><li class="lvl3"><a href="#логика-автоматического-выбора-канала">Логика автоматического выбора канала</a></li><li class="lvl3"><a href="#рекомендуемая-гибридная-схема">Рекомендуемая (гибридная) схема</a></li><li class="lvl2"><a href="#сценарии-работы-чат-центр">Сценарии работы (чат-центр)</a></li><li class="lvl3"><a href="#пример-1-отправка-предложения">Пример 1. Отправка предложения</a></li><li class="lvl3"><a href="#пример-2-клиент-посмотрел-предложение">Пример 2. Клиент посмотрел предложение</a></li><li class="lvl3"><a href="#пример-3-клиент-согласовал">Пример 3. Клиент согласовал</a></li><li class="lvl2"><a href="#индексы-для-производительности">Индексы для производительности</a></li><li class="lvl2"><a href="#готовые-sql-запросы-для-аналитики">Готовые SQL-запросы для аналитики</a></li><li class="lvl3"><a href="#история-по-клиенту">История по клиенту</a></li><li class="lvl3"><a href="#активные-предложения">Активные предложения</a></li><li class="lvl3"><a href="#задачи-на-сегодня">Задачи на сегодня</a></li><li class="lvl2"><a href="#преимущества-структуры">Преимущества структуры</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

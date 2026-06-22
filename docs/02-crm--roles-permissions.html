@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Роли и права — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="02-crm--roles-permissions">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li class="active"><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="роли-и-права">Роли и права</h1>
+<p>Описание системы ролей CRM типографии PrintOffice: перечень предопределённых ролей, матрица доступа «роль → раздел → действие», правила доступа к файлам в зависимости от типа клиента и типа заказа, а также механизм настройки прав силами администратора без участия программиста.</p>
+<h2 id="список-ролей">Список ролей</h2>
+<p>Администратор создаёт роли и назначает разрешения для каждого раздела. Базовый набор ролей:</p>
+<ul>
+<li><strong>Менеджер по продажам</strong> — работа с заказами и клиентами, коммуникации с клиентами, создание заказов, изменение статусов заказа (кроме статуса «Завершён»). Может запускать доставку.</li>
+<li><strong>Дизайнер</strong> — доступ к файлам (папки заказов, назначенных на него), внутренние комментарии.</li>
+<li><strong>Технолог</strong> — производство (вкладка в карточке заказа), комментарии для цеха, просмотр файлов (готовые макеты).</li>
+<li><strong>Отгрузчик</strong> — отгрузка: список заказов со статусом «Готов к отгрузке», печать накладных, вызов курьера, смена статуса на «Отгружен».</li>
+<li><strong>Бухгалтер</strong> — финансы, документы, синхронизация с Эльбой.</li>
+<li><strong>Руководитель</strong> — полный доступ ко всем разделам, включая настройки.</li>
+</ul>
+<h2 id="матрица-роль-раздел-действие">Матрица «роль → раздел → действие»</h2>
+<p>Права настраиваются по принципу: для каждой роли указывается набор разделов и допустимых действий (читать / писать / удалять). Сводная матрица доступа по ролям:</p>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Заказы</th>
+<th>Клиенты</th>
+<th>Коммуникации</th>
+<th>Производство</th>
+<th>Отгрузка</th>
+<th>Доставка</th>
+<th>Файлы</th>
+<th>Финансы / Документы</th>
+<th>Отчёты</th>
+<th>Настройки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Менеджер по продажам</td>
+<td>Создание заказов, изменение статусов (кроме «Завершён»)</td>
+<td>Да</td>
+<td>С клиентами</td>
+<td>—</td>
+<td>—</td>
+<td>Запуск доставки</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Дизайнер</td>
+<td>—</td>
+<td>—</td>
+<td>Внутренние комментарии</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Папки назначенных заказов</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Технолог</td>
+<td>—</td>
+<td>—</td>
+<td>Комментарии для цеха</td>
+<td>Вкладка «Производство» в заказе</td>
+<td>—</td>
+<td>—</td>
+<td>Просмотр (готовые макеты)</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Отгрузчик</td>
+<td>Смена статуса на «Отгружен»</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Список «Готов к отгрузке», печать накладных, вызов курьера</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Бухгалтер</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Финансы, документы, синхронизация с Эльбой</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Руководитель</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+<td>Полный</td>
+</tr>
+</tbody>
+</table>
+<p>Уровни действий для каждой пары «роль → раздел» задаются в терминах: <strong>читать / писать / удалять</strong>.</p>
+<h3 id="ограничения-по-статусам-заказа">Ограничения по статусам заказа</h3>
+<ul>
+<li>Менеджер по продажам может менять статусы заказа, <strong>кроме перевода в статус «Завершён»</strong>.</li>
+<li>Отгрузчик работает только с заказами в статусе «Готов к отгрузке» и переводит их в статус «Отгружен».</li>
+</ul>
+<h2 id="доступ-к-файлам-по-ролям-и-статусу-заказа">Доступ к файлам по ролям и статусу заказа</h2>
+<p>Видимость и операции с файлами определяются ролью пользователя:</p>
+<ul>
+<li><strong>Дизайнер</strong> — доступ к папкам только тех заказов, которые назначены на него; может оставлять внутренние комментарии.</li>
+<li><strong>Технолог</strong> — просмотр готовых макетов по заказам.</li>
+<li><strong>Менеджер</strong> — управление файлами в карточке заказа (загрузка, скачивание, предпросмотр, перемещение в архив, удаление в корзину).</li>
+<li>Доступ к разделу «Файлы» (интеграция с Яндекс.Диском, просмотр всех папок заказов) предоставляется по правам роли.</li>
+</ul>
+<h3 id="категории-и-сроки-хранения-файлов">Категории и сроки хранения файлов</h3>
+<p>Категория хранения и срок жизни файла (стратегия <code>FileStorageStrategy</code>: <code>temp</code> 24/72 ч, <code>active</code> 30/90 дн, <code>archive</code> бессрочно) определяются типом заказа, типом клиента и ролью файла, а не ролью пользователя. Эти параметры не зависят от прав доступа и описаны отдельно — каноническое описание класса <code>FileStorageStrategy</code> и таблиц сроков см. в <a href="05-prepress--file-management.html">Управление файлами и макетами</a> (раздел «Стратегия хранения в зависимости от типа клиента»).</p>
+<h2 id="настройка-прав-без-программиста">Настройка прав без программиста</h2>
+<ul>
+<li>Создание ролей и назначение разрешений по каждому разделу выполняет администратор через интерфейс.</li>
+<li>Все роли и права настраиваются через интерфейс <strong>без участия программиста</strong> на основе таблиц вида «роль → раздел → действие (читать / писать / удалять)».</li>
+<li>Раздел «Настройки» содержит справочники (партнёры, офисы, роли, правила бота, маржа); доступ к нему имеют роли с соответствующими правами (Руководитель — полностью).</li>
+</ul>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#список-ролей">Список ролей</a></li><li class="lvl2"><a href="#матрица-роль-раздел-действие">Матрица «роль → раздел → действие»</a></li><li class="lvl3"><a href="#ограничения-по-статусам-заказа">Ограничения по статусам заказа</a></li><li class="lvl2"><a href="#доступ-к-файлам-по-ролям-и-статусу-заказа">Доступ к файлам по ролям и статусу заказа</a></li><li class="lvl3"><a href="#категории-и-сроки-хранения-файлов">Категории и сроки хранения файлов</a></li><li class="lvl2"><a href="#настройка-прав-без-программиста">Настройка прав без программиста</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

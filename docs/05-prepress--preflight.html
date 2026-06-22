@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Препресс: автопроверка макета (preflight) — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="05-prepress--preflight">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li class="active"><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="препресс-автопроверка-макета-preflight">Препресс: автопроверка макета (preflight)</h1>
+<p>Автоматическая валидация PDF-макета при загрузке: проверка технических параметров печати (формат, размеры, dpi, цвет, вылеты, шрифты, слои, прозрачность), формирование статуса и отчёта, действия менеджера и отправка результата клиенту. Цель — заменить ручную проверку менеджером, исключить запуск в производство макетов с критическими ошибками («ошибка в макете, замеченная после печати, — это 100% убыток») и снять рутинную нагрузку.</p>
+<h2 id="назначение-и-роль-в-процессе">Назначение и роль в процессе</h2>
+<p>Как только клиент или менеджер загружает файл, система автоматически прогоняет его через префлайт-движок. Система выступает не просто «хранилищем файлов», а цифровым контролёром качества: макет не может быть отправлен в производство, пока критические ошибки не исправлены.</p>
+<p>Допускается использование готовых библиотек (например, <code>pdf2tk</code>, PDF-lib) или облачных сервисов, либо собственной утилиты под стек проекта. Анализ PDF на сервере — технически нетривиальная задача, поэтому полноценный префлайт можно вынести на этап 2–3 разработки.</p>
+<h3 id="ограничения-и-риски-автоматизации">Ограничения и риски автоматизации</h3>
+<ul>
+<li><strong>Ложное чувство безопасности.</strong> Автоматическая проверка не панацея: она не ловит смысловые ошибки (например, неправильный телефон в макете). Необходимо оставить место для ручного контроля менеджером.</li>
+<li><strong>Геометрия вылетов.</strong> Геометрически проверить наличие вылетов сложно; в качестве приближения сверяются размеры файла с заявленным форматом заказа.</li>
+</ul>
+<h2 id="технические-требования-к-макету-критерии-preflight">Технические требования к макету (критерии preflight)</h2>
+<p>Файлы принимаются в формате PDF и должны соответствовать техническим требованиям:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Требование</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Формат файла</td>
+<td>PDF</td>
+</tr>
+<tr>
+<td>Вылеты (bleed)</td>
+<td>3 мм со всех сторон</td>
+</tr>
+<tr>
+<td>Разрешение</td>
+<td>не ниже 300 dpi</td>
+</tr>
+<tr>
+<td>Слои</td>
+<td>все слои сведены</td>
+</tr>
+<tr>
+<td>Шрифты</td>
+<td>переведены в кривые (или встроены в PDF)</td>
+</tr>
+<tr>
+<td>Цветовая модель</td>
+<td>CMYK</td>
+</tr>
+</tbody>
+</table>
+<p>После загрузки макет проверяется. Если нужны правки — лёгкие вносятся бесплатно, сложные платно, либо клиента просят исправить макет самостоятельно. После подготовки макета делается принтскрин и согласовывается с клиентом; после согласования макета претензии по макету не принимаются.</p>
+<h2 id="чек-лист-параметров-проверки">Чек-лист параметров проверки</h2>
+<p>Полный набор проверяемых параметров с порогами и статусами (pass / warning / fail):</p>
+<h3 id="формат-файла">Формат файла</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>PDF (рекомендуется)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>CDR, AI, EPS, PSD (требуется конвертация)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>JPG, PNG, TIFF — только если нет вектора (предупреждение)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="размеры">Размеры</h3>
+<p>Допуск ±2 мм относительно заказанного формата.</p>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>размер макета соответствует заказанному формату</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>размер макета отличается (возможно масштабирование)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>размер макета слишком маленький или слишком большой</td>
+</tr>
+</tbody>
+</table>
+<h3 id="разрешение-dpi">Разрешение (DPI)</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Порог</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>300 dpi (оптимально)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>150–299 dpi (возможна потеря качества)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>&lt; 150 dpi (печать невозможна)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="цветовая-модель">Цветовая модель</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>CMYK (правильно для печати)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>RGB (будет конвертироваться, возможно изменение цветов)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>Lab, Grayscale (требуется конвертация)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="вылеты-bleed">Вылеты (bleed)</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Порог</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>3 мм со всех сторон (правильно)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>1–2 мм (риск белых полей при резке)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>0 мм (нет вылетов)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="шрифты">Шрифты</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>шрифты в кривых / встроены в PDF</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>шрифты не встроены (нужно прислать или перевести в кривые)</td>
+</tr>
+<tr>
+<td>❌ fail</td>
+<td>отсутствуют шрифты (печать невозможна)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="слои-и-прозрачность">Слои и прозрачность</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ pass</td>
+<td>слои не сведены (можно править)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>слои сведены (правки затруднены)</td>
+</tr>
+<tr>
+<td>⚠️ warning</td>
+<td>присутствует прозрачность (может вызвать проблемы при печати)</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: по требованиям к файлу (раздел AS-IS) слои должны быть <strong>сведены</strong>, а в чек-листе preflight статус «слои сведены» помечен как ⚠️ warning, а «слои не сведены» — как ✅ pass (логика «можно править»). Нужно согласовать желаемое поведение проверки слоёв: считать сведённые слои нормой (pass) или замечанием (warning).</p>
+<h2 id="статусы-и-уровни-серьёзности">Статусы и уровни серьёзности</h2>
+<h3 id="общий-статус-результата-проверки">Общий статус результата проверки</h3>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Значение</th>
+<th>Дальнейшее действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pass</code></td>
+<td>все параметры OK</td>
+<td>печать возможна → отправить на согласование</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>есть замечания</td>
+<td>нужны правки → создать отчёт о проверке</td>
+</tr>
+<tr>
+<td><code>fail</code></td>
+<td>критические ошибки</td>
+<td>печать невозможна → создать отчёт о проверке</td>
+</tr>
+</tbody>
+</table>
+<p>Логика определения общего статуса:</p>
+<pre><code>status = 'pass'
+если есть хотя бы одна непройденная проверка severity = 'error'  → status = 'fail'
+иначе если есть непройденная проверка severity = 'warning'        → status = 'warning'
+
+canPrint      = (status != 'fail')
+needsApproval = hasWarnings
+</code></pre>
+<h3 id="уровни-серьёзности-правила-severity">Уровни серьёзности правила (severity)</h3>
+<table>
+<thead>
+<tr>
+<th>severity</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>error</code></td>
+<td>критическая ошибка, блокирует запуск в производство</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>замечание, требует внимания/правок, не блокирует печать</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>информационное сообщение (например, «Файл в формате PDF — отлично!»)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="структура-бд">Структура БД</h2>
+<h3 id="таблица-правил-preflight_rules-настраивается-в-админке">Таблица правил <code>preflight_rules</code> (настраивается в админке)</h3>
+<pre><code class="language-sql">CREATE TABLE preflight_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(100) UNIQUE,
+    description TEXT,
+
+    -- Параметр проверки
+    parameter ENUM('format', 'size', 'resolution', 'color', 'bleed', 'fonts', 'layers', 'transparency') NOT NULL,
+
+    -- Условие
+    condition_type ENUM('equals', 'not_equals', 'greater_than', 'less_than', 'between', 'contains') NOT NULL,
+    condition_value VARCHAR(255),
+
+    -- Уровень серьезности
+    severity ENUM('error', 'warning', 'info') DEFAULT 'warning',
+
+    -- Сообщение для клиента
+    message_template TEXT NOT NULL,
+    recommendation_template TEXT,
+
+    -- Автоисправление (если возможно)
+    auto_fix JSON,                          -- {&quot;fix_type&quot;: &quot;convert_to_cmyk&quot;, &quot;params&quot;: {}}
+
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+</code></pre>
+<h3 id="таблица-результатов-preflight_results">Таблица результатов <code>preflight_results</code></h3>
+<pre><code class="language-sql">CREATE TABLE preflight_results (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    file_id INT NOT NULL,
+    order_id INT,
+
+    -- Общий статус
+    status ENUM('pass', 'warning', 'fail') NOT NULL,
+
+    -- Детали проверки
+    results JSON NOT NULL,                  -- массив результатов по каждому параметру
+
+    -- Отчет
+    report_text TEXT,
+    report_url VARCHAR(500),                -- ссылка на PDF-отчет
+
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (file_id) REFERENCES files(id),
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    INDEX idx_file (file_id),
+    INDEX idx_order (order_id)
+);
+</code></pre>
+<h3 id="примеры-правил">Примеры правил</h3>
+<pre><code class="language-sql">INSERT INTO preflight_rules (name, code, parameter, condition_type, condition_value, severity, message_template, recommendation_template, sort_order) VALUES
+('Проверка формата PDF', 'check_format_pdf', 'format', 'equals', 'application/pdf', 'info',
+  'Файл в формате PDF — отлично!', NULL, 10),
+
+('Проверка формата растровый', 'check_format_raster', 'format', 'contains', 'image/', 'warning',
+  'Файл в растровом формате ({actual_value}). Для качественной печати рекомендуется векторный PDF.',
+  'Пришлите, пожалуйста, макет в формате PDF или векторном формате (AI, EPS, CDR).', 20),
+
+('Проверка разрешения', 'check_resolution', 'resolution', 'less_than', '300', 'error',
+  'Разрешение макета {actual_value} dpi ниже требуемого (300 dpi). При печати изображение будет размытым.',
+  'Пожалуйста, предоставьте макет с разрешением 300 dpi.', 30),
+
+('Проверка вылетов', 'check_bleed', 'bleed', 'less_than', '3', 'error',
+  'Вылеты (bleed) составляют {actual_value} мм, требуется 3 мм. При резке могут появиться белые поля.',
+  'Добавьте вылеты 3 мм со всех сторон или воспользуйтесь нашим шаблоном.', 40),
+
+('Проверка цветовой модели', 'check_color_cmyk', 'color', 'not_equals', 'CMYK', 'warning',
+  'Цветовая модель {actual_value} не соответствует CMYK. Цвета могут измениться при печати.',
+  'Пожалуйста, конвертируйте макет в CMYK или доверьтесь нашей автоматической конвертации.', 50);
+</code></pre>
+<h2 id="класс-preflightchecker-анализ-pdf">Класс PreflightChecker (анализ PDF)</h2>
+<p>Движок проверки: загружает активные правила, получает информацию о файле через Ghostscript/PDF-lib, применяет правила, вычисляет общий статус, генерирует и сохраняет отчёт.</p>
+<pre><code class="language-javascript">class PreflightChecker {
+    constructor() {
+        this.rules = [];
+    }
+
+    /** Загрузка правил проверки */
+    async loadRules() {
+        this.rules = await db.query(`
+            SELECT * FROM preflight_rules
+            WHERE is_active = true
+            ORDER BY sort_order
+        `);
+        return this.rules.rows;
+    }
+
+    /** Проверка макета */
+    async check(filePath, orderParams = {}) {
+        const results = [];
+        let hasErrors = false;
+        let hasWarnings = false;
+
+        // 1. Получаем информацию о файле
+        const fileInfo = await this.getFileInfo(filePath);
+
+        // 2. Применяем правила
+        for (const rule of this.rules.rows) {
+            const checkResult = await this.applyRule(rule, fileInfo, orderParams);
+            results.push(checkResult);
+
+            if (checkResult.severity === 'error' &amp;&amp; !checkResult.passed) {
+                hasErrors = true;
+            }
+            if (checkResult.severity === 'warning' &amp;&amp; !checkResult.passed) {
+                hasWarnings = true;
+            }
+        }
+
+        // 3. Определяем общий статус
+        let status = 'pass';
+        if (hasErrors) status = 'fail';
+        else if (hasWarnings) status = 'warning';
+
+        // 4. Генерируем отчет
+        const report = this.generateReport(results, fileInfo);
+
+        // 5. Сохраняем результат
+        const savedResult = await this.saveResult(filePath, results, status, report);
+
+        return {
+            status,
+            hasErrors,
+            hasWarnings,
+            results,
+            report,
+            canPrint: status !== 'fail',
+            needsApproval: hasWarnings,
+            resultId: savedResult.id
+        };
+    }
+
+    /** Применение одного правила */
+    async applyRule(rule, fileInfo, orderParams) {
+        let actualValue = null;
+        let passed = true;
+
+        switch(rule.parameter) {
+            case 'format':
+                actualValue = fileInfo.mimetype;
+                passed = this.evaluateCondition(rule.condition_type, rule.condition_value, actualValue);
+                break;
+
+            case 'size':
+                const expectedWidth = orderParams.width || 210;
+                const expectedHeight = orderParams.height || 297;
+                const widthMatch = Math.abs(fileInfo.width - expectedWidth) &lt;= 2;
+                const heightMatch = Math.abs(fileInfo.height - expectedHeight) &lt;= 2;
+                passed = widthMatch &amp;&amp; heightMatch;
+                actualValue = `${fileInfo.width}×${fileInfo.height} мм`;
+                break;
+
+            case 'resolution':
+                actualValue = fileInfo.dpi;
+                passed = this.evaluateCondition(rule.condition_type, rule.condition_value, actualValue);
+                break;
+
+            case 'color':
+                actualValue = fileInfo.colorSpace;
+                passed = this.evaluateCondition(rule.condition_type, rule.condition_value, actualValue);
+                break;
+
+            case 'bleed':
+                actualValue = fileInfo.bleed;
+                passed = this.evaluateCondition(rule.condition_type, rule.condition_value, actualValue);
+                break;
+
+            case 'fonts':
+                actualValue = fileInfo.fonts;
+                passed = fileInfo.fontsEmbedded;
+                break;
+
+            case 'layers':
+                actualValue = fileInfo.layers;
+                passed = !fileInfo.layersFlattened;
+                break;
+
+            case 'transparency':
+                actualValue = fileInfo.hasTransparency;
+                passed = !fileInfo.hasTransparency;
+                break;
+        }
+
+        // Формируем сообщение
+        let message = rule.message_template;
+        if (actualValue !== null) {
+            message = message.replace('{actual_value}', actualValue);
+        }
+
+        let recommendation = rule.recommendation_template;
+
+        return {
+            ruleId: rule.id,
+            ruleName: rule.name,
+            parameter: rule.parameter,
+            passed,
+            severity: rule.severity,
+            actualValue,
+            expectedValue: rule.condition_value,
+            message,
+            recommendation,
+            canAutoFix: rule.auto_fix !== null,
+            autoFix: rule.auto_fix
+        };
+    }
+
+    /** Оценка условия */
+    evaluateCondition(conditionType, conditionValue, actualValue) {
+        switch(conditionType) {
+            case 'equals':
+                return actualValue === conditionValue;
+            case 'not_equals':
+                return actualValue !== conditionValue;
+            case 'greater_than':
+                return actualValue &gt; parseFloat(conditionValue);
+            case 'less_than':
+                return actualValue &lt; parseFloat(conditionValue);
+            case 'between':
+                const [min, max] = conditionValue.split(',');
+                return actualValue &gt;= parseFloat(min) &amp;&amp; actualValue &lt;= parseFloat(max);
+            case 'contains':
+                return actualValue?.includes(conditionValue);
+            default:
+                return true;
+        }
+    }
+
+    /** Получение информации о файле (через Ghostscript или PDF-lib) */
+    async getFileInfo(filePath) {
+        const exec = require('child_process').exec;
+
+        return new Promise((resolve, reject) =&gt; {
+            // Получаем размеры страницы, разрешение, цветовое пространство
+            exec(`gs -q -dNODISPLAY -dNOSAFER -dBATCH -sDEVICE=bbox &quot;${filePath}&quot; 2&gt;&amp;1`, (error, stdout) =&gt; {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+
+                const info = {
+                    mimetype: 'application/pdf',
+                    width: 0,
+                    height: 0,
+                    dpi: 300,
+                    colorSpace: 'CMYK',
+                    bleed: 3,
+                    fontsEmbedded: true,
+                    layersFlattened: false,
+                    hasTransparency: false
+                };
+
+                // Извлекаем размеры из %%BoundingBox
+                const bboxMatch = stdout.match(/%%BoundingBox: (\d+) (\d+) (\d+) (\d+)/);
+                if (bboxMatch) {
+                    const width = parseInt(bboxMatch[3]) - parseInt(bboxMatch[1]);
+                    const height = parseInt(bboxMatch[4]) - parseInt(bboxMatch[2]);
+                    info.width = Math.round(width / 2.83465);  // пункты в мм
+                    info.height = Math.round(height / 2.83465);
+                }
+
+                resolve(info);
+            });
+        });
+    }
+
+    /** Генерация отчета */
+    generateReport(results, fileInfo) {
+        const errors = results.filter(r =&gt; r.severity === 'error' &amp;&amp; !r.passed);
+        const warnings = results.filter(r =&gt; r.severity === 'warning' &amp;&amp; !r.passed);
+        const infos = results.filter(r =&gt; r.severity === 'info');
+
+        let report = `╔══════════════════════════════════════════════════════════════════╗
+║                    ОТЧЕТ О ПРОВЕРКЕ МАКЕТА                      ║
+╠══════════════════════════════════════════════════════════════════╣
+║  Файл: ${fileInfo.originalName}
+║  Размер: ${fileInfo.width}×${fileInfo.height} мм
+║  Разрешение: ${fileInfo.dpi} dpi
+║  Цветовая модель: ${fileInfo.colorSpace}
+╚══════════════════════════════════════════════════════════════════╝
+`;
+
+        if (errors.length &gt; 0) {
+            report += `❌ КРИТИЧЕСКИЕ ОШИБКИ (${errors.length}):\n`;
+            for (const err of errors) {
+                report += `   • ${err.message}\n`;
+                if (err.recommendation) report += `     → ${err.recommendation}\n`;
+            }
+            report += `\n`;
+        }
+
+        if (warnings.length &gt; 0) {
+            report += `⚠️ ПРЕДУПРЕЖДЕНИЯ (${warnings.length}):\n`;
+            for (const warn of warnings) {
+                report += `   • ${warn.message}\n`;
+                if (warn.recommendation) report += `     → ${warn.recommendation}\n`;
+            }
+            report += `\n`;
+        }
+
+        if (errors.length === 0 &amp;&amp; warnings.length === 0) {
+            report += `✅ МАКЕТ ПРОШЕЛ ПРОВЕРКУ!\n`;
+            report += `   Все параметры соответствуют требованиям печати.\n`;
+        }
+
+        return report;
+    }
+
+    /** Сохранение результата */
+    async saveResult(filePath, results, status, report) {
+        const result = await db.query(`
+            INSERT INTO preflight_results (file_id, status, results, report_text, created_at)
+            VALUES ($1, $2, $3, $4, NOW())
+            RETURNING id
+        `, [filePath, status, JSON.stringify(results), report]);
+
+        return { id: result.rows[0].id };
+    }
+}
+</code></pre>
+<h3 id="замечания-по-реализации">Замечания по реализации</h3>
+<ul>
+<li>
+<p>Размеры извлекаются из <code>%%BoundingBox</code> Ghostscript; перевод пунктов в миллиметры — деление на коэффициент <code>2.83465</code> (1 мм ≈ 2.83465 pt).</p>
+</li>
+<li>
+<p>Формула проверки размеров с допуском ±2 мм:</p>
+<pre><code>widthMatch  = |fileInfo.width  - expectedWidth|  &lt;= 2
+heightMatch = |fileInfo.height - expectedHeight| &lt;= 2
+passed      = widthMatch &amp;&amp; heightMatch
+</code></pre>
+</li>
+<li>
+<p>Значения формата по умолчанию (если не задан заказ): ширина 210 мм, высота 297 мм (A4).</p>
+</li>
+<li>
+<p>В <code>message_template</code> подставляется фактическое значение через плейсхолдер <code>{actual_value}</code>.</p>
+</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в методе <code>check()</code> правила перебираются через <code>this.rules.rows</code>, тогда как <code>loadRules()</code> возвращает <code>this.rules.rows</code>, но присваивает <code>this.rules</code> целиком результат запроса. Способ хранения и обхода правил (<code>this.rules</code> vs <code>this.rules.rows</code>) в коде непоследователен — требуется унификация при реализации.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: реальный анализ через Ghostscript в <code>getFileInfo()</code> извлекает только размеры из BoundingBox, а dpi, colorSpace, bleed, fontsEmbedded, layersFlattened, hasTransparency возвращаются заглушками (хардкод). Механизм фактического определения этих параметров (разрешение, цвет, вылеты, шрифты, слои, прозрачность) не реализован и требует доработки или подключения внешней библиотеки/сервиса.</p>
+<h2 id="автоисправление-auto_fix">Автоисправление (auto_fix)</h2>
+<p>Правило может содержать поле <code>auto_fix</code> (JSON), описывающее возможность автоматического исправления, например:</p>
+<pre><code class="language-json">{ &quot;fix_type&quot;: &quot;convert_to_cmyk&quot;, &quot;params&quot;: {} }
+</code></pre>
+<p>Если <code>auto_fix</code> задан, результат проверки помечается <code>canAutoFix = true</code>. В тексте сообщений клиенту автоисправление упоминается как опция (например: «...или доверьтесь нашей автоматической конвертации» для перевода в CMYK).</p>
+<h2 id="админка-настройка-правил-проверки">Админка: настройка правил проверки</h2>
+<p>Раздел «Правила проверки макетов (Preflight)» со списком правил и кнопкой «Добавить правило». Каждое правило отображается карточкой:</p>
+<ul>
+<li>код и название правила (например, <code>check_resolution</code>);</li>
+<li>порядок сортировки (<code>sort_order</code>);</li>
+<li>параметр, условие, уровень серьёзности;</li>
+<li>сообщение для клиента;</li>
+<li>действия: <strong>Редактировать</strong>, <strong>Клонировать</strong>, <strong>Отключить</strong>, <strong>Удалить</strong>.</li>
+</ul>
+<p>Пример карточек правил:</p>
+<table>
+<thead>
+<tr>
+<th>Правило (code)</th>
+<th>Параметр</th>
+<th>Условие</th>
+<th>Уровень</th>
+<th>Порядок</th>
+<th>Сообщение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Проверка формата (<code>check_format_pdf</code>)</td>
+<td>формат файла</td>
+<td>равно PDF</td>
+<td>info</td>
+<td>10</td>
+<td>«Файл в формате PDF — отлично!»</td>
+</tr>
+<tr>
+<td>Проверка размеров (<code>check_size</code>)</td>
+<td>размеры</td>
+<td>соответствуют заказу</td>
+<td>error</td>
+<td>20</td>
+<td>«Размер макета не соответствует заказанному формату»</td>
+</tr>
+<tr>
+<td>Проверка разрешения (<code>check_resolution</code>)</td>
+<td>разрешение</td>
+<td>меньше 300</td>
+<td>error</td>
+<td>30</td>
+<td>«Разрешение {actual_value} dpi ниже требуемого (300 dpi)»</td>
+</tr>
+<tr>
+<td>Проверка вылетов (<code>check_bleed</code>)</td>
+<td>вылеты</td>
+<td>меньше 3</td>
+<td>error</td>
+<td>40</td>
+<td>«Вылеты {actual_value} мм, требуется 3 мм»</td>
+</tr>
+</tbody>
+</table>
+<h2 id="интерфейс-менеджера-результат-проверки">Интерфейс менеджера (результат проверки)</h2>
+<p>Экран «Проверка макета» с привязкой к заказу (номер заказа, клиент, имя файла). Содержит:</p>
+<ul>
+<li>общий результат проверки (например, «⚠️ Есть замечания»);</li>
+<li>блок <strong>Критические ошибки</strong> с сообщением и рекомендацией по каждой;</li>
+<li>блок <strong>Предупреждения</strong> с сообщением и рекомендацией;</li>
+<li>блок <strong>Информация</strong> с пройденными/информационными проверками.</li>
+</ul>
+<p>Пример заполненного экрана (заказ №12345, клиент Иван Иванов, файл <code>maket_final.pdf</code>, общий результат «⚠️ Есть замечания»):</p>
+<p><strong>❌ Критические ошибки (1)</strong></p>
+<ul>
+<li>Разрешение макета <strong>150 dpi</strong> ниже требуемого (300 dpi). При печати изображение будет размытым.
+→ Пожалуйста, предоставьте макет с разрешением 300 dpi.</li>
+</ul>
+<p><strong>⚠️ Предупреждения (2)</strong></p>
+<ul>
+<li>Файл в растровом формате <strong>PNG</strong>. Для качественной печати рекомендуется векторный PDF.
+→ Пришлите, пожалуйста, макет в формате PDF или векторном формате.</li>
+<li>Цветовая модель <strong>RGB</strong> не соответствует CMYK. Цвета могут измениться при печати.
+→ Пожалуйста, конвертируйте макет в CMYK.</li>
+</ul>
+<p><strong>ℹ️ Информация</strong></p>
+<ul>
+<li>Файл в формате PDF — отлично!</li>
+<li>Шрифты встроены в файл.</li>
+</ul>
+<h3 id="действия-менеджера">Действия менеджера</h3>
+<ul>
+<li><strong>Отправить клиенту на доработку</strong></li>
+<li><strong>Править сами</strong></li>
+<li><strong>Игнорировать и печатать</strong></li>
+</ul>
+<h2 id="отправка-отчёта-клиенту">Отправка отчёта клиенту</h2>
+<p>Класс <code>PreflightReportSender</code> формирует сообщение по статусу и рассылает его клиенту через Telegram и email, а также прикладывает PDF-отчёт.</p>
+<pre><code class="language-javascript">class PreflightReportSender {
+    async sendReportToClient(orderId, preflightResult, clientContact) {
+        const { report_text, status, hasErrors, hasWarnings } = preflightResult;
+
+        let message = '';
+
+        if (status === 'fail') {
+            message = `❌ **Макет требует исправления**
+
+Мы проверили ваш макет и обнаружили критические ошибки, которые не позволят качественно напечатать заказ.
+
+${report_text}
+
+**Что делать?**
+Пожалуйста, исправьте макет по замечаниям выше и пришлите заново.
+
+Если у вас есть вопросы — напишите нам.`;
+        } else if (status === 'warning') {
+            message = `⚠️ **Макет требует внимания**
+
+Мы проверили ваш макет и обнаружили некоторые недочеты.
+
+${report_text}
+
+**Рекомендация:**
+Рекомендуем исправить замечания для лучшего качества печати.
+
+Если вы согласны на печать с текущим макетом — подтвердите, пожалуйста.`;
+        } else {
+            message = `✅ **Макет прошел проверку!**
+
+Ваш макет соответствует всем техническим требованиям.
+
+${report_text}
+
+Мы готовы начать печать. Подтвердите, пожалуйста, старт производства.`;
+        }
+
+        // Отправляем клиенту
+        await this.sendTelegram(clientContact.telegram, message);
+        await this.sendEmail(clientContact.email, 'Результат проверки макета', report_text);
+
+        // Отправляем сам отчет (PDF)
+        await this.sendPdfReport(clientContact, preflightResult);
+    }
+}
+</code></pre>
+<p>Тексты сообщений по статусам:</p>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Заголовок</th>
+<th>Призыв к действию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fail</code></td>
+<td>«Макет требует исправления»</td>
+<td>исправить по замечаниям и прислать заново</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>«Макет требует внимания»</td>
+<td>исправить рекомендуется; либо подтвердить печать «как есть»</td>
+</tr>
+<tr>
+<td><code>pass</code></td>
+<td>«Макет прошёл проверку!»</td>
+<td>подтвердить старт производства</td>
+</tr>
+</tbody>
+</table>
+<h2 id="связь-со-статусной-моделью-макета">Связь со статусной моделью макета</h2>
+<p>Префлайт — часть жизненного цикла макета. Превью с водяным знаком (watermark), статусы макета (Черновик → На проверке у менеджера → На согласовании с клиентом → Согласован → В производстве/В печати), версионность и фиксация согласования (IP, дата, время, версия) описаны в смежной документации по жизненному циклу и согласованию макета. После статуса «Согласован» файл блокируется для замены без создания новой версии; претензии по макету после согласования не принимаются.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#назначение-и-роль-в-процессе">Назначение и роль в процессе</a></li><li class="lvl3"><a href="#ограничения-и-риски-автоматизации">Ограничения и риски автоматизации</a></li><li class="lvl2"><a href="#технические-требования-к-макету-критерии-preflight">Технические требования к макету (критерии preflight)</a></li><li class="lvl2"><a href="#чек-лист-параметров-проверки">Чек-лист параметров проверки</a></li><li class="lvl3"><a href="#формат-файла">Формат файла</a></li><li class="lvl3"><a href="#размеры">Размеры</a></li><li class="lvl3"><a href="#разрешение-dpi">Разрешение (DPI)</a></li><li class="lvl3"><a href="#цветовая-модель">Цветовая модель</a></li><li class="lvl3"><a href="#вылеты-bleed">Вылеты (bleed)</a></li><li class="lvl3"><a href="#шрифты">Шрифты</a></li><li class="lvl3"><a href="#слои-и-прозрачность">Слои и прозрачность</a></li><li class="lvl2"><a href="#статусы-и-уровни-серьёзности">Статусы и уровни серьёзности</a></li><li class="lvl3"><a href="#общий-статус-результата-проверки">Общий статус результата проверки</a></li><li class="lvl3"><a href="#уровни-серьёзности-правила-severity">Уровни серьёзности правила (severity)</a></li><li class="lvl2"><a href="#структура-бд">Структура БД</a></li><li class="lvl3"><a href="#таблица-правил-preflight_rules-настраивается-в-админке">Таблица правил `preflight_rules` (настраивается в админке)</a></li><li class="lvl3"><a href="#таблица-результатов-preflight_results">Таблица результатов `preflight_results`</a></li><li class="lvl3"><a href="#примеры-правил">Примеры правил</a></li><li class="lvl2"><a href="#класс-preflightchecker-анализ-pdf">Класс PreflightChecker (анализ PDF)</a></li><li class="lvl3"><a href="#замечания-по-реализации">Замечания по реализации</a></li><li class="lvl2"><a href="#автоисправление-auto_fix">Автоисправление (auto_fix)</a></li><li class="lvl2"><a href="#админка-настройка-правил-проверки">Админка: настройка правил проверки</a></li><li class="lvl2"><a href="#интерфейс-менеджера-результат-проверки">Интерфейс менеджера (результат проверки)</a></li><li class="lvl3"><a href="#действия-менеджера">Действия менеджера</a></li><li class="lvl2"><a href="#отправка-отчёта-клиенту">Отправка отчёта клиенту</a></li><li class="lvl2"><a href="#связь-со-статусной-моделью-макета">Связь со статусной моделью макета</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

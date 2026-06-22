@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Препресс: интерактивное превью с метками — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="05-prepress--preview-markup">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li class="active"><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="препресс-интерактивное-превью-с-метками">Препресс: интерактивное превью с метками</h1>
+<p>Интерактивное превью макета с типографскими метками (рез, сгиб, безопасная зона, вылеты, фольга, лак, биговка, контур): структура данных, генерация SVG/Canvas с легендой и зумом, настройка меток по продукту/формату, пользовательские метки заказа и интеграция с калькулятором. Дополнительно описана динамическая программная отрисовка иконок формата/крепления.</p>
+<h2 id="назначение-и-сценарий-работы">Назначение и сценарий работы</h2>
+<p>Клиент видит, как будет выглядеть его макет после печати: где пройдут резы, сгибы, где расположены безопасная зона, вылеты, области фольгирования и лакировки. Превью интерактивное (зум, легенда, скачивание PDF/PNG) и интегрировано с калькулятором — при выборе продукта и формата, а также при добавлении услуг (фольгирование, лак), превью перегенерируется.</p>
+<h3 id="пайплайн-обработки">Пайплайн обработки</h3>
+<pre><code>Загружен макет (PDF)
+        ↓
+Автоматическая разметка:
+  • определение формата
+  • расчёт вылетов
+  • определение сгибов
+  • добавление меток
+        ↓
+Генерация превью (HTML Canvas / SVG)
+        ↓
+Отображение клиенту:
+  • миниатюра макета
+  • метки реза (красные линии)
+  • метки сгиба (оранжевые линии)
+  • безопасная зона (зелёный контур)
+  • зона вылетов (синий контур)
+  • фольгирование (золотые области)
+  • лак (голубые области)
+</code></pre>
+<h2 id="типы-меток">Типы меток</h2>
+<p>Метки описываются цветом, стилем и толщиной линии. Параметры по умолчанию:</p>
+<table>
+<thead>
+<tr>
+<th>Название</th>
+<th>Код (<code>code</code>)</th>
+<th>Цвет</th>
+<th>Стиль линии</th>
+<th>Толщина</th>
+<th>Порядок (<code>sort_order</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Линия реза</td>
+<td><code>cut</code></td>
+<td><code>#FF0000</code></td>
+<td>solid</td>
+<td>2</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Линия сгиба</td>
+<td><code>fold</code></td>
+<td><code>#FF6600</code></td>
+<td>dashed</td>
+<td>2</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Безопасная зона</td>
+<td><code>safe</code></td>
+<td><code>#00CC00</code></td>
+<td>dotted</td>
+<td>1</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Зона вылетов</td>
+<td><code>bleed</code></td>
+<td><code>#0066CC</code></td>
+<td>solid</td>
+<td>1</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Фольгирование</td>
+<td><code>foil</code></td>
+<td><code>#FFD700</code></td>
+<td>solid</td>
+<td>3</td>
+<td>50</td>
+</tr>
+<tr>
+<td>Выборочный лак</td>
+<td><code>varnish</code></td>
+<td><code>#00CCFF</code></td>
+<td>dashed</td>
+<td>2</td>
+<td>60</td>
+</tr>
+<tr>
+<td>Биговка</td>
+<td><code>scoring</code></td>
+<td><code>#9933CC</code></td>
+<td>dotted</td>
+<td>2</td>
+<td>70</td>
+</tr>
+<tr>
+<td>Контурная резка</td>
+<td><code>contour</code></td>
+<td><code>#FF00FF</code></td>
+<td>solid</td>
+<td>2</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Примечание: в таблице <code>markup_types</code> для <code>bleed</code> (зоны вылетов) толщина линии задана <code>1</code>, тогда как в коде генерации SVG прямоугольник вылетов рисуется с <code>stroke-width=&quot;2&quot;</code>. См. открытый вопрос ниже.</p>
+</blockquote>
+<h3 id="легенда-для-клиента">Легенда (для клиента)</h3>
+<ul>
+<li>🟥 Красная линия — линия реза (по ней будет обрезано).</li>
+<li>🟧 Оранжевая пунктирная — линия сгиба.</li>
+<li>🟩 Зелёный пунктир — безопасная зона (важный текст не должен выходить за неё).</li>
+<li>🔵 Синяя линия — зона вылетов (фон должен доходить до этой линии).</li>
+<li>🟡 Золотая область — фольгирование.</li>
+<li>🔷 Голубая область — выборочный лак.</li>
+<li>🟣 Фиолетовая линия — контурная резка.</li>
+</ul>
+<h2 id="параметры-по-умолчанию">Параметры по умолчанию</h2>
+<ul>
+<li>Вылеты (bleed): <strong>3 мм</strong>.</li>
+<li>Безопасная зона (safe margin): <strong>5 мм</strong>.</li>
+<li>Показывать линии реза: да.</li>
+<li>Показывать метки реза по углам: да.</li>
+</ul>
+<h2 id="структура-данных-sql">Структура данных (SQL)</h2>
+<h3 id="таблица-типов-меток">Таблица типов меток</h3>
+<pre><code class="language-sql">CREATE TABLE markup_types (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    color VARCHAR(20) DEFAULT '#000000',
+    line_style ENUM('solid', 'dashed', 'dotted') DEFAULT 'solid',
+    line_width INT DEFAULT 2,
+    description TEXT,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO markup_types (name, code, color, line_style, line_width, sort_order) VALUES
+('Линия реза',       'cut',     '#FF0000', 'solid',  2, 10),
+('Линия сгиба',      'fold',    '#FF6600', 'dashed', 2, 20),
+('Безопасная зона',  'safe',    '#00CC00', 'dotted', 1, 30),
+('Зона вылетов',     'bleed',   '#0066CC', 'solid',  1, 40),
+('Фольгирование',    'foil',    '#FFD700', 'solid',  3, 50),
+('Выборочный лак',   'varnish', '#00CCFF', 'dashed', 2, 60),
+('Биговка',          'scoring', '#9933CC', 'dotted', 2, 70),
+('Контурная резка',  'contour', '#FF00FF', 'solid',  2, 80);
+</code></pre>
+<h3 id="таблица-настроек-меток-по-типам-продукции">Таблица настроек меток по типам продукции</h3>
+<pre><code class="language-sql">CREATE TABLE product_markup_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_type VARCHAR(50) NOT NULL,      -- 'flyer', 'brochure', 'business_card', 'sticker'
+    format_id INT,
+    bleed_mm INT DEFAULT 3,
+    safe_margin_mm INT DEFAULT 5,
+    default_markups JSON,                    -- какие метки показывать по умолчанию
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (format_id) REFERENCES formats(id)
+);
+</code></pre>
+<h3 id="таблица-пользовательских-меток-заказа">Таблица пользовательских меток заказа</h3>
+<p>Позиции и размеры задаются в миллиметрах от левого верхнего угла.</p>
+<pre><code class="language-sql">CREATE TABLE order_markups (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    markup_type_id INT NOT NULL,
+
+    -- Позиция метки (в мм от левого верхнего угла)
+    position_x DECIMAL(10,2),
+    position_y DECIMAL(10,2),
+    width DECIMAL(10,2),
+    height DECIMAL(10,2),
+
+    -- Дополнительные параметры
+    params JSON,                             -- {&quot;angle&quot;: 45, &quot;radius&quot;: 10}
+
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (markup_type_id) REFERENCES markup_types(id)
+);
+</code></pre>
+<h2 id="класс-генерации-превью-markuppreviewgenerator">Класс генерации превью <code>MarkupPreviewGenerator</code></h2>
+<p>Класс загружает типы меток из БД, генерирует SVG с метками и оборачивает его в HTML с легендой и элементами управления зумом.</p>
+<h3 id="масштаб-отображения">Масштаб отображения</h3>
+<p>Максимальный размер превью ограничен 600 px по большей стороне:</p>
+<pre><code>scale = min(maxSize / width, maxSize / height)   // maxSize = 600
+displayWidth  = width  * scale
+displayHeight = height * scale
+</code></pre>
+<h3 id="порядок-отрисовки-слоёв-svg">Порядок отрисовки слоёв SVG</h3>
+<ol>
+<li>Фоновое изображение макета (<code>&lt;image&gt;</code> с URL <code>/api/preview/{fileId}?scale={scale}</code>).</li>
+<li>Зона вылетов (bleed) — прямоугольник по краю, синий пунктир, подпись «Зона вылетов (N мм)».</li>
+<li>Безопасная зона (safe margin) — отступ <code>safeMargin</code> со всех сторон, зелёный пунктир, подпись «Безопасная зона (N мм)».</li>
+<li>Линии реза — прямоугольник с отступом <code>bleed</code>, красная сплошная линия.</li>
+<li>Метки реза по углам — крестики размером <code>cutMarkSize = 10</code> в четырёх углах прямоугольника реза.</li>
+<li>Линии сгибов — для каждого сгиба (вертикальный/горизонтальный) оранжевая пунктирная линия.</li>
+<li>Фольгирование — полупрозрачные золотые прямоугольники <code>rgba(255, 215, 0, 0.3)</code> с обводкой <code>#FFD700</code>.</li>
+<li>Выборочный лак — полупрозрачные голубые прямоугольники <code>rgba(0, 204, 255, 0.2)</code> с пунктирной обводкой <code>#00CCFF</code>.</li>
+<li>Контурная резка — <code>&lt;path&gt;</code> по переданному контуру, обводка <code>#FF00FF</code>.</li>
+</ol>
+<h3 id="опции-generatepreview">Опции <code>generatePreview</code></h3>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Назначение</th>
+<th>Значение по умолчанию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>format</code></td>
+<td>Формат (A4, A5 и т.д.)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>bleed</code></td>
+<td>Вылеты в мм</td>
+<td>3</td>
+</tr>
+<tr>
+<td><code>safeMargin</code></td>
+<td>Безопасная зона в мм</td>
+<td>5</td>
+</tr>
+<tr>
+<td><code>folds</code></td>
+<td>Позиции сгибов: <code>[{position: 105, orientation: 'vertical'}]</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>foilAreas</code></td>
+<td>Области фольгирования</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>varnishAreas</code></td>
+<td>Области лака</td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>contourCut</code></td>
+<td>Контурная резка</td>
+<td><code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<p>Метод возвращает <code>{ previewUrl, svg, dimensions }</code>.</p>
+<h3 id="реализация-класса-javascript">Реализация класса (JavaScript)</h3>
+<pre><code class="language-javascript">class MarkupPreviewGenerator {
+    constructor() {
+        this.markupTypes = [];
+    }
+
+    /** Загрузка типов меток */
+    async loadMarkupTypes() {
+        const result = await db.query(`
+            SELECT * FROM markup_types WHERE is_active = true ORDER BY sort_order
+        `);
+        this.markupTypes = result.rows;
+    }
+
+    /** Генерация превью для макета */
+    async generatePreview(orderId, fileId, options = {}) {
+        const {
+            format,              // формат (A4, A5, etc)
+            bleed = 3,           // вылеты в мм
+            safeMargin = 5,      // безопасная зона в мм
+            folds = [],          // позиции сгибов [{position: 105, orientation: 'vertical'}]
+            foilAreas = [],      // области фольгирования
+            varnishAreas = [],   // области лака
+            contourCut = []      // контурная резка
+        } = options;
+
+        // 1. Получаем размеры формата
+        const formatSize = this.getFormatSize(format);
+
+        // 2. Генерируем SVG
+        const svg = this.generateSVG({
+            width: formatSize.width,
+            height: formatSize.height,
+            bleed, safeMargin, folds, foilAreas, varnishAreas, contourCut, fileId
+        });
+
+        // 3. Сохраняем превью
+        const previewUrl = await this.savePreview(orderId, svg);
+
+        return { previewUrl, svg, dimensions: formatSize };
+    }
+
+    /** Генерация SVG с метками */
+    generateSVG(params) {
+        const { width, height, bleed, safeMargin, folds, foilAreas, varnishAreas, contourCut, fileId } = params;
+
+        // Масштаб для отображения (ограничиваем максимальный размер)
+        const maxSize = 600;
+        const scale = Math.min(maxSize / width, maxSize / height);
+        const displayWidth = width * scale;
+        const displayHeight = height * scale;
+
+        let svg = `&lt;svg width=&quot;${displayWidth}&quot; height=&quot;${displayHeight}&quot; viewBox=&quot;0 0 ${width} ${height}&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;`;
+
+        // 1. Фоновое изображение (макет)
+        svg += `&lt;image href=&quot;/api/preview/${fileId}?scale=${scale}&quot; x=&quot;0&quot; y=&quot;0&quot; width=&quot;${width}&quot; height=&quot;${height}&quot; /&gt;`;
+
+        // 2. Зона вылетов (Bleed)
+        svg += `&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;${width}&quot; height=&quot;${height}&quot; fill=&quot;none&quot; stroke=&quot;#0066CC&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;4,4&quot; /&gt;`;
+        svg += `&lt;text x=&quot;5&quot; y=&quot;15&quot; font-size=&quot;8&quot; fill=&quot;#0066CC&quot;&gt;Зона вылетов (${bleed} мм)&lt;/text&gt;`;
+
+        // 3. Безопасная зона (Safe margin)
+        svg += `&lt;rect x=&quot;${safeMargin}&quot; y=&quot;${safeMargin}&quot; width=&quot;${width - safeMargin*2}&quot; height=&quot;${height - safeMargin*2}&quot; fill=&quot;none&quot; stroke=&quot;#00CC00&quot; stroke-width=&quot;1&quot; stroke-dasharray=&quot;2,2&quot; /&gt;`;
+        svg += `&lt;text x=&quot;${safeMargin + 5}&quot; y=&quot;${safeMargin + 12}&quot; font-size=&quot;8&quot; fill=&quot;#00CC00&quot;&gt;Безопасная зона (${safeMargin} мм)&lt;/text&gt;`;
+
+        // 4. Линии реза
+        svg += `&lt;rect x=&quot;${bleed}&quot; y=&quot;${bleed}&quot; width=&quot;${width - bleed*2}&quot; height=&quot;${height - bleed*2}&quot; fill=&quot;none&quot; stroke=&quot;#FF0000&quot; stroke-width=&quot;2&quot; /&gt;`;
+        svg += `&lt;text x=&quot;${bleed + 5}&quot; y=&quot;${bleed + 12}&quot; font-size=&quot;8&quot; fill=&quot;#FF0000&quot;&gt;Линия реза&lt;/text&gt;`;
+
+        // 5. Метки реза по углам
+        const cutMarkSize = 10;
+        const cutPositions = [
+            { x: bleed, y: bleed },                    // левый верхний
+            { x: width - bleed, y: bleed },            // правый верхний
+            { x: bleed, y: height - bleed },           // левый нижний
+            { x: width - bleed, y: height - bleed }    // правый нижний
+        ];
+        for (const pos of cutPositions) {
+            svg += `&lt;line x1=&quot;${pos.x - cutMarkSize}&quot; y1=&quot;${pos.y}&quot; x2=&quot;${pos.x + cutMarkSize}&quot; y2=&quot;${pos.y}&quot; stroke=&quot;#FF0000&quot; stroke-width=&quot;1&quot; /&gt;`;
+            svg += `&lt;line x1=&quot;${pos.x}&quot; y1=&quot;${pos.y - cutMarkSize}&quot; x2=&quot;${pos.x}&quot; y2=&quot;${pos.y + cutMarkSize}&quot; stroke=&quot;#FF0000&quot; stroke-width=&quot;1&quot; /&gt;`;
+        }
+
+        // 6. Линии сгибов
+        for (const fold of folds) {
+            const foldX = fold.orientation === 'vertical' ? fold.position : 0;
+            svg += `&lt;line x1=&quot;${foldX}&quot; y1=&quot;0&quot; x2=&quot;${foldX}&quot; y2=&quot;${height}&quot; stroke=&quot;#FF6600&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;8,4&quot; /&gt;`;
+            svg += `&lt;text x=&quot;${foldX + 5}&quot; y=&quot;15&quot; font-size=&quot;8&quot; fill=&quot;#FF6600&quot;&gt;Линия сгиба&lt;/text&gt;`;
+        }
+
+        // 7. Фольгирование
+        for (const foil of foilAreas) {
+            svg += `&lt;rect x=&quot;${foil.x}&quot; y=&quot;${foil.y}&quot; width=&quot;${foil.width}&quot; height=&quot;${foil.height}&quot; fill=&quot;rgba(255, 215, 0, 0.3)&quot; stroke=&quot;#FFD700&quot; stroke-width=&quot;2&quot; /&gt;`;
+            svg += `&lt;text x=&quot;${foil.x + 5}&quot; y=&quot;${foil.y + 15}&quot; font-size=&quot;8&quot; fill=&quot;#FFD700&quot;&gt;Фольгирование&lt;/text&gt;`;
+        }
+
+        // 8. Выборочный лак
+        for (const varnish of varnishAreas) {
+            svg += `&lt;rect x=&quot;${varnish.x}&quot; y=&quot;${varnish.y}&quot; width=&quot;${varnish.width}&quot; height=&quot;${varnish.height}&quot; fill=&quot;rgba(0, 204, 255, 0.2)&quot; stroke=&quot;#00CCFF&quot; stroke-width=&quot;2&quot; stroke-dasharray=&quot;4,4&quot; /&gt;`;
+            svg += `&lt;text x=&quot;${varnish.x + 5}&quot; y=&quot;${varnish.y + 15}&quot; font-size=&quot;8&quot; fill=&quot;#00CCFF&quot;&gt;Выборочный лак&lt;/text&gt;`;
+        }
+
+        // 9. Контурная резка
+        for (const contour of contourCut) {
+            svg += `&lt;path d=&quot;${contour.path}&quot; fill=&quot;none&quot; stroke=&quot;#FF00FF&quot; stroke-width=&quot;2&quot; /&gt;`;
+            svg += `&lt;text x=&quot;${contour.x + 5}&quot; y=&quot;${contour.y + 15}&quot; font-size=&quot;8&quot; fill=&quot;#FF00FF&quot;&gt;Контурная резка&lt;/text&gt;`;
+        }
+
+        svg += `&lt;/svg&gt;`;
+        return svg;
+    }
+}
+</code></pre>
+<blockquote>
+<p>Примечание по линиям сгиба: в исходной реализации переменные <code>foldY</code>, <code>foldWidth</code>, <code>foldHeight</code> для горизонтальной ориентации вычисляются, но фактически линия сгиба всегда рисуется как вертикальная (от <code>y=0</code> до <code>y=height</code> по координате <code>foldX</code>). Горизонтальный сгиб не отрисовывается. См. открытый вопрос.</p>
+</blockquote>
+<h3 id="html-превью-с-легендой-и-зумом">HTML-превью с легендой и зумом</h3>
+<p>Метод <code>generateHtmlPreview(svg, options)</code> оборачивает SVG в HTML-страницу с:</p>
+<ul>
+<li>Панелью управления зумом: кнопки «+ Увеличить», «- Уменьшить», «100%» и индикатор текущего масштаба.</li>
+<li>Контейнером превью со стилем (белый фон, скругление, тень).</li>
+<li>Блоком легенды (флекс-раскладка) с цветными маркерами по каждому типу метки.</li>
+</ul>
+<p>Логика зума (JavaScript):</p>
+<pre><code class="language-javascript">let currentScale = 1;
+
+function zoomIn()  { currentScale = Math.min(currentScale + 0.1, 3);   applyZoom(); }
+function zoomOut() { currentScale = Math.max(currentScale - 0.1, 0.5); applyZoom(); }
+function resetZoom() { currentScale = 1; applyZoom(); }
+
+function applyZoom() {
+    preview.style.transform = 'scale(' + currentScale + ')';
+    preview.style.transformOrigin = 'top left';
+    zoomLevel.textContent = Math.round(currentScale * 100) + '%';
+}
+</code></pre>
+<p>Границы зума: минимум <code>0.5</code> (50%), максимум <code>3</code> (300%), шаг <code>0.1</code> (10%).</p>
+<h2 id="интерфейс-клиента-личный-кабинет">Интерфейс клиента (личный кабинет)</h2>
+<p>Экран «Предпросмотр макета» по заказу содержит:</p>
+<ul>
+<li><strong>Превью макета</strong> — интерактивная область с макетом и метками; кнопки «+ Увеличить», «- Уменьшить», «Скачать PDF», «Скачать PNG».</li>
+<li><strong>Легенда</strong> — расшифровка цветовых меток (см. раздел «Типы меток»).</li>
+<li><strong>Рекомендации</strong>:
+<ul>
+<li>Важные элементы (текст, логотип) должны находиться внутри зелёной безопасной зоны.</li>
+<li>Фоновое изображение должно доходить до синей зоны вылетов.</li>
+<li>Области фольгирования и лака отмечены цветными зонами.</li>
+</ul>
+</li>
+<li><strong>Действия</strong>: «Подтвердить, что всё верно», «Сообщить о проблеме».</li>
+</ul>
+<h2 id="админка-настройка-меток-для-продуктов">Админка: настройка меток для продуктов</h2>
+<p>Настройка выполняется по паре «Продукт + Формат» (например, Листовки + A4).</p>
+<h3 id="основные-параметры">Основные параметры</h3>
+<ul>
+<li>Вылеты (bleed): значение в мм (по умолчанию 3).</li>
+<li>Безопасная зона: значение в мм (по умолчанию 5).</li>
+<li>Показывать линии реза: да/нет.</li>
+<li>Показывать метки реза по углам: да/нет.</li>
+</ul>
+<h3 id="сгибы-для-буклетов">Сгибы (для буклетов)</h3>
+<p>Добавление сгибов с типом и позицией, например: тип сгиба «Евробуклет (1 сгиб)», позиция <code>105</code> мм. Каждый сгиб можно сохранить или удалить.</p>
+<h3 id="дополнительные-эффекты">Дополнительные эффекты</h3>
+<p>Чекбоксы доступных эффектов: Фольгирование, Выборочный лак, Конгрев, Тиснение, Высечка, Биговка.</p>
+<h3 id="пример-превью">Пример превью</h3>
+<p>Блок «Пример превью» отображает результат с текущими настройками, обновляется по кнопке «Обновить превью». Внизу — «Сохранить настройки».</p>
+<h2 id="интеграция-с-калькулятором-markupintegration">Интеграция с калькулятором (<code>MarkupIntegration</code>)</h2>
+<p>Два события связывают калькулятор с генератором превью.</p>
+<h3 id="onproductselectproducttype-format-orderid"><code>onProductSelect(productType, format, orderId)</code></h3>
+<p>При выборе типа продукции и формата:</p>
+<ol>
+<li>Загружаются настройки меток для продукта из <code>product_markup_settings</code>.</li>
+<li>Генерируется превью через <code>MarkupPreviewGenerator.generatePreview</code> с <code>bleed</code>, <code>safeMargin</code>, <code>folds</code> из настроек.</li>
+<li>Возвращается HTML для отображения и сами настройки.</li>
+</ol>
+<h3 id="onserviceaddorderid-servicetype-params"><code>onServiceAdd(orderId, serviceType, params)</code></h3>
+<p>При изменении параметров (добавление услуги):</p>
+<ul>
+<li><code>serviceType === 'foiling'</code> → области фольгирования из <code>params.areas</code>.</li>
+<li><code>serviceType === 'varnish'</code> → области лака из <code>params.areas</code>.</li>
+<li>Превью перегенерируется с новыми метками, возвращается обновлённый HTML.</li>
+</ul>
+<pre><code class="language-javascript">class MarkupIntegration {
+    /** При выборе типа продукции и формата */
+    async onProductSelect(productType, format, orderId) {
+        const settings = await db.query(`
+            SELECT * FROM product_markup_settings
+            WHERE product_type = $1 AND format_id = $2
+        `, [productType, format.id]);
+
+        const generator = new MarkupPreviewGenerator();
+        const preview = await generator.generatePreview(orderId, null, {
+            format: format.name,
+            bleed: settings.bleed_mm,
+            safeMargin: settings.safe_margin_mm,
+            folds: settings.default_folds
+        });
+
+        return {
+            html: generator.generateHtmlPreview(preview.svg),
+            settings: settings
+        };
+    }
+
+    /** При изменении параметров (добавление фольгирования) */
+    async onServiceAdd(orderId, serviceType, params) {
+        const generator = new MarkupPreviewGenerator();
+        let foilAreas = [];
+        let varnishAreas = [];
+
+        if (serviceType === 'foiling') foilAreas = params.areas;
+        if (serviceType === 'varnish') varnishAreas = params.areas;
+
+        const preview = await generator.generatePreview(orderId, null, {
+            foilAreas, varnishAreas
+        });
+
+        return generator.generateHtmlPreview(preview.svg);
+    }
+}
+</code></pre>
+<blockquote>
+<p>Примечание: в <code>onProductSelect</code> используется поле <code>settings.default_folds</code>, но в таблице <code>product_markup_settings</code> определён столбец <code>default_markups</code>. См. открытый вопрос.</p>
+</blockquote>
+<blockquote>
+<p>Примечание: в <code>onServiceAdd</code> превью перегенерируется только с <code>foilAreas</code>/<code>varnishAreas</code>, без передачи ранее выбранных формата, вылетов и сгибов. См. открытый вопрос.</p>
+</blockquote>
+<h2 id="динамическая-визуализация-продукта-программная-отрисовка-иконок">Динамическая визуализация продукта (программная отрисовка иконок)</h2>
+<p>Вместо статичных картинок-превью для каждой комбинации формата и ориентации используется программная отрисовка SVG по реальным размерам продукта. Компонент получает <code>width</code>, <code>height</code>, <code>bindingSide</code>, <code>bindingType</code> и рисует точную схему в реальном времени, поддерживая любой формат (включая нестандартные размеры).</p>
+<p>Формула для клиента:</p>
+<pre><code>выбранный формат → realWidth, realHeight → программная отрисовка SVG → клиент видит точную схему
+</code></pre>
+<h3 id="компонент-productvisualization-react">Компонент <code>ProductVisualization</code> (React)</h3>
+<p>Параметры:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Тип</th>
+<th>Назначение</th>
+<th>По умолчанию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>width</code></td>
+<td>number</td>
+<td>ширина продукта в мм</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td>number</td>
+<td>высота продукта в мм</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>bindingSide</code></td>
+<td>string</td>
+<td>сторона крепления: <code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code></td>
+<td><code>left</code></td>
+</tr>
+<tr>
+<td><code>bindingType</code></td>
+<td>string</td>
+<td>тип крепления: <code>staple</code>, <code>spring</code>, <code>kbs</code>, <code>none</code></td>
+<td><code>spring</code></td>
+</tr>
+<tr>
+<td><code>orientation</code></td>
+<td>string</td>
+<td>ориентация: <code>portrait</code>, <code>landscape</code></td>
+<td><code>portrait</code></td>
+</tr>
+<tr>
+<td><code>showDimensions</code></td>
+<td>boolean</td>
+<td>показывать ли размеры</td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>number</td>
+<td>масштаб отображения (по умолчанию 1px = 1мм, но ограничивается)</td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ограничение масштаба отображения:</p>
+<pre><code>maxDisplaySize = 200            // px
+displayScale = min(scale, maxDisplaySize / max(width, height))
+displayWidth  = width  * displayScale
+displayHeight = height * displayScale
+</code></pre>
+<p>Позиция крепления в зависимости от стороны:</p>
+<pre><code class="language-javascript">switch (bindingSide) {
+    case 'left':   return { x: 0,             y: displayHeight / 2 };
+    case 'right':  return { x: displayWidth,  y: displayHeight / 2 };
+    case 'top':    return { x: displayWidth / 2, y: 0 };
+    case 'bottom': return { x: displayWidth / 2, y: displayHeight };
+    default:       return { x: 0,             y: displayHeight / 2 };
+}
+</code></pre>
+<p>SVG строится из слоёв: тень продукта, основной прямоугольник, крепление (<code>BindingMarker</code>), размеры (<code>DimensionLabels</code>), линии корешка/сгиба (<code>SpineLines</code>, только при <code>bindingType !== 'none'</code>).</p>
+<pre><code class="language-jsx">const ProductVisualization = ({
+    width, height,
+    bindingSide = 'left',
+    bindingType = 'spring',
+    orientation = 'portrait',
+    showDimensions = true,
+    scale = 1
+}) =&gt; {
+    const maxDisplaySize = 200;
+    const displayScale = Math.min(scale, maxDisplaySize / Math.max(width, height));
+    const displayWidth = width * displayScale;
+    const displayHeight = height * displayScale;
+
+    const bindingPosition = useMemo(() =&gt; {
+        switch (bindingSide) {
+            case 'left':   return { x: 0, y: displayHeight / 2 };
+            case 'right':  return { x: displayWidth, y: displayHeight / 2 };
+            case 'top':    return { x: displayWidth / 2, y: 0 };
+            case 'bottom': return { x: displayWidth / 2, y: displayHeight };
+            default:       return { x: 0, y: displayHeight / 2 };
+        }
+    }, [bindingSide, displayWidth, displayHeight]);
+
+    return (
+        &lt;svg
+            width={displayWidth + (bindingType !== 'none' ? 40 : 0)}
+            height={displayHeight + (bindingType !== 'none' ? 40 : 0)}
+            viewBox={`-20 -20 ${displayWidth + 40} ${displayHeight + 40}`}
+            className=&quot;product-visualization&quot;
+        &gt;
+            &lt;rect x={-5} y={-5} width={displayWidth + 10} height={displayHeight + 10} rx=&quot;4&quot; fill=&quot;rgba(0,0,0,0.05)&quot; /&gt;
+            &lt;rect x={0} y={0} width={displayWidth} height={displayHeight} rx=&quot;4&quot; fill=&quot;white&quot; stroke=&quot;#333&quot; strokeWidth=&quot;1.5&quot; className=&quot;product-rect&quot; /&gt;
+            &lt;BindingMarker type={bindingType} x={bindingPosition.x} y={bindingPosition.y} side={bindingSide} displayWidth={displayWidth} displayHeight={displayHeight} /&gt;
+            {showDimensions &amp;&amp; (
+                &lt;DimensionLabels width={width} height={height} displayWidth={displayWidth} displayHeight={displayHeight} orientation={orientation} /&gt;
+            )}
+            {bindingType !== 'none' &amp;&amp; (
+                &lt;SpineLines side={bindingSide} displayWidth={displayWidth} displayHeight={displayHeight} /&gt;
+            )}
+        &lt;/svg&gt;
+    );
+};
+</code></pre>
+<h3 id="компонент-крепления-bindingmarker">Компонент крепления <code>BindingMarker</code></h3>
+<p>Корректирует позицию и поворот в зависимости от стороны (<code>left</code>/<code>right</code> — поворот 0°, <code>top</code>/<code>bottom</code> — поворот 90°) и рисует разные элементы по типу:</p>
+<ul>
+<li><code>spring</code> — пружина (зигзаг-путь + кружок с символом ⛭).</li>
+<li><code>staple</code> — скоба (прямоугольник с тремя горизонтальными линиями).</li>
+<li><code>kbs</code> — клеевое бесшвейное скрепление (квадрат с подписью «клей»).</li>
+<li><code>none</code> — ничего не рисуется (<code>return null</code>).</li>
+</ul>
+<pre><code class="language-jsx">const BindingMarker = ({ type, x, y, side, displayWidth, displayHeight }) =&gt; {
+    if (type === 'none') return null;
+
+    let adjustedX = x, adjustedY = y, rotation = 0;
+    switch (side) {
+        case 'left':   adjustedX = -12;               adjustedY = y; rotation = 0;  break;
+        case 'right':  adjustedX = displayWidth + 2;  adjustedY = y; rotation = 0;  break;
+        case 'top':    adjustedX = x; adjustedY = -12;                rotation = 90; break;
+        case 'bottom': adjustedX = x; adjustedY = displayHeight + 2;  rotation = 90; break;
+    }
+
+    if (type === 'spring') {
+        return (
+            &lt;g transform={`translate(${adjustedX}, ${adjustedY}) rotate(${rotation})`}&gt;
+                &lt;path d=&quot;M 0 0 L 0 -20 L 5 -20 L 5 0 L 10 0 L 10 -20 L 15 -20 L 15 0&quot; fill=&quot;none&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1.5&quot; strokeLinecap=&quot;round&quot; /&gt;
+                &lt;circle cx=&quot;7.5&quot; cy=&quot;-10&quot; r=&quot;3&quot; fill=&quot;none&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1&quot; /&gt;
+                &lt;text x=&quot;7.5&quot; y=&quot;-8&quot; fontSize=&quot;6&quot; textAnchor=&quot;middle&quot; fill=&quot;#666&quot;&gt;⛭&lt;/text&gt;
+            &lt;/g&gt;
+        );
+    }
+    if (type === 'staple') {
+        return (
+            &lt;g transform={`translate(${adjustedX - 5}, ${adjustedY - 8})`}&gt;
+                &lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;10&quot; height=&quot;16&quot; rx=&quot;2&quot; fill=&quot;none&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1&quot; /&gt;
+                &lt;line x1=&quot;2&quot; y1=&quot;4&quot; x2=&quot;8&quot; y2=&quot;4&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1&quot; /&gt;
+                &lt;line x1=&quot;2&quot; y1=&quot;8&quot; x2=&quot;8&quot; y2=&quot;8&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1&quot; /&gt;
+                &lt;line x1=&quot;2&quot; y1=&quot;12&quot; x2=&quot;8&quot; y2=&quot;12&quot; stroke=&quot;#666&quot; strokeWidth=&quot;1&quot; /&gt;
+            &lt;/g&gt;
+        );
+    }
+    if (type === 'kbs') {
+        return (
+            &lt;g transform={`translate(${adjustedX - 10}, ${adjustedY - 10}) rotate(${rotation})`}&gt;
+                &lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;20&quot; height=&quot;20&quot; rx=&quot;2&quot; fill=&quot;#f0f0f0&quot; stroke=&quot;#999&quot; strokeWidth=&quot;1&quot; /&gt;
+                &lt;text x=&quot;10&quot; y=&quot;14&quot; fontSize=&quot;10&quot; textAnchor=&quot;middle&quot; fill=&quot;#666&quot;&gt;клей&lt;/text&gt;
+            &lt;/g&gt;
+        );
+    }
+    return null;
+};
+</code></pre>
+<h3 id="компонент-размеров-dimensionlabels">Компонент размеров <code>DimensionLabels</code></h3>
+<p>Рисует горизонтальную и вертикальную размерные линии (пунктир) с подписями в мм и индикатором ориентации («Книжная» / «Альбомная»). Целые значения выводятся без десятичных, дробные — с одним знаком:</p>
+<pre><code class="language-javascript">const formatDim = (val) =&gt; val % 1 === 0 ? val.toString() : val.toFixed(1);
+</code></pre>
+<h3 id="компонент-линий-корешкасгиба-spinelines">Компонент линий корешка/сгиба <code>SpineLines</code></h3>
+<p>Для брошюр рисует оранжевую пунктирную линию корешка (<code>#ff9900</code>, <code>strokeDasharray=&quot;4 4&quot;</code>) вдоль стороны крепления, со смещением 5% от соответствующего края:</p>
+<ul>
+<li><code>left</code> — вертикальная линия на <code>displayWidth * 0.05</code>.</li>
+<li><code>right</code> — вертикальная линия на <code>displayWidth * 0.95</code>.</li>
+<li><code>top</code> — горизонтальная линия на <code>displayHeight * 0.05</code>.</li>
+<li><code>bottom</code> — горизонтальная линия на <code>displayHeight * 0.95</code>.</li>
+</ul>
+<h3 id="интеграция-с-калькулятором-брошюр">Интеграция с калькулятором брошюр</h3>
+<p>Компонент <code>BrochureCalculator</code> управляет состоянием: <code>format</code>, <code>orientation</code>, <code>bindingType</code>, <code>bindingSide</code>. Текущие размеры зависят от ориентации:</p>
+<pre><code class="language-javascript">currentWidth  = orientation === 'portrait' ? format.width  : format.height;
+currentHeight = orientation === 'portrait' ? format.height : format.width;
+</code></pre>
+<p>Сторона крепления определяется автоматически при изменении ориентации/типа. По текущим правилам и для пружины, и для скобы:</p>
+<pre><code class="language-javascript">const getBindingSide = (orientation, bindingType) =&gt; {
+    if (bindingType === 'staple') {
+        return orientation === 'portrait' ? 'left' : 'top';
+    }
+    return orientation === 'portrait' ? 'left' : 'top';
+};
+</code></pre>
+<p>Пояснения для клиента под визуализацией:</p>
+<ul>
+<li>Пружина: крепится слева (книжная) или сверху (альбомная).</li>
+<li>Скоба: крепится слева (книжная) или сверху (альбомная).</li>
+<li>КБС: клеевой корешок.</li>
+</ul>
+<p>В селекторе формата доступен пункт «Свой размер...» с полями ввода ширины и высоты.</p>
+<h3 id="нестандартные-форматы">Нестандартные форматы</h3>
+<p>Компонент <code>CustomFormatVisualization</code> позволяет вводить произвольные ширину и высоту (диапазон 50–500 мм), ориентация определяется автоматически:</p>
+<pre><code class="language-javascript">orientation = customWidth &lt; customHeight ? 'portrait' : 'landscape'
+</code></pre>
+<h3 id="настройка-визуализации-в-админке">Настройка визуализации в админке</h3>
+<p>Общие настройки:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение по умолчанию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Цвет обложки</td>
+<td><code>#FFFFFF</code></td>
+</tr>
+<tr>
+<td>Цвет страниц</td>
+<td><code>#F5F5F5</code></td>
+</tr>
+<tr>
+<td>Цвет корешка</td>
+<td><code>#CCCCCC</code></td>
+</tr>
+<tr>
+<td>Цвет пружины</td>
+<td><code>#666666</code></td>
+</tr>
+<tr>
+<td>Показывать размеры</td>
+<td>Да</td>
+</tr>
+<tr>
+<td>Единицы измерения</td>
+<td>мм</td>
+</tr>
+<tr>
+<td>Максимальный размер визуализации</td>
+<td>200 px</td>
+</tr>
+</tbody>
+</table>
+<p>Настройки креплений — правила определения стороны крепления (для пружины и скобы) по ориентации: книжная → слева, альбомная → сверху (значения настраиваемые).</p>
+<p>Блок предпросмотра позволяет выбрать формат, ориентацию и тип крепления; визуализация обновляется автоматически.</p>
+<h3 id="преимущества-подхода">Преимущества подхода</h3>
+<table>
+<thead>
+<tr>
+<th>Преимущество</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Динамичность</td>
+<td>Визуализация обновляется мгновенно при любом изменении параметров</td>
+</tr>
+<tr>
+<td>Поддержка нестандартов</td>
+<td>Клиент может ввести любой размер — схема подстроится автоматически</td>
+</tr>
+<tr>
+<td>Нет необходимости в картинках</td>
+<td>Не нужно загружать сотни изображений для всех комбинаций форматов и ориентаций</td>
+</tr>
+<tr>
+<td>Единый источник истины</td>
+<td>Размеры берутся из справочника форматов, нет расхождений с текстовым описанием</td>
+</tr>
+<tr>
+<td>Лёгкая кастомизация</td>
+<td>Цвета, толщина линий, стиль иконок настраиваются в админке</td>
+</tr>
+<tr>
+<td>SEO-дружественность</td>
+<td>SVG-графика индексируется, можно добавить текстовые описания</td>
+</tr>
+<tr>
+<td>Адаптивность</td>
+<td>Масштабируется под любой размер экрана</td>
+</tr>
+</tbody>
+</table>
+<h2 id="открытые-вопросы">Открытые вопросы</h2>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Толщина линии зоны вылетов (<code>bleed</code>) расходится: в таблице <code>markup_types</code> задано <code>line_width = 1</code>, а в коде генерации SVG прямоугольник вылетов рисуется со <code>stroke-width=&quot;2&quot;</code>. Нужно определить единое значение.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Горизонтальные линии сгиба не реализованы. В <code>generateSVG</code> для сгибов вычисляются <code>foldY</code>/<code>foldWidth</code>/<code>foldHeight</code>, но фактически линия сгиба всегда рисуется вертикальной (по <code>foldX</code> от <code>y=0</code> до <code>y=height</code>). Требуется доработать отрисовку горизонтальных сгибов.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Несоответствие имён полей настроек меток. В <code>onProductSelect</code> читается <code>settings.default_folds</code>, тогда как в таблице <code>product_markup_settings</code> определён столбец <code>default_markups</code>. Нужно согласовать схему данных и код (а также определить, где хранятся позиции сгибов по умолчанию).</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: При <code>onServiceAdd</code> превью перегенерируется только с <code>foilAreas</code>/<code>varnishAreas</code>, без передачи ранее выбранных формата, вылетов, безопасной зоны и сгибов — это приведёт к потере контекста макета. Требуется передавать полный набор параметров текущего заказа.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Логика <code>getBindingSide</code> для типов <code>spring</code> и <code>staple</code> идентична (обе ветки возвращают одно и то же), а ветки для <code>kbs</code>/<code>none</code> не описаны. Нужно уточнить правила определения стороны крепления по всем типам.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#назначение-и-сценарий-работы">Назначение и сценарий работы</a></li><li class="lvl3"><a href="#пайплайн-обработки">Пайплайн обработки</a></li><li class="lvl2"><a href="#типы-меток">Типы меток</a></li><li class="lvl3"><a href="#легенда-для-клиента">Легенда (для клиента)</a></li><li class="lvl2"><a href="#параметры-по-умолчанию">Параметры по умолчанию</a></li><li class="lvl2"><a href="#структура-данных-sql">Структура данных (SQL)</a></li><li class="lvl3"><a href="#таблица-типов-меток">Таблица типов меток</a></li><li class="lvl3"><a href="#таблица-настроек-меток-по-типам-продукции">Таблица настроек меток по типам продукции</a></li><li class="lvl3"><a href="#таблица-пользовательских-меток-заказа">Таблица пользовательских меток заказа</a></li><li class="lvl2"><a href="#класс-генерации-превью-markuppreviewgenerator">Класс генерации превью `MarkupPreviewGenerator`</a></li><li class="lvl3"><a href="#масштаб-отображения">Масштаб отображения</a></li><li class="lvl3"><a href="#порядок-отрисовки-слоёв-svg">Порядок отрисовки слоёв SVG</a></li><li class="lvl3"><a href="#опции-generatepreview">Опции `generatePreview`</a></li><li class="lvl3"><a href="#реализация-класса-javascript">Реализация класса (JavaScript)</a></li><li class="lvl3"><a href="#html-превью-с-легендой-и-зумом">HTML-превью с легендой и зумом</a></li><li class="lvl2"><a href="#интерфейс-клиента-личный-кабинет">Интерфейс клиента (личный кабинет)</a></li><li class="lvl2"><a href="#админка-настройка-меток-для-продуктов">Админка: настройка меток для продуктов</a></li><li class="lvl3"><a href="#основные-параметры">Основные параметры</a></li><li class="lvl3"><a href="#сгибы-для-буклетов">Сгибы (для буклетов)</a></li><li class="lvl3"><a href="#дополнительные-эффекты">Дополнительные эффекты</a></li><li class="lvl3"><a href="#пример-превью">Пример превью</a></li><li class="lvl2"><a href="#интеграция-с-калькулятором-markupintegration">Интеграция с калькулятором (`MarkupIntegration`)</a></li><li class="lvl3"><a href="#onproductselectproducttype-format-orderid">`onProductSelect(productType, format, orderId)`</a></li><li class="lvl3"><a href="#onserviceaddorderid-servicetype-params">`onServiceAdd(orderId, serviceType, params)`</a></li><li class="lvl2"><a href="#динамическая-визуализация-продукта-программная-отрисовка-иконок">Динамическая визуализация продукта (программная отрисовка иконок)</a></li><li class="lvl3"><a href="#компонент-productvisualization-react">Компонент `ProductVisualization` (React)</a></li><li class="lvl3"><a href="#компонент-крепления-bindingmarker">Компонент крепления `BindingMarker`</a></li><li class="lvl3"><a href="#компонент-размеров-dimensionlabels">Компонент размеров `DimensionLabels`</a></li><li class="lvl3"><a href="#компонент-линий-корешкасгиба-spinelines">Компонент линий корешка/сгиба `SpineLines`</a></li><li class="lvl3"><a href="#интеграция-с-калькулятором-брошюр">Интеграция с калькулятором брошюр</a></li><li class="lvl3"><a href="#нестандартные-форматы">Нестандартные форматы</a></li><li class="lvl3"><a href="#настройка-визуализации-в-админке">Настройка визуализации в админке</a></li><li class="lvl3"><a href="#преимущества-подхода">Преимущества подхода</a></li><li class="lvl2"><a href="#открытые-вопросы">Открытые вопросы</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "printoffice-knowledge-base",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "PrintOffice — структурированная база знаний проекта (веб-сервис)",
+  "scripts": {
+    "sync": "node sync.mjs",
+    "build": "node build.mjs",
+    "serve": "node serve.mjs",
+    "all": "node sync.mjs && node build.mjs"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "minisearch": "^7.2.0"
+  }
+}

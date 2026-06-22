@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Автоматизации и cron — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="02-crm--automations">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li class="active"><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="автоматизации-и-cron">Автоматизации и cron</h1>
+<p>Описание автоматических процессов CRM PrintOffice: автосоздание производственных заданий и папок при оформлении заказа, правила-триггеры (автодействия и автоуведомления при событиях), а также фоновые cron-задачи (напоминания о неоплаченных заказах, автоматическая чистка и архивация файлов).</p>
+<h2 id="автоматическое-создание-производственного-задания-при-оформлении-заказа">Автоматическое создание производственного задания при оформлении заказа</h2>
+<p>Триггер «при создании заказа → задание партнёру»: при оформлении заказа клиентом система автоматически решает, формировать ли задание для партнёра-подрядчика, и маршрутизирует его по типу печати (<code>printing_type</code>) — <code>offset</code> → ГМ Принт (<code>partner_id = 1</code>), <code>wide</code> → партнёр по широкоформату (<code>partner_id = 2</code>). Задание создаётся со статусом <code>new</code>, в него собирается спецификация заказа и прикрепляются файлы, после чего партнёру уходит уведомление.</p>
+<p>Полный код класса <code>AutoTaskCreator</code>, спецификация задания и описание таблицы <code>partner_tasks</code> вынесены в профильный модуль партнёров: см. <a href="07-partners-delivery--partners.html#52-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F">Партнёры и подрядчики → Автоматическое создание задания</a> и <a href="07-partners-delivery--partners.html#62-%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0-partner_tasks-%D0%B7%D0%B0%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B4%D0%BB%D1%8F-%D0%BF%D0%B0%D1%80%D1%82%D0%BD%D1%91%D1%80%D0%BE%D0%B2">таблицу <code>partner_tasks</code></a>.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в исходных материалах раздел назван «Автоматическое создание производственного задания/папок», однако реализация описывает только создание записи задания (<code>partner_tasks</code>) и привязку файлов. Отдельный механизм создания файловых «папок» (структуры каталогов в хранилище) для заказа/задания не специфицирован — требуется уточнить, что подразумевается под «папками».</p>
+<h2 id="правила-автоматизации-триггеры-и-действия">Правила автоматизации (триггеры и действия)</h2>
+<p>Система автоматизации в CRM построена на правилах вида «КОГДА (триггер) → СДЕЛАТЬ (действие)». Правила хранятся в таблице <code>automation_rules</code>, имеют приоритет (правило с большим приоритетом применяется первым) и могут быть включены/выключены.</p>
+<h3 id="таблица-правил-автоматизации">Таблица правил автоматизации</h3>
+<pre><code class="language-sql">CREATE TABLE automation_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    is_active BOOLEAN DEFAULT true,
+
+    -- Триггер (когда срабатывает)
+    trigger_type VARCHAR(50),       -- 'price_change', 'status_change', 'manager_action'
+    trigger_conditions JSON,        -- {&quot;price_change_percent&quot;: &quot;&gt;20&quot;, &quot;has_lamination&quot;: true}
+
+    -- Действие (что сделать)
+    action_type VARCHAR(50),        -- 'send_message', 'assign_manager', 'create_task'
+    action_config JSON,             -- {&quot;channel&quot;: &quot;telegram&quot;, &quot;template_id&quot;: 5}
+
+    -- Приоритет (какое правило применять первым)
+    priority INT DEFAULT 0,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+</code></pre>
+<h3 id="типы-триггеров">Типы триггеров</h3>
+<table>
+<thead>
+<tr>
+<th>trigger_type</th>
+<th>Событие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>price_change</code></td>
+<td>Изменение цены заказа/позиции</td>
+</tr>
+<tr>
+<td><code>status_change</code></td>
+<td>Смена статуса заказа</td>
+</tr>
+<tr>
+<td><code>manager_action</code></td>
+<td>Действие менеджера</td>
+</tr>
+</tbody>
+</table>
+<h3 id="типы-действий">Типы действий</h3>
+<table>
+<thead>
+<tr>
+<th>action_type</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>send_message</code></td>
+<td>Отправить сообщение клиенту (канал и шаблон в <code>action_config</code>)</td>
+</tr>
+<tr>
+<td><code>assign_manager</code></td>
+<td>Назначить менеджера</td>
+</tr>
+<tr>
+<td><code>create_task</code></td>
+<td>Создать задачу (приоритет, исполнитель, срок в <code>action_config</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительно действие может включать отправку уведомления менеджеру в Telegram и приостановку автоотправки клиенту (опционально).</p>
+<h3 id="примеры-правил">Примеры правил</h3>
+<pre><code class="language-sql">-- Правило 1: Большое снижение цены → создать задачу старшему менеджеру
+INSERT INTO automation_rules VALUES (
+    1,
+    'Большое снижение цены - уведомить менеджера',
+    true,
+    'price_change',
+    '{&quot;percent&quot;: &quot;&lt;-30&quot;, &quot;reason&quot;: &quot;layout_change&quot;}',
+    'create_task',
+    '{&quot;priority&quot;: &quot;high&quot;, &quot;assign_to&quot;: &quot;senior_manager&quot;, &quot;due_in_hours&quot;: 1}',
+    100
+);
+
+-- Правило 2: Стандартное изменение цены → автоответ клиенту
+INSERT INTO automation_rules VALUES (
+    2,
+    'Стандартное изменение - автоответ клиенту',
+    true,
+    'price_change',
+    '{&quot;percent&quot;: &quot;between:-15 and 15&quot;}',
+    'send_message',
+    '{&quot;channel&quot;: &quot;telegram&quot;, &quot;template&quot;: &quot;price_adjusted_standard&quot;, &quot;auto_approve&quot;: true}',
+    50
+);
+</code></pre>
+<p>Семантика условий триггера:</p>
+<ul>
+<li><code>&quot;percent&quot;: &quot;&lt;-30&quot;</code> — снижение цены более чем на 30%.</li>
+<li><code>&quot;percent&quot;: &quot;between:-15 and 15&quot;</code> — изменение цены в коридоре от −15% до +15% (отправляется автоответ с автоутверждением).</li>
+</ul>
+<h3 id="пример-настройки-правила-интерфейс">Пример настройки правила (интерфейс)</h3>
+<p>Правило «Большое снижение цены»:</p>
+<ul>
+<li>КОГДА: изменение цены &gt; 30% в минус И причина — изменение раскладки.</li>
+<li>СДЕЛАТЬ:
+<ul>
+<li>Создать задачу менеджеру (приоритет высокий, исполнитель — старший менеджер, срок 1 час).</li>
+<li>Отправить уведомление в Telegram менеджеру (<code>@manager_chief</code>) с текстом «Крупное изменение цены по заказу...».</li>
+<li>(Опционально) Приостановить отправку клиенту.</li>
+</ul>
+</li>
+</ul>
+<h2 id="автоматические-обоснования-изменения-цены-4-уровня">Автоматические обоснования изменения цены (4 уровня)</h2>
+<p>Подсистема обоснований работает на четырёх уровнях автоматизации; правила автоматизации (<code>automation_rules</code>) — это уровень 4.</p>
+<table>
+<thead>
+<tr>
+<th>Уровень</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Системные обоснования — генерируются автоматически по правилам</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Шаблонные обоснования — настраиваются без программиста</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Ручные обоснования — менеджер пишет свободный текст</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Комбинированные (авто + ручные правки) / автоматизация ответов в CRM</td>
+</tr>
+</tbody>
+</table>
+<h3 id="уровень-1-автоматические-системные-обоснования">Уровень 1: автоматические системные обоснования</h3>
+<p>Система анализирует, почему изменилась цена, и генерирует объяснение. Каталог типовых причин (с кодами и шаблонами сообщений):</p>
+<table>
+<thead>
+<tr>
+<th>Код</th>
+<th>Причина</th>
+<th>Категория</th>
+<th>Пример сообщения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>layout_optimization</code></td>
+<td>Оптимизация раскладки</td>
+<td>Технологическая</td>
+<td>«Раскладка изменена с {oldLayout} шт/лист на {newLayout} шт/лист для совместимости с {operation}. Это увеличило количество листов с {oldSheets} до {newSheets}.»</td>
+</tr>
+<tr>
+<td><code>material_optimization</code></td>
+<td>Оптимизация материалов</td>
+<td>Материальная</td>
+<td>«Для {material} выбран оптимальный формат {newFormat} вместо {oldFormat} (экономия {saved} руб)»</td>
+</tr>
+<tr>
+<td><code>operation_required</code></td>
+<td>Добавлена технологическая операция</td>
+<td>Операция</td>
+<td>«Для качественного выполнения заказа требуется {operation}. Это добавило {cost} руб к стоимости.»</td>
+</tr>
+<tr>
+<td><code>complexity_increased</code></td>
+<td>Повышенная сложность</td>
+<td>Сложность</td>
+<td>«Учтена повышенная сложность: {reason}. Коэффициент сложности {factor}.»</td>
+</tr>
+<tr>
+<td><code>urgency</code></td>
+<td>Срочность выполнения</td>
+<td>Наценка</td>
+<td>«Срочное выполнение за {hours} часов. Коэффициент срочности {factor}.»</td>
+</tr>
+<tr>
+<td><code>make_ready</code></td>
+<td>Приладка оборудования</td>
+<td>Наценка</td>
+<td>«Сложная настройка оборудования (приладка): {cost} руб.»</td>
+</tr>
+<tr>
+<td><code>discount</code></td>
+<td>Скидка</td>
+<td>Скидка</td>
+<td>«Скидка {percent}% на позицию &quot;{itemName}&quot; (экономия {saved} руб)» или «Скидка {percent}% на весь заказ (экономия {saved} руб)»</td>
+</tr>
+</tbody>
+</table>
+<p>Алгоритм генерации (<code>PriceJustificationGenerator</code>):</p>
+<ul>
+<li>Сравнивает исходный и скорректированный расчёты, вычисляет суммарное изменение и процент:
+<ul>
+<li><code>totalChange = adjusted.total - original.total</code></li>
+<li><code>percentChange = (adjusted.total - original.total) / original.total * 100</code></li>
+</ul>
+</li>
+<li>Анализирует каждое изменение, группирует причины на повысившие (<code>increased</code>) и понизившие (<code>decreased</code>) цену.</li>
+<li>Формирует итоговое резюме: при росте — «Цена увеличилась на {N} руб ({M}%) из-за: ...»; при снижении — «Цена снизилась на {N} руб ({M}%) благодаря: ...»; при отсутствии изменения — «Цена не изменилась».</li>
+</ul>
+<h3 id="уровень-2-настраиваемые-шаблоны-обоснований">Уровень 2: настраиваемые шаблоны обоснований</h3>
+<p>Шаблоны хранятся в БД и редактируются без программиста. Поддерживаются переменные с подстановкой значений и условия автоматического применения:</p>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{{operation}}</code></td>
+<td>Название операции</td>
+</tr>
+<tr>
+<td><code>{{action}}</code></td>
+<td>«повысило» / «изменило» (направление влияния на цену)</td>
+</tr>
+<tr>
+<td><code>{{amount}}</code></td>
+<td>Сумма изменения</td>
+</tr>
+<tr>
+<td><code>{{percent}}</code></td>
+<td>Процент изменения</td>
+</tr>
+<tr>
+<td><code>{{old_layout}}</code> / <code>{{new_layout}}</code></td>
+<td>Исходная и новая раскладка (для шаблонов раскладки)</td>
+</tr>
+<tr>
+<td><code>{{reason}}</code></td>
+<td>Причина изменения</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры текста шаблонов (редактируются в визуальном редакторе шаблонов):</p>
+<ul>
+<li>Технологическая операция: «Для качественного выполнения заказа требуется {{operation}}. Это {{action}} стоимость на {{amount}} руб.»</li>
+<li>Сложная раскладка: «Из-за нестандартной раскладки ({{old_layout}}→{{new_layout}}) цена скорректирована на {{amount}} руб».</li>
+<li>Срочность: «Срочное выполнение за {{hours}} ч (коэф. {{factor}})».</li>
+</ul>
+<pre><code class="language-sql">CREATE TABLE justification_templates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),                  -- Название шаблона
+    code VARCHAR(100),                  -- Уникальный код
+    category VARCHAR(50),               -- 'price_increase', 'price_decrease', 'info'
+
+    template_text TEXT,                 -- &quot;Цена {action} на {amount} руб из-за {reason}&quot;
+    available_variables JSON,           -- [&quot;action&quot;, &quot;amount&quot;, &quot;reason&quot;, &quot;percent&quot;]
+    applies_to VARCHAR(50),             -- 'order', 'item', 'both'
+    auto_apply_conditions JSON,         -- {&quot;price_change_percent&quot;: &quot;&gt;10&quot;, &quot;has_operation&quot;: &quot;lamination&quot;}
+
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE template_variables (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    template_id INT,
+    variable_name VARCHAR(100),
+    variable_type VARCHAR(50),          -- 'text', 'number', 'currency', 'percent'
+    default_value VARCHAR(255),
+    description TEXT,
+    FOREIGN KEY (template_id) REFERENCES justification_templates(id)
+);
+</code></pre>
+<p>Условие автоматического применения шаблона может быть глобальным («при добавлении любой операции») или ограниченным конкретными операциями (например, ламинация, резка).</p>
+<h3 id="уровни-34-ручные-правки-и-комбинирование">Уровни 3–4: ручные правки и комбинирование</h3>
+<p>Менеджеру предоставляется сводный интерфейс: автоматически сгенерированные причины (с возможностью удалить/отредактировать) плюс ручное добавление обоснования (через шаблон или свободный текст с указанием влияния на цену). Итоговый текст для клиента собирается из авто- и ручных частей. Около 80% обоснования генерируется автоматически, остальное менеджер дополняет вручную; затем выбирается канал отправки.</p>
+<p>Пример интерфейса обоснования (заказ «Листовки А5, 100 шт», изменение −2400 руб / −39.7%):</p>
+<ul>
+<li>Блок «Автоматически сгенерированные причины» — изменение раскладки (24 → 20 шт/лист для совместимости с ламинацией) и добавленная приладка (+500 руб), каждая причина с кнопками «Удалить»/«Редактировать».</li>
+<li>Блок «Добавить обоснование вручную» — выбор шаблона или свободный текст; в примере менеджер вводит «Для постоянного клиента предоставлена дополнительная скидка 10%» и указывает влияние на цену −350 руб (скидка).</li>
+<li>Блок «Итоговый текст для клиента» — персонализированное письмо (обращение «Уважаемый Иван Петрович!»), перечень причин изменения, новая стоимость 3250 руб и ссылка для согласования; завершается кнопкой «Отправить клиенту».</li>
+</ul>
+<p>В результате клиент получает:</p>
+<ul>
+<li>Прозрачное объяснение, за что и почему изменилась цена.</li>
+<li>Возможность согласовать предложение в 1 клик (по ссылке согласования).</li>
+<li>Доверие к типографии за счёт открытости расчёта.</li>
+</ul>
+<h3 id="преимущества-системы-обоснований">Преимущества системы обоснований</h3>
+<ul>
+<li>Прозрачность — клиент понимает, за что платит.</li>
+<li>Автоматизация — около 80% обоснований генерируются автоматически.</li>
+<li>Гибкость — менеджер может добавить ручной текст.</li>
+<li>Настраиваемость — шаблоны редактируются без программиста.</li>
+<li>Контроль — система следит за крупными изменениями (через правила-триггеры уровня 4).</li>
+<li>История — все обоснования сохраняются.</li>
+</ul>
+<h3 id="пример-работы-листовки-а5-с-ламинацией">Пример работы (листовки А5 с ламинацией)</h3>
+<p>Клиент заказывает 100 шт А5, 4+4, ламинация; автоматический расчёт — 6050 руб. При проверке выявлена несовместимость раскладки с ламинацией, цена пересчитана:</p>
+<pre><code class="language-json">{
+  &quot;originalPrice&quot;: 6050,
+  &quot;newPrice&quot;: 3250,
+  &quot;change&quot;: -2800,
+  &quot;percent&quot;: -46.3,
+  &quot;reasons&quot;: [
+    {
+      &quot;type&quot;: &quot;layout_changed&quot;,
+      &quot;title&quot;: &quot;Изменение раскладки&quot;,
+      &quot;message&quot;: &quot;Раскладка изменена с 24 шт/лист на 20 шт/лист для совместимости с ламинацией. Количество листов увеличено, но себестоимость снижена за счёт оптимизации.&quot;,
+      &quot;impact&quot;: -2500
+    },
+    {
+      &quot;type&quot;: &quot;make_ready_added&quot;,
+      &quot;title&quot;: &quot;Приладка&quot;,
+      &quot;message&quot;: &quot;Добавлена приладка для точной настройки оборудования: +500 руб&quot;,
+      &quot;impact&quot;: 500
+    },
+    {
+      &quot;type&quot;: &quot;discount&quot;,
+      &quot;title&quot;: &quot;Скидка&quot;,
+      &quot;message&quot;: &quot;Для постоянного клиента скидка 15% на позицию&quot;,
+      &quot;impact&quot;: -800
+    }
+  ]
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в текстовом примере резюме указано снижение −2400 руб (−39.7%) и итоговая стоимость 3250 руб, тогда как в JSON-примере того же сценария указано изменение −2800 руб (−46.3%). Числа в двух местах не согласованы — требуется зафиксировать единый корректный расчёт.</p>
+<h2 id="автонапоминания-о-неоплаченных-заказах">Автонапоминания о неоплаченных заказах</h2>
+<p>Для отслеживания неоплаченных заказов система автоматически напоминает клиенту о необходимости оплаты по расписанию.</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Триггер</td>
+<td>Заказ не оплачен</td>
+</tr>
+<tr>
+<td>Напоминания</td>
+<td>Через 1, 3 и 7 дней после создания/выставления счёта</td>
+</tr>
+</tbody>
+</table>
+<p>Связанные процессы по платежам и закрытию заказа:</p>
+<ul>
+<li>При оплате по счёту на этапе закрытия заказа создаётся УПД (универсальный передаточный документ) и отправляется по ЭДО (Эльба).</li>
+<li>Постоянным клиентам доступна отсрочка платежа (отметка «постоянный»).</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: не определено, от какой именно даты отсчитываются интервалы 1/3/7 дней (создание заказа, выставление счёта или иной момент), и каков канал/шаблон напоминания. Требуется уточнить точку отсчёта и механику отправки.</p>
+<h2 id="cron-задачи-автоматическая-чистка-и-архивация-файлов">Cron-задачи: автоматическая чистка и архивация файлов</h2>
+<p>Файлы классифицируются по категориям (<code>temp</code>, <code>active</code>, <code>archive</code>, <code>trash</code>) и имеют срок хранения (<code>expires_at</code>). Фоновый сервис <code>FileCleanupService</code> периодически удаляет, архивирует и дедуплицирует файлы.</p>
+<h3 id="сроки-хранения-по-умолчанию">Сроки хранения по умолчанию</h3>
+<table>
+<thead>
+<tr>
+<th>Категория / контекст</th>
+<th>Срок жизни</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Временные файлы (<code>temp</code>)</td>
+<td>72 часа (3 дня)</td>
+</tr>
+<tr>
+<td>Активные файлы (<code>active</code>) после завершения заказа</td>
+<td>30 дней</td>
+</tr>
+<tr>
+<td>Файлы в корзине (<code>trash</code>)</td>
+<td>30 дней до окончательного удаления</td>
+</tr>
+<tr>
+<td>Дубликаты, отправленные в корзину</td>
+<td>7 дней</td>
+</tr>
+</tbody>
+</table>
+<p>Срок жизни временных файлов задаётся в конфигурации <code>FileManager</code> (<code>tempFileLifetime = 72 * 60 * 60 * 1000</code> — 72 часа / 3 дня); активные файлы — 30 дней после завершения заказа (<code>activeFileLifetime</code>), корзина — 30 дней (<code>trashLifetime</code>). Полная итоговая таблица сроков (с учётом типа клиента — пробная загрузка, B2C, B2B, постоянный макет) приведена в материале по файловому хранилищу.</p>
+<h3 id="расписание-cron-задач">Расписание cron-задач</h3>
+<table>
+<thead>
+<tr>
+<th>Задача</th>
+<th>Периодичность</th>
+<th>Cron-выражение</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cleanupTempFiles</code></td>
+<td>Каждый час</td>
+<td><code>0 * * * *</code></td>
+<td>Окончательно удаляет временные файлы с истёкшим <code>expires_at</code></td>
+</tr>
+<tr>
+<td><code>runAllCleanups</code> (полная очистка)</td>
+<td>Ежедневно в 03:00</td>
+<td><code>0 3 * * *</code></td>
+<td>Запускает все задачи очистки подряд</td>
+</tr>
+<tr>
+<td><code>cleanupActiveFiles</code></td>
+<td>Ежедневно (в составе полной очистки)</td>
+<td>—</td>
+<td>Переносит в архив активные файлы завершённых заказов старше 30 дней</td>
+</tr>
+<tr>
+<td><code>cleanupTrash</code></td>
+<td>Ежедневно (в составе полной очистки)</td>
+<td>—</td>
+<td>Окончательно удаляет файлы из корзины с истёкшим сроком</td>
+</tr>
+<tr>
+<td><code>deduplicateFiles</code></td>
+<td>Ежедневно (в составе полной очистки)</td>
+<td>—</td>
+<td>Находит дубликаты по хешу файла, оставляет один, остальные → корзина на 7 дней</td>
+</tr>
+</tbody>
+</table>
+<p>Используется библиотека <code>node-cron</code>.</p>
+<h3 id="реализация">Реализация</h3>
+<p>Полный код класса <code>FileCleanupService</code> (методы <code>cleanupTempFiles</code>, <code>cleanupActiveFiles</code>, <code>cleanupTrash</code>, <code>deduplicateFiles</code>, <code>runAllCleanups</code>) и регистрация cron-задач (<code>node-cron</code>, расписания <code>0 * * * *</code> и <code>0 3 * * *</code>) приведены в профильном документе по файлам: <a href="05-prepress--file-management.html#4-%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F-%D1%87%D0%B8%D1%81%D1%82%D0%BA%D0%B0-%D1%84%D0%B0%D0%B9%D0%BB%D0%BE%D0%B2-cron-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8">Управление файлами и макетами → Автоматическая чистка файлов (cron-задачи)</a>. Здесь дублирование кода намеренно не приводится.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в исходных материалах указан как cron-механизм автоматическая чистка файлов, но напоминания о неоплаченных заказах и проверка email/платежей описаны лишь как требования без cron-расписания. Точный набор cron-задач по платежам/почте не специфицирован — требуется определить периодичность и реализацию проверки оплаты и входящей почты.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#автоматическое-создание-производственного-задания-при-оформлении-заказа">Автоматическое создание производственного задания при оформлении заказа</a></li><li class="lvl2"><a href="#правила-автоматизации-триггеры-и-действия">Правила автоматизации (триггеры и действия)</a></li><li class="lvl3"><a href="#таблица-правил-автоматизации">Таблица правил автоматизации</a></li><li class="lvl3"><a href="#типы-триггеров">Типы триггеров</a></li><li class="lvl3"><a href="#типы-действий">Типы действий</a></li><li class="lvl3"><a href="#примеры-правил">Примеры правил</a></li><li class="lvl3"><a href="#пример-настройки-правила-интерфейс">Пример настройки правила (интерфейс)</a></li><li class="lvl2"><a href="#автоматические-обоснования-изменения-цены-4-уровня">Автоматические обоснования изменения цены (4 уровня)</a></li><li class="lvl3"><a href="#уровень-1-автоматические-системные-обоснования">Уровень 1: автоматические системные обоснования</a></li><li class="lvl3"><a href="#уровень-2-настраиваемые-шаблоны-обоснований">Уровень 2: настраиваемые шаблоны обоснований</a></li><li class="lvl3"><a href="#уровни-34-ручные-правки-и-комбинирование">Уровни 3–4: ручные правки и комбинирование</a></li><li class="lvl3"><a href="#преимущества-системы-обоснований">Преимущества системы обоснований</a></li><li class="lvl3"><a href="#пример-работы-листовки-а5-с-ламинацией">Пример работы (листовки А5 с ламинацией)</a></li><li class="lvl2"><a href="#автонапоминания-о-неоплаченных-заказах">Автонапоминания о неоплаченных заказах</a></li><li class="lvl2"><a href="#cron-задачи-автоматическая-чистка-и-архивация-файлов">Cron-задачи: автоматическая чистка и архивация файлов</a></li><li class="lvl3"><a href="#сроки-хранения-по-умолчанию">Сроки хранения по умолчанию</a></li><li class="lvl3"><a href="#расписание-cron-задач">Расписание cron-задач</a></li><li class="lvl3"><a href="#реализация">Реализация</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

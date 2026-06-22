@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Личный кабинет клиента — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="03-site-client--client-cabinet">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li class="active"><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="личный-кабинет-клиента">Личный кабинет клиента</h1>
+<p>Личный кабинет (ЛК) — раздел сайта для постоянных клиентов типографии PrintOffice, где отображаются заказы и коммерческие предложения, доступны история заказов и брифов, повтор заказа в один клик, отслеживание статусов и интерактивное согласование макета с превью.</p>
+<h2 id="назначение-и-аудитория">Назначение и аудитория</h2>
+<p>ЛК предназначен прежде всего для постоянных клиентов. В нём собраны:</p>
+<ul>
+<li>Статусы заказов в реальном времени;</li>
+<li>История заказов с возможностью повторить заказ в один клик;</li>
+<li>История брифов (заполненных, в процессе, отправленных);</li>
+<li>Коммерческие предложения / расчёты с интерактивным согласованием;</li>
+<li>Превью макета с производственными метками, подтверждением корректности или сообщением о проблеме.</li>
+</ul>
+<h2 id="состав-личного-кабинета">Состав личного кабинета</h2>
+<h3 id="статусы-заказа">Статусы заказа</h3>
+<p>Клиент видит текущий статус каждого заказа. Базовый набор статусов, отображаемых клиенту:</p>
+<table>
+<thead>
+<tr>
+<th>Статус</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Оплачен</td>
+<td>Заказ оплачен</td>
+</tr>
+<tr>
+<td>В работе</td>
+<td>Заказ в производстве</td>
+</tr>
+<tr>
+<td>Готов</td>
+<td>Заказ изготовлен</td>
+</tr>
+<tr>
+<td>Доставлен</td>
+<td>Заказ доставлен клиенту</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительно используется статус согласования расчёта (см. ниже): <strong>«Ожидает согласования»</strong>, который после подтверждения клиентом переходит в <strong>«Подтверждён»</strong>, а при отказе клиента — в <strong>«Отклонён»</strong>.</p>
+<h3 id="история-заказов">История заказов</h3>
+<p>В ЛК хранится история всех заказов клиента. По каждому заказу доступны детали и действия.</p>
+<h3 id="повтор-заказа-в-1-клик">Повтор заказа в 1 клик</h3>
+<p>Из истории заказов клиент может повторить ранее оформленный заказ одной кнопкой — параметры предыдущего заказа подставляются автоматически.</p>
+<h3 id="связанные-привилегии-постоянного-клиента">Связанные привилегии постоянного клиента</h3>
+<p>Отметка «постоянный» у клиента открывает дополнительные возможности (вне самого ЛК, но связанные с ним):</p>
+<ul>
+<li>Возможность отсрочки платежа;</li>
+<li>Автоматическое создание УПД;</li>
+<li>Интеграция с Эльбой (API).</li>
+</ul>
+<h2 id="карточка-заказа-и-согласование-расчёта-кп">Карточка заказа и согласование расчёта (КП)</h2>
+<p>Для постоянных клиентов в ЛК отображаются КП/заказы. Когда клиент получает расчёт (например, по ссылке вида <code>https://crm.print.ru/p/123</code>), он попадает на интерактивную страницу заказа.</p>
+<p>Пример макета карточки заказа в ЛК:</p>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────┐
+│  ЛИЧНЫЙ КАБИНЕТ                                      │
+├─────────────────────────────────────────────────────┤
+│  ЗАКАЗ №123 от 08.03.2026                           │
+│                                                      │
+│  Статус: Ожидает согласования                       │
+│                                                      │
+│  ДЕТАЛИ РАСЧЕТА:                                     │
+│  ┌─────────────────────────────────────────────────┐│
+│  │  Вариант 1 (стандартный): 6 050 руб             ││
+│  │     Раскладка 24 шт/лист                         ││
+│  │     ⚠️ Не подходит для ламинации                ││
+│  │                                                   ││
+│  │  Вариант 2 (рекомендуемый): 3 250 руб ✓         ││
+│  │     Раскладка 20 шт/лист                         ││
+│  │     ✓ Подходит для ламинации                     ││
+│  │     + Приладка включена                          ││
+│  └─────────────────────────────────────────────────┘│
+│  ВЫБЕРИТЕ ДЕЙСТВИЕ:                                 │
+│  [○] Согласен с вариантом 2                         │
+│  [○] Хочу вариант 1 (дешевле, но без ламинации)    │
+│  [○] Нужна консультация                             │
+│                                                      │
+│  Комментарий: _______________________________       │
+│                                                      │
+│  [ПОДТВЕРДИТЬ ВЫБОР]                                 │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="обратная-связь-от-клиента-по-расчёту">Обратная связь от клиента по расчёту</h3>
+<p>Перейдя по ссылке, клиент видит интерактивную страницу и может выполнить одно из действий:</p>
+<ul>
+<li><strong>Согласиться с предложенным вариантом:</strong>
+<ul>
+<li>Автоматически создаётся счёт;</li>
+<li>Менеджер получает уведомление;</li>
+<li>Заказ переходит в статус «Подтверждён».</li>
+</ul>
+</li>
+<li><strong>Выбрать другой вариант</strong> (если предложено несколько):
+<ul>
+<li>Фиксируется выбор клиента;</li>
+<li>Пересчитывается итог.</li>
+</ul>
+</li>
+<li><strong>Запросить консультацию</strong> (вариант «Нужна консультация»).</li>
+</ul>
+<p>Клиент может оставить произвольный комментарий к выбору.</p>
+<h2 id="превью-макета-с-метками-и-подтверждение">Превью макета с метками и подтверждение</h2>
+<p>В ЛК клиента доступен интерактивный предпросмотр макета с нанесёнными производственными метками (линии реза, сгибы, безопасная зона, вылеты, фольгирование, лак, контурная резка). Клиент проверяет корректность макета и либо подтверждает его, либо сообщает о проблеме.</p>
+<h3 id="интерфейс-предпросмотра">Интерфейс предпросмотра</h3>
+<pre><code class="language-text">┌───────────────────────────────────────────────────────────────────┐
+│  ПРЕДПРОСМОТР МАКЕТА                                  [Заказ №12345]│
+├───────────────────────────────────────────────────────────────────┤
+│  🖼️ ПРЕВЬЮ МАКЕТА                                                  │
+│      [ИНТЕРАКТИВНОЕ ПРЕВЬЮ — изображение макета с метками]         │
+│      [ + Увеличить ] [ - Уменьшить ] [ Скачать PDF ] [ Скачать PNG]│
+│                                                                     │
+│  📋 ЛЕГЕНДА                                                        │
+│  🟥 Красная линия — линия реза (по ней будет обрезано)            │
+│  🟧 Оранжевая пунктирная — линия сгиба                             │
+│  🟩 Зеленый пунктир — безопасная зона (важный текст не выходит за) │
+│  🔵 Синяя линия — зона вылетов (фон должен доходить до этой линии) │
+│  🟡 Золотая область — фольгирование                                │
+│  🔷 Голубая область — выборочный лак                               │
+│  🟣 Фиолетовая линия — контурная резка                             │
+│                                                                     │
+│  💡 РЕКОМЕНДАЦИИ                                                   │
+│  • Важные элементы (текст, логотип) — внутри зеленой безопасной зоны│
+│  • Фоновое изображение должно доходить до синей зоны вылетов        │
+│  • Области фольгирования и лака отмечены цветными зонами            │
+│                                                                     │
+│  [ ПОДТВЕРДИТЬ, ЧТО ВСЕ ВЕРНО ]  [ СООБЩИТЬ О ПРОБЛЕМЕ ]           │
+└───────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="элементы-интерфейса-предпросмотра">Элементы интерфейса предпросмотра</h3>
+<ul>
+<li><strong>Превью макета</strong> — интерактивное изображение с наложенными метками.</li>
+<li><strong>Управление масштабом</strong> — кнопки «Увеличить», «Уменьшить», сброс к 100%. Масштаб ограничен диапазоном 0.5–3 (50%–300%).</li>
+<li><strong>Скачивание</strong> — кнопки «Скачать PDF» и «Скачать PNG».</li>
+<li><strong>Легенда</strong> — расшифровка цветовых обозначений меток.</li>
+<li><strong>Рекомендации</strong> — текстовые подсказки по корректной подготовке макета.</li>
+<li><strong>Кнопки решения</strong> — «Подтвердить, что всё верно» и «Сообщить о проблеме».</li>
+</ul>
+<h3 id="цветовые-обозначения-и-параметры-генерации">Цветовые обозначения и параметры генерации</h3>
+<p>Легенда цветовых меток (рез, сгиб, безопасная зона, вылеты, фольга, лак, контур), типы меток, класс генератора <code>MarkupPreviewGenerator</code> с параметрами по умолчанию (<code>bleed</code> 3 мм, <code>safeMargin</code> 5 мм, <code>maxSize</code> 600 px), хранение пользовательских меток (таблица <code>order_markups</code>), админ-настройка меток для продуктов и интеграция с калькулятором (<code>MarkupIntegration</code>) описаны в каноническом разделе препресса: <a href="05-prepress--preview-markup.html">Препресс: интерактивное превью с метками</a>.</p>
+<h2 id="история-брифов-в-лк">История брифов в ЛК</h2>
+<p>В личном кабинете отображается история брифов клиента с их статусами и доступными действиями.</p>
+<pre><code class="language-text">┌───────────────────────────────────────────────────┐
+│  ЛИЧНЫЙ КАБИНЕТ | ИСТОРИЯ БРИФОВ                    │
+├───────────────────────────────────────────────────┤
+│  📋 ЗАКАЗ №12345 | ООО &quot;Ромашка&quot;                   │
+│  Бриф на листовку                                  │
+│  Статус: ✅ Заполнен                                │
+│  Заполнен: 16.03.2026 11:30                         │
+│  [ ПРОСМОТРЕТЬ ОТВЕТЫ ] [ СКАЧАТЬ PDF ]            │
+├───────────────────────────────────────────────────┤
+│  📋 ЗАКАЗ №12344 | ИП Иванов                       │
+│  Бриф на логотип                                   │
+│  Статус: ⏳ В процессе (60% заполнено)              │
+│  Ссылка: [ ПРОДОЛЖИТЬ ЗАПОЛНЕНИЕ ]                 │
+└───────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="статусы-и-действия-по-брифам">Статусы и действия по брифам</h3>
+<table>
+<thead>
+<tr>
+<th>Статус брифа</th>
+<th>Доступные действия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅ Заполнен</td>
+<td>«Просмотреть ответы», «Скачать PDF»; отображается дата и время заполнения</td>
+</tr>
+<tr>
+<td>⏳ В процессе (с процентом заполнения)</td>
+<td>«Продолжить заполнение» по сохранённой ссылке</td>
+</tr>
+</tbody>
+</table>
+<p>Каждая запись в истории привязана к заказу (номер заказа и название клиента/компании) и содержит название брифа (например, «Бриф на листовку», «Бриф на логотип»).</p>
+<p>Ссылка на бриф действительна <strong>7 дней</strong> с момента отправки. Создание, отправка и обработка брифов (класс <code>BriefManager</code>, таблица <code>brief_instances</code>, отправка по email/Telegram) подробно описаны в документации настройки CRM/сайта (<code>crm-site-setup.md</code>).</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в карточке заказа в ЛК (CRM) фигурирует домен <code>crm.print.ru</code>, в страницах брифов и ссылках — <code>printoffice.ru</code>. Единый домен личного кабинета и схема его поддоменов (CRM-ЛК и публичный сайт) не зафиксированы.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#назначение-и-аудитория">Назначение и аудитория</a></li><li class="lvl2"><a href="#состав-личного-кабинета">Состав личного кабинета</a></li><li class="lvl3"><a href="#статусы-заказа">Статусы заказа</a></li><li class="lvl3"><a href="#история-заказов">История заказов</a></li><li class="lvl3"><a href="#повтор-заказа-в-1-клик">Повтор заказа в 1 клик</a></li><li class="lvl3"><a href="#связанные-привилегии-постоянного-клиента">Связанные привилегии постоянного клиента</a></li><li class="lvl2"><a href="#карточка-заказа-и-согласование-расчёта-кп">Карточка заказа и согласование расчёта (КП)</a></li><li class="lvl3"><a href="#обратная-связь-от-клиента-по-расчёту">Обратная связь от клиента по расчёту</a></li><li class="lvl2"><a href="#превью-макета-с-метками-и-подтверждение">Превью макета с метками и подтверждение</a></li><li class="lvl3"><a href="#интерфейс-предпросмотра">Интерфейс предпросмотра</a></li><li class="lvl3"><a href="#элементы-интерфейса-предпросмотра">Элементы интерфейса предпросмотра</a></li><li class="lvl3"><a href="#цветовые-обозначения-и-параметры-генерации">Цветовые обозначения и параметры генерации</a></li><li class="lvl2"><a href="#история-брифов-в-лк">История брифов в ЛК</a></li><li class="lvl3"><a href="#статусы-и-действия-по-брифам">Статусы и действия по брифам</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

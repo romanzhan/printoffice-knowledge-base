@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Раскладка на листе и вылеты — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--imposition-bleeds">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li class="active"><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="раскладка-на-листе-и-вылеты">Раскладка на листе и вылеты</h1>
+<p>Спецификация алгоритма раскладки макетов на печатном листе (impositions) и правил вылетов (bleeds) для калькулятора типографии: расчёт количества изделий на лист с учётом обеих ориентаций, технологических полей принтера, меток плоттера для контурной резки и выбора печатного формата.</p>
+<h2 id="базовые-принципы-раскладки">Базовые принципы раскладки</h2>
+<p>Раскладка макетов на печатном листе всегда строится по следующим правилам:</p>
+<ol>
+<li>К размеру изделия добавляются вылеты (bleed) с каждой стороны.</li>
+<li>Проверяются <strong>обе ориентации</strong> макета (книжная и альбомная) — система ищет, в какой ориентации помещается больше изделий.</li>
+<li>Выбирается вариант с <strong>максимальным количеством</strong> изделий на листе (с учётом ограничений по полям и технологичности).</li>
+<li>Из печатного листа вычитаются технологические поля принтера (непечатаемая область) и, при контурной резке, место под метки плоттера и безопасный отступ.</li>
+<li>Менеджеру оставляется возможность вручную скорректировать раскладку и параметры для сложных заказов.</li>
+</ol>
+<p>Базовая формула количества листов на тираж:</p>
+<pre><code>items_per_sheet = cols × rows           // максимум по обеим ориентациям
+sheets = ceil(qty / items_per_sheet)
+</code></pre>
+<h2 id="размеры-форматов">Размеры форматов</h2>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Ширина × Высота, мм</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRA3</td>
+<td>320 × 450</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>297 × 420</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>210 × 297</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>148 × 210</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>105 × 148</td>
+</tr>
+<tr>
+<td>Банер (Konica)</td>
+<td>330 × 762</td>
+</tr>
+<tr>
+<td>Konica C6085 лоток / спец. лоток</td>
+<td>330 × 487 (физический лист 330,2 × 487,7)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="расчёт-раскладки-a6-на-sra3">Расчёт раскладки A6 на SRA3</h2>
+<p>Размеры: SRA3 = 320 × 450 мм, A6 = 105 × 148 мм.</p>
+<h3 id="геометрический-максимум-без-полей">Геометрический максимум (без полей)</h3>
+<pre><code>По ширине:  320 ÷ 105 = 3.04 → 3 шт   (остаток 320 - 315 = 5 мм)
+По высоте:  450 ÷ 148 = 3.04 → 3 шт   (остаток 450 - 444 = 6 мм)
+ИТОГО: 3 × 3 = 9 шт на листе (максимальная плотность, требует точной резки)
+</code></pre>
+<p>Проверка с поворотом по ширине: <code>320 ÷ 148 = 2.16 → 2 шт</code> — хуже, поэтому при печати «в плотную» оставляют 3 по ширине.</p>
+<h3 id="раскладка-с-вылетами-3-мм-рабочий-вариант">Раскладка с вылетами 3 мм (рабочий вариант)</h3>
+<p>Размер A6 с вылетами 3 мм с каждой стороны:</p>
+<pre><code>Ширина с вылетами = 105 + 3 + 3 = 111 мм
+Высота с вылетами = 148 + 3 + 3 = 154 мм
+</code></pre>
+<p>Проверка обеих ориентаций на SRA3:</p>
+<table>
+<thead>
+<tr>
+<th>Ориентация</th>
+<th>Размер макета</th>
+<th>По ширине</th>
+<th>По высоте</th>
+<th>Итого</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Книжная</td>
+<td>111 × 154</td>
+<td>320 ÷ 111 = 2.88 → 2</td>
+<td>450 ÷ 154 = 2.92 → 2</td>
+<td>4 шт</td>
+</tr>
+<tr>
+<td>Альбомная</td>
+<td>154 × 111</td>
+<td>320 ÷ 154 = 2.07 → 2</td>
+<td>450 ÷ 111 = 4.05 → 4</td>
+<td><strong>8 шт</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Оптимальная раскладка: альбомная ориентация, 2 × 4 = <strong>8 шт на листе</strong>.</p>
+<pre><code>Альбомная (154 × 111):
+По ширине:  320 ÷ 154 = 2.07 → 2 шт   (остаток 320 - 308 = 12 мм на поля)
+По высоте:  450 ÷ 111 = 4.05 → 4 шт   (остаток 450 - 444 = 6 мм на поля)
+ИТОГО: 2 × 4 = 8 шт
+</code></pre>
+<h3 id="варианты-раскладки-a6-на-sra3-как-опции">Варианты раскладки A6 на SRA3 (как опции)</h3>
+<pre><code class="language-javascript">const layouts = {
+  dense_9:    { cols: 3, rows: 3, rotated: false, description: &quot;Максимальная плотность (9 шт, без полей)&quot;, requires: &quot;точная резка&quot; },
+  rotated_8:  { cols: 2, rows: 4, rotated: true,  description: &quot;С поворотом (8 шт)&quot;,                       requires: &quot;стандартные поля&quot; },
+  technical_6:{ cols: 3, rows: 2, rotated: false, description: &quot;С технологическими полями (6 шт)&quot;,         requires: &quot;надёжная резка&quot; }
+};
+</code></pre>
+<blockquote>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: для варианта <code>rotated_8</code> в одном месте источника указаны <code>cols: 4, rows: 2</code>, а в выверенном расчёте — <code>cols: 2, rows: 4</code> (альбомная: 2 по ширине × 4 по высоте). Геометрически верен вариант 2 × 4. Также не зафиксировано, какая раскладка A6 (6, 8 или 9 шт) реально используется в производстве по умолчанию — вопрос «6 или 8?» оставался без ответа.</p>
+</blockquote>
+<h3 id="пример-пересчёта-тиража-a6-100-шт-раскладка-8-штлист">Пример пересчёта тиража (A6, 100 шт, раскладка 8 шт/лист)</h3>
+<pre><code>Печатных листов = 100 ÷ 8 = 12.5 → 13 листов SRA3
+Бумага:  13 × 3  = 39 руб
+Печать:  13 × 22 = 286 руб
+Себестоимость = 325 руб
+Цена клиенту (наценка 100%): 325 × 2 = 650 руб → 6.50 руб/шт
+</code></pre>
+<p>Сравнение: раскладка 6 шт/лист дала бы <code>ceil(100/6) = 17</code> листов и себестоимость 425 руб; раскладка 8 шт/лист — 13 листов и 325 руб. Экономия ~100 руб себестоимости / 200 руб в цене клиента при сохранении прибыли.</p>
+<h2 id="алгоритм-раскладки-итоговая-версия-для-калькулятора">Алгоритм раскладки (итоговая версия для калькулятора)</h2>
+<pre><code class="language-javascript">function calculateLayout(printFormat, productFormat, bleed, isDoubleSided) {
+  // printFormat = { width: 320, height: 450 } // SRA3
+  // productFormat = { width: 105, height: 148 } // A6
+  // bleed = 3 // мм
+
+  const itemWidth  = productFormat.width  + (bleed * 2);
+  const itemHeight = productFormat.height + (bleed * 2);
+
+  const orientations = [
+    { width: itemWidth,  height: itemHeight, name: &quot;книжная&quot; },
+    { width: itemHeight, height: itemWidth,  name: &quot;альбомная&quot; }
+  ];
+
+  let bestLayout = { count: 0, cols: 0, rows: 0, rotated: false };
+
+  for (const orient of orientations) {
+    // -10 мм на захват и поля по краям листа
+    const cols = Math.floor((printFormat.width  - 10) / orient.width);
+    const rows = Math.floor((printFormat.height - 10) / orient.height);
+    const total = cols * rows;
+
+    if (total &gt; bestLayout.count) {
+      bestLayout = {
+        count: total, cols, rows,
+        rotated: (orient.name === &quot;альбомная&quot;),
+        orientation: orient.name
+      };
+    }
+  }
+  return bestLayout;
+}
+// A6 на SRA3 с вылетами 3 мм → { count: 8, cols: 2, rows: 4, rotated: true, orientation: &quot;альбомная&quot; }
+</code></pre>
+<h2 id="расчёт-нестандартных-размеров">Расчёт нестандартных размеров</h2>
+<p>Для произвольного размера система ищет оптимальное размещение на стандартных печатных листах (SRA3, A3, A4) с учётом вылетов, технологических полей и обеих ориентаций.</p>
+<h3 id="алгоритм">Алгоритм</h3>
+<ol>
+<li>Добавить вылеты к размеру макета: <code>itemW = width + bleed*2</code>, <code>itemH = height + bleed*2</code>.</li>
+<li>Перебрать все доступные печатные форматы принтера.</li>
+<li>Для каждого формата проверить обе ориентации.</li>
+<li>Рассчитать остатки полей и проверить достаточность (минимально допустимое поле <code>MIN_MARGIN = 5</code> мм).</li>
+<li>Отсортировать варианты: сначала безопасные (<code>isSafe</code>), затем по убыванию количества.</li>
+<li>Предложить менеджеру лучшие варианты с возможностью ручной корректировки.</li>
+</ol>
+<h3 id="пример-макет-90-50-мм-вылеты-3-мм-96-56-мм">Пример: макет 90 × 50 мм, вылеты 3 мм → 96 × 56 мм</h3>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Ориентация</th>
+<th>Размер макета</th>
+<th>Расчёт</th>
+<th>Кол-во</th>
+<th>Остатки</th>
+<th>Приоритет</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRA3</td>
+<td>книжная</td>
+<td>96 × 56</td>
+<td>320÷96=3, 450÷56=8</td>
+<td><strong>24</strong></td>
+<td>по высоте 2 мм</td>
+<td>⚠️ риск</td>
+</tr>
+<tr>
+<td>SRA3</td>
+<td>альбомная</td>
+<td>56 × 96</td>
+<td>320÷56=5, 450÷96=4</td>
+<td>20</td>
+<td>хорошие (40/66 мм)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>книжная</td>
+<td>96 × 56</td>
+<td>297÷96=3, 420÷56=7</td>
+<td>21</td>
+<td>средние (9/28 мм)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>альбомная</td>
+<td>56 × 96</td>
+<td>297÷56=5, 420÷96=4</td>
+<td>20</td>
+<td>хорошие (17/36 мм)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>книжная</td>
+<td>96 × 56</td>
+<td>210÷96=2, 297÷56=5</td>
+<td>10</td>
+<td>хорошие</td>
+<td>❌ мало</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>альбомная</td>
+<td>56 × 96</td>
+<td>210÷56=3, 297÷96=3</td>
+<td>9</td>
+<td>хорошие</td>
+<td>❌ мало</td>
+</tr>
+</tbody>
+</table>
+<p>Для тиража 1000 шт нестандарта 90 × 50 при раскладке 24 шт/лист SRA3: <code>1000 ÷ 24 = 41.66 → 42 листа</code>.</p>
+<h3 id="код-алгоритма">Код алгоритма</h3>
+<pre><code class="language-javascript">function calculateNonStandardLayout(productWidth, productHeight, bleed = 3) {
+  const printFormats = [
+    { name: &quot;SRA3&quot;, width: 320, height: 450, costMultiplier: 1.0 },
+    { name: &quot;A3&quot;,   width: 297, height: 420, costMultiplier: 0.9 },
+    { name: &quot;A4&quot;,   width: 210, height: 297, costMultiplier: 0.7 }
+  ];
+
+  const itemW = productWidth  + (bleed * 2);
+  const itemH = productHeight + (bleed * 2);
+  const results = [];
+  const MIN_MARGIN = 5; // минимально допустимое поле для захвата и резки
+
+  for (const format of printFormats) {
+    const orientations = [
+      { w: itemW, h: itemH, name: &quot;книжная&quot; },
+      { w: itemH, h: itemW, name: &quot;альбомная&quot; }
+    ];
+
+    for (const orient of orientations) {
+      const cols = Math.floor((format.width  - MIN_MARGIN * 2) / orient.w);
+      if (cols &lt; 1) continue;
+      const rows = Math.floor((format.height - MIN_MARGIN * 2) / orient.h);
+      if (rows &lt; 1) continue;
+
+      const usedWidth  = cols * orient.w;
+      const usedHeight = rows * orient.h;
+      const marginLeft = Math.floor((format.width  - usedWidth)  / 2);
+      const marginTop  = Math.floor((format.height - usedHeight) / 2);
+      const marginRight  = format.width  - usedWidth  - marginLeft;
+      const marginBottom = format.height - usedHeight - marginTop;
+      const minMargin = Math.min(marginLeft, marginRight, marginTop, marginBottom);
+
+      results.push({
+        format: format.name, orientation: orient.name,
+        cols, rows, total: cols * rows,
+        usedWidth, usedHeight,
+        margins: { left: marginLeft, right: marginRight, top: marginTop, bottom: marginBottom, min: minMargin },
+        isSafe: minMargin &gt;= MIN_MARGIN,
+        warning: minMargin &lt; MIN_MARGIN ? `Малое поле: ${minMargin} мм` : null
+      });
+    }
+  }
+
+  results.sort((a, b) =&gt; {
+    if (a.isSafe &amp;&amp; !b.isSafe) return -1;
+    if (!a.isSafe &amp;&amp; b.isSafe) return 1;
+    return b.total - a.total;
+  });
+  return results;
+}
+</code></pre>
+<h3 id="особые-случаи-нестандартной-раскладки">Особые случаи нестандартной раскладки</h3>
+<ul>
+<li><strong>Макет чуть-чуть не влезает (на 1–2 мм):</strong> предложить уменьшить вылеты до 2 мм, предупредить о рисках при резке.</li>
+<li><strong>Много разных макетов в одном заказе:</strong> раскладка считается отдельно для каждого макета; применяется коэффициент сложности; менеджер видит предупреждение.</li>
+<li><strong>Двусторонняя печать:</strong> ориентация должна быть одинаковой на обеих сторонах; неподходящие варианты раскладки система отфильтровывает автоматически.</li>
+</ul>
+<h2 id="правила-вылетов-bleed">Правила вылетов (bleed)</h2>
+<p>Производственные правила:</p>
+<ul>
+<li><strong>Стандартные форматы:</strong> вылеты <strong>3 мм</strong> с каждой стороны для резки.</li>
+<li><strong>Нестандартные форматы:</strong> допускается уменьшить вылеты до <strong>2 мм</strong> с каждой стороны, если позволяет макет (на усмотрение менеджера). Чаще применяется на односторонней печати, но возможно и на двусторонней, если выгоднее.</li>
+</ul>
+<h3 id="итоговая-матрица-правил-вылетов">Итоговая матрица правил вылетов</h3>
+<table>
+<thead>
+<tr>
+<th>Категория</th>
+<th style="text-align:center">Вылеты</th>
+<th>Условие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Стандартный формат (A4, A3, A5 и т.д.)</td>
+<td style="text-align:center">0</td>
+<td>Печать на тот же формат, без послепечатной резки</td>
+</tr>
+<tr>
+<td>Стандартный формат</td>
+<td style="text-align:center">3</td>
+<td>Печать на большем формате с резкой под стандарт</td>
+</tr>
+<tr>
+<td>Нестандартный (произвольный) размер</td>
+<td style="text-align:center">3</td>
+<td>Все случаи (по умолчанию)</td>
+</tr>
+</tbody>
+</table>
+<p>Особые условия:</p>
+<ul>
+<li>При расчёте <strong>всегда</strong> проверяются обе ориентации макета.</li>
+<li>При <strong>равном количестве</strong> изделий в разных ориентациях выбирается вариант с вылетами <strong>3 мм</strong> (для технологичности резки).</li>
+<li>Если вариант с вылетами <strong>0 мм</strong> даёт больше изделий, но формат <strong>нестандартный</strong>, он <strong>не используется</strong> — только 3 мм.</li>
+</ul>
+<blockquote>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в производственном описании заказчик допускает для нестандарта вылеты 2 мм (по согласованию с менеджером), но формализованная матрица правил (<code>BLEED_RULES</code>) фиксирует для нестандарта жёстко 3 мм во всех случаях. Не определено, как в калькуляторе совмещаются «всегда 3 мм для нестандарта» и опция ручного уменьшения до 2 мм.</p>
+</blockquote>
+<h3 id="правила-вылетов-в-коде">Правила вылетов в коде</h3>
+<pre><code class="language-javascript">const BLEED_RULES = {
+  default: 3,
+  conditions: [
+    { name: &quot;Стандартный формат, печать без резки&quot;, condition: &quot;is_standard &amp;&amp; matches_paper&quot;,  bleed: 0 },
+    { name: &quot;Стандартный формат с резкой&quot;,          condition: &quot;is_standard &amp;&amp; !matches_paper&quot;, bleed: 3 },
+    { name: &quot;Нестандартный размер&quot;,                 condition: &quot;!is_standard&quot;,                  bleed: 3 }
+  ],
+  tieBreaker: {
+    rule: &quot;При равном количестве элементов в разных ориентациях&quot;,
+    action: &quot;выбирается вариант с вылетами 3 мм&quot;,
+    reason: &quot;Обеспечение технологичности резки&quot;
+  }
+};
+</code></pre>
+<h3 id="тест-равного-количества-нестандарт-80-120-мм-на-sra3">Тест равного количества (нестандарт 80 × 120 мм на SRA3)</h3>
+<pre><code>С вылетами 3 мм (86 × 126):
+  Книжная:   320÷86=3,  450÷126=3 → 9 шт
+  Альбомная: 320÷126=2, 450÷86=5  → 10 шт ✅
+С вылетами 0 мм (80 × 120):
+  Книжная:   320÷80=4,  450÷120=3 → 12 шт
+  Альбомная: 320÷120=2, 450÷80=5  → 10 шт
+Результат: лучший по количеству = 12 шт (0 мм), но для нестандарта 0 мм недопустимо
+           → выбираем следующий лучший с 3 мм = 10 шт.
+</code></pre>
+<h3 id="примеры-применения-правил-вылетов">Примеры применения правил вылетов</h3>
+<table>
+<thead>
+<tr>
+<th>Ситуация</th>
+<th>Формат</th>
+<th>Стандарт?</th>
+<th>Совпадает с бумагой?</th>
+<th style="text-align:center">Вылеты</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Визитки 90×50</td>
+<td>90×50</td>
+<td>Нет</td>
+<td>—</td>
+<td style="text-align:center">3 мм</td>
+<td>Всегда 3 мм для нестандарта</td>
+</tr>
+<tr>
+<td>Листовки A5</td>
+<td>148×210</td>
+<td>Да</td>
+<td>Нет (печать на SRA3)</td>
+<td style="text-align:center">3 мм</td>
+<td>Стандарт с резкой</td>
+</tr>
+<tr>
+<td>Документы A4</td>
+<td>210×297</td>
+<td>Да</td>
+<td>Да (печать на A4)</td>
+<td style="text-align:center">0 мм</td>
+<td>Готовый формат</td>
+</tr>
+<tr>
+<td>Конверт C5</td>
+<td>162×229</td>
+<td>Да</td>
+<td>Нет (печать на SRA3)</td>
+<td style="text-align:center">3 мм</td>
+<td>Стандарт с резкой</td>
+</tr>
+<tr>
+<td>Плакат A3</td>
+<td>297×420</td>
+<td>Да</td>
+<td>Да (печать на A3)</td>
+<td style="text-align:center">0 мм</td>
+<td>Готовый формат</td>
+</tr>
+<tr>
+<td>Нестандарт 95×55</td>
+<td>95×55</td>
+<td>Нет</td>
+<td>—</td>
+<td style="text-align:center">3 мм</td>
+<td>Всегда 3 мм</td>
+</tr>
+</tbody>
+</table>
+<p>Тест-кейсы:</p>
+<ul>
+<li>Нестандарт 90×50, SRA3: с 3 мм — 20 шт (альбомная); с 0 мм — 24 шт (недопустимо) → <strong>20 шт с 3 мм</strong>.</li>
+<li>A5 на SRA3 (стандарт с резкой): с 3 мм — 8 шт; с 0 мм — 12 шт (нельзя, нужна резка) → <strong>8 шт с 3 мм</strong>.</li>
+<li>A4 на A4 (стандарт без резки): и 3 мм, и 0 мм дают 1 шт → <strong>1 шт с 0 мм</strong> (выбирается более технологичный).</li>
+</ul>
+<h2 id="технологические-поля-принтера-непечатаемая-область">Технологические поля принтера (непечатаемая область)</h2>
+<p>Каждый принтер имеет непечатаемую область — поля по краям листа, где изображение физически не пропечатается. Эти поля настраиваются в админке для каждого принтера и формата и вычитаются при расчёте раскладки.</p>
+<h3 id="поля-konica-minolta-c6085">Поля Konica Minolta C6085</h3>
+<pre><code>Формат листа: 320 × 450 мм (SRA3)
+Технологические поля (непечатаемые):
+  Сверху:  3 мм
+  Снизу:   3 мм
+  Слева:   1 мм
+  Справа:  1 мм
+Реальная печатная область: 314 × 444 мм  (320 - 1 - 1 = 318 по ширине см. ниже)
+</code></pre>
+<p>Формула печатной области:</p>
+<pre><code>printable_width  = sheet_width  - left_margin - right_margin
+printable_height = sheet_height - top_margin  - bottom_margin
+</code></pre>
+<blockquote>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в источнике печатная область C6085 указана как <strong>314 × 444 мм</strong> (через расчёт «320-6, 450-6», то есть −3/−3 по обеим осям), но при полях 1/1 слева/справа и 3/3 сверху/снизу ширина должна быть <code>320 − 1 − 1 = 318 мм</code>, а высота <code>450 − 3 − 3 = 444 мм</code> (то есть 318 × 444). Значения 314 и 318 по ширине противоречат друг другу в разных местах текста.</p>
+</blockquote>
+<h3 id="схема-бд-технологических-полей">Схема БД технологических полей</h3>
+<pre><code class="language-sql">CREATE TABLE printer_technical_specs (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  printer_id INT NOT NULL,
+  printable_width INT,            -- мм
+  printable_height INT,
+  top_margin INT,                 -- сверху (обычно 3-5 мм)
+  bottom_margin INT,
+  left_margin INT,
+  right_margin INT,
+  margins_symmetric BOOLEAN DEFAULT true,
+  max_paper_weight INT,           -- макс. плотность бумаги
+  max_sheets_per_run INT,
+  valid_from DATE, valid_to DATE, is_active BOOLEAN DEFAULT true,
+  FOREIGN KEY (printer_id) REFERENCES printers(id),
+  INDEX idx_printer_active (printer_id, is_active)
+);
+
+-- Пример для Konica Minolta
+INSERT INTO printer_technical_specs VALUES
+  (1, 1, 314, 444, 3, 3, 1, 1, false, 300, 9999, '2026-01-01', NULL, true);
+</code></pre>
+<h3 id="учёт-полей-в-раскладке">Учёт полей в раскладке</h3>
+<pre><code class="language-javascript">const availableWidth  = printFormat.width  - left_margin - right_margin;
+const availableHeight = printFormat.height - top_margin  - bottom_margin;
+// далее раскладка считается только внутри (availableWidth × availableHeight)
+const cols = Math.floor(availableWidth  / itemWidth);
+const rows = Math.floor(availableHeight / itemHeight);
+</code></pre>
+<h2 id="метки-плоттера-для-контурной-резки">Метки плоттера для контурной резки</h2>
+<p>При контурной резке наклеек или вырубке на режущем плоттере на лист добавляются угловые метки, по которым плоттер определяет координаты элементов. Метки занимают полезную площадь и уменьшают область раскладки.</p>
+<h3 id="ключевые-параметры">Ключевые параметры</h3>
+<ul>
+<li><strong>Смещение меток от края листа:</strong> обычно <strong>8 мм</strong> (настраивается, рабочий диапазон 5–10 мм).</li>
+<li><strong>Безопасный отступ макетов от меток:</strong> <strong>10 мм</strong> по горизонтали и вертикали — макет не должен налезать на метки или касаться их.</li>
+</ul>
+<h3 id="важное-уточнение-метки-не-вычитаются-из-печатной-области-дважды">Важное уточнение: метки не вычитаются из печатной области дважды</h3>
+<p>Метки на расстоянии 8 мм от края <strong>попадают в печатаемую область</strong> (так как <code>8 мм &gt; максимального технологического поля 3 мм</code>), поэтому они корректно печатаются. Непечатаемая область влияет только на то, что изображение в ней не пропечатается, но размещать элементы (включая метки) в этой зоне не запрещено. Метки не уменьшают печатную область — они задают рамку, внутри которой размещаются макеты.</p>
+<pre><code>Проверка попадания меток в печатаемую область:
+  markerOffset &gt;= top_margin   →  8 &gt;= 3 ✓
+  markerOffset &gt;= left_margin  →  8 &gt;= 1 ✓
+</code></pre>
+<h3 id="итоговая-формула-области-для-макетов">Итоговая формула области для макетов</h3>
+<p>Область для макетов считается с учётом двух вычетов: смещения меток от края и безопасного отступа от меток.</p>
+<pre><code>item_area_width  = sheet_width  - (markerOffset × 2) - (safetyGap × 2)
+item_area_height = sheet_height - (markerOffset × 2) - (safetyGap × 2)
+startX = markerOffset + safetyGap
+startY = markerOffset + safetyGap
+</code></pre>
+<p>Для SRA3 (320 × 450), markerOffset = 8 мм, safetyGap = 10 мм:</p>
+<pre><code>Область внутри меток:  320 - 16 = 304 мм ширина;  450 - 16 = 434 мм высота   (304 × 434)
+Область для макетов:   304 - 20 = 284 мм ширина;  434 - 20 = 414 мм высота   (284 × 414)
+Начало координат: (18, 18)
+</code></pre>
+<pre><code class="language-javascript">function calculateLayoutArea(paperWidth, paperHeight, markerOffset, safetyGap) {
+  const areaInsideMarkers = {
+    width:  paperWidth  - (markerOffset * 2),
+    height: paperHeight - (markerOffset * 2)
+  };
+  const areaForItems = {
+    width:  areaInsideMarkers.width  - (safetyGap * 2),
+    height: areaInsideMarkers.height - (safetyGap * 2)
+  };
+  return {
+    total: areaInsideMarkers,        // 304 × 434
+    forItems: areaForItems,          // 284 × 414
+    // строковая формула для отображения в UI: &quot;(320 - 8×2 - 10×2) = 284&quot;
+    formula: `(${paperWidth} - ${markerOffset}×2 - ${safetyGap}×2) = ${areaForItems.width}`,
+    startX: markerOffset + safetyGap, // 18
+    startY: markerOffset + safetyGap  // 18
+  };
+}
+// calculateLayoutArea(320, 450, 8, 10) → forItems { width: 284, height: 414 }
+</code></pre>
+<h3 id="зависимость-области-для-макетов-от-смещения-меток-sra3-safetygap-отдельно">Зависимость области для макетов от смещения меток (SRA3, safetyGap отдельно)</h3>
+<p>Таблица показывает область <em>внутри меток</em> (<code>304 = 320 − 8×2</code> и т.д.) — без вычета безопасного отступа:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Смещение меток, мм</th>
+<th style="text-align:center">Ширина внутри меток</th>
+<th style="text-align:center">Высота внутри меток</th>
+<th style="text-align:center">Начало X</th>
+<th style="text-align:center">Начало Y</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">314</td>
+<td style="text-align:center">444</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td>Метки на границе поля</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">310</td>
+<td style="text-align:center">440</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center">5</td>
+<td>✅ рабочий вариант</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">304</td>
+<td style="text-align:center">434</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">8</td>
+<td>✅ стандарт</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">430</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">10</td>
+<td>✅ большой запас</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">290</td>
+<td style="text-align:center">420</td>
+<td style="text-align:center">15</td>
+<td style="text-align:center">15</td>
+<td>❌ много места теряем</td>
+</tr>
+</tbody>
+</table>
+<p>Менеджер может вручную менять смещение меток (например, на 5 мм), чтобы разместить больше элементов; область пересчитывается автоматически по формуле выше.</p>
+<h3 id="пример-раскладки-наклеек-с-контурной-резкой">Пример раскладки наклеек с контурной резкой</h3>
+<p>Наклейка 70 × 50 мм, вылеты 3 мм → 76 × 56 мм. Область для макетов на SRA3 с метками 8 мм и отступом 10 мм = 284 × 414 мм.</p>
+<pre><code>Книжная   (76 × 56):  284÷76=3, 414÷56=7  → 21 шт
+Альбомная (56 × 76):  284÷56=5, 414÷76=5  → 25 шт ✅
+</code></pre>
+<p>Оптимум — альбомная, <strong>25 шт/лист</strong>. На тираж 500 шт: <code>500 ÷ 25 = 20 листов</code>.</p>
+<p>Проверочный пример себестоимости (тираж 500, C6085, контурная резка):</p>
+<pre><code>Печать: 20 × 22 руб = 440 руб
+Бумага: 20 × 3 руб  = 60 руб
+Резка:  500 × 0.2 мин × 30 руб/мин = 3000 руб
+ИТОГО: 3500 руб → 7 руб/наклейка
+</code></pre>
+<blockquote>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в источнике для одного и того же примера (наклейки 70×50, SRA3) встречаются разные результаты раскладки — 35 шт (ранний ошибочный расчёт без отступа от меток), 25 шт (альбомная, область 284×414) и упоминание «5×7 = 35 шт» при метках без безопасного отступа. Канонический результат с учётом markerOffset 8 + safetyGap 10 = <strong>25 шт/лист</strong> (20 листов на 500).</p>
+</blockquote>
+<h3 id="сравнение-раскладок-с-метками-и-без-наклейки-5050-мм-размер-с-вылетами-5656">Сравнение раскладок с метками и без (наклейки 50×50 мм, размер с вылетами 56×56)</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Без контурной резки</th>
+<th>С контурной резкой</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Доступная ширина</td>
+<td>320 − 1 − 1 = 318</td>
+<td>(с метками/отступом меньше)</td>
+</tr>
+<tr>
+<td>Доступная высота</td>
+<td>450 − 3 − 3 = 444</td>
+<td>(с метками/отступом меньше)</td>
+</tr>
+<tr>
+<td>По ширине</td>
+<td>318 ÷ 56 = 5 шт</td>
+<td>5 шт</td>
+</tr>
+<tr>
+<td>По высоте</td>
+<td>444 ÷ 56 = 7 шт</td>
+<td>7 шт</td>
+</tr>
+<tr>
+<td>Итого на листе</td>
+<td>35 шт</td>
+<td>35 шт (в данном случае совпало)</td>
+</tr>
+<tr>
+<td>Себестоимость 1 шт</td>
+<td>ниже</td>
+<td>выше (доп. операция резки)</td>
+</tr>
+</tbody>
+</table>
+<p>Приоритет расчёта при контурной резке:</p>
+<ol>
+<li>Определить поля принтера → печатная область.</li>
+<li>Если есть контурная резка → вычесть место под метки и безопасный отступ.</li>
+<li>Рассчитать раскладку в итоговой области для макетов (обе ориентации).</li>
+<li>Вернуть результат с учётом всех ограничений.</li>
+</ol>
+<h2 id="архитектура-форматов-бумаги-и-выбор-печатного-формата">Архитектура форматов бумаги и выбор печатного формата</h2>
+<p>Принтер (например, Konica Minolta AccurioPress C6085) может печатать не только на стандартных форматах, но и на нестандартных загрузках (банерный формат 330 × 762 мм, спец. лоток 330 × 487 мм). Печатные форматы и их печатные области хранятся как шаблоны и привязываются к принтерам.</p>
+<h3 id="параметры-форматов-konica-c6085">Параметры форматов Konica C6085</h3>
+<table>
+<thead>
+<tr>
+<th>Лоток / формат</th>
+<th>Размер листа, мм</th>
+<th>Печатная область, мм</th>
+<th>Поля (в/н/л/п), мм</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRA3 основной лоток</td>
+<td>320 × 450</td>
+<td>314 × 444</td>
+<td>3 / 3 / 1 / 1</td>
+</tr>
+<tr>
+<td>Спец. лоток 330×487 (физ. 330,2 × 487,7)</td>
+<td>330 × 487</td>
+<td>321 × 480</td>
+<td>3 / 3 / 4 / 4</td>
+</tr>
+<tr>
+<td>Банерный лоток</td>
+<td>330 × 762</td>
+<td>321 × 480</td>
+<td>3 / 3 / 4 / 4</td>
+</tr>
+</tbody>
+</table>
+<p>Примечание: у банерного формата максимальная высота печати ограничена 480 мм (та же печатная область, что у спец. лотка), несмотря на длину листа 762 мм.</p>
+<h3 id="сравнение-форматов-для-одного-заказа-наклейки-контурная-резка">Сравнение форматов для одного заказа (наклейки, контурная резка)</h3>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Размер листа</th>
+<th>Печатная область</th>
+<th>Раскладка</th>
+<th style="text-align:center">Листов на 500</th>
+<th style="text-align:center">Экономия</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SRA3</td>
+<td>320 × 450</td>
+<td>314 × 444</td>
+<td>5 × 4 = 20</td>
+<td style="text-align:center">25</td>
+<td style="text-align:center">база</td>
+</tr>
+<tr>
+<td>Спец. лоток</td>
+<td>330 × 487</td>
+<td>321 × 480</td>
+<td>5 × 5 = 25</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">−20%</td>
+</tr>
+<tr>
+<td>Банерный</td>
+<td>330 × 762</td>
+<td>321 × 480</td>
+<td>5 × 5 = 25</td>
+<td style="text-align:center">20</td>
+<td style="text-align:center">−20%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="схема-бд-форматов-и-привязки-к-принтерам">Схема БД форматов и привязки к принтерам</h3>
+<pre><code class="language-sql">CREATE TABLE paper_formats (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,                          -- &quot;SRA3&quot;, &quot;Банер 330×762&quot;
+  category ENUM('standard','custom','roll') DEFAULT 'standard',
+  sheet_width INT NOT NULL,
+  sheet_height INT NOT NULL,
+  is_roll BOOLEAN DEFAULT false,
+  roll_length INT,                                     -- длина рулона, м
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_category (category),
+  INDEX idx_size (sheet_width, sheet_height)
+);
+
+CREATE TABLE printer_paper_formats (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  printer_id INT NOT NULL,
+  paper_format_id INT NOT NULL,
+  local_name VARCHAR(255),                             -- &quot;Основной лоток&quot;, &quot;Банерный лоток&quot;
+  printable_width INT NOT NULL,
+  printable_height INT NOT NULL,
+  top_margin INT DEFAULT 3, bottom_margin INT DEFAULT 3,
+  left_margin INT DEFAULT 1, right_margin INT DEFAULT 1,
+  max_sheets_per_run INT, min_quantity INT DEFAULT 1, setup_time INT,
+  is_default BOOLEAN DEFAULT false, is_active BOOLEAN DEFAULT true,
+  priority INT DEFAULT 100,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (printer_id) REFERENCES printers(id),
+  FOREIGN KEY (paper_format_id) REFERENCES paper_formats(id),
+  UNIQUE KEY unique_printer_format (printer_id, paper_format_id),
+  INDEX idx_printer_active (printer_id, is_active)
+);
+
+CREATE TABLE manager_paper_templates (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  printer_id INT NOT NULL,
+  template_name VARCHAR(255) NOT NULL,                 -- видит менеджер
+  paper_format_id INT NOT NULL,
+  default_bleed INT DEFAULT 3,
+  default_markup_percent DECIMAL(5,2),
+  service_types JSON,                                  -- ['envelopes','posters','stickers']
+  description TEXT,
+  sort_order INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT true,
+  created_by INT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (printer_id) REFERENCES printers(id),
+  FOREIGN KEY (paper_format_id) REFERENCES paper_formats(id),
+  INDEX idx_printer_sort (printer_id, sort_order)
+);
+</code></pre>
+<h3 id="пример-расчёта-для-c6085-с-банерным-форматом">Пример расчёта для C6085 с банерным форматом</h3>
+<pre><code class="language-javascript">const konicaSpecs = {
+  printer: &quot;Konica Minolta AccurioPress C6085&quot;,
+  standardTray: { paperSize: {width:330,height:487}, printableArea:{width:321,height:480}, margins:{top:3,bottom:3,left:4,right:4} },
+  bannerTray:   { paperSize: {width:330,height:762}, printableArea:{width:321,height:480}, margins:{top:3,bottom:3,left:4,right:4} }
+};
+// Наклейки 50×70, вылеты 3 → 56×76; контурная резка (метки 8, отступ 10)
+// bestLayout: { cols: 5, rows: 5, total: 25, orientation: 'landscape' }
+// availableArea: { width: 284, height: 414, startX: 18, startY: 18 }; листов на 500 → 20
+</code></pre>
+<p>При выборе формата менеджер может: выбрать шаблон быстрого выбора, выбрать формат вручную из списка, скорректировать печатную область и технологические поля, сохранить настройку как шаблон.</p>
+<blockquote>
+<p>ℹ️ Смежная тема (вне раскладки): у каждого принтера разная <strong>скорость печати</strong> в зависимости от плотности бумаги и формата. Эти данные нужны для производственного планирования (расчёт времени печати), а не для раскладки. Матрица скоростей печати (<code>printer_speed_matrix</code>) и коэффициенты форматов (<code>format_speed_coefficients</code>) описаны в их единственном владельце — <code>../06-production/equipment.md</code>, раздел 2; алгоритм расчёта времени печати (класс <code>PrintTimeCalculator</code>) — в <code>cutting-lamination-services.md</code>, раздел 5. Здесь значения скоростей намеренно не дублируются.</p>
+</blockquote>
+<h2 id="сводные-правила-раздел-32-спецификации">Сводные правила (раздел 3.2 спецификации)</h2>
+<ul>
+<li>Учёт обеих ориентаций макета.</li>
+<li>Выбор максимального количества изделий на листе.</li>
+<li>Учёт технологических полей принтера (непечатаемая область).</li>
+<li>Учёт меток для плоттера: <strong>8 мм</strong> (смещение от края) + <strong>10 мм</strong> (безопасный отступ от меток до макета).</li>
+</ul>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#базовые-принципы-раскладки">Базовые принципы раскладки</a></li><li class="lvl2"><a href="#размеры-форматов">Размеры форматов</a></li><li class="lvl2"><a href="#расчёт-раскладки-a6-на-sra3">Расчёт раскладки A6 на SRA3</a></li><li class="lvl3"><a href="#геометрический-максимум-без-полей">Геометрический максимум (без полей)</a></li><li class="lvl3"><a href="#раскладка-с-вылетами-3-мм-рабочий-вариант">Раскладка с вылетами 3 мм (рабочий вариант)</a></li><li class="lvl3"><a href="#варианты-раскладки-a6-на-sra3-как-опции">Варианты раскладки A6 на SRA3 (как опции)</a></li><li class="lvl3"><a href="#пример-пересчёта-тиража-a6-100-шт-раскладка-8-штлист">Пример пересчёта тиража (A6, 100 шт, раскладка 8 шт/лист)</a></li><li class="lvl2"><a href="#алгоритм-раскладки-итоговая-версия-для-калькулятора">Алгоритм раскладки (итоговая версия для калькулятора)</a></li><li class="lvl2"><a href="#расчёт-нестандартных-размеров">Расчёт нестандартных размеров</a></li><li class="lvl3"><a href="#алгоритм">Алгоритм</a></li><li class="lvl3"><a href="#пример-макет-90-50-мм-вылеты-3-мм-96-56-мм">Пример: макет 90 × 50 мм, вылеты 3 мм → 96 × 56 мм</a></li><li class="lvl3"><a href="#код-алгоритма">Код алгоритма</a></li><li class="lvl3"><a href="#особые-случаи-нестандартной-раскладки">Особые случаи нестандартной раскладки</a></li><li class="lvl2"><a href="#правила-вылетов-bleed">Правила вылетов (bleed)</a></li><li class="lvl3"><a href="#итоговая-матрица-правил-вылетов">Итоговая матрица правил вылетов</a></li><li class="lvl3"><a href="#правила-вылетов-в-коде">Правила вылетов в коде</a></li><li class="lvl3"><a href="#тест-равного-количества-нестандарт-80-120-мм-на-sra3">Тест равного количества (нестандарт 80 × 120 мм на SRA3)</a></li><li class="lvl3"><a href="#примеры-применения-правил-вылетов">Примеры применения правил вылетов</a></li><li class="lvl2"><a href="#технологические-поля-принтера-непечатаемая-область">Технологические поля принтера (непечатаемая область)</a></li><li class="lvl3"><a href="#поля-konica-minolta-c6085">Поля Konica Minolta C6085</a></li><li class="lvl3"><a href="#схема-бд-технологических-полей">Схема БД технологических полей</a></li><li class="lvl3"><a href="#учёт-полей-в-раскладке">Учёт полей в раскладке</a></li><li class="lvl2"><a href="#метки-плоттера-для-контурной-резки">Метки плоттера для контурной резки</a></li><li class="lvl3"><a href="#ключевые-параметры">Ключевые параметры</a></li><li class="lvl3"><a href="#важное-уточнение-метки-не-вычитаются-из-печатной-области-дважды">Важное уточнение: метки не вычитаются из печатной области дважды</a></li><li class="lvl3"><a href="#итоговая-формула-области-для-макетов">Итоговая формула области для макетов</a></li><li class="lvl3"><a href="#зависимость-области-для-макетов-от-смещения-меток-sra3-safetygap-отдельно">Зависимость области для макетов от смещения меток (SRA3, safetyGap отдельно)</a></li><li class="lvl3"><a href="#пример-раскладки-наклеек-с-контурной-резкой">Пример раскладки наклеек с контурной резкой</a></li><li class="lvl3"><a href="#сравнение-раскладок-с-метками-и-без-наклейки-5050-мм-размер-с-вылетами-5656">Сравнение раскладок с метками и без (наклейки 50×50 мм, размер с вылетами 56×56)</a></li><li class="lvl2"><a href="#архитектура-форматов-бумаги-и-выбор-печатного-формата">Архитектура форматов бумаги и выбор печатного формата</a></li><li class="lvl3"><a href="#параметры-форматов-konica-c6085">Параметры форматов Konica C6085</a></li><li class="lvl3"><a href="#сравнение-форматов-для-одного-заказа-наклейки-контурная-резка">Сравнение форматов для одного заказа (наклейки, контурная резка)</a></li><li class="lvl3"><a href="#схема-бд-форматов-и-привязки-к-принтерам">Схема БД форматов и привязки к принтерам</a></li><li class="lvl3"><a href="#пример-расчёта-для-c6085-с-банерным-форматом">Пример расчёта для C6085 с банерным форматом</a></li><li class="lvl2"><a href="#сводные-правила-раздел-32-спецификации">Сводные правила (раздел 3.2 спецификации)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

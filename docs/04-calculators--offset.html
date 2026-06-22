@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Калькулятор офсетной печати — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--offset">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li class="active"><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="калькулятор-офсетной-печати">Калькулятор офсетной печати</h1>
+<p>Калькулятор офсетной печати реализует расчёт стоимости через партнёра (ГМ Принт): себестоимость партнёра берётся из матрицы цен, к ней применяется «чистая» (без налога) пропорциональная наценка, начисляется налог 7% и добавляется доставка. Документ описывает полный цикл, структуру БД, правила маржи, доставку, формулы расчёта, линейную интерполяцию маржи по сумме заказа, интерполяцию нестандартных размеров по площади и примеры расчётов.</p>
+<h2 id="общая-концепция">Общая концепция</h2>
+<p>Офсетная печать выполняется не на собственном оборудовании, а через партнёра (ГМ Принт). Партнёр предоставляет только себестоимость на стандартные форматы и тиражи. Система:</p>
+<ol>
+<li><strong>Настройка (администратор):</strong>
+<ul>
+<li>Импорт цен партнёра в таблицу <code>offset_partner_prices</code> (только себестоимость).</li>
+<li>Настройка правил маржи в таблице <code>offset_margin_rules</code> (по сумме или по тиражу).</li>
+<li>Настройка налога (7%).</li>
+<li>Настройка доставки (регионы, вес, тираж, временные интервалы).</li>
+</ul>
+</li>
+<li><strong>Клиент выбирает параметры:</strong> продукт (листовки, визитки, буклеты, брошюры, бирки, календари), формат (A4, A5, A6, A3, DL, 90×50), бумагу (130, 170, 300 г/м²), цветность (4+0, 4+4), тираж, дополнительные услуги (ламинация, биговка, фальцовка, сверление, скругление).</li>
+<li><strong>Система рассчитывает стоимость:</strong> поиск себестоимости в <code>offset_partner_prices</code>, применение правил маржи (сначала по сумме, потом по тиражу), добавление стоимости доп. услуг, расчёт налога 7%, итоговая цена.</li>
+<li><strong>Система предлагает доставку:</strong> бесплатная (10:00–18:00, без гарантии) — 0 руб; платная (до 13:00, с гарантией) — 300 руб; другие интервалы (утренняя, вечерняя); самовывоз со склада (суббота).</li>
+<li><strong>Клиент оформляет заказ:</strong> выбирает дату/время доставки, оплачивает (ссылка/счёт), получает заказ.</li>
+</ol>
+<p>Ключевые принципы:</p>
+<ul>
+<li>Разделение данных: цены партнёра и правила маржи хранятся отдельно.</li>
+<li>Маржа «чистая» — без налога, начисляется только на себестоимость партнёра.</li>
+<li>Налог 7% добавляется поверх (себестоимость + маржа).</li>
+<li>Поддержка сборных заказов (с цифровой и широкоформатной печатью).</li>
+</ul>
+<h2 id="структура-базы-данных">Структура базы данных</h2>
+<h3 id="справочники">Справочники</h3>
+<pre><code class="language-sql">-- 1.1 Типы продукции
+CREATE TABLE offset_product_types (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    category VARCHAR(50),
+    has_folding BOOLEAN DEFAULT false,
+    has_binding BOOLEAN DEFAULT false,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 1.2 Форматы
+CREATE TABLE offset_formats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(20) NOT NULL,
+    width_mm INT,
+    height_mm INT,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 1.3 Бумага
+CREATE TABLE offset_papers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    density INT NOT NULL,
+    name VARCHAR(100),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 1.4 Цветность
+CREATE TABLE offset_colors (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(10) NOT NULL,
+    name VARCHAR(50),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 1.5 Дополнительные услуги
+CREATE TABLE offset_services (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    category VARCHAR(50),
+    unit VARCHAR(20),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+</code></pre>
+<h3 id="цены-партнёра-только-себестоимость">Цены партнёра (только себестоимость)</h3>
+<pre><code class="language-sql">CREATE TABLE offset_partner_prices (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_type_id INT NOT NULL,
+    format_id INT NOT NULL,
+    paper_id INT NOT NULL,
+    color_id INT NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_type_id) REFERENCES offset_product_types(id),
+    FOREIGN KEY (format_id) REFERENCES offset_formats(id),
+    FOREIGN KEY (paper_id) REFERENCES offset_papers(id),
+    FOREIGN KEY (color_id) REFERENCES offset_colors(id),
+    UNIQUE KEY unique_price (product_type_id, format_id, paper_id, color_id, quantity)
+);
+</code></pre>
+<h3 id="цены-на-дополнительные-услуги">Цены на дополнительные услуги</h3>
+<pre><code class="language-sql">CREATE TABLE offset_service_prices (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_type_id INT NOT NULL,
+    service_id INT NOT NULL,
+    quantity_from INT,
+    quantity_to INT,
+    price DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (product_type_id) REFERENCES offset_product_types(id),
+    FOREIGN KEY (service_id) REFERENCES offset_services(id)
+);
+</code></pre>
+<h3 id="правила-маржи-наша-наценка">Правила маржи (наша наценка)</h3>
+<pre><code class="language-sql">CREATE TABLE offset_margin_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    -- Условия по себестоимости
+    cost_from DECIMAL(10,2),
+    cost_to DECIMAL(10,2),
+    -- Условия по тиражу
+    quantity_from INT,
+    quantity_to INT,
+    -- Ограничения по продукту (опционально)
+    product_type_id INT,
+    paper_id INT,
+    color_id INT,
+    -- Наценка
+    margin_type ENUM('percent', 'fixed') NOT NULL,
+    margin_value DECIMAL(10,2) NOT NULL,
+    -- Приоритет (меньше = выше)
+    priority INT DEFAULT 100,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_type_id) REFERENCES offset_product_types(id),
+    FOREIGN KEY (paper_id) REFERENCES offset_papers(id),
+    FOREIGN KEY (color_id) REFERENCES offset_colors(id),
+    INDEX idx_cost (cost_from, cost_to),
+    INDEX idx_quantity (quantity_from, quantity_to)
+);
+</code></pre>
+<h3 id="доставка">Доставка</h3>
+<pre><code class="language-sql">-- 5.1 Регионы
+CREATE TABLE delivery_regions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(50) UNIQUE,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 5.2 Правила доставки ГМ Принт
+CREATE TABLE gm_delivery_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    region_id INT,
+    max_weight_kg DECIMAL(10,2),
+    min_weight_kg DECIMAL(10,2),
+    max_quantity INT,
+    min_quantity INT,
+    has_services BOOLEAN,
+    price DECIMAL(10,2) NOT NULL,
+    delivery_days INT,
+    extra_days_for_large_quantity BOOLEAN DEFAULT true,
+    extra_days_for_services BOOLEAN DEFAULT true,
+    available_days JSON,
+    priority INT DEFAULT 100,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (region_id) REFERENCES delivery_regions(id)
+);
+
+-- 5.3 Временные интервалы доставки
+CREATE TABLE delivery_time_slots (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    time_start TIME NOT NULL,
+    time_end TIME NOT NULL,
+    guaranteed BOOLEAN DEFAULT false,
+    price DECIMAL(10,2) DEFAULT 0,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 5.4 Правила доступности временных интервалов
+CREATE TABLE delivery_time_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    time_slot_id INT NOT NULL,
+    max_weight_kg DECIMAL(10,2),
+    max_quantity INT,
+    region_id INT,
+    is_active BOOLEAN DEFAULT true,
+    priority INT DEFAULT 100,
+    FOREIGN KEY (time_slot_id) REFERENCES delivery_time_slots(id),
+    FOREIGN KEY (region_id) REFERENCES delivery_regions(id)
+);
+</code></pre>
+<h2 id="примеры-данных">Примеры данных</h2>
+<h3 id="цены-партнёра-себестоимость-листовки-a4-130-гм²-44">Цены партнёра (себестоимость) — Листовки A4, 130 г/м², 4+4</h3>
+<pre><code class="language-sql">INSERT INTO offset_partner_prices (product_type_id, format_id, paper_id, color_id, quantity, price) VALUES
+(1, 1, 1, 2, 100, 1000),
+(1, 1, 1, 2, 200, 1800),
+(1, 1, 1, 2, 300, 2500),
+(1, 1, 1, 2, 500, 4000),
+(1, 1, 1, 2, 1000, 7500),
+(1, 1, 1, 2, 2000, 14000),
+(1, 1, 1, 2, 5000, 32000),
+(1, 1, 1, 2, 10000, 58000);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Тираж</th>
+<th style="text-align:right">Цена партнёра (себестоимость)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">100</td>
+<td style="text-align:right">1 000 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">200</td>
+<td style="text-align:right">1 800 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">300</td>
+<td style="text-align:right">2 500 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">500</td>
+<td style="text-align:right">4 000 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">1 000</td>
+<td style="text-align:right">7 500 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">2 000</td>
+<td style="text-align:right">14 000 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">5 000</td>
+<td style="text-align:right">32 000 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">10 000</td>
+<td style="text-align:right">58 000 руб</td>
+</tr>
+</tbody>
+</table>
+<h3 id="правила-маржи">Правила маржи</h3>
+<pre><code class="language-sql">-- Правила по себестоимости
+INSERT INTO offset_margin_rules (name, cost_from, cost_to, margin_type, margin_value, priority) VALUES
+('Сумма до 1000 руб',    0,    1000, 'fixed',   1500, 10),
+('Сумма 1001-1500 руб',  1001, 1500, 'fixed',   1300, 20),
+('Сумма 1501-2500 руб',  1501, 2500, 'percent', 60,   30),
+('Сумма 2501-5000 руб',  2501, 5000, 'percent', 50,   40),
+('Сумма более 5000 руб',  5001, NULL, 'percent', 40,  50);
+
+-- Правила по тиражу (если нет правил по сумме)
+INSERT INTO offset_margin_rules (name, quantity_from, quantity_to, margin_type, margin_value, priority) VALUES
+('Тираж 1-100 шт',     1,   100, 'fixed',   1500, 100),
+('Тираж 101-500 шт',   101, 500, 'fixed',   1300, 110),
+('Тираж более 500 шт',  501, NULL, 'percent', 60,  120);
+</code></pre>
+<h3 id="доставка-1">Доставка</h3>
+<pre><code class="language-sql">-- Регионы
+INSERT INTO delivery_regions (name, slug) VALUES
+('Москва (МКАД)', 'moscow'),
+('Московская область', 'mo');
+
+-- Правила доставки
+INSERT INTO gm_delivery_rules (region_id, max_weight_kg, price, delivery_days, available_days, priority) VALUES
+(1, 100, 0,   1, '[1,2,3,4,5]', 10),
+(2, 100, 250, 2, '[1,2,3,4,5]', 20);
+
+-- Временные интервалы
+INSERT INTO delivery_time_slots (name, code, time_start, time_end, guaranteed, price, sort_order) VALUES
+('Стандартная',       'standard',   '10:00', '18:00', false, 0,   10),
+('Срочная (до 13:00)', 'express_13', '09:00', '13:00', true,  300, 20),
+('Утренняя',          'morning',    '09:00', '12:00', true,  350, 30),
+('Вечерняя',          'evening',    '16:00', '19:00', true,  250, 40);
+</code></pre>
+<h2 id="формулы-расчёта">Формулы расчёта</h2>
+<h3 id="основная-формула">Основная формула</h3>
+<pre><code>Цена_для_клиента = (Себестоимость + Наценка + Стоимость_услуг) × (1 + Налог/100) + Доставка
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Порядок применения налога к доставке расходится между разделами источника. В разделе «Система офсетной печати» доставка добавляется ПОСЛЕ умножения на налог (доставка не облагается налогом). В сводной бизнес-логике (раздел 3.2) формула <code>total = partner_price + delivery + tax + our_markup</code>, где <code>tax = partner_price × tax_percent / 100</code> начисляется только на себестоимость (без учёта наценки), а доставка прибавляется как отдельное слагаемое. Нужно зафиксировать единый порядок: облагается ли наценка налогом, и облагается ли доставка налогом.</p>
+<p>Сводная формула из раздела бизнес-логики:</p>
+<pre><code>partner_price = getPriceFromMatrix(params)
+delivery      = getDeliveryCost(city, weight)
+tax           = partner_price × tax_percent / 100
+our_markup    = partner_price × markup_percent / 100
+total         = partner_price + delivery + tax + our_markup
+</code></pre>
+<h3 id="наценка-маржа">Наценка (маржа)</h3>
+<p>Правила применяются в порядке приоритета.</p>
+<ol>
+<li><strong>По себестоимости:</strong>
+<ul>
+<li>0–1000 руб → +1500 руб (фикс)</li>
+<li>1001–1500 руб → +1300 руб (фикс)</li>
+<li>1501–2500 руб → +60%</li>
+<li>2501–5000 руб → +50%</li>
+<li>5001+ руб → +40%</li>
+</ul>
+</li>
+<li><strong>Если нет правила по себестоимости — применяется правило по тиражу:</strong>
+<ul>
+<li>1–100 шт → +1500 руб (фикс)</li>
+<li>101–500 шт → +1300 руб (фикс)</li>
+<li>501+ шт → +60%</li>
+</ul>
+</li>
+</ol>
+<p>Примечание: дискретные правила «по себестоимости/по тиражу» — это «старый» режим (<code>calculation_method = 'discrete'</code>). Для офсета рекомендуется плавная пропорциональная наценка (<code>linear_percent</code>, см. раздел «Плавная пропорциональная наценка»).</p>
+<h3 id="налог">Налог</h3>
+<pre><code>Налог = (Себестоимость + Наценка + Услуги) × 7%
+</code></pre>
+<p>Налог не входит в правила маржи и применяется глобально для всех расчётов офсетной печати после вычисления <code>price_before_tax</code>. Ставку налога следует вынести в отдельную настройку (например, <code>settings.tax_rate</code>), изменяемую через админку.</p>
+<h3 id="доставка-2">Доставка</h3>
+<pre><code>Если вес ≤ 100 кг И регион = Москва:
+    Бесплатная доставка (10:00-18:00)
+Если требуется доставка до 13:00:
+    Платная доставка = 300 руб
+Если регион = Московская область:
+    Доставка = 250 руб, +1 день
+</code></pre>
+<h3 id="сроки-готовности">Сроки готовности</h3>
+<pre><code>Базовый срок = 1 день
+Если тираж &gt; 5000: +1 день
+Если есть доп. услуги: +1 день
+Если регион = Московская область: +1 день
+</code></pre>
+<h2 id="пример-расчёта-заказ-со-стандартным-форматом">Пример расчёта (заказ со стандартным форматом)</h2>
+<p><strong>Входные данные:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Продукт</td>
+<td>Листовки A4</td>
+</tr>
+<tr>
+<td>Бумага</td>
+<td>130 г/м²</td>
+</tr>
+<tr>
+<td>Цветность</td>
+<td>4+4</td>
+</tr>
+<tr>
+<td>Тираж</td>
+<td>500 шт</td>
+</tr>
+<tr>
+<td>Доп. услуги</td>
+<td>Ламинация</td>
+</tr>
+<tr>
+<td>Регион</td>
+<td>Москва</td>
+</tr>
+<tr>
+<td>Вес</td>
+<td>45 кг</td>
+</tr>
+<tr>
+<td>Желаемое время</td>
+<td>до 13:00</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Расчёт:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Этап</th>
+<th>Формула</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Себестоимость (из таблицы)</td>
+<td>500 шт → 4 000 руб</td>
+<td>4 000 руб</td>
+</tr>
+<tr>
+<td>Наценка (по сумме 4000 руб)</td>
+<td>4000 × 50%</td>
+<td>+2 000 руб</td>
+</tr>
+<tr>
+<td>Ламинация (из таблицы услуг)</td>
+<td>500 шт → 1 500 руб</td>
+<td>+1 500 руб</td>
+</tr>
+<tr>
+<td>Цена без налога</td>
+<td>4 000 + 2 000 + 1 500</td>
+<td>7 500 руб</td>
+</tr>
+<tr>
+<td>Налог (7%)</td>
+<td>7 500 × 0.07</td>
+<td>+525 руб</td>
+</tr>
+<tr>
+<td>Доставка (срочная до 13:00)</td>
+<td>фикс</td>
+<td>+300 руб</td>
+</tr>
+<tr>
+<td><strong>ИТОГО</strong></td>
+<td>7 500 + 525 + 300</td>
+<td><strong>8 325 руб</strong></td>
+</tr>
+<tr>
+<td>Цена за 1 шт</td>
+<td>8 325 / 500</td>
+<td>16.65 руб</td>
+</tr>
+<tr>
+<td>Чистая прибыль</td>
+<td>7 500 − 4 000 − 1 500</td>
+<td>2 000 руб</td>
+</tr>
+<tr>
+<td>Срок готовности</td>
+<td>1 + 1 (ламинация)</td>
+<td>2 дня</td>
+</tr>
+</tbody>
+</table>
+<h2 id="плавная-пропорциональная-наценка-linear_percent">Плавная пропорциональная наценка (linear_percent)</h2>
+<h3 id="бизнес-требования">Бизнес-требования</h3>
+<ul>
+<li>Себестоимость заказа приходит от партнёра (ГМ Принт) в виде суммы <code>partner_price</code> (руб).</li>
+<li>Маржа должна быть «чистой» — без налога, начисляется только на <code>partner_price</code>.</li>
+<li>Налог 7% добавляется поверх итога (<code>partner_price + маржа</code>).</li>
+<li>Цена для клиента должна меняться <strong>плавно</strong> при изменении <code>partner_price</code>, без резких скачков. Маржа не должна быть дискретной (разные проценты на интервалах с фиксированными границами), а должна быть непрерывной функцией от <code>partner_price</code>.</li>
+<li>Для малых сумм нужна высокая маржа (чтобы не работать в убыток), для крупных — низкая (стимулировать объём).</li>
+<li>Настройка должна быть простой для администратора: задать несколько опорных точек с процентами, система интерполирует остальное.</li>
+</ul>
+<p>Мотивация нелинейности (исходные примеры заказчика):</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">partner_price</th>
+<th>маржа</th>
+<th style="text-align:right">результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1000</td>
+<td>+100%</td>
+<td style="text-align:right">2000 руб</td>
+</tr>
+<tr>
+<td style="text-align:right">4000</td>
+<td>+2000 руб (т.е. 50%)</td>
+<td style="text-align:right">6000 руб</td>
+</tr>
+</tbody>
+</table>
+<p>При 4000 руб 100% дало бы 4000 руб маржи, но фактически нужно ~2000 (50%) — значит наценка нелинейная и процент снижается с ростом суммы.</p>
+<h3 id="математическая-модель">Математическая модель</h3>
+<p>Задаётся таблица опорных точек <code>(price, margin_percent)</code>, где <code>price</code> — сумма заказа от партнёра, <code>margin_percent</code> — наценка в процентах от <code>price</code> для этой точки. Точки сортируются по возрастанию <code>price</code>. Между точками процент маржи изменяется линейно.</p>
+<p>Для произвольной суммы <code>S</code>:</p>
+<ul>
+<li>Находим две соседние точки <code>(S1, P1)</code> и <code>(S2, P2)</code>, такие что <code>S1 ≤ S ≤ S2</code>.</li>
+<li>Если <code>S &lt; S1</code> — берём <code>P1</code>.</li>
+<li>Если <code>S &gt; S_last</code> — берём <code>P_last</code> (фиксируем последний процент, без экстраполяции вверх).</li>
+</ul>
+<pre><code>percent(S)       = P1 + (P2 - P1) * (S - S1) / (S2 - S1)
+margin           = S * (percent(S) / 100)
+price_before_tax = S + margin
+final_price      = price_before_tax * (1 + tax_rate)   // tax_rate = 0.07
+</code></pre>
+<h3 id="пример-опорных-точек-и-расчёты">Пример опорных точек и расчёты</h3>
+<p>Опорные точки в админке:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">partner_price (руб)</th>
+<th style="text-align:right">margin_percent (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">1 000</td>
+<td style="text-align:right">100</td>
+</tr>
+<tr>
+<td style="text-align:right">3 000</td>
+<td style="text-align:right">50</td>
+</tr>
+<tr>
+<td style="text-align:right">5 000</td>
+<td style="text-align:right">40</td>
+</tr>
+<tr>
+<td style="text-align:right">10 000</td>
+<td style="text-align:right">30</td>
+</tr>
+<tr>
+<td style="text-align:right">50 000</td>
+<td style="text-align:right">20</td>
+</tr>
+<tr>
+<td style="text-align:right">100 000</td>
+<td style="text-align:right">15</td>
+</tr>
+</tbody>
+</table>
+<p>Расчёты для разных сумм:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">S (руб)</th>
+<th>Интервал</th>
+<th style="text-align:right">percent(S)</th>
+<th style="text-align:right">Маржа</th>
+<th style="text-align:right">До налога</th>
+<th style="text-align:right">Итог (×1.07)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">500</td>
+<td>0–1000 (постоянный 100%)</td>
+<td style="text-align:right">100%</td>
+<td style="text-align:right">500</td>
+<td style="text-align:right">1 000</td>
+<td style="text-align:right">1 070</td>
+</tr>
+<tr>
+<td style="text-align:right">2 000</td>
+<td>1000–3000</td>
+<td style="text-align:right">75%</td>
+<td style="text-align:right">1 500</td>
+<td style="text-align:right">3 500</td>
+<td style="text-align:right">3 745</td>
+</tr>
+<tr>
+<td style="text-align:right">4 000</td>
+<td>3000–5000</td>
+<td style="text-align:right">45%</td>
+<td style="text-align:right">1 800</td>
+<td style="text-align:right">5 800</td>
+<td style="text-align:right">6 206</td>
+</tr>
+<tr>
+<td style="text-align:right">12 000</td>
+<td>10000–50000</td>
+<td style="text-align:right">29.5%</td>
+<td style="text-align:right">3 540</td>
+<td style="text-align:right">15 540</td>
+<td style="text-align:right">≈ 16 628</td>
+</tr>
+<tr>
+<td style="text-align:right">200 000</td>
+<td>&gt; 100000 (фикс 15%)</td>
+<td style="text-align:right">15%</td>
+<td style="text-align:right">30 000</td>
+<td style="text-align:right">230 000</td>
+<td style="text-align:right">246 100</td>
+</tr>
+</tbody>
+</table>
+<h3 id="преимущества-подхода">Преимущества подхода</h3>
+<ul>
+<li><strong>Плавность</strong> — при увеличении заказа на 1 рубль итоговая цена меняется непрерывно, без «ступенек».</li>
+<li><strong>Пропорциональность</strong> — маржа считается как процент от суммы, но процент снижается с ростом объёма.</li>
+<li><strong>Простота настройки</strong> — администратору достаточно задать 5–7 точек, без интервалов и типов наценки.</li>
+<li><strong>Защита от убытков</strong> — для малых сумм можно установить высокий процент (100% и выше).</li>
+<li><strong>Стимулирование крупных заказов</strong> — большие суммы получают низкую маржу.</li>
+<li><strong>Масштабируемость</strong> — не нужно настраивать тысячи комбинаций (формат+бумага+тираж+цветность+допы), достаточно 5–10 точек.</li>
+<li><strong>Гибкость</strong> — при изменении цен партнёра достаточно скорректировать точки.</li>
+</ul>
+<h3 id="интеграция-в-существующий-модуль-маржи">Интеграция в существующий модуль маржи</h3>
+<p>Не ломая старую логику (для цифры и копирования), добавляется новый тип таблицы маржи.</p>
+<p>В таблице <code>margin_tables</code> добавить поле <code>calculation_method</code>:</p>
+<ul>
+<li><code>'discrete'</code> — старый режим (диапазоны с фикс или процентом) — для цифры и копирования.</li>
+<li><code>'linear_percent'</code> — новый режим (интерполяция процента по точкам) — для офсета.</li>
+</ul>
+<p>Для <code>linear_percent</code> поля <code>quantity_from</code> и <code>quantity_to</code> в их обычном смысле не используются. Источник описывает <strong>два варианта хранения опорных точек</strong>:</p>
+<ul>
+<li><strong>Вариант А — отдельная таблица <code>margin_curve_points</code>.</strong> Завести специализированную таблицу с полями <code>point_price</code> (сумма заказа от партнёра, руб) и <code>margin_percent</code> (процент маржи в этой точке). Семантически чище: точки кривой хранятся в собственной структуре, не перегружая поля <code>margin_rules</code> чужим смыслом.</li>
+<li><strong>Вариант Б (рекомендуется для унификации) — переиспользовать существующую <code>margin_rules</code>.</strong> Не вводить новых таблиц, а хранить точки в <code>margin_rules</code>, переинтерпретируя поля:
+<ul>
+<li><code>quantity_from</code> = цена точки <code>point_price</code> (руб);</li>
+<li><code>quantity_to</code> = NULL;</li>
+<li><code>margin_type</code> всегда <code>'percent'</code> (интерпретируется как процент именно для этой точки, а не для диапазона);</li>
+<li><code>margin_value</code> = процент маржи <code>margin_percent</code>;</li>
+<li>сортировка по <code>quantity_from</code>.</li>
+</ul>
+</li>
+</ul>
+<p>В источнике поля точки прямо названы <code>point_price</code> (сумма) и <code>margin_percent</code>; в варианте Б они отображаются на <code>quantity_from</code> и <code>margin_value</code> соответственно. Дальнейшие разделы (псевдокод, указания программисту) описаны для варианта Б как основного, но при выборе варианта А логика интерполяции остаётся той же — меняется только источник точек.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В разделе про БД для офсета описана отдельная таблица <code>offset_margin_rules</code> (с полями <code>cost_from/cost_to</code>, <code>quantity_from/quantity_to</code>, <code>margin_type</code>, <code>margin_value</code>), а в разделе про плавную наценку предлагается переиспользовать общую таблицу <code>margin_rules</code> с полем <code>calculation_method</code> в <code>margin_tables</code>. Нужно решить, используется ли единая модель маржи для всех видов печати или отдельная таблица только для офсета.</p>
+<h3 id="указания-программисту-linear_percent">Указания программисту (linear_percent)</h3>
+<ul>
+<li>Расширить модель: добавить <code>margin_tables.calculation_method</code> (enum: <code>'discrete'</code>, <code>'linear_percent'</code>).</li>
+<li>Выбрать способ хранения опорных точек (см. «Интеграция в существующий модуль маржи»): либо отдельная таблица <code>margin_curve_points</code> (поля <code>point_price</code>, <code>margin_percent</code>), либо переиспользование <code>margin_rules</code> (<code>quantity_from</code> = <code>point_price</code>, <code>margin_value</code> = <code>margin_percent</code>, <code>margin_type = 'percent'</code>). Для унификации с существующим модулем по умолчанию используется <code>margin_rules</code>.</li>
+<li>В классе <code>MarginCalculator</code> создать метод <code>_calculateLinearPercentMargin(partner_price)</code>, который: загружает точки для таблицы с <code>calculation_method = 'linear_percent'</code> (из выбранного хранилища — <code>margin_curve_points</code> или <code>margin_rules</code>), сортирует по сумме точки (<code>point_price</code> / <code>quantity_from</code>), находит отрезок, содержащий <code>partner_price</code>, вычисляет интерполированный процент, возвращает маржу в рублях.</li>
+<li>Для <code>'discrete'</code> оставить старую логику поиска по диапазонам.</li>
+<li>В контроллере офсетного расчёта:
+<ol>
+<li>Получить <code>partner_price</code> от API.</li>
+<li>Вызвать <code>calculateMargin</code> с <code>total_price = partner_price</code> и <code>entity_type = 'offset'</code>.</li>
+<li>Получить <code>margin_amount</code>.</li>
+<li><code>price_before_tax = partner_price + margin_amount</code></li>
+<li><code>final_price = price_before_tax * (1 + tax_rate)</code></li>
+</ol>
+</li>
+<li>Админка: при создании/редактировании таблицы маржи добавить выбор <code>calculation_method</code>. Для <code>linear_percent</code> — интерфейс ввода точек (цена, процент) с добавлением/удалением/сортировкой; для <code>discrete</code> — старый интерфейс с диапазонами.</li>
+</ul>
+<h2 id="интерфейс-настройки-маржи-с-отображением-чистой-прибыли">Интерфейс настройки маржи с отображением чистой прибыли</h2>
+<p>При настройке опорных точек администратор сразу видит <strong>чистую прибыль</strong> (в рублях) — это маржа, добавляемая к себестоимости партнёра до налога. Налог 7% на этом этапе не участвует.</p>
+<p><strong>Чистая прибыль</strong> = маржа в рублях = <code>partner_price × (margin_percent / 100)</code>.</p>
+<p>Промежуточные суммы (между точками) постоянно не показываются — но есть возможность проверить любую сумму по запросу.</p>
+<h3 id="таблица-опорных-точек-вид-для-администратора">Таблица опорных точек (вид для администратора)</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Сумма заказа у партнёра (₽)</th>
+<th style="text-align:right">Маржа (%)</th>
+<th style="text-align:right">Чистая прибыль (₽)</th>
+<th style="text-align:right">Итого до налога (₽)</th>
+<th style="text-align:right">Итого с налогом 7% (₽)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">0</td>
+</tr>
+<tr>
+<td style="text-align:right">1 000</td>
+<td style="text-align:right">100</td>
+<td style="text-align:right">1 000</td>
+<td style="text-align:right">2 000</td>
+<td style="text-align:right">2 140</td>
+</tr>
+<tr>
+<td style="text-align:right">3 000</td>
+<td style="text-align:right">50</td>
+<td style="text-align:right">1 500</td>
+<td style="text-align:right">4 500</td>
+<td style="text-align:right">4 815</td>
+</tr>
+<tr>
+<td style="text-align:right">5 000</td>
+<td style="text-align:right">40</td>
+<td style="text-align:right">2 000</td>
+<td style="text-align:right">7 000</td>
+<td style="text-align:right">7 490</td>
+</tr>
+<tr>
+<td style="text-align:right">10 000</td>
+<td style="text-align:right">30</td>
+<td style="text-align:right">3 000</td>
+<td style="text-align:right">13 000</td>
+<td style="text-align:right">13 910</td>
+</tr>
+<tr>
+<td style="text-align:right">50 000</td>
+<td style="text-align:right">20</td>
+<td style="text-align:right">10 000</td>
+<td style="text-align:right">60 000</td>
+<td style="text-align:right">64 200</td>
+</tr>
+<tr>
+<td style="text-align:right">100 000</td>
+<td style="text-align:right">15</td>
+<td style="text-align:right">15 000</td>
+<td style="text-align:right">115 000</td>
+<td style="text-align:right">123 050</td>
+</tr>
+</tbody>
+</table>
+<p>Вычисление колонок:</p>
+<pre><code>Чистая прибыль (₽)     = Сумма партнёра × (Маржа% / 100)
+Итого до налога        = Сумма партнёра + Чистая прибыль
+Итого с налогом 7%     = Итого до налога × 1.07
+</code></pre>
+<p>Первая строка с суммой 0 нужна, чтобы интерполяция работала от 0; фактически минимальный заказ будет больше. Можно задать и 0, и первую реальную точку 1000.</p>
+<h3 id="калькулятор-по-запросу-промежуточные-суммы">Калькулятор по запросу (промежуточные суммы)</h3>
+<p>Под таблицей — блок проверки произвольной суммы. Пример для суммы 2 500 ₽:</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Проверить промежуточную сумму                          │
+│                                                         │
+│  Сумма заказа у партнёра (₽): [ 2 500 ]                 │
+│                                                         │
+│  Результат (интерполировано):                           │
+│  ● Маржа (чистая прибыль):  1 625 ₽  (65%)              │
+│  ● Итого до налога:          4 125 ₽                    │
+│  ● Итого с налогом 7%:       4 414 ₽                    │
+└─────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="техническая-реализация-интерфейса">Техническая реализация интерфейса</h3>
+<p><strong>Фронтенд (админка):</strong></p>
+<ul>
+<li>Редактируемая таблица точек: каждая точка — <code>price</code> (сумма партнёра) и <code>margin_percent</code>. Добавление/удаление/сортировка перетаскиванием.</li>
+<li>При изменении данных фронтенд пересчитывает производные колонки (чистая прибыль, итого до налога, итого с налогом) без обращения к серверу.</li>
+<li>Блок «Калькулятор по запросу» использует те же точки, интерполирует линейно.</li>
+</ul>
+<p><strong>Бэкенд (API сохранения):</strong> принимает массив точек, валидирует (цены уникальные и возрастающие), сохраняет в <code>margin_rules</code> для таблицы типа <code>linear_percent</code> (<code>quantity_from</code> = цена точки, <code>margin_value</code> = процент, <code>margin_type = 'percent'</code>). При сохранении — очистить старые правила для данной <code>margin_table_id</code> и создать новые.</p>
+<p><strong>Серверный расчёт (для реального заказа):</strong> получив <code>partner_price</code>, выполнить ту же интерполяцию по точкам, вычислить <code>margin_amount</code>, прибавить налог, отдать итог. Логика интерполяции одинакова на фронте (предпросмотр) и на бэке.</p>
+<p>Колонки таблицы для программиста:</p>
+<ul>
+<li>Сумма партнёра (₽) — ввод числа (обязательно, уникальное, возрастающее)</li>
+<li>Маржа (%) — ввод числа (0–1000)</li>
+<li>Чистая прибыль (₽) — вычисляемое (сумма × %/100)</li>
+<li>Итого до налога — вычисляемое</li>
+<li>Итого с налогом 7% — вычисляемое (ставку налога взять из настроек)</li>
+</ul>
+<p><strong>Дополнительные улучшения:</strong> график зависимости чистой прибыли (или % маржи) от суммы заказа; экспорт/импорт точек (CSV/JSON); предупреждение о слишком больших интервалах между точками с подсказкой добавить промежуточную точку.</p>
+<h2 id="расчёт-офсета-для-нестандартных-размеров-интерполяция-по-площади">Расчёт офсета для нестандартных размеров (интерполяция по площади)</h2>
+<h3 id="задача">Задача</h3>
+<p>Партнёр (ГМ Принт) предоставляет цены только на стандартные форматы. Клиент в калькуляторе может ввести произвольный размер (ширина × высота в мм). Для нестандартных размеров цены от партнёра нет, поэтому стоимость рассчитывается на основе цен ближайших стандартных форматов.</p>
+<h3 id="требования-и-выбор-подхода">Требования и выбор подхода</h3>
+<ul>
+<li>Если введённый размер точно соответствует стандартному формату — использовать цену этого формата.</li>
+<li>Если размер нестандартный — два альтернативных подхода:
+<ol>
+<li><strong>Правило «вмещающий формат»</strong>: найти минимальный стандартный формат, полностью вмещающий заданный размер (ширина и высота не превышают размеры стандартного). Прозрачно для клиента (он платит как за больший формат). Возможен поворот макета — рекомендуется проверять оба варианта (ширина к ширине / высота к высоте и наоборот) и выбрать тот, который влезает; если ни один не влезает — взять следующий формат.</li>
+<li><strong>Линейная интерполяция по площади</strong> (более гибкий): найти два ближайших стандартных формата (один меньше, другой больше по площади) и интерполировать цену.</li>
+</ol>
+</li>
+<li>Если размер превышает максимальный стандартный формат — заблокировать расчёт и предложить связаться с менеджером («Рассчитать у менеджера»).</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Не зафиксирован единый метод для нестандартных размеров. Один источник рекомендует правило «вмещающий формат без поворота, иначе с поворотом, иначе ошибка» как более понятное клиенту; другой использует линейную интерполяцию по площади как основной метод. Также отмечено, что в офсете цена меняется скачком при переходе на другой формат (из-за раскладки на листе), что делает линейную интерполяцию потенциально неточной. Нужно выбрать один метод. Дополнительно: фактический метод расчёта на сайте ГМ Принт неизвестен (возможно, по большей стороне или сумме сторон, а не по площади) — требуется сверка.</p>
+<h3 id="перечень-стандартных-форматов-типичный-набор">Перечень стандартных форматов (типичный набор)</h3>
+<p>Точный список со всеми форматами должен быть выведен из БД после парсинга цен партнёра.</p>
+<table>
+<thead>
+<tr>
+<th>Название</th>
+<th style="text-align:right">Ширина, мм</th>
+<th style="text-align:right">Высота, мм</th>
+<th style="text-align:right">Площадь, мм²</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A7</td>
+<td style="text-align:right">74</td>
+<td style="text-align:right">105</td>
+<td style="text-align:right">7 770</td>
+<td></td>
+</tr>
+<tr>
+<td>A6</td>
+<td style="text-align:right">105</td>
+<td style="text-align:right">148</td>
+<td style="text-align:right">15 540</td>
+<td></td>
+</tr>
+<tr>
+<td>A5</td>
+<td style="text-align:right">148</td>
+<td style="text-align:right">210</td>
+<td style="text-align:right">31 080</td>
+<td></td>
+</tr>
+<tr>
+<td>A4</td>
+<td style="text-align:right">210</td>
+<td style="text-align:right">297</td>
+<td style="text-align:right">—</td>
+<td></td>
+</tr>
+<tr>
+<td>A3</td>
+<td style="text-align:right">297</td>
+<td style="text-align:right">420</td>
+<td style="text-align:right">—</td>
+<td></td>
+</tr>
+<tr>
+<td>SRA3</td>
+<td style="text-align:right">320</td>
+<td style="text-align:right">450</td>
+<td style="text-align:right">—</td>
+<td></td>
+</tr>
+<tr>
+<td>A3+</td>
+<td style="text-align:right">329</td>
+<td style="text-align:right">483</td>
+<td style="text-align:right">—</td>
+<td>если парсится</td>
+</tr>
+<tr>
+<td>300×300</td>
+<td style="text-align:right">300</td>
+<td style="text-align:right">300</td>
+<td style="text-align:right">—</td>
+<td>если есть квадрат</td>
+</tr>
+</tbody>
+</table>
+<h3 id="алгоритм-интерполяции-по-площади">Алгоритм интерполяции по площади</h3>
+<ol>
+<li>Получить список стандартных форматов с площадями и ценами (для каждого тиража, цвета, бумаги).</li>
+<li>Отсортировать форматы по возрастанию площади.</li>
+<li>Найти два опорных формата:
+<ul>
+<li><code>lower</code> — формат с наибольшей площадью ≤ площади клиентского размера.</li>
+<li><code>upper</code> — формат с наименьшей площадью ≥ площади клиентского размера.</li>
+</ul>
+</li>
+<li>Рассчитать цену:
+<ul>
+<li>Если найдены <code>lower</code> и <code>upper</code>:<pre><code>price = price_lower + (price_upper - price_lower) * (area_client - area_lower) / (area_upper - area_lower)
+</code></pre>
+</li>
+<li>Если только <code>upper</code> (клиентский размер меньше минимального) — экстраполяция вниз:<pre><code>price = price_upper * (area_client / area_upper)
+</code></pre>
+</li>
+<li>Если только <code>lower</code> (клиентский размер больше максимального) — вернуть ошибку (предпочтительно) либо экстраполировать вверх <code>price = price_lower * (area_client / area_lower)</code>.</li>
+</ul>
+</li>
+<li>Округлить цену до целых рублей.</li>
+</ol>
+<p><code>area_client = clientWidth * clientHeight</code></p>
+<h3 id="псевдокод">Псевдокод</h3>
+<pre><code class="language-javascript">function interpolatePrice(clientWidth, clientHeight, standardFormats) {
+    const clientArea = clientWidth * clientHeight;
+    // standardFormats: [{ width, height, price, area }]
+    const sorted = [...standardFormats].sort((a, b) =&gt; a.area - b.area);
+
+    let lower = null, upper = null;
+    for (let f of sorted) {
+        if (f.area &lt;= clientArea) lower = f;
+        if (f.area &gt;= clientArea &amp;&amp; !upper) upper = f;
+    }
+
+    if (lower &amp;&amp; upper) {
+        if (Math.abs(lower.area - upper.area) &lt; 1e-6) return lower.price; // одинаковые площади
+        const ratio = (clientArea - lower.area) / (upper.area - lower.area);
+        return lower.price + (upper.price - lower.price) * ratio;
+    } else if (upper &amp;&amp; !lower) {
+        // меньше минимального формата — экстраполяция вниз
+        return upper.price * (clientArea / upper.area);
+    } else if (lower &amp;&amp; !upper) {
+        // больше максимального — ошибка или экстраполяция
+        throw new Error('Размер превышает максимальный стандартный формат');
+    } else {
+        throw new Error('Нет стандартных форматов');
+    }
+}
+</code></pre>
+<h3 id="полная-формула-с-учётом-тиража-цветности-бумаги">Полная формула с учётом тиража, цветности, бумаги</h3>
+<p>Цены для каждого тиража, цветности и бумаги хранятся в матрице. Интерполяцию нужно проводить для каждой комбинации параметров отдельно.</p>
+<ul>
+<li><strong>Цветность и бумага:</strong> выбрать нужную подтаблицу цен.</li>
+<li><strong>Тираж:</strong> если цена партнёра задана для дискретных тиражей (например, 500, 1000, 2000) — сначала интерполировать по тиражу (для каждого формата), затем по полученным ценам выполнить интерполяцию по площади.</li>
+<li><strong>Раскладка на лист:</strong> в реальном офсете цена сильно зависит от того, сколько изделий помещается на печатный лист. Площадь — хороший прокси (она уже отражает изменение количества изделий на листе при переходе A7 → A6), но не идеальный; при необходимости можно ввести коэффициент использования листа.</li>
+</ul>
+<p>Хранение цен: <code>(format_id, quantity, color, paper) -&gt; price</code>.</p>
+<p>Порядок при запросе клиента:</p>
+<ol>
+<li>Определить цветность и бумагу — выбрать подтаблицу.</li>
+<li>Для каждого формата получить цену, интерполированную по тиражу (если тираж не табличный).</li>
+<li>Вычислить площади всех форматов.</li>
+<li>Применить формулу интерполяции по площади.</li>
+<li>Округлить до целых рублей (или копеек).</li>
+<li>Выдать клиенту цену и сообщение: «Цена рассчитана на основе форматов A7 и A6».</li>
+</ol>
+<p>Рекомендуется кэшировать результаты интерполяции для одинаковых размеров.</p>
+<h3 id="что-показать-клиенту">Что показать клиенту</h3>
+<ul>
+<li>При интерполяции — сообщение: «Цена рассчитана на основе форматов A6 и A5» (с указанием фактических опорных форматов).</li>
+<li>Если размер слишком большой — вместо цены кнопка «Рассчитать у менеджера».</li>
+</ul>
+<h3 id="примеры-расчётов-интерполяции">Примеры расчётов интерполяции</h3>
+<p><strong>Пример 1. Размер 100×100 мм (площадь 10 000 мм²), интерполяция между A7 и A6.</strong></p>
+<p>Исходные данные (тираж недискретно указан; ранние цены):</p>
+<ul>
+<li>A7 (74×105) → 7 770 мм² → 711 ₽</li>
+<li>A6 (105×148) → 15 540 мм² → 1 460 ₽</li>
+<li>A5 (148×210) → 31 080 мм² → 2 863 ₽ (для справки)</li>
+</ul>
+<pre><code>ΔP = 1 460 − 711 = 749 ₽
+ΔS = 15 540 − 7 770 = 7 770 мм²
+k  = (10 000 − 7 770) / 7 770 = 2 230 / 7 770 ≈ 0,2870
+Цена = 711 + 749 × 0,2870 ≈ 711 + 214,9 = 925,9 ₽ → 926 ₽
+</code></pre>
+<p>Замечание: ранний ошибочный расчёт использовал пару A6/A5 и дал 960 ₽; правильнее использовать ближайший меньший формат A7 (площадь клиента 10 000 мм² лежит между A7 и A6), результат 926 ₽.</p>
+<p><strong>Пример 2. Размер 100×100 мм, тираж 10 000 шт.</strong></p>
+<p>Исходные данные (с сайта ГМ Принт):</p>
+<ul>
+<li>A7 (74×105) → 7 770 мм² → 4 128 ₽</li>
+<li>A6 (105×148) → 15 540 мм² → 7 642 ₽</li>
+</ul>
+<pre><code>ΔP = 7 642 − 4 128 = 3 514 ₽
+ΔS = 15 540 − 7 770 = 7 770 мм²
+k  = (10 000 − 7 770) / 7 770 = 2 230 / 7 770 ≈ 0,2870
+Цена = 4 128 + 3 514 × 0,2870 = 4 128 + 1 008,5 ≈ 5 136,5 ₽ → 5 137 ₽
+</code></pre>
+<p><strong>Пример 3. Размер 200×70 мм (площадь 14 000 мм²), тираж 10 000 шт.</strong></p>
+<p>Исходные данные (с сайта ГМ Принт, тираж 10 000):</p>
+<ul>
+<li>A7 (74×105) → 7 770 мм² → 4 128 ₽</li>
+<li>A6 (105×148) → 15 540 мм² → 7 642 ₽</li>
+<li>A5 (148×210) → 31 080 мм² → 13 489 ₽ (для справки)</li>
+</ul>
+<p>Площадь клиента 14 000 мм² лежит между A7 (7 770) и A6 (15 540), поэтому опорные форматы — A7 (нижний) и A6 (верхний).</p>
+<pre><code>S_lower = 7 770, price_lower = 4 128
+S_upper = 15 540, price_upper = 7 642
+S_c     = 14 000
+ΔS = 15 540 − 7 770 = 7 770
+ΔP = 7 642 − 4 128 = 3 514
+k  = (14 000 − 7 770) / 7 770 = 6 230 / 7 770 ≈ 0,8018
+Цена = 4 128 + 3 514 × 0,8018 = 4 128 + 2 817,5 ≈ 6 945,5 ₽ → 6 946 ₽
+</code></pre>
+<h2 id="интерфейсы">Интерфейсы</h2>
+<h3 id="админка-таблица-цен-партнёра">Админка — таблица цен партнёра</h3>
+<p>Фильтры: Продукт / Формат / Бумага / Цветность. Таблица «Тираж — Цена партнёра (себестоимость) — Действия (редактировать/удалить)». Кнопки: «Импорт из Excel», «Экспорт в Excel», «Добавить цену».</p>
+<h3 id="админка-таблица-правил-маржи">Админка — таблица правил маржи</h3>
+<p>Раздел «Правила по себестоимости» (приоритет выше): карточки правил с условиями (0–1000 руб → +1500 руб фикс; 1001–1500 руб → +1300 руб фикс; 1501–2500 руб → 60%; 2501–5000 руб → 50%; 5001+ руб → 40%) и кнопкой «Редактировать». Кнопки: «Сохранить правила», «Тестировать».</p>
+<h3 id="интерфейс-клиента">Интерфейс клиента</h3>
+<p>Блок параметров заказа: Продукт, Формат, Бумага, Цветность, Тираж, Дополнительные услуги (чекбоксы: Ламинация, Биговка, Фальцовка, Сверление), кнопка «Рассчитать».</p>
+<p>Блок стоимости: итоговая стоимость, цена за 1 шт, срок готовности (с датой).</p>
+<p>Блок доставки (радиокнопки):</p>
+<ul>
+<li>Бесплатная (10:00–18:00) — 0 руб</li>
+<li>Срочная (до 13:00) — 300 руб</li>
+<li>Утренняя (09:00–12:00) — 350 руб</li>
+<li>Вечерняя (16:00–19:00) — 250 руб</li>
+</ul>
+<p>Кнопка «Перейти к оформлению».</p>
+<h2 id="чек-лист-для-разработки">Чек-лист для разработки</h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th style="text-align:center">Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Справочники (продукты, форматы, бумага, цветность, услуги)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Таблица цен партнёра (только себестоимость)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Импорт/экспорт Excel для цен</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Интерполяция цен для промежуточных тиражей</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Таблица правил маржи (отдельно от цен)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Правила по себестоимости (фикс и процент)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Правила по тиражу (фикс и процент)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Приоритет правил (сначала по сумме, потом по тиражу)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Расчёт доп. услуг</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Расчёт налога (7%)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Расчёт чистой прибыли</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Правила доставки (регионы, вес, тираж)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Временные интервалы доставки (бесплатно/платно)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Расчёт сроков готовности</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Сборные заказы (с цифровой и широкоформатной печатью)</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Интерфейс клиента</td>
+<td style="text-align:center">✅</td>
+</tr>
+<tr>
+<td>Интерфейс админки (2 отдельные таблицы)</td>
+<td style="text-align:center">✅</td>
+</tr>
+</tbody>
+</table>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#общая-концепция">Общая концепция</a></li><li class="lvl2"><a href="#структура-базы-данных">Структура базы данных</a></li><li class="lvl3"><a href="#справочники">Справочники</a></li><li class="lvl3"><a href="#цены-партнёра-только-себестоимость">Цены партнёра (только себестоимость)</a></li><li class="lvl3"><a href="#цены-на-дополнительные-услуги">Цены на дополнительные услуги</a></li><li class="lvl3"><a href="#правила-маржи-наша-наценка">Правила маржи (наша наценка)</a></li><li class="lvl3"><a href="#доставка">Доставка</a></li><li class="lvl2"><a href="#примеры-данных">Примеры данных</a></li><li class="lvl3"><a href="#цены-партнёра-себестоимость-листовки-a4-130-гм²-44">Цены партнёра (себестоимость) — Листовки A4, 130 г/м², 4+4</a></li><li class="lvl3"><a href="#правила-маржи">Правила маржи</a></li><li class="lvl3"><a href="#доставка-1">Доставка</a></li><li class="lvl2"><a href="#формулы-расчёта">Формулы расчёта</a></li><li class="lvl3"><a href="#основная-формула">Основная формула</a></li><li class="lvl3"><a href="#наценка-маржа">Наценка (маржа)</a></li><li class="lvl3"><a href="#налог">Налог</a></li><li class="lvl3"><a href="#доставка-2">Доставка</a></li><li class="lvl3"><a href="#сроки-готовности">Сроки готовности</a></li><li class="lvl2"><a href="#пример-расчёта-заказ-со-стандартным-форматом">Пример расчёта (заказ со стандартным форматом)</a></li><li class="lvl2"><a href="#плавная-пропорциональная-наценка-linear_percent">Плавная пропорциональная наценка (linear_percent)</a></li><li class="lvl3"><a href="#бизнес-требования">Бизнес-требования</a></li><li class="lvl3"><a href="#математическая-модель">Математическая модель</a></li><li class="lvl3"><a href="#пример-опорных-точек-и-расчёты">Пример опорных точек и расчёты</a></li><li class="lvl3"><a href="#преимущества-подхода">Преимущества подхода</a></li><li class="lvl3"><a href="#интеграция-в-существующий-модуль-маржи">Интеграция в существующий модуль маржи</a></li><li class="lvl3"><a href="#указания-программисту-linear_percent">Указания программисту (linear_percent)</a></li><li class="lvl2"><a href="#интерфейс-настройки-маржи-с-отображением-чистой-прибыли">Интерфейс настройки маржи с отображением чистой прибыли</a></li><li class="lvl3"><a href="#таблица-опорных-точек-вид-для-администратора">Таблица опорных точек (вид для администратора)</a></li><li class="lvl3"><a href="#калькулятор-по-запросу-промежуточные-суммы">Калькулятор по запросу (промежуточные суммы)</a></li><li class="lvl3"><a href="#техническая-реализация-интерфейса">Техническая реализация интерфейса</a></li><li class="lvl2"><a href="#расчёт-офсета-для-нестандартных-размеров-интерполяция-по-площади">Расчёт офсета для нестандартных размеров (интерполяция по площади)</a></li><li class="lvl3"><a href="#задача">Задача</a></li><li class="lvl3"><a href="#требования-и-выбор-подхода">Требования и выбор подхода</a></li><li class="lvl3"><a href="#перечень-стандартных-форматов-типичный-набор">Перечень стандартных форматов (типичный набор)</a></li><li class="lvl3"><a href="#алгоритм-интерполяции-по-площади">Алгоритм интерполяции по площади</a></li><li class="lvl3"><a href="#псевдокод">Псевдокод</a></li><li class="lvl3"><a href="#полная-формула-с-учётом-тиража-цветности-бумаги">Полная формула с учётом тиража, цветности, бумаги</a></li><li class="lvl3"><a href="#что-показать-клиенту">Что показать клиенту</a></li><li class="lvl3"><a href="#примеры-расчётов-интерполяции">Примеры расчётов интерполяции</a></li><li class="lvl2"><a href="#интерфейсы">Интерфейсы</a></li><li class="lvl3"><a href="#админка-таблица-цен-партнёра">Админка — таблица цен партнёра</a></li><li class="lvl3"><a href="#админка-таблица-правил-маржи">Админка — таблица правил маржи</a></li><li class="lvl3"><a href="#интерфейс-клиента">Интерфейс клиента</a></li><li class="lvl2"><a href="#чек-лист-для-разработки">Чек-лист для разработки</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

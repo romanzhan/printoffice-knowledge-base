@@ -1,0 +1,1552 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Конструкторы (без программиста) — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="09-admin-interface--constructors">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li class="active"><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="конструкторы-без-программиста">Конструкторы (без программиста)</h1>
+<p>Раздел описывает набор админ-конструкторов, позволяющих менеджеру/технологу настраивать систему типографии PrintOffice без участия программиста: конструктор оборудования, редактор формул, конструктор типов услуг и полей калькуляторов, конструктор страниц/витрины (сборка из сущностей), а также настраиваемые правила вылетов и маржи. Базовый принцип — «всё есть сущность с ID», которую можно создавать, клонировать, включать/отключать и переиспользовать.</p>
+<hr>
+<h2 id="1-философия-всё-сущность">1. Философия: всё — сущность</h2>
+<p>Ключевой архитектурный принцип: любой объект системы является сущностью с уникальным ID, которую можно:</p>
+<ul>
+<li>создавать (create);</li>
+<li>копировать/клонировать (clone);</li>
+<li>включать/отключать (<code>is_active</code>);</li>
+<li>привязывать к другой сущности;</li>
+<li>собирать в конструктор.</li>
+</ul>
+<p>Сущностями являются: принтеры, материалы, форматы, услуги, правила, калькуляторы, страницы, партнёры, города и т.д. (диапазоны ID разнесены по типам: принтеры 1–3, материалы 101+, форматы 201+, услуги 301+, правила 401+, калькуляторы 501+, страницы 601+, партнёры 701+, города 801+).</p>
+<h3 id="базовая-структура-сущностей">Базовая структура сущностей</h3>
+<p>Возможен единый абстрактный реестр (опционально), но на практике для каждой сущности заводится своя таблица с однотипной структурой (<code>id</code>, <code>name</code>, <code>slug</code>, <code>is_active</code>, <code>sort_order</code>, специфические поля/<code>config JSON</code>).</p>
+<pre><code class="language-sql">-- Абстрактная таблица для всех сущностей (опционально)
+CREATE TABLE entities (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    entity_type VARCHAR(50) NOT NULL,  -- 'printer', 'material', 'format', 'service', 'rule'...
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    parent_id INT,                     -- для иерархии (бумага → вид бумаги)
+    config JSON,                       -- все специфические параметры
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_type_active (entity_type, is_active),
+    INDEX idx_parent (parent_id)
+);
+
+-- На практике — отдельные таблицы с однотипной структурой
+CREATE TABLE printers  (id INT, name, slug, is_active, sort_order, technical_params JSON);
+CREATE TABLE materials (id INT, name, slug, is_active, sort_order, properties JSON);
+CREATE TABLE formats   (id INT, name, slug, is_active, sort_order, width, height);
+CREATE TABLE services  (id INT, name, slug, is_active, sort_order, price_formula, calculation_type);
+CREATE TABLE rules     (id INT, name, slug, is_active, sort_order, conditions, actions);
+CREATE TABLE partners  (id INT, name, slug, is_active, sort_order, settings JSON);
+CREATE TABLE cities    (id INT, name, slug, is_active, sort_order, delivery_settings JSON);
+</code></pre>
+<p>Обзорный состав конструкторской части системы: конструктор оборудования и ТЗ для производства; универсальная система витрины и кросс-продаж; детальная настройка отображения вариантов товара и привязка к страницам; понятное объяснение, как вывести услугу на страницу (например, услугу «Визитки»); настройка дополнительных услуг для цифровой печати.</p>
+<hr>
+<h2 id="2-конструктор-оборудования-и-справочники">2. Конструктор оборудования и справочники</h2>
+<p>Конструктор оборудования опирается на двухуровневую модель «Справочники + Конструкторы»: сырые данные хранятся в справочниках, а конструкторы услуг только ссылаются на них (минимум дублирования).</p>
+<h3 id="уровень-1-базовые-справочники-сырые-данные">Уровень 1. Базовые справочники (сырые данные)</h3>
+<pre><code class="language-sql">-- 1.1. Принтеры (оборудование)
+CREATE TABLE printers (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    slug VARCHAR(100),
+    type VARCHAR(50),              -- 'color' или 'bw'
+    max_format_width INT,
+    max_format_height INT,
+    speed_ppm INT,                 -- скорость, листов в минуту
+    cost_per_hour DECIMAL(10,2),   -- стоимость часа работы
+    is_active BOOLEAN
+);
+
+-- 1.2. Материалы (бумага, плёнка и т.д.)
+CREATE TABLE materials (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(50),          -- 'paper', 'film', 'binding'...
+    unit VARCHAR(20),              -- 'лист', 'пачка', 'кв_м', 'рулон'
+    cost_per_unit DECIMAL(10,2),   -- закупочная цена
+    stock_balance INT              -- остаток на складе
+);
+
+-- 1.3. Форматы (стандартные и нестандартные)
+CREATE TABLE formats (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),              -- 'A4', 'A5', 'SRA3', 'custom'
+    width INT,
+    height INT,
+    is_standard BOOLEAN DEFAULT true,
+    description VARCHAR(255)
+);
+
+-- 1.4. Цветность (типы печати)
+CREATE TABLE color_types (
+    id INT PRIMARY KEY,
+    code VARCHAR(10),              -- '1+0', '1+1', '4+0', '4+4'
+    description VARCHAR(255)
+);
+
+-- 1.5. Технологические операции
+CREATE TABLE tech_operations (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),             -- 'резка', 'биговка', 'фальцовка', 'ламинация'
+    unit VARCHAR(20),              -- 'операция', 'минута', 'лист'
+    cost_per_unit DECIMAL(10,2),   -- базовая стоимость
+    time_per_unit INT              -- время в минутах на единицу
+);
+</code></pre>
+<h3 id="уровень-2-привязка-к-принтерам-цены-и-возможности">Уровень 2. Привязка к принтерам (цены и возможности)</h3>
+<pre><code class="language-sql">-- 2.1. Цены печати (принтер + материал + формат + цветность)
+CREATE TABLE print_prices (
+    id INT PRIMARY KEY,
+    printer_id INT,
+    material_id INT,
+    format_id INT,
+    color_type_id INT,
+    cost_per_print DECIMAL(10,2),  -- себестоимость одного отпечатка
+    is_active BOOLEAN DEFAULT true,
+    valid_from DATE,
+    valid_to DATE
+);
+
+-- 2.2. Доступные форматы для принтера (с ограничениями)
+CREATE TABLE printer_formats (
+    printer_id INT,
+    format_id INT,
+    max_sheets_per_run INT,        -- макс. листов в прогоне
+    default_bleed INT DEFAULT 3    -- вылеты по умолчанию для формата
+);
+
+-- 2.3. Стоимость технологических операций для принтера
+CREATE TABLE printer_operations (
+    printer_id INT,
+    operation_id INT,
+    cost_multiplier DECIMAL(3,2) DEFAULT 1.0,  -- коэффициент к базовой стоимости
+    time_multiplier DECIMAL(3,2) DEFAULT 1.0   -- коэффициент к времени
+);
+</code></pre>
+<p>Принцип разделения логики: производственная часть (себестоимость, время операций) хранится отдельно от коммерческой (наценка).</p>
+<hr>
+<h2 id="3-конструктор-услуг-сборка-калькуляторов-под-страницу">3. Конструктор услуг (сборка калькуляторов под страницу)</h2>
+<p>Конструктор услуг — сборка готового калькулятора для конкретной страницы сайта из справочных сущностей.</p>
+<pre><code class="language-sql">-- 3.1. Конструкторы услуг (что видит пользователь на сайте)
+CREATE TABLE service_constructors (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),             -- 'Листовки А6', 'Цветная печать А4'
+    slug VARCHAR(100),             -- 'listovki-a6' (для URL)
+    description TEXT,
+    page_title VARCHAR(255),       -- SEO
+    page_description TEXT,
+    is_published BOOLEAN DEFAULT false
+);
+
+-- 3.2. Настройки конструктора (самая гибкая часть)
+CREATE TABLE constructor_settings (
+    constructor_id INT,
+    printer_id INT,                -- какой принтер использовать
+    allowed_materials JSON,        -- массив ID материалов
+    allowed_formats JSON,          -- массив ID форматов
+    allow_custom_format BOOLEAN DEFAULT false,  -- разрешить свой размер
+    allowed_color_types JSON,
+    bleed_rules JSON,              -- правила вылетов, напр.: {&quot;default&quot;: 3, &quot;for_standard&quot;: 0, &quot;for_custom&quot;: 3}
+    default_operations JSON,       -- операции, включённые по умолчанию
+    default_markup_percent DECIMAL(5,2)  -- наценка по умолчанию
+);
+</code></pre>
+<h3 id="примеры-настройки-конструкторов">Примеры настройки конструкторов</h3>
+<p><strong>Конструктор «Листовки А6»:</strong></p>
+<pre><code>Название: Листовки А6
+URL: listovki-a6
+Принтер: Konica Minolta 6085
+Материалы: [130 г, 250 г, 300 г]   (показываем только эти)
+Форматы: [A6]                       (только А6, без своего размера)
+Цветность: [4+0, 4+4]
+Вылеты: по правилу &quot;format_is_standard AND format_matches_paper&quot; → 0 мм
+Операции: резка (включена)
+</code></pre>
+<p><strong>Конструктор «Цветная печать (любые форматы)»:</strong></p>
+<pre><code>Название: Цветная печать на заказ
+URL: color-printing
+Принтер: Konica Minolta 6085
+Материалы: [80 г, 130 г, 250 г]    (все бумаги)
+Форматы: [A4, A3, SRA3] + разрешить свой размер
+Цветность: [1+0, 1+1, 4+0, 4+4]
+Вылеты:
+  - для стандартных с совпадением: 0 мм
+  - для стандартных с резкой: 3 мм
+  - для нестандартных: 2 мм
+Операции: резка (опционально, менеджер решает)
+</code></pre>
+<h3 id="визуальный-редактор-конструктора-админка">Визуальный редактор конструктора (админка)</h3>
+<p>Структура экрана редактора конструктора услуги:</p>
+<ol>
+<li><strong>Базовые настройки</strong> — выбор принтера, доступных материалов (чекбоксы), доступных форматов (+ флаг «разрешить свой размер»), доступной цветности.</li>
+<li><strong>Правила вылетов</strong> — значение по умолчанию + особые случаи-условия (см. раздел 7).</li>
+<li><strong>Технологические операции</strong> — таблица операций с флагом «по умолчанию», ценой и временем:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Операция</th>
+<th>По умолч.</th>
+<th>Цена</th>
+<th>Время</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Резка</td>
+<td>да</td>
+<td>50 руб</td>
+<td>5 мин/заказ</td>
+</tr>
+<tr>
+<td>Биговка</td>
+<td>нет</td>
+<td>30 руб</td>
+<td>3 мин/лист</td>
+</tr>
+<tr>
+<td>Фальцовка</td>
+<td>нет</td>
+<td>40 руб</td>
+<td>4 мин/лист</td>
+</tr>
+<tr>
+<td>Ламинация</td>
+<td>нет</td>
+<td>20 руб</td>
+<td>2 мин/лист</td>
+</tr>
+</tbody>
+</table>
+<ol start="4">
+<li><strong>Правила наценки</strong> по тиражу (см. раздел 8).</li>
+</ol>
+<p>Действия: «Предпросмотр калькулятора на сайте», «Сохранить конструктор». Конструкторы можно клонировать, чтобы не создавать похожие с нуля.</p>
+<h3 id="витрина-для-клиента-пример-отображения">Витрина для клиента (пример отображения)</h3>
+<p>Для конструктора «Цветная печать на заказ» клиент видит: переключатель формата (стандартный из списка / свой размер Ш×В мм), выбор бумаги, цветности, тираж, чекбоксы дополнительной обработки (резка/биговка/фальцовка), кнопку расчёта и блок результата с детализацией:</p>
+<pre><code>Стоимость: 1 250 руб
+Цена за единицу: 12.50 руб
+Детали расчёта:
+  • Печать: 8.50 руб/шт
+  • Бумага: 2.50 руб/шт
+  • Резка: 1.50 руб/шт
+</code></pre>
+<hr>
+<h2 id="4-конструктор-витрины-и-страниц-сборка-из-сущностей">4. Конструктор витрины и страниц (сборка из сущностей)</h2>
+<p>Конструкторы страниц — это сборки из готовых сущностей под конкретную страницу сайта. Фронтенд работает по <code>slug</code> страницы.</p>
+<pre><code class="language-sql">CREATE TABLE constructors (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    is_active BOOLEAN DEFAULT true,
+    entities JSON,                 -- список ID и типов используемых сущностей
+    display_settings JSON,         -- порядок, видимость, значения по умолчанию
+    client_type ENUM('b2c', 'b2b', 'both') DEFAULT 'both',  -- кому показывать
+    cloned_from INT,               -- от какого конструктора скопирован (история)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+</code></pre>
+<h3 id="пример-конструктора-страницы-листовки">Пример конструктора страницы «Листовки»</h3>
+<pre><code class="language-json">{
+  &quot;constructor_id&quot;: 101,
+  &quot;name&quot;: &quot;Листовки офсет (B2C)&quot;,
+  &quot;slug&quot;: &quot;listovki-offset&quot;,
+  &quot;entities&quot;: {
+    &quot;formats&quot;: [201, 202, 203],
+    &quot;materials&quot;: [101, 102, 103],
+    &quot;colors&quot;: [301, 304],
+    &quot;services&quot;: [401, 402, 403],
+    &quot;partners&quot;: [701],
+    &quot;cities&quot;: [801, 802],
+    &quot;deadline_rules&quot;: [901]
+  },
+  &quot;display_settings&quot;: {
+    &quot;default_format&quot;: 201,
+    &quot;default_material&quot;: 102,
+    &quot;default_color&quot;: 304,
+    &quot;default_quantity&quot;: 1000,
+    &quot;show_quantity_presets&quot;: [1000, 2000, 3000, 5000, 10000],
+    &quot;hide_services&quot;: []
+  }
+}
+</code></pre>
+<h3 id="визуальный-редактор-конструктора-страницы">Визуальный редактор конструктора страницы</h3>
+<p>Состав экрана:</p>
+<ul>
+<li><strong>Основные настройки</strong> — название, URL slug, тип клиента (B2C / B2B / Оба), флаг «Активен».</li>
+<li><strong>Сущности</strong> (перетаскиванием для смены порядка) — секции «Форматы», «Материалы», «Цветность», «Услуги», «Партнёры», «Города», «Правила сроков»; в каждой — чекбоксы выбора и кнопки «Добавить / Редактировать». Для партнёров отдельно флаг «Показывать альтернативы (только для B2B)».</li>
+<li><strong>Настройки по умолчанию</strong> — формат, материал, цветность, тираж по умолчанию; предустановленные тиражи (через запятую); флаг «Показывать сравнение выгоды по тиражам».</li>
+<li><strong>Визуал и SEO</strong> — заголовок страницы, описание, превью-изображение.</li>
+</ul>
+<p>Действия: «Сохранить», «Сохранить как новый» (клонирование), «Предпросмотр», «Отмена». В списке конструкторов отображается метка <code>Скопирован с ID: N</code> для клонированных.</p>
+<h3 id="наследование-шаблонов-продуктов-и-переопределение">Наследование шаблонов продуктов и переопределение</h3>
+<p>Альтернативный/дополняющий механизм — наследование от базового шаблона продукта (<code>product_templates</code>) с переопределением на уровне страницы (<code>pages</code>). Базовый шаблон знает доступные параметры, формулу расчёта и доступные доп. услуги; страница берёт всё от шаблона и меняет значения по умолчанию, добавляет/убирает параметры и услуги, меняет визуал.</p>
+<pre><code class="language-sql">-- Шаблоны продуктов
+CREATE TABLE product_templates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    slug VARCHAR(100),
+    calculator_type VARCHAR(50),   -- 'sheet', 'booklet', 'sticker'
+    available_parameters JSON,
+    available_services JSON,
+    fold_types JSON,               -- для буклетов
+    created_at TIMESTAMP
+);
+
+-- Страницы сайта
+CREATE TABLE pages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    template_id INT,
+    name VARCHAR(255),
+    slug VARCHAR(100) UNIQUE,
+    defaults JSON,                 -- значения по умолчанию
+    parameters_config JSON,        -- какие параметры доступны
+    services_config JSON,          -- какие услуги доступны
+    preview_image VARCHAR(500),
+    has_size_preview BOOLEAN DEFAULT true,
+    page_title VARCHAR(255),
+    meta_description TEXT,
+    is_published BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (template_id) REFERENCES product_templates(id)
+);
+
+-- Связь страниц с типами сгибов (для буклетов)
+CREATE TABLE page_fold_types (
+    page_id INT,
+    fold_type_id INT,              -- из JSON в template
+    sort_order INT,
+    FOREIGN KEY (page_id) REFERENCES pages(id)
+);
+</code></pre>
+<p><strong>Примеры переопределения значений по умолчанию для страниц одного шаблона «Листовки (базовый)»:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Страница</th>
+<th>Шаблон</th>
+<th>Формат</th>
+<th>Бумага</th>
+<th>Цветность</th>
+<th>Тираж</th>
+<th>Доп. услуги (include/exclude)</th>
+<th>Формат изменяемый</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Листовки</td>
+<td>базовый</td>
+<td>A4</td>
+<td>130 г</td>
+<td>4+4</td>
+<td>100</td>
+<td>базовые (ламинация, скругление, резка)</td>
+<td>да</td>
+</tr>
+<tr>
+<td>Грамоты</td>
+<td>базовый</td>
+<td>A4</td>
+<td>300 г</td>
+<td>4+0</td>
+<td>50</td>
+<td>+фольгирование, +нумерация; −скругление</td>
+<td>нет (фикс. А4)</td>
+</tr>
+<tr>
+<td>Плакаты</td>
+<td>базовый</td>
+<td>A3</td>
+<td>200 г</td>
+<td>—</td>
+<td>—</td>
+<td>базовые</td>
+<td>да</td>
+</tr>
+</tbody>
+</table>
+<h3 id="типы-сгибов-для-буклетов">Типы сгибов для буклетов</h3>
+<p>Буклеты используют отдельный шаблон с типами сгибов; при выборе типа меняется изображение-превью (со схемой сгибов и размерами), размер в развороте и доступные форматы.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Название</th>
+<th>Кол-во сгибов</th>
+<th>Размер в развороте</th>
+<th>Биговка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>one_fold</code></td>
+<td>Евробуклет (1 сгиб)</td>
+<td>1</td>
+<td>A4</td>
+<td>да</td>
+</tr>
+<tr>
+<td><code>two_fold_accordion</code></td>
+<td>Гармошка (2 сгиба)</td>
+<td>2</td>
+<td>A3</td>
+<td>да</td>
+</tr>
+<tr>
+<td><code>three_fold_accordion</code></td>
+<td>Гармошка (3 сгиба)</td>
+<td>3</td>
+<td>A3</td>
+<td>да</td>
+</tr>
+<tr>
+<td><code>three_fold_snail</code></td>
+<td>Улитка (3 сгиба)</td>
+<td>3</td>
+<td>A3</td>
+<td>да</td>
+</tr>
+</tbody>
+</table>
+<p>Параметры типа сгиба: <code>id</code>, <code>name</code>, <code>icon</code> (SVG), <code>preview</code>, <code>unfolded_size</code> (размер в развороте), <code>folds_count</code>, <code>scoring_needed</code> (нужна биговка), <code>description</code>. Для страницы буклетов задаются <code>available_fold_types</code>, <code>default_fold_type</code> и признак <code>show_unfolded_size</code>.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в системе сосуществуют два пересекающихся механизма сборки страниц — конструкторы из сущностей (<code>constructors</code> + <code>constructor_settings</code>/<code>service_constructors</code>) и наследование шаблонов (<code>product_templates</code> + <code>pages</code>). В исходных материалах не зафиксировано, какой из них является основным, как они соотносятся между собой и не дублируют ли они функциональность.</p>
+<h3 id="фронтенд-загрузка-конфигурации-страницы">Фронтенд: загрузка конфигурации страницы</h3>
+<p>Фронтенд по <code>slug</code> запрашивает конфигурацию калькулятора:</p>
+<pre><code>GET /api/page-config/{slug}      (вариант: GET /api/page/{slug})
+</code></pre>
+<p>Ответ описывает параметры (тип поля, опции, значение по умолчанию, флаг <code>editable</code>/<code>readonly</code>, <code>presets</code>) и доп. услуги. Пример для <code>/gramoty</code>:</p>
+<pre><code class="language-json">{
+  &quot;page&quot;: { &quot;name&quot;: &quot;Печать грамот&quot;, &quot;preview_image&quot;: &quot;/images/gramota-preview.jpg&quot; },
+  &quot;calculator&quot;: {
+    &quot;type&quot;: &quot;sheet&quot;,
+    &quot;parameters&quot;: [
+      { &quot;name&quot;: &quot;format&quot;, &quot;type&quot;: &quot;select&quot;,
+        &quot;options&quot;: [{ &quot;value&quot;: &quot;a4&quot;, &quot;label&quot;: &quot;А4 (210×297 мм)&quot; }],
+        &quot;default&quot;: &quot;a4&quot;, &quot;readonly&quot;: true },
+      { &quot;name&quot;: &quot;paper&quot;, &quot;type&quot;: &quot;select&quot;,
+        &quot;options&quot;: [
+          { &quot;value&quot;: &quot;paper_300&quot;, &quot;label&quot;: &quot;Дизайнерская 300 г/м²&quot;, &quot;price&quot;: 45 },
+          { &quot;value&quot;: &quot;paper_250&quot;, &quot;label&quot;: &quot;Матовая 250 г/м²&quot;, &quot;price&quot;: 32 }
+        ], &quot;default&quot;: &quot;paper_300&quot; },
+      { &quot;name&quot;: &quot;color&quot;, &quot;type&quot;: &quot;select&quot;,
+        &quot;options&quot;: [
+          { &quot;value&quot;: &quot;4+0&quot;, &quot;label&quot;: &quot;Цветная с одной стороны&quot; },
+          { &quot;value&quot;: &quot;4+4&quot;, &quot;label&quot;: &quot;Цветная с двух сторон&quot; }
+        ], &quot;default&quot;: &quot;4+0&quot; },
+      { &quot;name&quot;: &quot;quantity&quot;, &quot;type&quot;: &quot;number&quot;,
+        &quot;default&quot;: 50, &quot;min&quot;: 1, &quot;max&quot;: 1000,
+        &quot;presets&quot;: [1, 10, 20, 30, 40, 50, 100] }
+    ],
+    &quot;services&quot;: [
+      { &quot;id&quot;: &quot;foiling&quot;, &quot;name&quot;: &quot;Фольгирование&quot;, &quot;type&quot;: &quot;checkbox&quot;,
+        &quot;price&quot;: 50, &quot;price_type&quot;: &quot;fixed&quot;, &quot;icon&quot;: &quot;/icons/foil.svg&quot; },
+      { &quot;id&quot;: &quot;numbering&quot;, &quot;name&quot;: &quot;Нумерация&quot;, &quot;type&quot;: &quot;checkbox&quot;,
+        &quot;price&quot;: 3, &quot;price_type&quot;: &quot;per_item&quot;, &quot;icon&quot;: &quot;/icons/numbering.svg&quot; }
+    ]
+  }
+}
+</code></pre>
+<p>Для буклетов в ответ добавляется секция <code>fold_types</code> (селектор с иконками, превью, размером в развороте и описанием).</p>
+<hr>
+<h2 id="5-конструктор-полей-калькуляторов-типы-услуг">5. Конструктор полей калькуляторов (типы услуг)</h2>
+<p>Модуль «Типы услуг» — центральный справочник, определяющий категории услуг, их поведение, доступные параметры и способы расчёта. Он служит основой для конструктора услуг и маржи.</p>
+<p>Тип услуги — это шаблон поведения, который определяет: как рассчитывается стоимость (формула, единицы); какие параметры доступны; какие доп. услуги можно добавить; какие справочники использовать; какая таблица маржи применяется по умолчанию.</p>
+<h3 id="категория-vs-тип-услуги">Категория vs Тип услуги</h3>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС (разрешён в исходнике): изначально категория и тип услуги смешивались. Финальное разграничение:</p>
+<table>
+<thead>
+<tr>
+<th>Понятие</th>
+<th>Что это</th>
+<th>Пример</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Категория</td>
+<td>Группа для визуальной группировки (только название, иконка, порядок)</td>
+<td>«Печать», «Копирование», «Переплёт»</td>
+<td>Навигация, фильтрация, права, SEO</td>
+</tr>
+<tr>
+<td>Тип услуги</td>
+<td>Бизнес-сущность с правилами расчёта</td>
+<td>«Цифровая печать», «Копирование»</td>
+<td>Логика расчёта, параметры, справочники</td>
+</tr>
+</tbody>
+</table>
+<p>Категория не имеет своей логики расчёта — она только группирует типы услуг.</p>
+<h3 id="структура-бд">Структура БД</h3>
+<pre><code class="language-sql">-- Категории (только для группировки)
+CREATE TABLE service_categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(50) UNIQUE,
+    icon VARCHAR(50),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Типы услуг (бизнес-сущности)
+CREATE TABLE service_types (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE NOT NULL,
+    description TEXT,
+    category_id INT,               -- привязка к service_categories
+    calculation_type ENUM(
+        'by_sheets',   -- по листам (копирование, сканирование)
+        'by_pages',    -- по страницам (брошюровка)
+        'by_items',    -- по штукам (ламинация одного листа)
+        'by_formula',  -- сложная формула (печать с раскладкой)
+        'by_tariff'    -- тарифная сетка (факс)
+    ) NOT NULL,
+    default_unit VARCHAR(20) DEFAULT 'шт',
+    default_margin_table_id INT,   -- таблица маржи по умолчанию
+    available_parameters JSON,
+    uses_dictionaries JSON,        -- ['countries', 'copy_methods', 'binding_types']
+    icon VARCHAR(255),
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES service_categories(id),
+    FOREIGN KEY (default_margin_table_id) REFERENCES margin_tables(id)
+);
+
+-- Параметры типа услуги (какие поля показывать в форме калькулятора)
+CREATE TABLE service_type_parameters (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    service_type_id INT NOT NULL,
+    param_name VARCHAR(100) NOT NULL,
+    param_code VARCHAR(50) NOT NULL,
+    field_type ENUM('select', 'radio', 'checkbox', 'number', 'text', 'range') NOT NULL,
+    source_type ENUM('dictionary', 'static', 'custom') DEFAULT 'static',
+    source_table VARCHAR(50),      -- таблица-справочник
+    source_query TEXT,             -- кастомный запрос
+    static_options JSON,           -- статические значения (если source_type = 'static')
+    default_value VARCHAR(255),
+    is_required BOOLEAN DEFAULT true,
+    affects_price BOOLEAN DEFAULT false,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (service_type_id) REFERENCES service_types(id) ON DELETE CASCADE
+);
+</code></pre>
+<h3 id="предустановленные-категории-и-типы-услуг">Предустановленные категории и типы услуг</h3>
+<pre><code class="language-sql">INSERT INTO service_categories (name, slug, icon, sort_order) VALUES
+('Печать', 'printing', '🖨️', 10),
+('Копирование и сканирование', 'copy-scan', '📄', 20),
+('Переплёт и отделка', 'binding-finishing', '📖', 30),
+('Дизайн и подготовка', 'design', '🎨', 40);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Тип услуги</th>
+<th>Категория</th>
+<th>Способ расчёта</th>
+<th>Ед.</th>
+<th>Справочники</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Цифровая печать</td>
+<td>Печать</td>
+<td>by_formula</td>
+<td>лист</td>
+<td>formats, materials, color_types</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Офсетная печать</td>
+<td>Печать</td>
+<td>by_formula</td>
+<td>лист</td>
+<td>formats, materials, color_types</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Копирование</td>
+<td>Копирование/сканир.</td>
+<td>by_sheets</td>
+<td>лист</td>
+<td>copy_methods</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Сканирование</td>
+<td>Копирование/сканир.</td>
+<td>by_sheets</td>
+<td>лист</td>
+<td>scan_methods, resolutions</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Отправка факса</td>
+<td>Копирование/сканир.</td>
+<td>by_tariff</td>
+<td>лист</td>
+<td>countries</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Брошюровка на скобе</td>
+<td>Переплёт и отделка</td>
+<td>by_pages</td>
+<td>шт</td>
+<td>binding_types</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Брошюровка на пружине</td>
+<td>Переплёт и отделка</td>
+<td>by_pages</td>
+<td>шт</td>
+<td>binding_types</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Ламинация</td>
+<td>Переплёт и отделка</td>
+<td>by_items</td>
+<td>шт</td>
+<td>lamination_types, film_materials</td>
+</tr>
+</tbody>
+</table>
+<p>Пример параметров типа «Копирование»:</p>
+<pre><code class="language-sql">INSERT INTO service_type_parameters
+  (service_type_id, param_name, param_code, field_type, source_type, source_table, sort_order) VALUES
+(2, 'Способ копирования', 'copy_method', 'radio', 'dictionary', 'copy_methods', 10),
+(2, 'Количество листов',  'quantity',    'number', 'static',    NULL,           20);
+</code></pre>
+<h3 id="вспомогательные-справочники">Вспомогательные справочники</h3>
+<pre><code class="language-sql">CREATE TABLE scan_methods (
+    id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) UNIQUE, description TEXT, default_resolution INT,
+    sort_order INT DEFAULT 0, is_active BOOLEAN DEFAULT true
+);
+INSERT INTO scan_methods (name, code, description, default_resolution) VALUES
+('Со стекла (планшетный)', 'glass', 'Ручная подача на стекло', 300),
+('Через автоподатчик', 'auto', 'Автоматическая подача документов', 300),
+('Книжный сканер', 'book', 'Сканирование книг без разбора', 300);
+
+CREATE TABLE resolutions (
+    id INT PRIMARY KEY AUTO_INCREMENT, dpi INT NOT NULL, description VARCHAR(255),
+    price_coefficient DECIMAL(3,2) DEFAULT 1.0, sort_order INT DEFAULT 0, is_active BOOLEAN DEFAULT true
+);
+INSERT INTO resolutions (dpi, description, price_coefficient) VALUES
+(150, 'Черновик (150 dpi)', 0.7),
+(300, 'Стандартное (300 dpi)', 1.0),
+(600, 'Высокое качество (600 dpi)', 1.5),
+(1200, 'Архивное качество (1200 dpi)', 2.5);
+
+CREATE TABLE lamination_types (
+    id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(100) NOT NULL, code VARCHAR(50) UNIQUE,
+    description TEXT, is_packet BOOLEAN DEFAULT true, sort_order INT DEFAULT 0, is_active BOOLEAN DEFAULT true
+);
+INSERT INTO lamination_types (name, code, is_packet) VALUES
+('Пакетная (холодная)', 'cold_packet', true),
+('Пакетная (горячая)', 'hot_packet', true),
+('Рулонная', 'roll', false);
+</code></pre>
+<h3 id="редактор-типа-услуги-админка">Редактор типа услуги (админка)</h3>
+<p>Редактор организован в 5 вкладок:</p>
+<ol>
+<li><strong>Основные настройки</strong> — название, системный код, описание, категория, иконка, статус; настройки расчёта (способ расчёта, единица измерения, базовая таблица маржи).</li>
+<li><strong>Параметры</strong> — визуальный конструктор полей формы: для каждого параметра задаётся системный код, тип поля (select/radio/checkbox/number/text/range), источник (справочник/статический/кастомный), справочник, значение по умолчанию, флаги «Обязательный» и «Влияет на цену», порядок. Тут же — живой предпросмотр формы.</li>
+<li><strong>Справочники</strong> — настройка значений выпадающих списков/радиокнопок (добавление/редактирование значений с кодом и флагом «по умолчанию», редактирование цен для каждого варианта).</li>
+<li><strong>Маржа</strong> — таблица правил наценки по диапазонам количества (см. раздел 8) с блоком «Примеры расчёта».</li>
+<li><strong>Предпросмотр</strong> — живой просмотр калькулятора так, как его увидит клиент (с расчётом итога).</li>
+</ol>
+<p>Действия: «Сохранить», «Предпросмотр на сайте», «Клонировать», «Отключить».</p>
+<h3 id="класс-работы-с-типами-услуг">Класс работы с типами услуг</h3>
+<pre><code class="language-javascript">class ServiceTypeManager {
+    async getServiceType(serviceTypeId) {
+        const query = `
+            SELECT st.*, mt.name AS margin_table_name, stp.*
+            FROM service_types st
+            LEFT JOIN margin_tables mt ON mt.id = st.default_margin_table_id
+            LEFT JOIN service_type_parameters stp ON stp.service_type_id = st.id
+            WHERE st.id = $1 AND st.is_active = true
+            ORDER BY stp.sort_order
+        `;
+        // ... собирает serviceType с массивом parameters
+    }
+
+    async getDictionaryValues(tableName) {
+        const query = `SELECT * FROM ${tableName} WHERE is_active = true ORDER BY sort_order`;
+        return (await db.query(query)).rows;
+    }
+
+    async calculateService(serviceTypeId, params) {
+        const serviceType = await this.getServiceType(serviceTypeId);
+        switch (serviceType.calculation_type) {
+            case 'by_sheets':  return this.calculateBySheets(serviceType, params);
+            case 'by_pages':   return this.calculateByPages(serviceType, params);
+            case 'by_items':   return this.calculateByItems(serviceType, params);
+            case 'by_tariff':  return this.calculateByTariff(serviceType, params);
+            case 'by_formula': return this.calculateByFormula(serviceType, params);
+            default: throw new Error(`Неизвестный тип расчёта: ${serviceType.calculation_type}`);
+        }
+    }
+}
+</code></pre>
+<hr>
+<h2 id="6-настройка-услуги-через-маржу">6. Настройка услуги через маржу</h2>
+<p>Любая услуга настраивается через единый механизм маржи (как для печати). Базовая цена (себестоимость) задаётся отдельно, наценка — через таблицу маржи по диапазонам количества.</p>
+<p>Этот раздел описывает только <strong>UI/админ-настройку</strong> маржи услуги. Концептуальная модель универсального модуля маржи (<code>margin_tables</code> / <code>margin_rules</code> / <code>margin_links</code>, база <code>base_on</code>: <code>quantity</code> vs <code>total_price</code>, стек таблиц, маржа операций по времени) — канонический раздел <a href="04-calculators--pricing-model.html#4-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C-%D0%BC%D0%B0%D1%80%D0%B6%D0%B8-%D1%83%D0%BD%D0%B8%D0%B2%D0%B5%D1%80%D1%81%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D1%85%D0%B0%D0%BD%D0%B8%D0%B7%D0%BC">Модуль маржи (pricing-model.md, §4–5)</a>. DDL-справка по таблицам — в data-model.md.</p>
+<p><strong>Итоговая формула (общий случай):</strong></p>
+<pre><code>price = (base_price × quantity) × (1 + margin / 100)
+</code></pre>
+<h3 id="пример-копирование-зависимость-от-тиража">Пример: копирование (зависимость от тиража)</h3>
+<p>Базовая цена за лист задаётся для каждого способа копирования; наценка — таблица маржи. Для копирования:</p>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Базовая цена (руб/лист)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Со стекла</td>
+<td>10</td>
+</tr>
+<tr>
+<td>Автоподатчик</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Двустороннее</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: базовая цена «Со стекла» в разных фрагментах указана и как 5 руб/лист (раздел «Базовая цена»), и как 10 руб/лист (таблица маржи и предпросмотр). Корректное значение не зафиксировано.</p>
+<h3 id="пример-факс-тарификация-по-странам">Пример: факс (тарификация по странам)</h3>
+<pre><code>price = base_price × pages × coefficient
+</code></pre>
+<p>Зависимость от страны (маржа 100% во всех строках):</p>
+<table>
+<thead>
+<tr>
+<th>Страна</th>
+<th>Базовая цена/лист</th>
+<th>Маржа</th>
+<th>Итоговая цена/лист</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Россия</td>
+<td>20 руб</td>
+<td>100%</td>
+<td>40 руб</td>
+</tr>
+<tr>
+<td>СНГ</td>
+<td>40 руб</td>
+<td>100%</td>
+<td>80 руб</td>
+</tr>
+<tr>
+<td>Европа</td>
+<td>80 руб</td>
+<td>100%</td>
+<td>160 руб</td>
+</tr>
+<tr>
+<td>Мир</td>
+<td>120 руб</td>
+<td>100%</td>
+<td>240 руб</td>
+</tr>
+</tbody>
+</table>
+<p>Зависимость от количества листов (коэффициент):</p>
+<table>
+<thead>
+<tr>
+<th>От листов</th>
+<th>До листов</th>
+<th>Коэффициент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>5</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>6</td>
+<td>10</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>11</td>
+<td>20</td>
+<td>0.8</td>
+</tr>
+<tr>
+<td>21</td>
+<td>∞</td>
+<td>0.7</td>
+</tr>
+</tbody>
+</table>
+<p>Пример: Россия, 5 листов → <code>20 × 5 × 1.0 = 100 руб</code>.</p>
+<h3 id="универсальный-класс-расчёта-услуги">Универсальный класс расчёта услуги</h3>
+<pre><code class="language-javascript">class UniversalServicePriceCalculator {
+    async calculatePrice(serviceId, params) {
+        const { quantity, parameter1, parameter2 } = params;  // parameterN — страна, способ и т.д.
+
+        // 1. Базовая цена (с учётом параметров и диапазона количества)
+        const priceRow = (await db.query(`
+            SELECT sbp.*, s.name, s.unit, s.calculation_type
+            FROM service_base_prices sbp
+            JOIN services s ON s.id = sbp.service_id
+            WHERE sbp.service_id = $1
+              AND (sbp.parameter1 = $2 OR sbp.parameter1 IS NULL)
+              AND (sbp.parameter2 = $3 OR sbp.parameter2 IS NULL)
+              AND sbp.quantity_from &lt;= $4
+              AND (sbp.quantity_to &gt;= $4 OR sbp.quantity_to IS NULL)
+              AND sbp.is_active = true
+            ORDER BY sbp.quantity_from DESC LIMIT 1
+        `, [serviceId, parameter1, parameter2, quantity])).rows[0];
+
+        let baseCost = priceRow.base_price * quantity;
+
+        // 2. Маржа из margin_tables (entity_type='service')
+        const margin = (await db.query(`
+            SELECT mr.* FROM margin_rules mr
+            JOIN margin_tables mt ON mt.id = mr.margin_table_id
+            WHERE mt.entity_type = 'service' AND mt.is_active = true
+              AND mr.quantity_from &lt;= $1
+              AND (mr.quantity_to &gt;= $1 OR mr.quantity_to IS NULL)
+            ORDER BY mr.quantity_from DESC LIMIT 1
+        `, [quantity])).rows[0];
+
+        let finalPrice = baseCost;
+        if (margin) {
+            finalPrice = margin.margin_type === 'percent'
+                ? baseCost * (1 + margin.margin_value / 100)
+                : baseCost + margin.margin_value;
+        }
+        return {
+            serviceId,
+            serviceName: priceRow.name,
+            quantity,
+            baseCost,
+            finalPrice,
+            breakdown: { basePrice: priceRow.base_price, margin: margin || null }
+        };
+    }
+
+    // Расчёт для факса (тарификация по странам), id услуги 100 — «Факс»
+    async calculateFax(country, pages) {
+        return this.calculatePrice(100, { quantity: pages, parameter1: country });
+    }
+
+    // Расчёт для копирования, id услуги 101 — «Копирование»
+    async calculateCopying(method, pages) {
+        return this.calculatePrice(101, { quantity: pages, parameter1: method }); // method: 'glass' | 'auto'
+    }
+}
+</code></pre>
+<p>Возвращаемая структура расчёта: <code>serviceId</code>, <code>serviceName</code> (название услуги), <code>quantity</code>, <code>baseCost</code>, <code>finalPrice</code> и <code>breakdown</code> с базовой ценой за единицу (<code>basePrice</code>) и применённым правилом маржи (<code>margin</code>). Вспомогательные методы <code>calculateFax(country, pages)</code> и <code>calculateCopying(method, pages)</code> — обёртки над <code>calculatePrice</code> для конкретных услуг (факс — id 100, копирование — id 101).</p>
+<h3 id="админка-зависимостей-услуги">Админка зависимостей услуги</h3>
+<p>Для услуги настраиваются три блока: зависимость от тиража (таблица маржи), зависимость от способа (базовая цена за способ), дополнительные услуги (с типом расчёта — фиксированная за заказ или за лист):</p>
+<table>
+<thead>
+<tr>
+<th>Доп. услуга</th>
+<th>Тип расчёта</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Сортировка</td>
+<td>Фикс. за заказ</td>
+<td>50 руб</td>
+</tr>
+<tr>
+<td>Сшивание</td>
+<td>Фикс. за заказ</td>
+<td>30 руб</td>
+</tr>
+<tr>
+<td>Сверление</td>
+<td>За лист</td>
+<td>5 руб</td>
+</tr>
+<tr>
+<td>Степлер</td>
+<td>Фикс. за заказ</td>
+<td>10 руб</td>
+</tr>
+</tbody>
+</table>
+<p>Ключевые решения модуля: единый механизм маржи для всех типов услуг; автоматический расчёт макс. количества страниц для брошюровки (толщина бумаги × макс. толщина корешка); параметр «страна» в базовой цене факса; зависимость от тиража через таблицу диапазонов.</p>
+<hr>
+<h2 id="7-правила-вылетов-bleed_rules-как-настраиваемые">7. Правила вылетов (bleed_rules) как настраиваемые</h2>
+<p>Вылеты (bleed) настраиваются не флагом «вкл/выкл», а условными правилами в JSON конструктора (<code>constructor_settings.bleed_rules</code>).</p>
+<p>Поле допускает как короткую форму (значение по умолчанию плюс пары «случай → вылет»), приводимую в комментарии к <code>CREATE TABLE constructor_settings</code>:</p>
+<pre><code class="language-json">{ &quot;default&quot;: 3, &quot;for_standard&quot;: 0, &quot;for_custom&quot;: 3 }
+</code></pre>
+<p>так и развёрнутую форму с массивом <code>rules[]</code> и условиями:</p>
+<pre><code class="language-json">// Пример bleed_rules для конструктора &quot;Листовки А6&quot;
+{
+  &quot;default&quot;: 3,
+  &quot;rules&quot;: [
+    {
+      &quot;condition&quot;: &quot;format_is_standard AND format_matches_paper&quot;,
+      &quot;bleed&quot;: 0,
+      &quot;description&quot;: &quot;Печать на готовый формат&quot;
+    },
+    {
+      &quot;condition&quot;: &quot;format_is_standard AND format_smaller_than_paper&quot;,
+      &quot;bleed&quot;: 3,
+      &quot;description&quot;: &quot;Печать с подрезкой под стандарт&quot;
+    },
+    {
+      &quot;condition&quot;: &quot;format_is_custom&quot;,
+      &quot;bleed&quot;: 2,
+      &quot;description&quot;: &quot;Произвольный размер (вылеты 2 мм)&quot;
+    }
+  ]
+}
+</code></pre>
+<p>В админке (блок «Правила вылетов» редактора конструктора): значение по умолчанию + список особых случаев («Если формат совпадает с бумагой → 0 мм», «Если формат стандартный, но меньше → 3 мм», «Если формат нестандартный → 2 мм»), кнопка «Добавить правило».</p>
+<hr>
+<h2 id="8-правила-маржинаценки-как-настраиваемые">8. Правила маржи/наценки как настраиваемые</h2>
+<p>Правила наценки задаются таблицей диапазонов количества и могут привязываться к конкретному конструктору или к принтеру.</p>
+<pre><code class="language-sql">-- Правила наценки по тиражу
+CREATE TABLE markup_rules (
+    id INT PRIMARY KEY,
+    constructor_id INT,            -- привязка к конструктору
+    printer_id INT,                -- или к принтеру
+    quantity_from INT,
+    quantity_to INT,
+    markup_percent DECIMAL(5,2)
+);
+
+-- Коэффициенты сложности (для нестандартных ситуаций)
+CREATE TABLE complexity_factors (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),             -- 'Много макетов', 'Нестандартный размер', 'Сложная резка'
+    condition_type VARCHAR(50),    -- 'multiple_files', 'custom_size'...
+    factor DECIMAL(3,2),           -- 1.2 = +20% к стоимости
+    applies_to VARCHAR(50)         -- 'time', 'cost', 'both'
+);
+</code></pre>
+<p>Пример таблицы наценки по тиражу (для конструктора цифровой печати):</p>
+<table>
+<thead>
+<tr>
+<th>Тираж</th>
+<th>Наценка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–10</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>11–20</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>21–30</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>31–40</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>41+</td>
+<td>60%</td>
+</tr>
+</tbody>
+</table>
+<p>Пример таблицы маржи для услуги (копирование) с примерами расчёта при базовой цене 10 руб/лист:</p>
+<table>
+<thead>
+<tr>
+<th>От (листов)</th>
+<th>До (листов)</th>
+<th>Тип</th>
+<th>Значение</th>
+<th>Пример расчёта</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>процент</td>
+<td>100%</td>
+<td>5 листов: 50 руб × (1+100%) = 100 руб</td>
+</tr>
+<tr>
+<td>11</td>
+<td>50</td>
+<td>процент</td>
+<td>80%</td>
+<td>20 листов: 200 руб × (1+80%) = 360 руб</td>
+</tr>
+<tr>
+<td>51</td>
+<td>100</td>
+<td>процент</td>
+<td>60%</td>
+<td>100 листов: 1000 руб × (1+60%) = 1600 руб</td>
+</tr>
+<tr>
+<td>101</td>
+<td>∞</td>
+<td>процент</td>
+<td>50%</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Наценка по умолчанию хранится в <code>constructor_settings.default_markup_percent</code> (применяется, если не задана в правилах тиража).</p>
+<hr>
+<h2 id="9-редактор-формул-визуальный-конструктор-расчётов">9. Редактор формул (визуальный конструктор расчётов)</h2>
+<p>Модуль формул — универсальный конструктор математических зависимостей, позволяющий настраивать расчёты без программиста. Подробная роль формул в ценообразовании — в документе модели ценообразования (pricing-model); здесь описана конструкторская часть.</p>
+<h3 id="назначение">Назначение</h3>
+<p>Модуль формул позволяет создавать формулы для расчёта: себестоимости, времени, расхода материалов, наценки; переиспользовать формулы в разных услугах; тестировать формулы перед применением.</p>
+<p><strong>Примеры формул:</strong></p>
+<pre><code># Цифровая печать
+sheets = ceil(quantity / layout_items)
+cost   = sheets × (print_price + paper_price)
+
+# Раскладка на листе
+cols = floor((sheet_width - margins) / (item_width + bleed))
+
+# Время резки
+time = (perimeter / speed) + (corners × 0.3) + (items × 0.5)
+
+# Маржа
+price = cost × (1 + margin / 100)
+</code></pre>
+<h3 id="требования-к-интерфейсу">Требования к интерфейсу</h3>
+<table>
+<thead>
+<tr>
+<th>Требование</th>
+<th>Зачем</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Понятный язык</td>
+<td>Менеджер должен понимать, что пишет</td>
+</tr>
+<tr>
+<td>Безопасность</td>
+<td>Нельзя сломать систему некорректной формулой</td>
+</tr>
+<tr>
+<td>Наглядность</td>
+<td>Сразу виден результат</td>
+</tr>
+<tr>
+<td>Подсказки</td>
+<td>Доступные переменные и примеры</td>
+</tr>
+<tr>
+<td>Сохранение истории</td>
+<td>Возможность вернуться к предыдущей версии</td>
+</tr>
+</tbody>
+</table>
+<h3 id="типы-переменных">Типы переменных</h3>
+<p>Система типов переменных (целочисленные, дробные, константы оборудования, настройки), у каждой — описание и пример:</p>
+<table>
+<thead>
+<tr>
+<th>Переменная</th>
+<th>Тип</th>
+<th>Описание</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sheets</td>
+<td>integer</td>
+<td>Количество листов</td>
+<td>125</td>
+</tr>
+<tr>
+<td>cuts</td>
+<td>integer</td>
+<td>Количество резов</td>
+<td>7</td>
+</tr>
+<tr>
+<td>stacks</td>
+<td>integer</td>
+<td>Количество стоп</td>
+<td>2</td>
+</tr>
+<tr>
+<td>stack_height</td>
+<td>float</td>
+<td>Высота стопы (мм)</td>
+<td>79.8</td>
+</tr>
+<tr>
+<td>cut_speed</td>
+<td>float</td>
+<td>Скорость реза (мин/рез)</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>density</td>
+<td>float</td>
+<td>Плотность бумаги (г/м²)</td>
+<td>250</td>
+</tr>
+<tr>
+<td>max_stack_height</td>
+<td>float</td>
+<td>Макс. высота стопы (мм)</td>
+<td>80</td>
+</tr>
+<tr>
+<td>setup_time</td>
+<td>float</td>
+<td>Время настройки (мин)</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>Справочник переменных хранится в БД, с указанием источника значения (<code>input</code> — ввод, <code>database</code> — из БД, <code>calculation</code> — расчёт, <code>constant</code>):</p>
+<pre><code class="language-sql">CREATE TABLE formula_variables (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    variable_type ENUM('number', 'string', 'boolean', 'array', 'object') DEFAULT 'number',
+    default_value VARCHAR(255),
+    source ENUM('input', 'database', 'calculation', 'constant') DEFAULT 'input',
+    source_table VARCHAR(100),     -- откуда брать, если не из ввода
+    example VARCHAR(255),
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO formula_variables (name, description, variable_type, source) VALUES
+('quantity', 'Количество (тираж, листы, штуки)', 'number', 'input'),
+('sheets', 'Количество печатных листов', 'number', 'calculation'),
+('items_per_sheet', 'Количество изделий на листе', 'number', 'database'),
+('paper_density', 'Плотность бумаги (г/м²)', 'number', 'database'),
+('print_price', 'Стоимость печати листа', 'number', 'database'),
+('paper_price', 'Стоимость бумаги листа', 'number', 'database'),
+('margin_percent', 'Маржа в процентах', 'number', 'database'),
+('width', 'Ширина изделия (мм)', 'number', 'input'),
+('height', 'Высота изделия (мм)', 'number', 'input'),
+('bleed', 'Вылеты (мм)', 'number', 'database'),
+('sheet_width', 'Ширина печатного листа (мм)', 'number', 'database'),
+('sheet_height', 'Высота печатного листа (мм)', 'number', 'database');
+</code></pre>
+<h3 id="структура-редактора-формул">Структура редактора формул</h3>
+<p>Редактор организован вкладками: <strong>Параметры (переменные) · Формула · Проверка (тестирование) · История · Шаблоны</strong>. Рабочая область содержит:</p>
+<ol>
+<li><strong>Доступные переменные</strong> — список переменных заказа и оборудования с текущими значениями.</li>
+<li><strong>Конструктор формулы</strong> — поле ввода + кнопки «Проверить», «Очистить», «Вставить шаблон».</li>
+<li><strong>Результат проверки</strong> — статус корректности и тестовый расчёт.</li>
+</ol>
+<h3 id="визуальный-конструктор-drag-and-drop">Визуальный конструктор (drag-and-drop)</h3>
+<p>Переменные и операторы перетаскиваются в формулу. Доступные операторы: <code>+  -  ×  ÷  ^  (  )  =  &gt;  &lt;  &gt;=  &lt;=</code> и функции <code>ceil</code>, <code>floor</code>, <code>round</code>, <code>min</code>, <code>max</code>, <code>abs</code>, <code>sin</code>, <code>cos</code>, <code>sqrt</code>, <code>if/then/else</code>.</p>
+<h3 id="шаблоны-формул">Шаблоны формул</h3>
+<p>Готовые шаблоны для быстрого старта (с действиями «Применить» / «Редактировать»):</p>
+<pre><code># Гильотинная резка (базовая)
+setup_time + stacks × cuts × cut_speed
+
+# Гильотинная резка (с учётом высоты)
+setup_time + stacks × cuts × cut_speed × (1 + (stack_height / max_height) × 0.5)
+
+# Плоттерная резка (простая)
+setup_time + (perimeter / speed) × items + corners × 0.3 + (items - 1) × 1.0 + 2
+
+# Ламинация пакетная
+sheets × time_per_sheet + cutting_time
+</code></pre>
+<p>Можно создавать собственные шаблоны (кнопка «Создать шаблон», действие «Сохранить как шаблон»).</p>
+<h3 id="валидация-и-тестирование">Валидация и тестирование</h3>
+<p>Проверка формулы включает:</p>
+<ol>
+<li>Только разрешённые символы и функции.</li>
+<li>Баланс скобок (отдельные сообщения о лишней закрывающей и о недостающей закрывающей).</li>
+<li>Все переменные известны (иначе ошибка <code>Неизвестные переменные: ...</code>).</li>
+<li>Пробное вычисление на автоматически сгенерированных тестовых значениях.</li>
+<li>Подсказки по оптимизации (например, «Рекомендуем проверить приоритет операций», «Слишком много вложенных скобок»).</li>
+</ol>
+<p>Класс валидатора оперирует белым списком функций (<code>['sin', 'cos', 'sqrt', 'min', 'max', 'abs']</code>) и операторов (<code>['+', '-', '*', '/', '^', '(', ')']</code>). Тестовые значения генерируются эвристически по имени переменной (содержит <code>height</code>/<code>width</code> → 100; <code>speed</code> → 0.5; <code>count</code>/<code>sheets</code> → 10; иначе 1).</p>
+<p>Вкладка «Тестирование»: пользователь задаёт входные данные, получает результат выполнения, видит время выполнения (например, 0.5 мс), может сохранить набор как пример.</p>
+<h3 id="примеры-расчёта-тестовые-прогоны">Примеры расчёта (тестовые прогоны)</h3>
+<pre><code># Гильотинная резка с учётом высоты
+sheets=125, cuts=7, stack_height=79.8, max_height=80, cut_speed=0.5, setup_time=3
+3 + (1 × 7 × 0.5 × (1 + 79.8/80 × 0.5)) = 3 + (3.5 × 1.5) ≈ 8.25 мин
+
+# Тот же шаблон при stacks=2
+3 + (2 × 7 × 0.5 × (1 + 80/80 × 0.5)) = 3 + (7 × 1.5) = 13.5 мин
+
+# Себестоимость цифровой печати
+quantity=100, items_per_sheet=4, print_price=25, paper_price=3
+sheets = ceil(100 / 4) = 25
+cost   = 25 × (25 + 3) = 700 руб
+</code></pre>
+<h3 id="версионирование-и-история-изменений">Версионирование и история изменений</h3>
+<p>Хранится история версий формулы с автором, датой, причиной изменения и текстом формулы; доступны действия «Восстановить» и «Сравнить».</p>
+<p>Пример истории для оборудования «Boway BW-4908 V9»:</p>
+<table>
+<thead>
+<tr>
+<th>Версия</th>
+<th>Дата/время</th>
+<th>Автор</th>
+<th>Изменение</th>
+<th>Формула</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.3</td>
+<td>11.03.2026 14:30</td>
+<td>Иванов А.</td>
+<td>Добавлен коэффициент высоты</td>
+<td><code>setup + stacks×cuts×speed×(1+height/80)</code></td>
+</tr>
+<tr>
+<td>1.2</td>
+<td>10.03.2026 09:15</td>
+<td>Петрова М.</td>
+<td>Уточнена базовая скорость</td>
+<td><code>setup + stacks×cuts×speed</code></td>
+</tr>
+<tr>
+<td>1.1</td>
+<td>09.03.2026 16:20</td>
+<td>Сидоров К.</td>
+<td>Добавлено время настройки</td>
+<td><code>stacks×cuts×speed</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="структура-бд-модуля-формул">Структура БД модуля формул</h3>
+<p>Формула хранится в двух видах: текст и распарсенное AST-дерево для быстрого вычисления.</p>
+<pre><code class="language-sql">-- Формула, привязанная к оборудованию (версионируемая)
+CREATE TABLE equipment_formulas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id INT NOT NULL,
+    version INT NOT NULL,
+    is_current BOOLEAN DEFAULT false,
+    formula_text TEXT NOT NULL,    -- &quot;setup + stacks * cuts * speed * (1 + height/80)&quot;
+    formula_parsed JSON,           -- AST-дерево для быстрого вычисления
+    variables JSON NOT NULL,       -- [&quot;setup&quot;, &quot;stacks&quot;, &quot;cuts&quot;, &quot;speed&quot;, &quot;height&quot;]
+    description TEXT,
+    changed_by INT,
+    change_reason TEXT,
+    test_values JSON,              -- для автоматической проверки
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    INDEX idx_equipment_current (equipment_id, is_current)
+);
+
+-- Категории формул (группировка)
+CREATE TABLE formula_categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL, slug VARCHAR(50) UNIQUE, description TEXT,
+    icon VARCHAR(50), sort_order INT DEFAULT 0, is_active BOOLEAN DEFAULT true
+);
+INSERT INTO formula_categories (name, slug, icon, sort_order) VALUES
+('Расчёт себестоимости', 'cost-calculation', '💰', 10),
+('Расчёт раскладки', 'layout-calculation', '📐', 20),
+('Расчёт времени', 'time-calculation', '⏱️', 30),
+('Расчёт материалов', 'material-calculation', '📦', 40),
+('Расчёт наценки', 'margin-calculation', '💹', 50),
+('Валидация', 'validation', '✅', 60);
+
+-- Универсальные формулы
+CREATE TABLE formulas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(100) UNIQUE NOT NULL,
+    category_id INT,
+    description TEXT,
+    formula_text TEXT NOT NULL,    -- &quot;sheets = ceil(quantity / items_per_sheet)&quot;
+    formula_type ENUM('cost', 'time', 'material', 'margin', 'layout', 'validation') NOT NULL,
+    result_type ENUM('number', 'boolean', 'string') DEFAULT 'number',
+    result_unit VARCHAR(20),       -- 'руб', 'мин', 'лист', 'шт'
+    available_variables JSON,
+    example_input JSON,
+    example_output VARCHAR(255),
+    version INT DEFAULT 1,
+    is_current BOOLEAN DEFAULT true,
+    parent_formula_id INT,         -- для истории версий
+    is_active BOOLEAN DEFAULT true,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES formula_categories(id),
+    INDEX idx_type_active (formula_type, is_active),
+    INDEX idx_code (code)
+);
+
+-- Привязка формул к сущностям (переиспользование)
+CREATE TABLE formula_links (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    formula_id INT NOT NULL,
+    entity_type ENUM('constructor', 'service', 'material', 'equipment') NOT NULL,
+    entity_id INT NOT NULL,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (formula_id) REFERENCES formulas(id),
+    UNIQUE KEY unique_link (formula_id, entity_type, entity_id)
+);
+
+-- История вычислений (для отладки)
+CREATE TABLE formula_execution_log (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    formula_id INT NOT NULL,
+    input_values JSON,
+    output_value VARCHAR(255),
+    execution_time_ms INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (formula_id) REFERENCES formulas(id),
+    INDEX idx_formula_time (formula_id, created_at)
+);
+</code></pre>
+<h3 id="примеры-формул-в-бд">Примеры формул в БД</h3>
+<pre><code class="language-sql">-- Себестоимость цифровой печати
+INSERT INTO formulas (name, code, category_id, formula_text, formula_type, result_unit, available_variables) VALUES
+('Себестоимость цифровой печати', 'digital_print_cost', 1,
+ 'sheets = ceil(quantity / items_per_sheet); cost = sheets × (print_price + paper_price)',
+ 'cost', 'руб', '[&quot;quantity&quot;, &quot;items_per_sheet&quot;, &quot;print_price&quot;, &quot;paper_price&quot;]');
+
+-- Себестоимость офсетной печати (закупка у партнёра + доставка + допы)
+INSERT INTO formulas (...) VALUES
+('Себестоимость офсетной печати', 'offset_print_cost', 1,
+ 'cost = partner_price + delivery + extra',
+ 'cost', 'руб', '[&quot;partner_price&quot;, &quot;delivery&quot;, &quot;extra&quot;]');
+
+-- Раскладка на SRA3
+INSERT INTO formulas (...) VALUES
+('Раскладка на SRA3', 'sra3_layout', 2,
+ 'item_w = width + bleed*2; item_h = height + bleed*2; cols = floor((sheet_width - 2) / item_w); rows = floor((sheet_height - 6) / item_h); items_per_sheet = cols × rows',
+ 'layout', 'шт', '[&quot;width&quot;, &quot;height&quot;, &quot;bleed&quot;, &quot;sheet_width&quot;, &quot;sheet_height&quot;]');
+
+-- Время гильотинной резки
+INSERT INTO formulas (...) VALUES
+('Время гильотинной резки', 'guillotine_time', 3,
+ 'stacks = ceil(sheets / max_sheets_per_stack); cuts = (cols-1) + (rows-1)×cols; time = stacks × cuts × cut_speed × (1 + stack_height/80×0.5) + setup_time',
+ 'time', 'мин', '[&quot;sheets&quot;, &quot;max_sheets_per_stack&quot;, &quot;cols&quot;, &quot;rows&quot;, &quot;cut_speed&quot;, &quot;stack_height&quot;, &quot;setup_time&quot;]');
+
+-- Тариф факса по странам
+INSERT INTO formulas (...) VALUES
+('Тариф факса по странам', 'fax_tariff', 4,
+ 'price = CASE country WHEN &quot;Россия&quot; THEN 20 WHEN &quot;СНГ&quot; THEN 40 WHEN &quot;Европа&quot; THEN 80 ELSE 120 END; total = price × pages',
+ 'cost', 'руб', '[&quot;country&quot;, &quot;pages&quot;]');
+</code></pre>
+<h3 id="движок-вычисления-формул-кэширование-многострочность">Движок вычисления формул (кэширование, многострочность)</h3>
+<p><code>FormulaEngine</code> кэширует загруженные формулы в <code>Map</code>, поддерживает многострочные формулы (строки разделяются <code>;</code>, присваивания обновляют контекст), логирует выполнение и валидирует синтаксис.</p>
+<pre><code class="language-javascript">class FormulaEngine {
+    constructor() { this.formulasCache = new Map(); }
+
+    async loadFormula(code) {
+        if (this.formulasCache.has(code)) return this.formulasCache.get(code);
+        const result = await db.query(
+            `SELECT * FROM formulas WHERE code = $1 AND is_current = true AND is_active = true`, [code]);
+        if (result.rows.length === 0) throw new Error(`Формула ${code} не найдена`);
+        const formula = result.rows[0];
+        this.formulasCache.set(code, formula);
+        return formula;
+    }
+
+    async evaluate(formulaCode, inputValues) {
+        const formula = await this.loadFormula(formulaCode);
+        const context = { ...inputValues };
+        const lines = formula.formula_text.split(';');
+        let result;
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed) continue;
+            const fn = new Function(...Object.keys(context), `return (${trimmed})`);
+            result = fn(...Object.values(context));
+            const assignMatch = trimmed.match(/^(\w+)\s*=/);
+            if (assignMatch) context[assignMatch[1]] = result;  // присваивание обновляет контекст
+        }
+        await this.logExecution(formula.id, inputValues, result);
+        return { success: true, result, unit: formula.result_unit, context };
+    }
+    // validateSyntax(...) — проверка неизвестных переменных + пробное вычисление
+}
+</code></pre>
+<h3 id="безопасный-движок-formulaevaluator-mathjs">Безопасный движок: <code>FormulaEvaluator</code> (math.js)</h3>
+<p>В блоке проектирования редактора формул (привязанного к оборудованию) предлагался альтернативный, безопасный движок <code>FormulaEvaluator</code> на базе парсера <code>math.js</code> (<code>math.parser()</code>). Он подставляет значения переменных в текст формулы (по границам слов <code>\b</code>) и вычисляет результат через <code>parser.evaluate(...)</code> вместо <code>new Function(...)</code>, что исключает выполнение произвольного JS-кода.</p>
+<pre><code class="language-javascript">class FormulaEvaluator {
+    constructor() {
+        this.parser = new math.parser(); // используем math.js
+    }
+
+    evaluate(formula, variables) {
+        // Подставляем значения переменных по границам слов
+        let compiledFormula = formula;
+        for (const [key, value] of Object.entries(variables)) {
+            compiledFormula = compiledFormula.replace(
+                new RegExp(`\\b${key}\\b`, 'g'), value.toString());
+        }
+        // Безопасное вычисление через парсер math.js
+        try {
+            const result = this.parser.evaluate(compiledFormula);
+            return { success: true, result, formula: compiledFormula };
+        } catch (e) {
+            return { success: false, error: e.message };
+        }
+    }
+
+    // Проверка, что в формуле использованы только разрешённые переменные
+    validateFormula(formula, allowedVars) {
+        const varPattern = new RegExp(`\\b(${allowedVars.join('|')})\\b`, 'g');
+        const usedVars = formula.match(varPattern) || [];
+        const unknownVars = usedVars.filter(v =&gt; !allowedVars.includes(v));
+        if (unknownVars.length &gt; 0) {
+            return { valid: false, error: `Неизвестные переменные: ${unknownVars.join(', ')}` };
+        }
+        return { valid: true };
+    }
+}
+</code></pre>
+<blockquote>
+<p>Примечание по безопасности: в исходных материалах модуль формул (универсальный, на таблице <code>formulas</code>) реализован через <code>new Function(...)</code>. Это противоречит требованию «нельзя сломать систему кривой формулой» — выполнение произвольного JS-кода небезопасно. Параллельно для редактора формул оборудования спроектирован безопасный путь через <code>FormulaEvaluator</code> (<code>math.parser()</code>), показанный выше.</p>
+</blockquote>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: способ безопасного вычисления формул не унифицирован — в одном фрагменте используется <code>new Function()</code> (потенциально небезопасно), в другом — парсер <code>math.js</code>. Нужно зафиксировать единый безопасный движок.</p>
+<h3 id="использование-в-калькуляторе">Использование в калькуляторе</h3>
+<pre><code class="language-javascript">class DigitalPrintCalculator {
+    async calculate(params) {
+        const engine = new FormulaEngine();
+        const layout = await engine.evaluate('sra3_layout', {
+            width: params.width, height: params.height, bleed: 3,
+            sheet_width: 320, sheet_height: 450
+        });
+        const cost = await engine.evaluate('digital_print_cost', {
+            quantity: params.quantity,
+            items_per_sheet: layout.result,
+            print_price: await this.getPrintPrice(params.colorType),
+            paper_price: await this.getPaperPrice(params.paperId)
+        });
+        const price = await engine.evaluate('margin_price', {
+            cost: cost.result,
+            margin_percent: await this.getMargin(params.quantity)
+        });
+        return { cost: cost.result, price: price.result, layout: layout.result };
+    }
+}
+</code></pre>
+<h3 id="сводка-возможностей-модуля-формул">Сводка возможностей модуля формул</h3>
+<table>
+<thead>
+<tr>
+<th>Возможность</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Визуальный редактор</td>
+<td>Создание формул без программиста</td>
+</tr>
+<tr>
+<td>Доступные переменные</td>
+<td>Справочник всех переменных</td>
+</tr>
+<tr>
+<td>Проверка синтаксиса</td>
+<td>Мгновенная валидация формулы</td>
+</tr>
+<tr>
+<td>Тестирование</td>
+<td>Проверка формулы на тестовых данных</td>
+</tr>
+<tr>
+<td>Версионирование</td>
+<td>История изменений формул</td>
+</tr>
+<tr>
+<td>Привязка к сущностям</td>
+<td>Одна формула — в разных услугах (<code>formula_links</code>)</td>
+</tr>
+<tr>
+<td>Кэширование</td>
+<td>Быстрое выполнение часто используемых формул</td>
+</tr>
+<tr>
+<td>Логирование</td>
+<td>Запись всех вычислений для отладки</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-философия-всё-сущность">1. Философия: всё — сущность</a></li><li class="lvl3"><a href="#базовая-структура-сущностей">Базовая структура сущностей</a></li><li class="lvl2"><a href="#2-конструктор-оборудования-и-справочники">2. Конструктор оборудования и справочники</a></li><li class="lvl3"><a href="#уровень-1-базовые-справочники-сырые-данные">Уровень 1. Базовые справочники (сырые данные)</a></li><li class="lvl3"><a href="#уровень-2-привязка-к-принтерам-цены-и-возможности">Уровень 2. Привязка к принтерам (цены и возможности)</a></li><li class="lvl2"><a href="#3-конструктор-услуг-сборка-калькуляторов-под-страницу">3. Конструктор услуг (сборка калькуляторов под страницу)</a></li><li class="lvl3"><a href="#примеры-настройки-конструкторов">Примеры настройки конструкторов</a></li><li class="lvl3"><a href="#визуальный-редактор-конструктора-админка">Визуальный редактор конструктора (админка)</a></li><li class="lvl3"><a href="#витрина-для-клиента-пример-отображения">Витрина для клиента (пример отображения)</a></li><li class="lvl2"><a href="#4-конструктор-витрины-и-страниц-сборка-из-сущностей">4. Конструктор витрины и страниц (сборка из сущностей)</a></li><li class="lvl3"><a href="#пример-конструктора-страницы-листовки">Пример конструктора страницы «Листовки»</a></li><li class="lvl3"><a href="#визуальный-редактор-конструктора-страницы">Визуальный редактор конструктора страницы</a></li><li class="lvl3"><a href="#наследование-шаблонов-продуктов-и-переопределение">Наследование шаблонов продуктов и переопределение</a></li><li class="lvl3"><a href="#типы-сгибов-для-буклетов">Типы сгибов для буклетов</a></li><li class="lvl3"><a href="#фронтенд-загрузка-конфигурации-страницы">Фронтенд: загрузка конфигурации страницы</a></li><li class="lvl2"><a href="#5-конструктор-полей-калькуляторов-типы-услуг">5. Конструктор полей калькуляторов (типы услуг)</a></li><li class="lvl3"><a href="#категория-vs-тип-услуги">Категория vs Тип услуги</a></li><li class="lvl3"><a href="#структура-бд">Структура БД</a></li><li class="lvl3"><a href="#предустановленные-категории-и-типы-услуг">Предустановленные категории и типы услуг</a></li><li class="lvl3"><a href="#вспомогательные-справочники">Вспомогательные справочники</a></li><li class="lvl3"><a href="#редактор-типа-услуги-админка">Редактор типа услуги (админка)</a></li><li class="lvl3"><a href="#класс-работы-с-типами-услуг">Класс работы с типами услуг</a></li><li class="lvl2"><a href="#6-настройка-услуги-через-маржу">6. Настройка услуги через маржу</a></li><li class="lvl3"><a href="#пример-копирование-зависимость-от-тиража">Пример: копирование (зависимость от тиража)</a></li><li class="lvl3"><a href="#пример-факс-тарификация-по-странам">Пример: факс (тарификация по странам)</a></li><li class="lvl3"><a href="#универсальный-класс-расчёта-услуги">Универсальный класс расчёта услуги</a></li><li class="lvl3"><a href="#админка-зависимостей-услуги">Админка зависимостей услуги</a></li><li class="lvl2"><a href="#7-правила-вылетов-bleed_rules-как-настраиваемые">7. Правила вылетов (bleed_rules) как настраиваемые</a></li><li class="lvl2"><a href="#8-правила-маржинаценки-как-настраиваемые">8. Правила маржи/наценки как настраиваемые</a></li><li class="lvl2"><a href="#9-редактор-формул-визуальный-конструктор-расчётов">9. Редактор формул (визуальный конструктор расчётов)</a></li><li class="lvl3"><a href="#назначение">Назначение</a></li><li class="lvl3"><a href="#требования-к-интерфейсу">Требования к интерфейсу</a></li><li class="lvl3"><a href="#типы-переменных">Типы переменных</a></li><li class="lvl3"><a href="#структура-редактора-формул">Структура редактора формул</a></li><li class="lvl3"><a href="#визуальный-конструктор-drag-and-drop">Визуальный конструктор (drag-and-drop)</a></li><li class="lvl3"><a href="#шаблоны-формул">Шаблоны формул</a></li><li class="lvl3"><a href="#валидация-и-тестирование">Валидация и тестирование</a></li><li class="lvl3"><a href="#примеры-расчёта-тестовые-прогоны">Примеры расчёта (тестовые прогоны)</a></li><li class="lvl3"><a href="#версионирование-и-история-изменений">Версионирование и история изменений</a></li><li class="lvl3"><a href="#структура-бд-модуля-формул">Структура БД модуля формул</a></li><li class="lvl3"><a href="#примеры-формул-в-бд">Примеры формул в БД</a></li><li class="lvl3"><a href="#движок-вычисления-формул-кэширование-многострочность">Движок вычисления формул (кэширование, многострочность)</a></li><li class="lvl3"><a href="#безопасный-движок-formulaevaluator-mathjs">Безопасный движок: `FormulaEvaluator` (math.js)</a></li><li class="lvl3"><a href="#использование-в-калькуляторе">Использование в калькуляторе</a></li><li class="lvl3"><a href="#сводка-возможностей-модуля-формул">Сводка возможностей модуля формул</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Админка: обзор — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="09-admin-interface--admin-overview">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li class="active"><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="админка-обзор">Админка: обзор</h1>
+<p>Административная панель PrintOffice — это модуль настроек, позволяющий управлять всей бизнес-логикой типографии (конструкторами услуг, ценами, формулами, справочниками, ролями) без участия программиста. Все изменения вносятся через визуальные конструкторы и справочники.</p>
+<h2 id="назначение-админки">Назначение админки</h2>
+<p>Админ-панель служит единым центром управления конфигурацией системы. Через неё настраиваются:</p>
+<ul>
+<li>страницы-калькуляторы (конструкторы услуг);</li>
+<li>ценообразование и маржа;</li>
+<li>расчётные формулы и правила валидации;</li>
+<li>справочники оборудования, материалов, форматов, услуг и партнёров;</li>
+<li>пользователи и права доступа.</li>
+</ul>
+<h2 id="сквозной-принцип-настройка-без-программиста">Сквозной принцип: «настройка без программиста»</h2>
+<p>Ключевой принцип админ-панели — администратор должен иметь возможность менять поведение системы самостоятельно, без привлечения разработчиков. Это обеспечивается за счёт следующих механизмов:</p>
+<ul>
+<li><strong>Конструкторы</strong> — сборка калькуляторов и страниц из готовых блоков.</li>
+<li><strong>Визуальный редактор формул</strong> — настройка расчётных формул без написания кода, с проверкой синтаксиса и тестовым расчётом.</li>
+<li><strong>Конструктор правил валидации</strong> — создание правил совместимости (материалов, форматов) без программиста.</li>
+<li><strong>Справочники</strong> — ведение оборудования, материалов, форматов, услуг и партнёров через формы.</li>
+<li><strong>Шаблоны ответов</strong> — заготовки текстов для коммуникаций.</li>
+<li><strong>Импорт/экспорт Excel</strong> — массовая загрузка и выгрузка цен партнёров.</li>
+</ul>
+<h2 id="разделы-настроек">Разделы настроек</h2>
+<p>Модуль настроек разделён на функциональные блоки.</p>
+<h3 id="1-конструкторы-услуг">1. Конструкторы услуг</h3>
+<p>Сборка калькуляторов из блоков. Каждый конструктор привязан к отдельной странице сайта (каждый конструктор = своя страница).</p>
+<p>Возможности:</p>
+<ul>
+<li>Создание страниц калькуляторов.</li>
+<li>Привязка к страницам сайта.</li>
+<li>Настройка доступных материалов (какие бумаги показывать).</li>
+<li>Настройка доступных форматов (какие форматы доступны).</li>
+<li>Настройка параметров (форматы, бумага, цветность).</li>
+<li>Правила вылетов для конструктора (гибкие условия).</li>
+<li>Технологические операции по умолчанию (что включено в услугу).</li>
+<li>Привязка дополнительных услуг.</li>
+<li>Копирование конструкторов (быстрое создание новых страниц).</li>
+<li>Семейства товаров — группировка вариантов (скоба / пружина / КБС).</li>
+<li>Кросс-продажи — настройка связей между услугами.</li>
+</ul>
+<h3 id="2-маржа-и-цены">2. Маржа и цены</h3>
+<p>Управление ценообразованием.</p>
+<ul>
+<li>Таблицы маржи (по тиражу, по себестоимости).</li>
+<li>Импорт/экспорт Excel для цен партнёров.</li>
+<li>Настройка налога (7%).</li>
+<li>Правила доставки (регионы, вес, тираж, время).</li>
+</ul>
+<h3 id="3-формулы-и-правила-выбор-технологии">3. Формулы и правила (выбор технологии)</h3>
+<p>Настройка расчётной логики и правил совместимости.</p>
+<p><strong>Конструктор формул:</strong></p>
+<ul>
+<li>Визуальный редактор.</li>
+<li>Доступные переменные.</li>
+<li>Проверка синтаксиса.</li>
+<li>Тестовый расчёт.</li>
+<li>История версий.</li>
+<li>Шаблоны формул.</li>
+</ul>
+<p><strong>Конструктор правил валидации:</strong></p>
+<ul>
+<li>Условия совместимости (материалов, форматов).</li>
+<li>Уровни серьёзности: ошибка / предупреждение.</li>
+<li>Сообщения и рекомендации.</li>
+<li>Исключения для постоянных клиентов.</li>
+</ul>
+<p><strong>Прочее:</strong></p>
+<ul>
+<li>Шаблоны ответов.</li>
+</ul>
+<h3 id="4-справочники">4. Справочники</h3>
+<p>Ведение базовых сущностей системы. Создание/редактирование оборудования, материалов и форматов.</p>
+<table>
+<thead>
+<tr>
+<th>Справочник</th>
+<th>Состав / примеры</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Оборудование (принтеры)</td>
+<td>принтеры, резаки, плоттеры, ламинаторы</td>
+<td>с техническими полями и скоростями</td>
+</tr>
+<tr>
+<td>Материалы</td>
+<td>бумага, плёнки, пружины, картон, самоклейка</td>
+<td>бумага, плёнки</td>
+</tr>
+<tr>
+<td>Форматы</td>
+<td>A4, A5, A6, A3, SRA3, нестандартные</td>
+<td>стандартные и нестандартные</td>
+</tr>
+<tr>
+<td>Услуги (операции)</td>
+<td>ламинация, биговка, фальцовка, сверление</td>
+<td>технологические операции</td>
+</tr>
+<tr>
+<td>Партнёры</td>
+<td>ГМ Принт и др.</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительно к справочникам относятся:</p>
+<ul>
+<li><strong>Медиа-галерея</strong> — загрузка фото и видео для материалов.</li>
+<li><strong>Шаблоны для менеджера</strong> — быстрый выбор формата.</li>
+<li><strong>Шаблоны ответов</strong> — для коммуникаций.</li>
+</ul>
+<h3 id="5-витрина">5. Витрина</h3>
+<p>Настройка отображения услуг на сайте через конструкторы услуг (привязка к страницам, выбор показываемых материалов и форматов, кросс-продажи, семейства товаров). См. раздел «Конструкторы услуг».</p>
+<h3 id="6-пользователи-и-роли">6. Пользователи и роли</h3>
+<p>Управление доступом сотрудников и клиентов.</p>
+<ul>
+<li>Управление ролями: <code>admin</code>, <code>manager</code>, <code>partner</code>, <code>client</code>.</li>
+<li>Права доступа.</li>
+<li>Приглашение сотрудников.</li>
+</ul>
+<h3 id="7-брифы-уведомления-шаблоны-документов">7. Брифы, уведомления, шаблоны документов</h3>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в указанных фрагментах источника явно не описаны разделы настройки брифов, уведомлений и шаблонов документов как отдельные блоки админки. В исходнике присутствуют только «шаблоны ответов» (для коммуникаций) и «шаблоны для менеджера» (быстрый выбор формата). Требуется уточнить состав и наличие этих разделов.</p>
+<h2 id="сводная-диаграмма-модуля-настроек">Сводная диаграмма модуля настроек</h2>
+<pre><code class="language-text">┌─────────────────────────────────────────────────────────────────┐
+│                    МОДУЛЬ НАСТРОЕК (АДМИНКА)                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  🔧 КОНСТРУКТОРЫ УСЛУГ                                       │ │
+│  │  ───────────────────────────────────────────────────────────│ │
+│  │  • Создание страниц калькуляторов                           │ │
+│  │  • Настройка параметров (форматы, бумага, цветность)        │ │
+│  │  • Привязка дополнительных услуг                            │ │
+│  │  • Копирование конструкторов                                │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  💰 МАРЖА И ЦЕНЫ                                             │ │
+│  │  ───────────────────────────────────────────────────────────│ │
+│  │  • Таблицы маржи (по тиражу, по себестоимости)              │ │
+│  │  • Импорт/экспорт Excel (цены партнёров)                    │ │
+│  │  • Настройка налога (7%)                                    │ │
+│  │  • Правила доставки (регионы, вес, тираж, время)            │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  📊 ФОРМУЛЫ И ПРАВИЛА                                        │ │
+│  │  ───────────────────────────────────────────────────────────│ │
+│  │  • Визуальный редактор формул                               │ │
+│  │  • Правила валидации (совместимость материалов, форматов)   │ │
+│  │  • Шаблоны ответов                                          │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  📦 СПРАВОЧНИКИ                                              │ │
+│  │  ───────────────────────────────────────────────────────────│ │
+│  │  • Оборудование (принтеры, резаки, плоттеры, ламинаторы)    │ │
+│  │  • Материалы (бумага, плёнки, пружины, картон, самоклейка)  │ │
+│  │  • Форматы (A4, A5, A6, A3, SRA3, нестандартные)            │ │
+│  │  • Услуги (ламинация, биговка, фальцовка, сверление)        │ │
+│  │  • Партнёры (ГМ Принт и др.)                                │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                                                                   │
+│  ┌─────────────────────────────────────────────────────────────┐ │
+│  │  👥 ПОЛЬЗОВАТЕЛИ                                             │ │
+│  │  ───────────────────────────────────────────────────────────│ │
+│  │  • Управление ролями (admin, manager, partner, client)      │ │
+│  │  • Права доступа                                            │ │
+│  │  • Приглашение сотрудников                                  │ │
+│  └─────────────────────────────────────────────────────────────┘ │
+│                                                                   │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h2 id="кто-имеет-доступ">Кто имеет доступ</h2>
+<p>Доступ к админ-панели определяется ролями пользователей:</p>
+<table>
+<thead>
+<tr>
+<th>Роль</th>
+<th>Доступ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>admin</code></td>
+<td>полный доступ к настройкам, справочникам, ролям и формулам</td>
+</tr>
+<tr>
+<td><code>manager</code></td>
+<td>работа в рамках предоставленных прав (например, шаблоны для менеджера)</td>
+</tr>
+<tr>
+<td><code>partner</code></td>
+<td>доступ к данным партнёра (цены через импорт/экспорт Excel)</td>
+</tr>
+<tr>
+<td><code>client</code></td>
+<td>клиентский доступ (без настроек админки)</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: точное распределение прав доступа по разделам админки между ролями <code>admin</code>, <code>manager</code>, <code>partner</code>, <code>client</code> в источнике детально не описано — указан только сам перечень ролей и наличие механизма прав доступа.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#назначение-админки">Назначение админки</a></li><li class="lvl2"><a href="#сквозной-принцип-настройка-без-программиста">Сквозной принцип: «настройка без программиста»</a></li><li class="lvl2"><a href="#разделы-настроек">Разделы настроек</a></li><li class="lvl3"><a href="#1-конструкторы-услуг">1. Конструкторы услуг</a></li><li class="lvl3"><a href="#2-маржа-и-цены">2. Маржа и цены</a></li><li class="lvl3"><a href="#3-формулы-и-правила-выбор-технологии">3. Формулы и правила (выбор технологии)</a></li><li class="lvl3"><a href="#4-справочники">4. Справочники</a></li><li class="lvl3"><a href="#5-витрина">5. Витрина</a></li><li class="lvl3"><a href="#6-пользователи-и-роли">6. Пользователи и роли</a></li><li class="lvl3"><a href="#7-брифы-уведомления-шаблоны-документов">7. Брифы, уведомления, шаблоны документов</a></li><li class="lvl2"><a href="#сводная-диаграмма-модуля-настроек">Сводная диаграмма модуля настроек</a></li><li class="lvl2"><a href="#кто-имеет-доступ">Кто имеет доступ</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

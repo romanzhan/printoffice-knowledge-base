@@ -1,0 +1,1314 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Калькулятор брошюр и многостраничной продукции — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--brochures">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li class="active"><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="калькулятор-брошюр-и-многостраничной-продукции">Калькулятор брошюр и многостраничной продукции</h1>
+<p>Спецификация модуля расчёта составной многостраничной продукции (брошюры на скобе, пружине, КБС, болтах): кратность страниц, раскладка, подбор пружины, пластиковые обложки и цветные подложки, расчёт себестоимости по блокам, валидация, маржа и чек-листы готовности.</p>
+<hr>
+<h2 id="1-концепция-брошюра-как-композиция-блоков">1. Концепция: брошюра как композиция блоков</h2>
+<p>Брошюра — составное изделие, которое рассчитывается как сумма независимых блоков. Каждый блок имеет собственную бумагу/материал, цветность, раскладку и себестоимость.</p>
+<table>
+<thead>
+<tr>
+<th>Блок</th>
+<th>Обязательность</th>
+<th>Содержание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>📖 Обложка</td>
+<td>опционально (можно отключить)</td>
+<td>Печать (бумага, цветность), доп. услуги (ламинация, биговка). Тираж обложек = тираж брошюр</td>
+</tr>
+<tr>
+<td>📄 Внутренний блок</td>
+<td>обязательно</td>
+<td>Печать (бумага, цветность), количество страниц (кратно 2 или 4)</td>
+</tr>
+<tr>
+<td>🎨 Подложка (back cover)</td>
+<td>опционально, только для пружины/болтов</td>
+<td>Материал (картон, цвет), печать опциональна. Тираж = тираж брошюр</td>
+</tr>
+<tr>
+<td>✨ Материалы</td>
+<td>опционально</td>
+<td>Пластиковая обложка, защитная плёнка, картонная вкладка</td>
+</tr>
+<tr>
+<td>🔗 Сборка</td>
+<td>обязательно</td>
+<td>Тип переплёта (скоба/пружина/КБС), сторона крепления, визуализация</td>
+</tr>
+</tbody>
+</table>
+<h3 id="финальная-формула-расчёта">Финальная формула расчёта</h3>
+<pre><code>Общая себестоимость =
+    cover_cost          (если включён)
+  + block_cost          (обязательно)
+  + back_cover_cost     (если включён и тип = пружина)
+  + materials_cost      (если включены)
+  + binding_cost        (обязательно)
+
+Цена для клиента = Общая себестоимость × (1 + маржа / 100)
+</code></pre>
+<p>Где:</p>
+<ul>
+<li><code>cover_cost = sheets × (print_price + paper_price) + lamination_cost</code> (если есть)</li>
+<li><code>block_cost = sheets × (print_price + paper_price)</code></li>
+<li><code>back_cover_cost = sheets × material_price</code> (без печати) или <code>sheets × (print_price + paper_price)</code> (с печатью)</li>
+<li><code>materials_cost = material_price × quantity</code> (для каждого материала)</li>
+<li><code>binding_cost = цена сборки</code> (фиксированная или зависит от тиража/толщины)</li>
+</ul>
+<hr>
+<h2 id="2-типы-переплёта-и-бизнес-логика">2. Типы переплёта и бизнес-логика</h2>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Код</th>
+<th>Кратность страниц</th>
+<th>Обложка</th>
+<th>Отдельная подложка</th>
+<th>Корешок виден</th>
+<th>Min стр.</th>
+<th>Max стр.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>На скобе</td>
+<td><code>staple</code></td>
+<td>4</td>
+<td>да (единая, из другой бумаги)</td>
+<td>нет</td>
+<td>нет</td>
+<td>8</td>
+<td>64</td>
+</tr>
+<tr>
+<td>На пружине</td>
+<td><code>spring</code></td>
+<td>2</td>
+<td>да</td>
+<td>да</td>
+<td>да</td>
+<td>4</td>
+<td>200</td>
+</tr>
+<tr>
+<td>КБС (клей)</td>
+<td><code>kbs</code></td>
+<td>2</td>
+<td>да (плотная)</td>
+<td>—</td>
+<td>да</td>
+<td>20</td>
+<td>400</td>
+</tr>
+<tr>
+<td>На болтах</td>
+<td><code>bolt</code></td>
+<td>2</td>
+<td>да</td>
+<td>да</td>
+<td>да</td>
+<td>10</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительные характеристики типов (из конфигурации калькулятора):</p>
+<pre><code class="language-javascript">bindingTypes: {
+  staple: { name:'На скобе',  icon:'staple-icon.svg', pageMultiple:4, minPages:8,  maxPages:64,  hasCover:true, coverRequired:true,       spineVisible:false, availableFormats:['A5','A6','custom'] },
+  spring: { name:'На пружине', icon:'spring-icon.svg', pageMultiple:2, minPages:4,  maxPages:200, hasCover:true, hasBackCover:true, coverRequired:'optional', spineVisible:true,  availableFormats:['A4','A5','A6','custom'] },
+  kbs:    { name:'КБС (клей)', icon:'kbs-icon.svg',    pageMultiple:2, minPages:20, maxPages:400, hasCover:true, coverRequired:true,       spineVisible:true,  availableFormats:['A4','A5'] },
+  bolt:   { name:'На болтах',  icon:'bolt-icon.svg',   pageMultiple:2, minPages:10, maxPages:100, hasCover:true, hasBackCover:true, coverRequired:true,        spineVisible:true,  availableFormats:['A4','A5','custom'] }
+}
+</code></pre>
+<h3 id="ориентация">Ориентация</h3>
+<table>
+<thead>
+<tr>
+<th>Ориентация</th>
+<th>Ширина</th>
+<th>Высота</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Вертикальная (книжная)</td>
+<td>меньшая сторона</td>
+<td>большая сторона</td>
+</tr>
+<tr>
+<td>Горизонтальная (альбомная)</td>
+<td>большая сторона</td>
+<td>меньшая сторона</td>
+</tr>
+</tbody>
+</table>
+<p>Сторона крепления зависит от ориентации: книжная → слева, альбомная → сверху (по умолчанию автоматически, можно переопределить вручную для каждого формата).</p>
+<h3 id="значения-по-умолчанию-конструктора-админ">Значения по умолчанию конструктора (админ)</h3>
+<p>При создании конструктора в основных настройках задаются дефолты, которые подставляются клиенту в калькуляторе:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение по умолчанию</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Страниц по умолчанию</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Формат по умолчанию</td>
+<td>A4</td>
+</tr>
+<tr>
+<td>Ориентация по умолчанию</td>
+<td>книжная</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-раскладка-и-формулы-расчёта-блоков">3. Раскладка и формулы расчёта блоков</h2>
+<h3 id="31-раскладка-на-печатном-листе-общая-для-всех-блоков">3.1. Раскладка на печатном листе (общая для всех блоков)</h3>
+<p>Печатный лист по умолчанию — SRA3 (320×450 мм).</p>
+<pre><code class="language-javascript">function calculateLayout(format, orientation) {
+  const formats = { A4:{w:210,h:297}, A5:{w:148,h:210}, A6:{w:105,h:148} };
+  const sheet = { width:320, height:450 }; // SRA3
+  const p = formats[format];
+  const itemW = orientation === 'portrait' ? p.w : p.h;
+  const itemH = orientation === 'portrait' ? p.h : p.w;
+  // страниц на одной стороне листа
+  const pagesPerSide = Math.floor(sheet.width/itemW) * Math.floor(sheet.height/itemH);
+  const pagesPerSheet  = pagesPerSide * 2;   // двусторонняя печать
+  const coversPerSheet = pagesPerSide;       // обложки/подложки — односторонне считается на сторону
+  return { pagesPerSheet, coversPerSheet };
+}
+</code></pre>
+<p>Базовые формулы:</p>
+<pre><code># внутренний блок
+sheets_per_brochure = ceil(total_pages / pages_per_sheet)
+total_sheets        = sheets_per_brochure × quantity
+
+# обложка / подложка
+sheets = ceil(quantity / covers_per_sheet)
+
+# себестоимость блока
+cost = sheets × (print_price + paper_price)
+</code></pre>
+<h3 id="32-себестоимость-каждого-блока">3.2. Себестоимость каждого блока</h3>
+<pre><code># Обложка
+cover_sheets   = ceil(quantity / covers_per_sheet)
+cover_cost     = cover_sheets × (print_price + paper_price) + lamination_cost
+lamination_cost = quantity × lamination_price_per_unit
+
+# Внутренний блок
+block_sheets   = ceil(pages / pages_per_sheet) × quantity
+block_cost     = block_sheets × (print_price + paper_price)
+
+# Подложка (картон, обычно без печати)
+back_sheets    = ceil(quantity / covers_per_sheet)
+back_cover_cost = back_sheets × material_price  (+ печать, если выбрана)
+
+# Сборка
+binding_cost   = price_per_unit(quantity) × quantity  # фиксированная или ступенчатая по тиражу
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: количество страниц на листе для A4 указано непоследовательно. В одном фрагменте <code>calculateLayout</code> для брошюры A5 даёт 8 страниц на листе (4 с каждой стороны), а упрощённая таблица в <code>BrochureCostCalculator.calculateLayout</code> задаёт фиксированно A4=4, A5=8, A6=16 стр/лист независимо от ориентации; для авторефератов на скобе зашито <code>pagesPerSheet = 2</code> для A4 «в сложенном виде». Нужно зафиксировать единый алгоритм раскладки.</p>
+<hr>
+<h2 id="4-класс-расчёта-брошюры-полный-с-учётом-всех-блоков">4. Класс расчёта брошюры (полный, с учётом всех блоков)</h2>
+<p>Полный калькулятор собирает себестоимость из блоков-классов <code>InnerBlock</code>, <code>CoverBlock</code>, <code>BackCoverBlock</code>, <code>PlasticCoverBlock</code>, <code>BindingBlock</code>.</p>
+<pre><code class="language-javascript">class BrochureCalculator {
+  async calculate(params) {
+    const results = { blocks:{}, totalCost:0, errors:[] };
+
+    // 1. Внутренний блок (обязательный)
+    const block = await new InnerBlock().calculate({ format, orientation, pages, paperId:blockPaperId, colorId:blockColorId, quantity });
+    results.blocks.inner = block; results.totalCost += block.totalCost;
+
+    // 2. Обложка (опционально)
+    if (coverEnabled) {
+      const cover = await new CoverBlock().calculate({ format, orientation, paperId:coverPaperId, colorId:coverColorId, hasLamination:coverLamination, quantity });
+      results.blocks.cover = cover; results.totalCost += cover.totalCost;
+    }
+
+    // 3. Подложка (только для пружины)
+    if (bindingType === 'spring' &amp;&amp; backCoverEnabled) {
+      const back = await new BackCoverBlock().calculate({ format, orientation, materialId:backCoverMaterialId, color:backCoverColor, hasPrint:backCoverPrint, quantity });
+      results.blocks.backCover = back; results.totalCost += back.totalCost;
+    }
+
+    // 4. Пластиковая обложка
+    if (plasticCoverEnabled) {
+      const plastic = await new PlasticCoverBlock().calculate(format, plasticCoverType, quantity);
+      if (!plastic.success) results.errors.push(plastic.error);
+      else { results.blocks.plasticCover = plastic; results.totalCost += plastic.finalCost; }
+    }
+
+    // 5. Сборка
+    const binding = await new BindingBlock().calculate({ type:bindingType, pages, paperDensity, quantity });
+    if (!binding.success) results.errors.push(binding.error);
+    else { results.blocks.binding = binding; results.totalCost += binding.totalCost; }
+
+    // 6. Маржа
+    const margin = await this.getMargin(quantity);
+    const finalPrice = results.totalCost * (1 + margin/100);
+
+    return { success: results.errors.length===0, breakdown: results.blocks, totalCost: results.totalCost, margin, finalPrice, pricePerUnit: finalPrice/quantity };
+  }
+
+  // Маржа от тиража (значения из кода калькулятора)
+  async getMargin(quantity) {
+    if (quantity &lt; 10)  return 100;   // &lt; 10 шт
+    if (quantity &lt; 50)  return 80;    // 10–49 шт
+    if (quantity &lt; 100) return 60;    // 50–99 шт
+    return 50;                        // 100+ шт
+  }
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: ступени маржи в коде <code>getMargin</code> (<code>&lt;10</code>→100%, <code>&lt;50</code>→80%, <code>&lt;100</code>→60%, иначе 50%) не совпадают со ступенями админ-таблицы маржи из финальной спецификации конструктора (см. §5.4: 1–10→100%, 11–50→80%, 51–100→70%, 101+→60%). В частности для тиража 50–100 шт код даёт 60%, а админ-таблица — 70%. Нужно выбрать единый источник наценки (жёстко зашитая функция vs настраиваемая таблица).</p>
+<p>Внутренние «справочные» цены, использованные в примерах кода (себестоимость, не финальная цена):</p>
+<ul>
+<li>Печать (за лист): <code>1+0</code> = 5; <code>1+1</code> = 8; <code>4+0</code> = 20; <code>4+4</code> = 25 руб.</li>
+<li>Бумага блока (за лист): 80 г/м² = 2; 130 = 3; 170 = 4; 200 = 4.5 руб.</li>
+<li>Бумага обложки (за лист): 130 = 3; 200 = 4.5; 250 = 6; 300 = 8 руб.</li>
+<li>Ламинация (за шт): A4 = 15; A5 = 10; A6 = 7 руб.</li>
+<li>Картон подложки (за лист): чёрный = 12; белый = 10; красный/синий = 15 руб.</li>
+<li>Сборка (за шт): скоба = 15 (в авторефератах 5); пружина = по подбору; КБС = 50 руб.</li>
+</ul>
+<hr>
+<h2 id="5-примеры-расчётов">5. Примеры расчётов</h2>
+<h3 id="51-брошюра-а5-на-скобе-20-стр-тираж-100-шт">5.1. Брошюра А5 на скобе, 20 стр, тираж 100 шт</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Формат готовой брошюры</td>
+<td>А5 (148×210)</td>
+</tr>
+<tr>
+<td>Формат печати</td>
+<td>А4 (210×297)</td>
+</tr>
+<tr>
+<td>Ориентация</td>
+<td>Вертикальная</td>
+</tr>
+<tr>
+<td>Страниц в брошюре</td>
+<td>20 (кратность 4 ✓)</td>
+</tr>
+<tr>
+<td>Страниц на листе</td>
+<td>4 (2 с каждой стороны)</td>
+</tr>
+<tr>
+<td>Листов на брошюру</td>
+<td>20 / 4 = 5</td>
+</tr>
+<tr>
+<td>Всего листов блока</td>
+<td>100 × 5 = 500</td>
+</tr>
+<tr>
+<td>Обложек на листе</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Листов обложки</td>
+<td>100 / 2 = 50</td>
+</tr>
+</tbody>
+</table>
+<p>Себестоимость:</p>
+<ul>
+<li>Блок: 500 × (2.5 печать + 0.8 бумага) = 1650 руб</li>
+<li>Обложка: 50 × (5.0 печать + 2.5 бумага) = 375 руб</li>
+<li>Ламинация: 100 × 15 = 1500 руб</li>
+<li>Сборка (скоба): 100 × 8 = 800 руб</li>
+<li><strong>ИТОГО: 4325 руб; цена за шт: 43.25 руб</strong></li>
+</ul>
+<h3 id="52-брошюра-а6-на-пружине-32-стр-тираж-50-шт">5.2. Брошюра А6 на пружине, 32 стр, тираж 50 шт</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Формат</td>
+<td>А6 (105×148)</td>
+</tr>
+<tr>
+<td>Формат печати</td>
+<td>А4 (210×297)</td>
+</tr>
+<tr>
+<td>Страниц на листе</td>
+<td>8 (4 с каждой стороны)</td>
+</tr>
+<tr>
+<td>Листов на брошюру</td>
+<td>32 / 8 = 4</td>
+</tr>
+<tr>
+<td>Всего листов</td>
+<td>50 × 4 = 200</td>
+</tr>
+<tr>
+<td>Обложка + подложка</td>
+<td>отдельно</td>
+</tr>
+</tbody>
+</table>
+<h3 id="53-полный-расчёт-а5-на-пружине-20-стр-тираж-50-шт-со-всеми-блоками">5.3. Полный расчёт: А5 на пружине, 20 стр, тираж 50 шт (со всеми блоками)</h3>
+<p>Параметры: обложка 200 г/м² 4+4 с ламинацией; блок 130 г/м² 4+4; подложка картон чёрный без печати; пластиковая обложка прозрачная.</p>
+<table>
+<thead>
+<tr>
+<th>Блок</th>
+<th>Расчёт</th>
+<th>Себестоимость</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Внутренний блок</td>
+<td>3 листа/брошюру × 50 = 150 листов; печать 150×25=3750; бумага 150×3=450</td>
+<td>4200 руб (84/шт)</td>
+</tr>
+<tr>
+<td>Обложка</td>
+<td>13 листов; печать 13×25=325; бумага 13×4.5=58.5; ламинация 50×10=500</td>
+<td>883.5 руб (17.67/шт)</td>
+</tr>
+<tr>
+<td>Подложка</td>
+<td>13 листов × 12 (картон чёрный)</td>
+<td>156 руб (3.12/шт)</td>
+</tr>
+<tr>
+<td>Пластиковая обложка</td>
+<td>30 руб/шт × 50</td>
+<td>1500 руб</td>
+</tr>
+<tr>
+<td>Сборка (пружина Ø8)</td>
+<td>18 руб/шт × 50; толщина корешка 4.4 мм</td>
+<td>900 руб</td>
+</tr>
+<tr>
+<td><strong>Себестоимость</strong></td>
+<td></td>
+<td><strong>7639.5 руб</strong></td>
+</tr>
+<tr>
+<td>Маржа (тираж &lt; 100)</td>
+<td>60%</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Цена клиенту</strong></td>
+<td>7639.5 × 1.6</td>
+<td><strong>12 223.2 руб (244.46/шт)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Маржа 60% здесь взята по ступеням кода <code>getMargin</code> (тираж 50 попадает в диапазон 50–99 шт → 60%). По админ-таблице маржи (§5.4) тот же тираж дал бы 80% (диапазон 11–50) либо 70% (51–100) — расхождение источников отмечено как открытый вопрос.</p>
+<h3 id="54-маржа-и-дополнительные-наценки-админ-таблица-конструктора">5.4. Маржа и дополнительные наценки (админ-таблица конструктора)</h3>
+<p>Маржа применяется к общей себестоимости всех блоков и настраивается отдельной таблицей в конструкторе брошюр (вкладка «Маржа»). Эти ступени заданы в финальной спецификации конструктора и отличаются от зашитой в коде функции <code>getMargin</code> (см. §4).</p>
+<table>
+<thead>
+<tr>
+<th>От (экз)</th>
+<th>До (экз)</th>
+<th>Тип наценки</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>Процент</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>11</td>
+<td>50</td>
+<td>Процент</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>51</td>
+<td>100</td>
+<td>Процент</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>101</td>
+<td>∞</td>
+<td>Процент</td>
+<td>60%</td>
+</tr>
+</tbody>
+</table>
+<p>Дополнительные наценки (включаются опционально и суммируются к базовой марже):</p>
+<table>
+<thead>
+<tr>
+<th>Опция</th>
+<th>Наценка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Срочность (до 24 ч)</td>
+<td>+50%</td>
+</tr>
+<tr>
+<td>Сложная раскладка (разные макеты)</td>
+<td>+30%</td>
+</tr>
+<tr>
+<td>Пластиковая обложка</td>
+<td>+20%</td>
+</tr>
+</tbody>
+</table>
+<p>Маржа едина для всей брошюры (применяется к сумме себестоимости блоков), а не к каждому блоку отдельно.</p>
+<hr>
+<h2 id="6-валидация-параметров">6. Валидация параметров</h2>
+<p>Валидация выполняется при вводе и блокирует расчёт при ошибках (<code>errors</code>), либо выдаёт предупреждения (<code>warnings</code>), предложения (<code>suggestions</code>) и альтернативы (<code>alternatives</code>).</p>
+<h3 id="61-ограничения-по-формату">6.1. Ограничения по формату</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Минимальный размер для ручной резки</td>
+<td>20×20 мм</td>
+</tr>
+<tr>
+<td>Меньше 30×30 мм</td>
+<td>только вырубка на плоттере</td>
+</tr>
+<tr>
+<td>Минимальный формат брошюры</td>
+<td>50×50 мм (в части правил 50×70 мм)</td>
+</tr>
+<tr>
+<td>Максимум для цифровой печати</td>
+<td>320×450 мм</td>
+</tr>
+<tr>
+<td>Разворот не помещается на SRA3</td>
+<td>предупреждение «печать на большем листе / широкоформат»</td>
+</tr>
+</tbody>
+</table>
+<p>Логика разворота:</p>
+<pre><code>spread_width  = (orientation==='vertical') ? format.width*2  : format.height*2
+spread_height = (orientation==='vertical') ? format.height   : format.width
+fits = spread_width &lt;= printableWidth &amp;&amp; spread_height &lt;= printableHeight
+</code></pre>
+<p>Если не помещается — предлагаются альтернативы: повернуть разворот, использовать больший формат бумаги, разбить на несколько листов (дороже).</p>
+<h3 id="62-ограничения-по-страницам">6.2. Ограничения по страницам</h3>
+<pre><code>multiple = (bindingType==='staple') ? 4 : 2
+pages % multiple === 0           # иначе ошибка кратности
+minPages &lt;= pages &lt;= maxPages    # иначе ошибка + предложение альтернативы
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>minPages</th>
+<th>maxPages</th>
+<th>maxSheets</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Скоба</td>
+<td>8</td>
+<td>64</td>
+<td>32</td>
+</tr>
+<tr>
+<td>Пружина</td>
+<td>4</td>
+<td>200</td>
+<td>100</td>
+</tr>
+<tr>
+<td>КБС</td>
+<td>20</td>
+<td>400</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>Толщина корешка для скобы &gt; 5 мм → предупреждение «рассмотрите пружину/КБС».</p>
+<h3 id="63-ограничения-по-бумаге-биговкафальцовка">6.3. Ограничения по бумаге (биговка/фальцовка)</h3>
+<p>Плотная бумага плохо фальцуется и краска осыпается — нужна биговка (а для очень плотной — биговка перед фальцовкой).</p>
+<table>
+<thead>
+<tr>
+<th>Плотность, г/м²</th>
+<th>Фальцовка</th>
+<th>Биговка</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>≤ 80</td>
+<td>да</td>
+<td>нет</td>
+<td></td>
+</tr>
+<tr>
+<td>130</td>
+<td>да</td>
+<td>нет</td>
+<td></td>
+</tr>
+<tr>
+<td>170</td>
+<td>да</td>
+<td>рекомендуется</td>
+<td>порог <code>scoringRequired</code></td>
+</tr>
+<tr>
+<td>200</td>
+<td>нет</td>
+<td>да</td>
+<td>только биговка</td>
+</tr>
+<tr>
+<td>250</td>
+<td>нет</td>
+<td>да</td>
+<td>макс. плотность для скобы</td>
+</tr>
+<tr>
+<td>300</td>
+<td>нет</td>
+<td>да</td>
+<td>биговка + осторожно</td>
+</tr>
+<tr>
+<td>350</td>
+<td>нет</td>
+<td>да</td>
+<td>биговка обязательна</td>
+</tr>
+</tbody>
+</table>
+<p>Пороги по типам переплёта:</p>
+<ul>
+<li>Скоба: макс. плотность 250 г/м²; биговка с 170 г/м². Плотность обложки &gt; 300 г/м² → ошибка (слишком толстая для скобы).</li>
+<li>Пружина: макс. плотность 300 г/м²; биговка с 200 г/м².</li>
+<li>КБС: плотность блока 80–300 г/м².</li>
+</ul>
+<p>Прочие проверки бумаги:</p>
+<ul>
+<li>Обложка &lt; 150 г/м² → предупреждение «недостаточно жёсткая, рекомендуется от 200 г/м²».</li>
+<li>Скоба: очень плотная обложка (&gt; 250) + тонкий блок (&lt; 100) → предупреждение «плохо скрепляется скобой».</li>
+</ul>
+<h3 id="64-технологические-ограничения">6.4. Технологические ограничения</h3>
+<ul>
+<li>Мелкий формат (&lt; 30×30 мм) при тираже &gt; 10 шт → рекомендуется вырубка на плоттере (множитель цены ×1.5, времени ×0.3) или штанц-форма.</li>
+<li>Офсетная печать при тираже &lt; 100 шт → предупреждение «рекомендуется цифровая».</li>
+<li>Формат &gt; печатного листа при цифре → ошибка + переход на широкоформатную печать.</li>
+</ul>
+<h3 id="65-автоподбор-альтернатив-цепочки-замен">6.5. Автоподбор альтернатив (цепочки замен)</h3>
+<p>Цепочка по умолчанию: <strong>скоба → пружина → КБС</strong>.</p>
+<pre><code class="language-javascript">findAlternativeForManyPages(pages, type) {
+  if (type==='staple' &amp;&amp; pages&gt;64)  return { type:'spring', url:'/catalog/brochures?type=spring' };
+  if (type==='spring' &amp;&amp; pages&gt;200) return { type:'kbs',    url:'/catalog/brochures?type=kbs' };
+  return null;
+}
+</code></pre>
+<p>При выборе альтернативы выполняется перерасчёт цены и сроков; страницы округляются до кратности нового типа.</p>
+<hr>
+<h2 id="7-автоматический-расчёт-максимального-количества-страниц">7. Автоматический расчёт максимального количества страниц</h2>
+<p>Максимум страниц зависит от плотности бумаги, типа переплёта и допустимой толщины корешка.</p>
+<pre><code class="language-javascript">calculateMaxPages(paperDensity, bindingType) {
+  const sheetThickness = paperDensity * 0.0011;            // толщина листа, мм
+  const maxSpineThickness = { staple:5, spring:15, kbs:25 }; // макс. корешок, мм
+  const maxThickness = maxSpineThickness[bindingType] || 10;
+  const maxSheets = Math.floor(maxThickness / sheetThickness);
+  let maxPages = maxSheets * 2;                            // лист = 2 страницы
+  const multiple = bindingType==='staple' ? 4 : 2;
+  maxPages = Math.floor(maxPages / multiple) * multiple;   // кратность
+  const minPages = bindingType==='staple' ? 8 : 4;
+  return { minPages, maxPages, maxSheets, spineThickness:(maxSheets*sheetThickness).toFixed(1) };
+}
+</code></pre>
+<p>Пример: 130 г/м² → толщина листа 0.143 мм; пружина (корешок 15 мм) → 104 листа → 208 страниц (кратно 2 = 208).</p>
+<p>В админке поддерживается переключатель «использовать автоматический расчёт / ручной лимит min-max страниц».</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: максимум страниц для скобы задан жёстко как 64 в правилах валидации, но автоматический расчёт <code>calculateMaxPages</code> при допустимой толщине корешка 5 мм и тонкой бумаге выдаёт значительно больше. Нужно решить, что приоритетнее — жёсткий лимит из настроек или автоматический расчёт по толщине.</p>
+<hr>
+<h2 id="8-подбор-пружины">8. Подбор пружины</h2>
+<h3 id="81-принцип">8.1. Принцип</h3>
+<p>Производитель указывает ёмкость пружины для офисной бумаги 80 г/м². Для другой плотности выполняется пересчёт по толщине листа. В параметрах пружины учитываются материал (металл/пластик) и цвет.</p>
+<pre><code>sheet_thickness  = paperDensity × 0.0011          # мм на лист
+spine_thickness  = (pages / 2) × sheet_thickness   # толщина корешка, мм
+required_thickness = spine_thickness × safety_margin + spine_margin
+</code></pre>
+<p>Коэффициент запаса материала <code>safety_margin</code> (мультипликативный): металл = 1.0, пластик = 1.2 (нужен запас +10–20%; <code>max_sheets_factor</code>: металл 1.0, пластик 0.9).</p>
+<p>Аддитивный запас на корешок <code>spine_margin</code> задаётся в админ-формуле и по умолчанию = <strong>2 мм</strong>: при подборе пружины он прибавляется к рассчитанной толщине корешка (<code>required_thickness = spine_thickness + spine_margin</code>, формула из <code>ConfigurableRuleEngine.selectSpring</code>). Запас редактируется в админке вместе с формулами толщины бумаги (<code>density × 0.0011</code>) и макс. толщины для скобы (5 мм).</p>
+<h3 id="82-пересчёт-ёмкости-под-плотность">8.2. Пересчёт ёмкости под плотность</h3>
+<pre><code>base_density = 80
+ratio        = thickness(target_density) / thickness(80)
+adjustedMin  = round(base_pages_min / ratio)
+adjustedMax  = round(base_pages_max / ratio)
+fits         = target_pages in [adjustedMin, adjustedMax]
+</code></pre>
+<h3 id="83-толщина-бумаги-по-плотности-предустановленная-таблица">8.3. Толщина бумаги по плотности (предустановленная таблица)</h3>
+<p>Предустановленная таблица толщины по плотности (80=0.10, 130=0.16 … 400=0.48), формула <code>density × 0.0011</code> (используемая в §7 и §8.1) и сведённое расхождение между ними (для 80 г/м²: 0.10 мм по таблице vs 0.088 мм по формуле; для 130 г/м²: 0.16 мм vs 0.143 мм) — в каноническом справочнике толщин: <a href="06-production--equipment.html#81-%D1%82%D0%BE%D0%BB%D1%89%D0%B8%D0%BD%D0%B0-%D0%B8-%D0%B2%D0%B5%D1%81-%D0%B1%D1%83%D0%BC%D0%B0%D0%B3%D0%B8-%D0%BA%D0%B0%D0%BD%D0%BE%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BE%D1%87%D0%BD%D0%B8%D0%BA-%D1%82%D0%BE%D0%BB%D1%89%D0%B8%D0%BD">Оборудование и нормативы, раздел 8.1 «Толщина и вес бумаги»</a>.</p>
+<h3 id="84-справочник-пружин-пример">8.4. Справочник пружин (пример)</h3>
+<table>
+<thead>
+<tr>
+<th>Диаметр</th>
+<th>Страницы (80 г/м²)</th>
+<th>Толщина корешка</th>
+<th>На складе</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 мм</td>
+<td>10–20</td>
+<td>2.0–3.5 мм</td>
+<td>500 шт</td>
+<td>15 руб</td>
+</tr>
+<tr>
+<td>8 мм</td>
+<td>21–35</td>
+<td>3.6–5.5 мм</td>
+<td>320 шт</td>
+<td>18 руб</td>
+</tr>
+<tr>
+<td>10 мм</td>
+<td>36–50</td>
+<td>5.6–7.5 мм</td>
+<td>150 шт</td>
+<td>22 руб</td>
+</tr>
+<tr>
+<td>12 мм</td>
+<td>51–70</td>
+<td>7.6–9.5 мм</td>
+<td>80 шт</td>
+<td>28 руб</td>
+</tr>
+</tbody>
+</table>
+<p>Параметры пружины в БД: диаметр, материал (<code>metal</code>/<code>plastic</code>), цвет, базовые min/max листов и толщина для 80 г/м², коэффициент пересчёта (по умолчанию 0.0011), остаток на складе, точка заказа, цена, поставщик.</p>
+<p>Цвета: металл — чёрный, белый, серебро, золото, синий; пластик — чёрный, белый, прозрачный, красный, синий, зелёный.</p>
+<p>Алгоритм подбора: рассчитать толщину корешка → применить запас материала → найти пружины, в диапазон которых попадает требуемая толщина/количество → отсортировать по приоритету (близость к оптимуму, предпочтение металлу +10, штраф при остатке &lt; 10 шт) → отфильтровать по материалу/цвету → проверить наличие на складе. Если пружина не найдена — предложить КБС.</p>
+<h3 id="85-производственное-задание-тз-по-сборке">8.5. Производственное задание (ТЗ) по сборке</h3>
+<p>В ТЗ передаются: диаметр, материал и цвет пружины, тираж, толщина корешка, пересчитанные лимиты под текущую плотность, предупреждение о нехватке на складе.</p>
+<hr>
+<h2 id="9-пластиковая-обложка">9. Пластиковая обложка</h2>
+<p>Пластиковые обложки используются в готовых форматах A4/A3 (реже A5) — в ~90% случаев резка не требуется. Резка нужна только для нестандартного размера.</p>
+<h3 id="91-готовые-форматы-и-цены">9.1. Готовые форматы и цены</h3>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Размер, мм</th>
+<th>Тип</th>
+<th>Цена, руб</th>
+<th>На складе</th>
+<th>Подходит для</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A4</td>
+<td>210×297</td>
+<td>прозрачный</td>
+<td>45</td>
+<td>500</td>
+<td>A4, A5</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>210×297</td>
+<td>матовый</td>
+<td>55</td>
+<td>300</td>
+<td>A4, A5</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>210×297</td>
+<td>цветной (красный)</td>
+<td>65</td>
+<td>100</td>
+<td>A4</td>
+</tr>
+<tr>
+<td>A4</td>
+<td>210×297</td>
+<td>цветной (синий)</td>
+<td>65</td>
+<td>100</td>
+<td>A4</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>148×210</td>
+<td>прозрачный</td>
+<td>30</td>
+<td>500</td>
+<td>A5, A6</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>148×210</td>
+<td>матовый</td>
+<td>40</td>
+<td>300</td>
+<td>A5, A6</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>148×210</td>
+<td>цветной (красный)</td>
+<td>45</td>
+<td>100</td>
+<td>A5</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>297×420</td>
+<td>прозрачный</td>
+<td>85</td>
+<td>200</td>
+<td>A3, A4</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>297×420</td>
+<td>матовый</td>
+<td>95</td>
+<td>150</td>
+<td>A3, A4</td>
+</tr>
+</tbody>
+</table>
+<p>Типы пластика: прозрачный (базовая цена), матовый (+10 руб), цветной (по запросу/индивидуально).</p>
+<h3 id="92-скидки-по-тиражу">9.2. Скидки по тиражу</h3>
+<table>
+<thead>
+<tr>
+<th>От (шт)</th>
+<th>До (шт)</th>
+<th>Скидка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>49</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>50</td>
+<td>99</td>
+<td>5%</td>
+</tr>
+<tr>
+<td>100</td>
+<td>∞</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-расчёт-и-склад">9.3. Расчёт и склад</h3>
+<pre><code>total_cost = price × quantity
+discount   = total_cost × discount_percent / 100
+final_cost = total_cost − discount
+available_stock = stock_quantity − reserved_quantity   # проверка наличия
+</code></pre>
+<p>Складской учёт: проверка наличия при расчёте, резервирование при оформлении заказа (<code>reserve</code>), списание при отгрузке (<code>writeOff</code>), освобождение резерва при отмене (<code>releaseReservation</code>), пополнение (<code>restock</code>), история движений (<code>plastic_covers_stock_history</code>).</p>
+<h3 id="94-резка-нестандарта">9.4. Резка нестандарта</h3>
+<p>Если нужного готового формата нет — расчёт резки:</p>
+<pre><code>covers_per_sheet = floor(sheet_w / target_w) × floor(sheet_h / target_h)   # лист обычно 320×450
+sheets        = ceil(quantity / covers_per_sheet)
+material_cost = sheets × material.cost_per_unit
+cutting_cost  = quantity × perimeter_m × cutting_time_per_meter × cost_per_minute
+total_cost    = (material_cost + cutting_cost) × custom_cut_markup           # наценка за нестандарт, по умолчанию ×1.2 (+20%)
+</code></pre>
+<p>Параметры по умолчанию: минимальный размер резки 50×50 мм; стоимость резки 30 руб/мин; время резки 0.5 мин/метр; резать специальным ножом, скорость снижена на 30%.</p>
+<hr>
+<h2 id="10-подложка-back-cover">10. Подложка (back cover)</h2>
+<p>Задняя обложка для брошюр на пружине: обеспечивает жёсткость, может быть с печатью или без.</p>
+<h3 id="101-материалы">10.1. Материалы</h3>
+<table>
+<thead>
+<tr>
+<th>Материал</th>
+<th>Плотность/толщина</th>
+<th>Цвета</th>
+<th>Цена (себест./продажа), руб/лист</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Картон</td>
+<td>250 г/м²</td>
+<td>чёрный</td>
+<td>8 / 12</td>
+</tr>
+<tr>
+<td>Картон</td>
+<td>250 г/м²</td>
+<td>белый</td>
+<td>7 / 10</td>
+</tr>
+<tr>
+<td>Картон</td>
+<td>250 г/м²</td>
+<td>красный</td>
+<td>10 / 15</td>
+</tr>
+<tr>
+<td>Картон</td>
+<td>300 г/м²</td>
+<td>чёрный</td>
+<td>10 / 15</td>
+</tr>
+<tr>
+<td>Картон</td>
+<td>300 г/м²</td>
+<td>белый</td>
+<td>9 / 13</td>
+</tr>
+<tr>
+<td>Пластик</td>
+<td>0.5 мм</td>
+<td>прозрачный</td>
+<td>18 / 25</td>
+</tr>
+</tbody>
+</table>
+<p>Цены печати на подложке (за лист): A4 <code>1+0</code>=10, <code>4+0</code>=25; A5 <code>1+0</code>=7, <code>4+0</code>=18; A6 <code>1+0</code>=5, <code>4+0</code>=12.</p>
+<p>Коды цветов для отображения: чёрный <code>#1a1a1a</code>, белый <code>#f5f5f5</code>, красный <code>#e53935</code>, синий <code>#1e88e5</code>, зелёный <code>#43a047</code>, прозрачный <code>#e0e0e0</code>.</p>
+<h3 id="102-расчёт">10.2. Расчёт</h3>
+<pre><code>sheets         = ceil(quantity / covers_per_sheet)   # раскладка как у обложки (SRA3)
+material_cost  = selling_price × sheets
+print_cost     = print_price × sheets                # если hasPrint
+total_cost     = material_cost + print_cost
+</code></pre>
+<p>Проверки: цвет должен входить в список доступных для материала; наличие на складе (<code>stock − reserved &gt;= sheets</code>). Поддерживаются резервирование и списание, как у пластиковых обложек.</p>
+<hr>
+<h2 id="11-стоимость-сборки-в-модуле-маржи-binding">11. Стоимость сборки в модуле маржи (binding)</h2>
+<p>Стоимость сборки (переплёта) настраивается в модуле маржи (<code>applies_to = 'binding'</code>) и подтягивается в конструктор брошюры. Это позволяет переиспользовать одну таблицу для разных брошюр и менять цену в одном месте.</p>
+<h3 id="111-базовые-цены-таблицы-маржи">11.1. Базовые цены (таблицы маржи)</h3>
+<table>
+<thead>
+<tr>
+<th>Тип сборки</th>
+<th>Код</th>
+<th>Таблица ID</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>На скобе</td>
+<td>staple</td>
+<td>10</td>
+<td>15 руб/шт (фикс.)</td>
+</tr>
+<tr>
+<td>На пружине</td>
+<td>spring</td>
+<td>11</td>
+<td>ступенчато по тиражу</td>
+</tr>
+<tr>
+<td>КБС</td>
+<td>kbs</td>
+<td>12</td>
+<td>50 руб/шт (фикс.)</td>
+</tr>
+</tbody>
+</table>
+<p>Ступенчатая цена сборки на пружине:</p>
+<table>
+<thead>
+<tr>
+<th>От (шт)</th>
+<th>До (шт)</th>
+<th>Цена</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>30 руб/шт</td>
+</tr>
+<tr>
+<td>11</td>
+<td>50</td>
+<td>25 руб/шт</td>
+</tr>
+<tr>
+<td>51</td>
+<td>∞</td>
+<td>20 руб/шт</td>
+</tr>
+</tbody>
+</table>
+<p>Примеры: тираж 5 шт → 150 руб; 20 шт → 500 руб; 100 шт → 2000 руб.</p>
+<h3 id="112-переопределение-для-конкретного-конструктора">11.2. Переопределение для конкретного конструктора</h3>
+<p>В калькуляторе можно выбрать «использовать глобальную таблицу маржи» или «переопределить» правила (<code>constructor_binding_overrides</code>: <code>constructor_id</code>, <code>binding_type</code>, <code>quantity_from/to</code>, <code>price</code>, <code>price_type</code>).</p>
+<pre><code>binding_cost = функция(quantity) из margin_rules
+# скоба — обычно фикс. цена/шт; пружина — фикс. или зависит от тиража; КБС — фикс. или зависит от толщины блока
+</code></pre>
+<hr>
+<h2 id="12-конструктор-авторефератовкаталогов-на-скобе-комбинированная-печать">12. Конструктор авторефератов/каталогов на скобе (комбинированная печать)</h2>
+<p>Экономичный вариант брошюры на скобе: дешёвый ч/б основной блок + цветная обложка + опциональные цветные вставки. Поддерживает разную бумагу и цветность для разных частей.</p>
+<table>
+<thead>
+<tr>
+<th>Блок</th>
+<th>Бумага</th>
+<th>Печать</th>
+<th>Кратность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Обложка</td>
+<td>цветная (напр. 200 г/м²)</td>
+<td>4+0 или 4+4, опц. ламинация</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Основной блок</td>
+<td>офсетная 80 г/м² (дёшево)</td>
+<td>1+0 или 1+1 (ч/б)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Цветные вставки (опц.)</td>
+<td>мелованная 130 г/м²</td>
+<td>4+4</td>
+<td>4, в пределах основного блока</td>
+</tr>
+</tbody>
+</table>
+<p>Расположение цветных вставок: в начале (<code>start</code>), в конце (<code>end</code>), внутри в разбивку (<code>mixed</code>).</p>
+<p>Расчёт каждого блока: <code>sheets = ceil(pages / pages_per_sheet)</code> (для блоков) или <code>ceil(quantity / covers_per_sheet)</code> (обложка), затем <code>cost = sheets × (paper_price + print_price)</code>. Сборка на скобу — фиксированно 5 руб/шт.</p>
+<h3 id="пример">Пример</h3>
+<p>Вход: печать A4; обложка цветная 200 г/м² 4+0 без ламинации; основной блок офсет 80 г/м² 1+1, 32 стр; цветные вставки мелованная 130 г/м², 4 стр в начале; тираж 50 шт.</p>
+<table>
+<thead>
+<tr>
+<th>Блок</th>
+<th>Себестоимость</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Обложка</td>
+<td>200 руб</td>
+</tr>
+<tr>
+<td>Основной блок</td>
+<td>1280 руб</td>
+</tr>
+<tr>
+<td>Цветные вставки</td>
+<td>150 руб</td>
+</tr>
+<tr>
+<td>Сборка</td>
+<td>250 руб</td>
+</tr>
+<tr>
+<td><strong>ИТОГО</strong></td>
+<td><strong>1880 руб (37.60/шт)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="13-структура-бд-ключевые-таблицы">13. Структура БД (ключевые таблицы)</h2>
+<pre><code class="language-sql">-- Типы брошюр
+CREATE TABLE brochure_types (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(100), code VARCHAR(50) UNIQUE,   -- staple/spring/kbs/bolt
+  page_multiple INT NOT NULL,                    -- 4 / 2
+  has_cover BOOLEAN DEFAULT true,
+  has_back_cover BOOLEAN DEFAULT false,
+  cover_paper_type ENUM('same','different','optional') DEFAULT 'different',
+  is_active BOOLEAN DEFAULT true
+);
+
+-- Конструкторы брошюр (страницы услуг)
+CREATE TABLE brochure_constructors (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255), slug VARCHAR(100) UNIQUE,
+  brochure_type_id INT, format_id INT,
+  allowed_orientations JSON,                      -- [&quot;vertical&quot;,&quot;horizontal&quot;]
+  cover_papers JSON, inner_papers JSON, back_cover_papers JSON,
+  cover_colors JSON, inner_colors JSON,
+  has_lamination BOOLEAN DEFAULT false,
+  has_round_corners BOOLEAN DEFAULT false,
+  is_published BOOLEAN DEFAULT false
+);
+
+-- Расчёт брошюры (в заказе)
+CREATE TABLE brochure_calculations (
+  id INT PRIMARY KEY AUTO_INCREMENT, order_id INT,
+  brochure_type_id INT, format_id INT, orientation VARCHAR(20),
+  total_pages INT NOT NULL, cover_pages INT DEFAULT 4,
+  inner_pages INT GENERATED ALWAYS AS (total_pages - cover_pages) STORED,
+  cover_paper_id INT, inner_paper_id INT, back_cover_paper_id INT,
+  cover_color_id INT, inner_color_id INT,
+  cover_layout JSON, inner_layout JSON,           -- {cols, rows, sheets, itemsPerSheet}
+  quantity INT NOT NULL, cost_breakdown JSON,
+  total_cost DECIMAL(10,2), price_per_unit DECIMAL(10,2)
+);
+
+-- Справочник пружин (расширенный)
+CREATE TABLE spring_sizes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  diameter INT NOT NULL,
+  material_type ENUM('metal','plastic') NOT NULL, color VARCHAR(50),
+  base_pages_min INT, base_pages_max INT,         -- для 80 г/м²
+  base_thickness_min DECIMAL(5,2), base_thickness_max DECIMAL(5,2),
+  density_coefficient DECIMAL(5,4) DEFAULT 0.0011,
+  stock_quantity INT DEFAULT 0, reorder_point INT DEFAULT 10,
+  price_per_unit DECIMAL(10,2), is_active BOOLEAN DEFAULT true
+);
+
+-- Настраиваемые правила валидации/альтернатив
+CREATE TABLE configurable_rules ( id INT PRIMARY KEY AUTO_INCREMENT,
+  rule_type VARCHAR(50), rule_name VARCHAR(255),
+  parameters JSON, conditions JSON, actions JSON, priority INT DEFAULT 100, is_active BOOLEAN DEFAULT true );
+CREATE TABLE calculation_formulas ( id INT PRIMARY KEY AUTO_INCREMENT,
+  formula_name VARCHAR(255), formula_code VARCHAR(100) UNIQUE, formula_text TEXT, available_variables JSON );
+CREATE TABLE alternative_chains ( id INT PRIMARY KEY AUTO_INCREMENT,
+  chain_name VARCHAR(255), alternatives JSON, transition_rules JSON );  -- [&quot;staple&quot;,&quot;spring&quot;,&quot;kbs&quot;]
+
+-- Пластиковые обложки + склад
+CREATE TABLE plastic_covers ( id INT PRIMARY KEY AUTO_INCREMENT,
+  format VARCHAR(10), width_mm INT, height_mm INT, type VARCHAR(50), color VARCHAR(50),
+  price DECIMAL(10,2), stock_quantity INT DEFAULT 0, reserved_quantity INT DEFAULT 0, min_order INT DEFAULT 1,
+  UNIQUE KEY unique_format_type (format, type, color) );
+CREATE TABLE plastic_covers_reservations ( id INT PRIMARY KEY, cover_id INT, order_id INT, quantity INT, reserved_at TIMESTAMP, released_at TIMESTAMP );
+CREATE TABLE plastic_covers_stock_history ( id INT PRIMARY KEY, cover_id INT, quantity_change INT, reason VARCHAR(100), order_id INT, created_at TIMESTAMP );
+CREATE TABLE plastic_covers_discounts ( id INT PRIMARY KEY, quantity_from INT, quantity_to INT, discount_percent DECIMAL(5,2) );
+
+-- Материалы подложки
+CREATE TABLE back_cover_materials ( id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255), category VARCHAR(50) DEFAULT 'cardboard', density INT, thickness_mm DECIMAL(5,2),
+  colors JSON, printable BOOLEAN DEFAULT true, cost_price DECIMAL(10,2), selling_price DECIMAL(10,2),
+  stock_quantity INT DEFAULT 0, reserved_quantity INT DEFAULT 0 );
+CREATE TABLE back_cover_print_prices ( id INT PRIMARY KEY, format VARCHAR(10), color_type VARCHAR(10), price DECIMAL(10,2) );
+
+-- Авторефераты: типы печати и спецификация
+CREATE TABLE print_types ( id INT PRIMARY KEY, name VARCHAR(50), code VARCHAR(20) UNIQUE, price_per_sheet DECIMAL(10,2) );
+CREATE TABLE brochure_specifications ( id INT PRIMARY KEY AUTO_INCREMENT, order_id INT,
+  print_format VARCHAR(10), cover_paper_id INT, cover_print_type_id INT, cover_has_lamination BOOLEAN,
+  main_paper_id INT, main_print_type_id INT, main_pages INT,
+  has_color_insets BOOLEAN DEFAULT false, color_inset_paper_id INT, color_inset_pages INT,
+  color_inset_position ENUM('start','end','mixed') DEFAULT 'start', total_pages INT, quantity INT );
+</code></pre>
+<hr>
+<h2 id="14-фронтенд-универсальная-страница-и-ux">14. Фронтенд: универсальная страница и UX</h2>
+<ul>
+<li><strong>Одна страница <code>/catalog/brochures</code></strong> с переключением типов переплёта через иконки (скоба/пружина/КБС/болты). При переключении сохраняется контекст: предыдущие параметры подгружаются из истории (localStorage, последние 10 переходов), URL обновляется для SEO (<code>?type=staple&amp;format=a5&amp;pages=20&amp;orientation=vertical</code>).</li>
+<li><strong>Возможность отдельных страниц</strong> под каждый тип переплёта для SEO + перелинковка («похожий товар»: каталог на скобе → каталог на пружине) с сохранением истории расчёта при переходе.</li>
+<li><strong>Визуализация (SVG)</strong>: схема брошюры в сложенном и развёрнутом виде с размерами по высоте/ширине; автоматически меняется при выборе формата/ориентации; показывает сторону крепления скоб/пружины (книжная → слева, альбомная → сверху).</li>
+<li><strong>Проверка влезания разворота</strong> на печатный лист при вводе своего формата с предложением альтернатив (повернуть / больший лист / широкоформат).</li>
+<li><strong>Отображение валидации</strong>: ошибки блокируют расчёт, предупреждения с кнопкой авто-исправления (например, добавить биговку), карточки альтернатив с переходом и оценкой цены.</li>
+<li><strong>SEO</strong>: Schema.org <code>Product</code>/<code>AggregateOffer</code> (lowPrice/highPrice по типу и формату), микроразметка для всех типов.</li>
+</ul>
+<hr>
+<h2 id="15-степень-готовности-и-план-по-спринтам">15. Степень готовности и план по спринтам</h2>
+<h3 id="чек-лист-готовности-итоговый">Чек-лист готовности (итоговый)</h3>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Статус</th>
+<th>Спринт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Типы переплёта</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Кратность страниц</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Расчёт страниц и листов</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Блоки брошюры</td>
+<td>⚠️ интеграция</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Расчёт себестоимости</td>
+<td>⚠️ → ✅ (реализован по блокам)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Обложка бумажная</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Обложка пластиковая</td>
+<td>✅ (реализована, готовые форматы + склад)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Подложка</td>
+<td>✅ (материалы + цвета + склад)</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Подбор пружины</td>
+<td>⚠️/✅ (пересчёт под плотность)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Валидация страниц</td>
+<td>⚠️</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Автопредложение альтернатив</td>
+<td>⚠️</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Динамическая визуализация (SVG)</td>
+<td>⚠️</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Маржа</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ТЗ для производства</td>
+<td>❌ концепция</td>
+<td>5</td>
+</tr>
+</tbody>
+</table>
+<h3 id="план-по-спринтам">План по спринтам</h3>
+<ul>
+<li><strong>Спринт 1 (3–5 дн):</strong> <code>BrochureCostCalculator</code> — раскладка, обложка, блок, подложка, тесты.</li>
+<li><strong>Спринт 2 (3–5 дн):</strong> <code>SpringSelector</code> с пересчётом под плотность + склад; <code>PlasticCoverCalculator</code> (готовые форматы).</li>
+<li><strong>Спринт 3 (2–3 дн):</strong> валидация кратности, min/max, автопредложение альтернатив.</li>
+<li><strong>Спринт 4 (3–5 дн):</strong> фронтенд-форма, SVG-визуализация, интеграция с API.</li>
+<li><strong>Спринт 5 (2–3 дн):</strong> ТЗ для производства, интеграция с производственным модулем.</li>
+</ul>
+<hr>
+<h2 id="16-интеграция-с-производством-тз">16. Интеграция с производством (ТЗ)</h2>
+<p>В производственное задание передаются:</p>
+<ul>
+<li><strong>Печать:</strong> для блока и обложки — количество листов, имозиция (<code>N стр/лист</code>), бумага, цветность.</li>
+<li><strong>Послепечать:</strong> фальцовка (<code>N страниц</code>), сборка (на скобу/пружину/КБС), обрезка с трёх сторон, ламинация обложки (если есть).</li>
+<li><strong>Сборка:</strong> для пружины — диаметр, материал, цвет пружины, толщина корешка, пересчитанные под плотность лимиты, предупреждение о нехватке на складе.</li>
+<li><strong>Спецматериалы:</strong> для пластиковой обложки — инструкция «специальный нож, скорость реза снижена»; порядок сборки «обложка (пластик) → блок → подложка (картон)»; предупреждение «пластик царапается».</li>
+<li><strong>Контроль качества:</strong> совпадение цветов обложки и блока, ровность корешка, отсутствие дефектов печати.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: складской учёт остатков (пружины, пластиковые обложки, картон подложки) на момент проектирования реализован заглушками (<code>InventoryManager</code>, <code>FutureInventorySystem</code>). Полноценные резервирование/списание/автозаказ откладываются до этапа построения склада.</p>
+<hr>
+<h2 id="открытые-вопросы-сводно">Открытые вопросы (сводно)</h2>
+<ol>
+<li>Непоследовательное число страниц на печатном листе для A4 (8 vs фиксированная таблица vs <code>2</code> для авторефератов «в сложенном виде») — нужен единый алгоритм раскладки.</li>
+<li>Максимум страниц для скобы: жёсткий лимит 64 vs автоматический расчёт по толщине корешка — что приоритетнее.</li>
+<li>Два несовместимых способа расчёта толщины листа: <code>density × 0.0011</code> vs предустановленная таблица <code>paper_density_thickness</code> (80 г/м²: 0.088 vs 0.10 мм) — выбрать единый источник.</li>
+<li>Ступени маржи в коде <code>getMargin</code> (<code>&lt;10</code>→100%, <code>&lt;50</code>→80%, <code>&lt;100</code>→60%, иначе 50%) не совпадают с админ-таблицей маржи конструктора (1–10→100%, 11–50→80%, 51–100→70%, 101+→60%) — для тиража 50–100 шт расхождение 60% vs 70%. Нужен единый источник наценки.</li>
+<li>Складской учёт остатков реализован заглушками; полноценная интеграция отложена до построения склада.</li>
+</ol>
+<hr>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-концепция-брошюра-как-композиция-блоков">1. Концепция: брошюра как композиция блоков</a></li><li class="lvl3"><a href="#финальная-формула-расчёта">Финальная формула расчёта</a></li><li class="lvl2"><a href="#2-типы-переплёта-и-бизнес-логика">2. Типы переплёта и бизнес-логика</a></li><li class="lvl3"><a href="#ориентация">Ориентация</a></li><li class="lvl3"><a href="#значения-по-умолчанию-конструктора-админ">Значения по умолчанию конструктора (админ)</a></li><li class="lvl2"><a href="#3-раскладка-и-формулы-расчёта-блоков">3. Раскладка и формулы расчёта блоков</a></li><li class="lvl3"><a href="#31-раскладка-на-печатном-листе-общая-для-всех-блоков">3.1. Раскладка на печатном листе (общая для всех блоков)</a></li><li class="lvl3"><a href="#32-себестоимость-каждого-блока">3.2. Себестоимость каждого блока</a></li><li class="lvl2"><a href="#4-класс-расчёта-брошюры-полный-с-учётом-всех-блоков">4. Класс расчёта брошюры (полный, с учётом всех блоков)</a></li><li class="lvl2"><a href="#5-примеры-расчётов">5. Примеры расчётов</a></li><li class="lvl3"><a href="#51-брошюра-а5-на-скобе-20-стр-тираж-100-шт">5.1. Брошюра А5 на скобе, 20 стр, тираж 100 шт</a></li><li class="lvl3"><a href="#52-брошюра-а6-на-пружине-32-стр-тираж-50-шт">5.2. Брошюра А6 на пружине, 32 стр, тираж 50 шт</a></li><li class="lvl3"><a href="#53-полный-расчёт-а5-на-пружине-20-стр-тираж-50-шт-со-всеми-блоками">5.3. Полный расчёт: А5 на пружине, 20 стр, тираж 50 шт (со всеми блоками)</a></li><li class="lvl3"><a href="#54-маржа-и-дополнительные-наценки-админ-таблица-конструктора">5.4. Маржа и дополнительные наценки (админ-таблица конструктора)</a></li><li class="lvl2"><a href="#6-валидация-параметров">6. Валидация параметров</a></li><li class="lvl3"><a href="#61-ограничения-по-формату">6.1. Ограничения по формату</a></li><li class="lvl3"><a href="#62-ограничения-по-страницам">6.2. Ограничения по страницам</a></li><li class="lvl3"><a href="#63-ограничения-по-бумаге-биговкафальцовка">6.3. Ограничения по бумаге (биговка/фальцовка)</a></li><li class="lvl3"><a href="#64-технологические-ограничения">6.4. Технологические ограничения</a></li><li class="lvl3"><a href="#65-автоподбор-альтернатив-цепочки-замен">6.5. Автоподбор альтернатив (цепочки замен)</a></li><li class="lvl2"><a href="#7-автоматический-расчёт-максимального-количества-страниц">7. Автоматический расчёт максимального количества страниц</a></li><li class="lvl2"><a href="#8-подбор-пружины">8. Подбор пружины</a></li><li class="lvl3"><a href="#81-принцип">8.1. Принцип</a></li><li class="lvl3"><a href="#82-пересчёт-ёмкости-под-плотность">8.2. Пересчёт ёмкости под плотность</a></li><li class="lvl3"><a href="#83-толщина-бумаги-по-плотности-предустановленная-таблица">8.3. Толщина бумаги по плотности (предустановленная таблица)</a></li><li class="lvl3"><a href="#84-справочник-пружин-пример">8.4. Справочник пружин (пример)</a></li><li class="lvl3"><a href="#85-производственное-задание-тз-по-сборке">8.5. Производственное задание (ТЗ) по сборке</a></li><li class="lvl2"><a href="#9-пластиковая-обложка">9. Пластиковая обложка</a></li><li class="lvl3"><a href="#91-готовые-форматы-и-цены">9.1. Готовые форматы и цены</a></li><li class="lvl3"><a href="#92-скидки-по-тиражу">9.2. Скидки по тиражу</a></li><li class="lvl3"><a href="#93-расчёт-и-склад">9.3. Расчёт и склад</a></li><li class="lvl3"><a href="#94-резка-нестандарта">9.4. Резка нестандарта</a></li><li class="lvl2"><a href="#10-подложка-back-cover">10. Подложка (back cover)</a></li><li class="lvl3"><a href="#101-материалы">10.1. Материалы</a></li><li class="lvl3"><a href="#102-расчёт">10.2. Расчёт</a></li><li class="lvl2"><a href="#11-стоимость-сборки-в-модуле-маржи-binding">11. Стоимость сборки в модуле маржи (binding)</a></li><li class="lvl3"><a href="#111-базовые-цены-таблицы-маржи">11.1. Базовые цены (таблицы маржи)</a></li><li class="lvl3"><a href="#112-переопределение-для-конкретного-конструктора">11.2. Переопределение для конкретного конструктора</a></li><li class="lvl2"><a href="#12-конструктор-авторефератовкаталогов-на-скобе-комбинированная-печать">12. Конструктор авторефератов/каталогов на скобе (комбинированная печать)</a></li><li class="lvl3"><a href="#пример">Пример</a></li><li class="lvl2"><a href="#13-структура-бд-ключевые-таблицы">13. Структура БД (ключевые таблицы)</a></li><li class="lvl2"><a href="#14-фронтенд-универсальная-страница-и-ux">14. Фронтенд: универсальная страница и UX</a></li><li class="lvl2"><a href="#15-степень-готовности-и-план-по-спринтам">15. Степень готовности и план по спринтам</a></li><li class="lvl3"><a href="#чек-лист-готовности-итоговый">Чек-лист готовности (итоговый)</a></li><li class="lvl3"><a href="#план-по-спринтам">План по спринтам</a></li><li class="lvl2"><a href="#16-интеграция-с-производством-тз">16. Интеграция с производством (ТЗ)</a></li><li class="lvl2"><a href="#открытые-вопросы-сводно">Открытые вопросы (сводно)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

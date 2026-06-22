@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Доставка — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="07-partners-delivery--delivery">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li class="active"><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="доставка">Доставка</h1>
+<p>Спецификация модуля доставки и отгрузки PrintOffice: способы получения заказа (самовывоз из офисов, курьерские службы, ПВЗ), единая лента доставок в CRM, отгрузочная накладная с QR-кодом, управление пропусками, зоны, сроки и тарифы.</p>
+<h2 id="1-способы-получения-заказа">1. Способы получения заказа</h2>
+<p>На странице оформления заказа клиенту доступны три вкладки: «Доставка курьером», «Самовывоз», «ПВЗ».</p>
+<h3 id="11-сводка-способов-и-базовых-цен">1.1. Сводка способов и базовых цен</h3>
+<table>
+<thead>
+<tr>
+<th>Способ</th>
+<th>Провайдер / вариант</th>
+<th>Базовая стоимость</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Курьер</td>
+<td>Яндекс.Доставка</td>
+<td>500 ₽</td>
+</tr>
+<tr>
+<td>Курьер</td>
+<td>Достависта</td>
+<td>450 ₽</td>
+</tr>
+<tr>
+<td>Эконом-доставка / ПВЗ</td>
+<td>Ozon Доставка</td>
+<td>150 ₽</td>
+</tr>
+<tr>
+<td>ПВЗ</td>
+<td>СДЭК</td>
+<td>250 ₽</td>
+</tr>
+<tr>
+<td>Самовывоз</td>
+<td>Офисы Перово / Ленинский пр-т / Пролетарская</td>
+<td>0 ₽</td>
+</tr>
+</tbody>
+</table>
+<p>Стоимость доставки в сводке заказа по умолчанию подставляется 500 ₽ и пересчитывается динамически в зависимости от выбранного провайдера и параметров (вес, габариты, адрес).</p>
+<h3 id="12-курьерская-доставка">1.2. Курьерская доставка</h3>
+<p>Поддерживаемые службы и их возможности:</p>
+<table>
+<thead>
+<tr>
+<th>Служба</th>
+<th>API</th>
+<th>Типы доставки</th>
+<th>Расчёт стоимости</th>
+<th>Отслеживание</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Яндекс.Доставка</td>
+<td>Полноценный API (расчёт, создание, отслеживание); готовые модули для CS-Cart и др. CMS</td>
+<td>Курьер (пеший/авто), ПВЗ, грузовая</td>
+<td>В реальном времени через API</td>
+<td>Интерактивная карта, статусы, контакты курьера</td>
+<td>Динамическое ценообразование (спрос, время суток, погода). География: Москва, МО, регионы РФ</td>
+</tr>
+<tr>
+<td>Достависта</td>
+<td>REST API (неофициальная PHP-библиотека), вебхуки</td>
+<td>Курьер (пеший/авто), грузовая</td>
+<td>Через API; тип транспорта <code>DELIVERY_TYPE_FOOT</code> / <code>DELIVERY_TYPE_AUTO</code></td>
+<td>Интерактивная карта, статусы</td>
+<td>Динамическое ценообразование; можно повысить скорость поиска курьера за доп. плату</td>
+</tr>
+<tr>
+<td>СДЭК</td>
+<td>Официальное API v2 (OAuth 2.0), асинхронная Python-библиотека <code>aiocdek</code>, вебхуки, модули для 1С и CMS</td>
+<td>Курьер, ПВЗ, постаматы</td>
+<td>Через API (тарифы, вес, габариты, город)</td>
+<td>Трек-номер, статусы, вебхуки</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Ozon Доставка</td>
+<td>Ozon Seller API</td>
+<td>ПВЗ, постаматы (не курьерская по Москве)</td>
+<td>Фиксированные тарифы (от 150 ₽)</td>
+<td>—</td>
+<td>Сроки 3–4 дня</td>
+</tr>
+</tbody>
+</table>
+<h3 id="13-параметры-формы-курьерской-доставки-ui">1.3. Параметры формы курьерской доставки (UI)</h3>
+<table>
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тип доставки</td>
+<td>Экспресс (1–3 ч) / Запланировать (выбор даты и времени)</td>
+</tr>
+<tr>
+<td>Тип курьера</td>
+<td>Пешком / Легковой / Грузовой</td>
+</tr>
+<tr>
+<td>Кто встретит курьера</td>
+<td>«Я сам» / «Другой человек» (появляется поле «Телефон получателя») / «Пока не знаю» (подсказка)</td>
+</tr>
+<tr>
+<td>Адрес доставки</td>
+<td>Поле ввода; после 3+ символов раскрываются детали: Подъезд, Этаж, Кв/офис, Как пройти, Комментарий</td>
+</tr>
+</tbody>
+</table>
+<p>Весовая сетка:</p>
+<ul>
+<li><strong>Пешком:</strong> до 1 кг, 5 кг, 10 кг, 15 кг.</li>
+<li><strong>Легковой:</strong> до 5 кг, 15 кг, 25 кг, 50 кг, 100 кг, 200 кг.</li>
+<li><strong>Грузовой:</strong> выбор кузова S, M, L, XL (с визуализацией и характеристиками).</li>
+</ul>
+<p>Динамический блок «Что везём» зависит от типа курьера:</p>
+<table>
+<thead>
+<tr>
+<th>Тип курьера</th>
+<th>Отображаемые опции</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Пешком</td>
+<td>Только поле «Что везём?» (textarea)</td>
+</tr>
+<tr>
+<td>Легковой</td>
+<td>Чекбокс «От двери до двери» + поле «Что везём?»</td>
+</tr>
+<tr>
+<td>Грузовой</td>
+<td>Чекбокс «Грузчики» (выбор 1–2), чекбокс «Хрупкий груз», поле «Что везём?»</td>
+</tr>
+</tbody>
+</table>
+<p>При смене типа курьера блок опций перерисовывается: Пешком → пусто; Легковой → «От двери до двери»; Грузовой → «Грузчики» + «Хрупкий груз».</p>
+<h3 id="14-пвз-пункты-выдачи">1.4. ПВЗ (пункты выдачи)</h3>
+<ul>
+<li>Поиск ПВЗ (на текущем этапе — заглушка; в дальнейшем API служб доставки).</li>
+<li>Список доступных ПВЗ с ценой: СДЭК — 250 ₽, Ozon — 150 ₽.</li>
+</ul>
+<h2 id="2-пункты-самовывоза-3-офиса">2. Пункты самовывоза (3 офиса)</h2>
+<p>При выборе самовывоза стоимость доставки = 0 ₽. Из выпадающего списка офисов автоматически подставляется информация: адрес, часы работы, телефон, как пройти.</p>
+<h3 id="офис-1-м-перово">Офис 1 — м. Перово</h3>
+<ul>
+<li><strong>Адрес:</strong> ул. Перовская, дом 22 корп. 1, отдел «Фото-услуги».</li>
+<li><strong>Режим:</strong> Пн–Пт 09:30–20:00, Сб–Вс 10:00–18:00 (без выходных).</li>
+<li><strong>Телефон:</strong> 8 (977) 366-44-01, 8 (977) 366-44-03.</li>
+<li><strong>Как добраться:</strong> последний вагон из центра, из стеклянных дверей 2 раза налево, затем направо к магазину «Терволина». Или на автобусе: 1 раз налево, затем направо к SubWay.</li>
+</ul>
+<h3 id="офис-2-м-ленинский-проспект">Офис 2 — м. Ленинский проспект</h3>
+<ul>
+<li><strong>Адрес:</strong> ул. Орджоникидзе, 11, стр. 41.</li>
+<li><strong>Режим:</strong> Пн–Пт 09:30–20:00, Сб–Вс 10:00–18:00 (без выходных).</li>
+<li><strong>Телефон:</strong> 8 (977) 366-44-05.</li>
+<li><strong>Как добраться:</strong>
+<ul>
+<li>На машине: в навигаторе указать «Орджоникидзе 11 стр 41, подъезд 2». Для пропуска прислать ФИО, марку и номер машины в WhatsApp 8 (977) 366-44-01. Проезд на территорию — 500 ₽. Придёт QR-код для получения карточки-пропуска.</li>
+<li>Парковка: указать «Орджоникидзе 11 стр 44». Для пропуска прислать ФИО в WhatsApp.</li>
+<li>От метро: выход №2, к улице Орджоникидзе и направо, далее до КПП. Для пропуска прислать ФИО в WhatsApp. В навигаторе — «Орджоникидзе 11 стр 44».</li>
+</ul>
+</li>
+</ul>
+<h3 id="офис-3-м-пролетарская">Офис 3 — м. Пролетарская</h3>
+<ul>
+<li><strong>Адрес:</strong> Волгоградский проспект, 9, стр. 1, отдел «Фото-услуги».</li>
+<li><strong>Режим:</strong> Пн–Пт 09:30–20:00, Сб 10:00–18:00, Вс — выходной.</li>
+<li><strong>Телефон:</strong> 8 (977) 366-44-10.</li>
+<li><strong>Как добраться:</strong> метро Пролетарская, выход №3, далее 5 минут пешком, павильон №15. Надпись над входом «Торговые Ряды», Ozon, Валберис.</li>
+</ul>
+<p>На сайте предусмотрена переключаемая карта офисов с фото, адресом, телефоном, графиком, инструкцией «как пройти» и картой проезда.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В разных источниках расходятся адреса/станции офисов. На странице оформления заказа и карте офисов точки названы «Перово», «Ленинский проспект», «Пролетарская» с адресами Перовская 22, Орджоникидзе 11 стр 41, Волгоградский пр-т 9 стр 1. В черновике карты офисов главной страницы фигурируют станции «Перово», «Ленинский», «Китай-город» и адрес «ул. Перовская, 22». В справочнике партнёров CRM точки самовывоза указаны как «Город — ул. Типографская, 5», «Виктория — …» — это могут быть условные/тестовые названия. Требуется единый выверенный список адресов самовывоза.</p>
+<h2 id="3-зоны-сроки-и-тарифы-доставки">3. Зоны, сроки и тарифы доставки</h2>
+<ul>
+<li><strong>Регионы доставки:</strong> Москва (в пределах МКАД) и Московская область.</li>
+<li><strong>Самовывоз:</strong> работает в субботу и воскресенье.</li>
+<li><strong>Доставка службой ГМ Принт:</strong> не работает в субботу и воскресенье. В субботу заказ от ГМ Принт можно доставить своим курьером.</li>
+<li><strong>Доставка свыше 100 кг:</strong> платная.</li>
+<li><strong>Доставка в Московскую область (за МКАД):</strong> платная.</li>
+</ul>
+<pre><code>delivery_regions:
+  - 'Москва (МКАД)'  (slug: moscow)
+  - 'Московская область'  (slug: mo)
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В исходных фрагментах явно зафиксированы только правила «доставка &gt;100 кг — платная» и «доставка в МО — платная». Тариф/условие «доставка ГМ бесплатно в МКАД» как отдельная норма в прочитанных фрагментах прямо не подтверждён — требуется уточнить точные тарифы доставки внутри МКАД и стоимость доставки в МО.</p>
+<h2 id="4-модуль-доставка-и-отгрузка-crm">4. Модуль «Доставка» и отгрузка (CRM)</h2>
+<h3 id="41-справочник-адресов-и-партнёров">4.1. Справочник адресов и партнёров</h3>
+<table>
+<thead>
+<tr>
+<th>Партнёр</th>
+<th>Адрес забора</th>
+<th>Инструкция для курьера</th>
+<th>Пропуск</th>
+<th>Тип отгрузки</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ГМ Принт</td>
+<td>ул. Полиграфическая, 10</td>
+<td>«Заезд через шлагбаум, код 1234»</td>
+<td>Не нужен</td>
+<td>Доставка партнёром</td>
+</tr>
+<tr>
+<td>Эдгар</td>
+<td>Орджоникидзе 11 стр 41</td>
+<td>«Пеший пропуск — получить код по СМС. Авто — нужен QR-код»</td>
+<td>Требуется (авто/пеший)</td>
+<td>Забираем сами</td>
+</tr>
+<tr>
+<td>Город</td>
+<td>ул. Типографская, 5</td>
+<td>«Звонок на проходную, номер заказа»</td>
+<td>Не нужен</td>
+<td>Забираем сами</td>
+</tr>
+<tr>
+<td>Виктория</td>
+<td>…</td>
+<td>…</td>
+<td>Не нужен</td>
+<td>Забираем сами</td>
+</tr>
+</tbody>
+</table>
+<p>Примечание: адрес забора партнёра ГМ Принт в макете задания фигурирует также как «г. Москва, ул. Полиграфическая, д. 1, склад 2, контакт Иван, +7 999 123 45 67».</p>
+<h3 id="42-процесс-отгрузки-в-карточке-заказа-блок-отгрузка">4.2. Процесс отгрузки в карточке заказа (блок «Отгрузка»)</h3>
+<p>Вкладка «Отгрузка» в карточке заказа содержит поля:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Откуда берётся</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Исполнитель</td>
+<td>Автоматически из позиций (цифра / партнёр)</td>
+<td>Может быть несколько</td>
+</tr>
+<tr>
+<td>Адрес забора</td>
+<td>Из справочника партнёров или нашего офиса</td>
+<td>Выбор менеджером</td>
+</tr>
+<tr>
+<td>Адрес доставки</td>
+<td>Из карточки клиента или вручную</td>
+<td>Заполняется клиентом при заказе</td>
+</tr>
+<tr>
+<td>Контакт получателя</td>
+<td>ФИО, телефон</td>
+<td>Из карточки клиента</td>
+</tr>
+<tr>
+<td>Пропускной режим</td>
+<td>Автоматически из справочника</td>
+<td>Кнопка «Запросить пропуск» (ручное заполнение, если нет API)</td>
+</tr>
+<tr>
+<td>Курьерская служба</td>
+<td>Яндекс, Достависта</td>
+<td>Выбор менеджера</td>
+</tr>
+<tr>
+<td>Трек-номер / ссылка</td>
+<td>После создания заявки в службе</td>
+<td>Интеграция через API</td>
+</tr>
+<tr>
+<td>Отгрузочная накладная</td>
+<td>Кнопка «Печать»</td>
+<td>PDF с QR-кодом (номер заказа) и списком позиций</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Создание курьерской заявки.</strong> Менеджер нажимает «Заказать курьера» → форма (вес, габариты, адреса) → запрос к API Яндекс/Достависта → возвращаются стоимость, срок, номер заказа, ссылка отслеживания → всё сохраняется в заказе. Ссылку на отслеживание можно отправить клиенту из CRM.</p>
+<p><strong>Партнёры, вызывающие курьера сами (ГМ Принт).</strong> Система парсит письмо от ГМ (номер заказа, ссылка на маршрутизацию) и автоматически создаёт запись в блоке отгрузки. Ссылку можно отправить клиенту из CRM.</p>
+<p>В задании партнёру блок отгрузки выглядит так: выбор «Забрать самовывозом» / «Доставка курьером»; при курьерской доставке — выбор службы (Достависта / Яндекс Доставка), адреса забора и доставки, вес и габариты (Д×Ш×В, см), кнопки «Рассчитать стоимость» и «Создать заявку». Результат: стоимость, номер заявки, имя и телефон курьера, ссылка отслеживания, кнопка «Отправить данные партнёру».</p>
+<h3 id="43-лента-доставок-единый-раздел-crm">4.3. Лента доставок (единый раздел CRM)</h3>
+<p>Отдельный раздел показывает все активные доставки — и от партнёров, и от собственных курьерских заявок:</p>
+<ul>
+<li>Номер заказа, клиент, адрес доставки, статус (в пути, доставлен), ссылка отслеживания.</li>
+<li>Фильтры: по партнёру, по дате, по курьерской службе.</li>
+</ul>
+<h2 id="5-сборные-заказы">5. Сборные заказы</h2>
+<p>Один заказ может включать несколько исполнителей (несколько партнёров/собственных позиций) — поле «Исполнитель» в блоке отгрузки заполняется автоматически из позиций и может содержать несколько значений. Отгрузка такого заказа собирается с учётом разных адресов забора.</p>
+<h2 id="6-управление-пропусками-и-кодами-доступа">6. Управление пропусками и кодами доступа</h2>
+<p>Это профильный (эталонный) раздел по механике пропусков; в <code>08-integrations.md</code> и <code>02-crm/crm-overview.md</code> на него стоят ссылки.</p>
+<p>Для офиса на Орджоникидзе требуется оформление пропуска:</p>
+<ul>
+<li>Для авто — номер, марка, телефон, отправка QR-кода.</li>
+<li>Для пешего курьера — SMS с кодом.</li>
+</ul>
+<p>В карточке заказа при выборе адреса Орджоникидзе появляется блок «Пропуск»:</p>
+<ul>
+<li>Поля: тип (авто / пеший), номер авто, марка, телефон водителя.</li>
+<li>Кнопка «Запросить пропуск» — интеграция с системой пропусков (API) или ручное заполнение (заявка охране).</li>
+<li>Ссылка на скачивание QR-кода (если авто) или код для отправки по SMS (если пеший курьер).</li>
+</ul>
+<p>Текущая (AS-IS) механика выдачи: пропуск выдаётся через сторонний сайт (наличие у него API неизвестно). Данные для пропуска заполняет менеджер вручную. SMS отправляется автоматически; QR-код приходит автоматически только на почту. Сейчас указывается своя почта и QR переотправляется курьеру в мессенджер — это двойная работа; желательно сразу отправлять курьеру на его почту.</p>
+<p>Назначение в общей картине: контроль доступа на охраняемый объект выдачи/доставки (офис на Орджоникидзе). Интеграционный аспект (есть ли у системы пропусков API) — см. <a href="08-integrations.html#13-%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0-%D0%BF%D1%80%D0%BE%D0%BF%D1%83%D1%81%D0%BA%D0%BE%D0%B2-%D0%B8-%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8F-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0">08-integrations.md, раздел «Система пропусков и контроля доступа»</a>.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Не определено, выдаются ли пропуска через систему (API) или вручную через заявку охране (метод интеграции не подтверждён).</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Кто вводит данные для пропуска — менеджер при создании заказа или клиент в личном кабинете.</p>
+<h2 id="7-отгрузочная-накладная-pdf-с-qr-кодом">7. Отгрузочная накладная (PDF с QR-кодом)</h2>
+<p>При нажатии «Печать накладной» генерируется PDF, содержащий:</p>
+<ul>
+<li>Номер заказа (крупно).</li>
+<li>QR-код с номером заказа (для сканирования при отгрузке).</li>
+<li>Перечень позиций: название, количество, вес, габариты.</li>
+<li>Адрес забора и адрес доставки.</li>
+<li>Контакты получателя и отправителя.</li>
+</ul>
+<p>Накладная автоматически прикрепляется к заказу (в файлы) и может быть отправлена курьеру или клиенту через чат.</p>
+<h2 id="8-архитектура-системы-управления-доставкой-суд">8. Архитектура системы управления доставкой (СУД)</h2>
+<p>Четыре уровня:</p>
+<ol>
+<li><strong>Веб-интерфейс (клиент и менеджер):</strong> выбор способа доставки, расчёт стоимости, создание заказа, отслеживание статуса.</li>
+<li><strong>Оркестратор доставки (<code>DeliveryOrchestrator</code>, единый фасад):</strong>
+<ul>
+<li><code>calculateCost(params)</code> — сравнивает цены всех сервисов;</li>
+<li><code>selectBestProvider()</code> — выбирает оптимального провайдера;</li>
+<li><code>createDelivery(order)</code> — создаёт заказ у провайдера;</li>
+<li><code>trackDelivery(id)</code> — получает статус и координаты;</li>
+<li><code>monitorDelivery()</code> — фоновый мониторинг.</li>
+</ul>
+</li>
+<li><strong>Адаптеры провайдеров:</strong> ЯндексАдаптер, ДоставистаАдаптер, СДЭКАдаптер, OzonАдаптер — каждый реализует <code>calculate()</code>, <code>create()</code>, <code>track()</code>, <code>cancel()</code>.</li>
+<li><strong>Внешние API:</strong> Яндекс.Доставка, Достависта, СДЭК, Ozon.</li>
+</ol>
+<h3 id="81-класс-интеграции-с-курьерскими-службами">8.1. Класс интеграции с курьерскими службами</h3>
+<p>Это профильное (эталонное) определение класса <code>CourierIntegration</code> (методы <code>calculatePrice</code> / <code>createOrder</code> / <code>updateOrderStatus</code> / <code>notifyPartner</code>); в документе партнёров на него стоит ссылка. DDL таблицы <code>courier_orders</code>, в которую пишет <code>createOrder</code>, — см. data-model.md, раздел «courier_orders (курьерские заявки)».</p>
+<pre><code class="language-javascript">class CourierIntegration {
+  constructor() {
+    this.services = {
+      dostavista: new DostavistaAPI(),
+      yandex: new YandexDeliveryAPI()
+    };
+  }
+
+  // Расчёт стоимости доставки
+  async calculatePrice(service, pickup, delivery, weight, dimensions) {
+    const api = this.services[service];
+    const result = await api.calculate({
+      pickup:   { address: pickup.address, lat: pickup.lat, lon: pickup.lon, contact: pickup.contact, phone: pickup.phone },
+      delivery: { address: delivery.address, lat: delivery.lat, lon: delivery.lon, contact: delivery.contact, phone: delivery.phone },
+      weight, dimensions
+    });
+    return { price: result.price, estimated_time: result.estimated_time };
+  }
+
+  // Создание заявки на доставку
+  async createOrder(service, data) {
+    const api = this.services[service];
+    const result = await api.createOrder({
+      pickup: data.pickup, delivery: data.delivery,
+      weight: data.weight, dimensions: data.dimensions,
+      items: data.items, total_price: data.total_price
+    });
+
+    const courierOrder = await db.query(`
+      INSERT INTO courier_orders (
+        order_id, task_id, service, pickup_address, delivery_address,
+        weight_kg, dimensions, courier_order_id, tracking_link,
+        courier_name, courier_phone, estimated_price, status
+      ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,'created')
+      RETURNING id
+    `, [
+      data.order_id, data.task_id, service,
+      data.pickup.address, data.delivery.address,
+      data.weight, JSON.stringify(data.dimensions),
+      result.order_id, result.tracking_link,
+      result.courier_name, result.courier_phone, result.price
+    ]);
+
+    await this.notifyPartner(data.task_id, {
+      courier_name: result.courier_name,
+      courier_phone: result.courier_phone,
+      tracking_link: result.tracking_link,
+      estimated_arrival: result.estimated_arrival
+    });
+
+    return courierOrder.rows[0];
+  }
+
+  // Обновление статуса заявки (webhook от курьерской службы)
+  async updateOrderStatus(courierOrderId, status, data) {
+    await db.query(`
+      UPDATE courier_orders
+      SET status = $1, final_price = COALESCE($2, final_price), updated_at = NOW()
+      WHERE courier_order_id = $3
+    `, [status, data.final_price, courierOrderId]);
+
+    if (status === 'completed') {
+      const courierOrder = await db.query(
+        `SELECT task_id FROM courier_orders WHERE courier_order_id = $1`, [courierOrderId]);
+      await db.query(`
+        UPDATE partner_tasks SET status = 'shipped', shipped_at = NOW() WHERE id = $1
+      `, [courierOrder.rows[0].task_id]);
+    }
+  }
+
+  // Отправка данных партнёру об отгрузке (email / Telegram)
+  async notifyPartner(taskId, shipmentData) {
+    const task = await db.query(`
+      SELECT pt.*, p.email, p.telegram
+      FROM partner_tasks pt JOIN partners p ON p.id = pt.partner_id
+      WHERE pt.id = $1
+    `, [taskId]);
+
+    const message = `🚚 ОТГРУЗКА ЗАКАЗА №${task.rows[0].task_number}
+Курьер: ${shipmentData.courier_name}
+Телефон: ${shipmentData.courier_phone}
+Отслеживание: ${shipmentData.tracking_link}
+Ожидаемое прибытие: ${shipmentData.estimated_arrival}
+Статус заказа обновлён.`;
+
+    if (task.rows[0].email)    await this.sendEmail(task.rows[0].email, `Отгрузка заказа №${task.rows[0].task_number}`, message);
+    if (task.rows[0].telegram) await this.sendTelegram(task.rows[0].telegram, message);
+
+    await db.query(`UPDATE partner_tasks SET shipment_info = $1 WHERE id = $2`,
+      [JSON.stringify(shipmentData), taskId]);
+  }
+}
+</code></pre>
+<h2 id="9-умный-мониторинг-доставки-автоматизация">9. Умный мониторинг доставки (автоматизация)</h2>
+<p>Фоновый процесс запускается каждые 5–15 минут. Для каждого активного заказа с доставкой:</p>
+<ol>
+<li>Запрашивает статус через API провайдера.</li>
+<li>Сравнивает с предыдущим статусом.</li>
+<li>При изменении — обновляет в CRM и уведомляет.</li>
+<li>При проблемах — создаёт задачу менеджеру.</li>
+</ol>
+<p>Критические события, требующие вмешательства менеджера:</p>
+<ul>
+<li>Курьер не назначен более 30 минут → перезаказать.</li>
+<li>Курьер назначен, но не забрал заказ → связаться с поддержкой.</li>
+<li>Курьер опаздывает более 15 минут → уведомить клиента.</li>
+<li>Курьер не может дозвониться → отправить SMS/Telegram клиенту.</li>
+<li>Вес/габариты не соответствуют типу курьера → перезаказать с авто.</li>
+<li>Заказ отменён курьером → перезаказать или сменить провайдера.</li>
+</ul>
+<h2 id="10-расчёт-стоимости-в-оформлении-заказа">10. Расчёт стоимости в оформлении заказа</h2>
+<p>Пример блоков сводки и формул на странице оформления заказа:</p>
+<table>
+<thead>
+<tr>
+<th>Элемент</th>
+<th>Значение (пример)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Товар</td>
+<td>Брошюра на скобе (A5, 16 стр.) — 3200 ₽</td>
+</tr>
+<tr>
+<td>Доп. услуга</td>
+<td>Ламинация обложки (матовая) — +250 ₽</td>
+</tr>
+<tr>
+<td>Доставка</td>
+<td>Динамически (по умолчанию 500 ₽)</td>
+</tr>
+<tr>
+<td>Промокод</td>
+<td>PRINT10 = скидка 10%</td>
+</tr>
+</tbody>
+</table>
+<pre><code>Итого = 3200 + 250 + Стоимость_доставки − Скидка
+Скидка = 10% от 3450 (товар + ламинация) при промокоде PRINT10
+</code></pre>
+<p>Валидация при переходе к оплате: ФИО клиента не пустое, телефон не пустой, email не пустой, дата дедлайна выбрана, чекбокс реального срока отмечен; для курьера — адрес не пустой.</p>
+<h2 id="11-заглушки-и-интеграции-дорожная-карта">11. Заглушки и интеграции (дорожная карта)</h2>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Сейчас</th>
+<th>Что заменить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Поиск ПВЗ</td>
+<td>Заглушка</td>
+<td>API служб доставки</td>
+</tr>
+<tr>
+<td>Подсказки адресов</td>
+<td>Нет</td>
+<td>API DaData / Яндекс.Карты</td>
+</tr>
+<tr>
+<td>Сохранение заказа</td>
+<td>Нет</td>
+<td>POST-запрос на бэкенд</td>
+</tr>
+</tbody>
+</table>
+<p>Чек-лист по доставке для разработчиков (приоритет / сложность):</p>
+<table>
+<thead>
+<tr>
+<th>Задача</th>
+<th>Приоритет</th>
+<th>Сложность</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Получить API-ключи Яндекс.Доставки, Достависта, СДЭК</td>
+<td>Высокий</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Реализовать адаптеры для каждого провайдера</td>
+<td>Высокий</td>
+<td>Высокая</td>
+</tr>
+<tr>
+<td>Реализовать оркестратор (выбор лучшего варианта)</td>
+<td>Высокий</td>
+<td>Средняя</td>
+</tr>
+<tr>
+<td>Добавить самовывоз (3 офиса с детальной информацией)</td>
+<td>Высокий</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Реализовать фоновый мониторинг доставок</td>
+<td>Средний</td>
+<td>Высокая</td>
+</tr>
+<tr>
+<td>Настроить уведомления (Telegram/email менеджеру)</td>
+<td>Средний</td>
+<td>Низкая</td>
+</tr>
+<tr>
+<td>Добавить интерактивную карту отслеживания</td>
+<td>Средний</td>
+<td>Средняя</td>
+</tr>
+<tr>
+<td>Настроить автоматический перезаказ при проблемах</td>
+<td>Низкий</td>
+<td>Высокая</td>
+</tr>
+</tbody>
+</table>
+<p>Очерёдность реализации: вариант А — начать с интеграции API Яндекс.Доставки (расчёт стоимости); вариант Б — сделать блок самовывоза с 3 офисами (пока без API).</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-способы-получения-заказа">1. Способы получения заказа</a></li><li class="lvl3"><a href="#11-сводка-способов-и-базовых-цен">1.1. Сводка способов и базовых цен</a></li><li class="lvl3"><a href="#12-курьерская-доставка">1.2. Курьерская доставка</a></li><li class="lvl3"><a href="#13-параметры-формы-курьерской-доставки-ui">1.3. Параметры формы курьерской доставки (UI)</a></li><li class="lvl3"><a href="#14-пвз-пункты-выдачи">1.4. ПВЗ (пункты выдачи)</a></li><li class="lvl2"><a href="#2-пункты-самовывоза-3-офиса">2. Пункты самовывоза (3 офиса)</a></li><li class="lvl3"><a href="#офис-1-м-перово">Офис 1 — м. Перово</a></li><li class="lvl3"><a href="#офис-2-м-ленинский-проспект">Офис 2 — м. Ленинский проспект</a></li><li class="lvl3"><a href="#офис-3-м-пролетарская">Офис 3 — м. Пролетарская</a></li><li class="lvl2"><a href="#3-зоны-сроки-и-тарифы-доставки">3. Зоны, сроки и тарифы доставки</a></li><li class="lvl2"><a href="#4-модуль-доставка-и-отгрузка-crm">4. Модуль «Доставка» и отгрузка (CRM)</a></li><li class="lvl3"><a href="#41-справочник-адресов-и-партнёров">4.1. Справочник адресов и партнёров</a></li><li class="lvl3"><a href="#42-процесс-отгрузки-в-карточке-заказа-блок-отгрузка">4.2. Процесс отгрузки в карточке заказа (блок «Отгрузка»)</a></li><li class="lvl3"><a href="#43-лента-доставок-единый-раздел-crm">4.3. Лента доставок (единый раздел CRM)</a></li><li class="lvl2"><a href="#5-сборные-заказы">5. Сборные заказы</a></li><li class="lvl2"><a href="#6-управление-пропусками-и-кодами-доступа">6. Управление пропусками и кодами доступа</a></li><li class="lvl2"><a href="#7-отгрузочная-накладная-pdf-с-qr-кодом">7. Отгрузочная накладная (PDF с QR-кодом)</a></li><li class="lvl2"><a href="#8-архитектура-системы-управления-доставкой-суд">8. Архитектура системы управления доставкой (СУД)</a></li><li class="lvl3"><a href="#81-класс-интеграции-с-курьерскими-службами">8.1. Класс интеграции с курьерскими службами</a></li><li class="lvl2"><a href="#9-умный-мониторинг-доставки-автоматизация">9. Умный мониторинг доставки (автоматизация)</a></li><li class="lvl2"><a href="#10-расчёт-стоимости-в-оформлении-заказа">10. Расчёт стоимости в оформлении заказа</a></li><li class="lvl2"><a href="#11-заглушки-и-интеграции-дорожная-карта">11. Заглушки и интеграции (дорожная карта)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

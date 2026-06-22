@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Модель ценообразования — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--pricing-model">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li class="active"><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="модель-ценообразования">Модель ценообразования</h1>
+<p>Общая архитектура формирования цены в PrintOffice: разделение себестоимости и наценки, движок правил наценки (Rule Engine), универсальные модули формул и маржи, способы тарификации тиражей, система коррекции и обоснования цены, налог 7%. Конкретные формулы отдельных видов печати (цифра, офсет, широкоформат) описаны в соответствующих файлах калькуляторов; здесь зафиксирована общая модель.</p>
+<h2 id="1-базовый-принцип-цена-себестоимость-коэффициент-наценки">1. Базовый принцип: цена = себестоимость × коэффициент наценки</h2>
+<p>Система строго разделяет два понятия:</p>
+<ul>
+<li><strong>Себестоимость</strong> — во сколько заказ обошёлся типографии (затраты).</li>
+<li><strong>Наценка (маржа)</strong> — то, что зарабатывается сверх себестоимости.</li>
+</ul>
+<p>Это не единая формула в коде, а <strong>гибкая система правил</strong>, позволяющая менять наценку, запускать акции и экспериментировать с ценой без участия программиста.</p>
+<h3 id="базовая-формула">Базовая формула</h3>
+<pre><code class="language-text">Цена = (базовая_цена × листы) × (1 + маржа/100)
+        └────────┬────────┘     └──────┬──────┘
+            себестоимость      коэффициент наценки
+</code></pre>
+<p>Где:</p>
+<ul>
+<li><code>базовая_цена</code> — стоимость одного листа (наши затраты);</li>
+<li><code>листы</code> — количество печатаемых листов;</li>
+<li><code>маржа</code> — наценка в процентах; деление на 100 переводит проценты в долю;</li>
+<li><code>1 + маржа/100</code> — коэффициент наценки (1 = сохранение себестоимости, <code>маржа/100</code> = надбавка сверху).</li>
+</ul>
+<p><strong>Пример:</strong> себестоимость 50 листов = 10 × 50 = 500 руб; маржа 80% → коэффициент 1.8; цена = 500 × 1.8 = 900 руб (прибыль 400 руб).</p>
+<h3 id="зависимость-цены-от-маржи-себестоимость-1000-руб">Зависимость цены от маржи (себестоимость 1000 руб)</h3>
+<table>
+<thead>
+<tr>
+<th>Маржа</th>
+<th>Формула</th>
+<th>Цена для клиента</th>
+<th>Прибыль</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0%</td>
+<td>1000 × 1.0</td>
+<td>1000 руб</td>
+<td>0 руб</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>1000 × 1.5</td>
+<td>1500 руб</td>
+<td>500 руб</td>
+</tr>
+<tr>
+<td>80%</td>
+<td>1000 × 1.8</td>
+<td>1800 руб</td>
+<td>800 руб</td>
+</tr>
+<tr>
+<td>100%</td>
+<td>1000 × 2.0</td>
+<td>2000 руб</td>
+<td>1000 руб</td>
+</tr>
+<tr>
+<td>150%</td>
+<td>1000 × 2.5</td>
+<td>2500 руб</td>
+<td>1500 руб</td>
+</tr>
+</tbody>
+</table>
+<h3 id="умножение-а-не-прибавление">Умножение, а не прибавление</h3>
+<p>Прибавление <code>Цена = себестоимость + себестоимость × маржа/100</code> даёт тот же результат, но длиннее. Умножение <code>Цена = себестоимость × (1 + маржа/100)</code> короче, удобнее для программирования и читается легче.</p>
+<p>Единица в <code>(1 + маржа/100)</code> обязательна: без неё (<code>себестоимость × маржа/100</code>) при марже 80% получилось бы <code>500 × 0.8 = 400 руб</code> — ниже себестоимости, то есть работа в убыток.</p>
+<h3 id="процентная-vs-фиксированная-наценка">Процентная vs фиксированная наценка</h3>
+<table>
+<thead>
+<tr>
+<th>Тип наценки</th>
+<th>Формула</th>
+<th>Когда использовать</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Процентная</td>
+<td><code>Цена = Себестоимость × (1 + %/100)</code></td>
+<td>Основная наценка; сохраняет пропорцию (чем больше заказ, тем больше прибыль в рублях)</td>
+</tr>
+<tr>
+<td>Фиксированная</td>
+<td><code>Цена = Себестоимость + Фикс</code></td>
+<td>Доп. услуги: доставка, срочность, настройка — наценка не зависит от суммы заказа</td>
+</tr>
+</tbody>
+</table>
+<p>Пример фиксированной: себестоимость 500 руб + фикс 200 руб = 700 руб.</p>
+<h2 id="2-трёхуровневая-архитектура-наценки-rule-engine">2. Трёхуровневая архитектура наценки (Rule Engine)</h2>
+<p>Цель — «живой», а не «мёртвый» (как Excel) механизм, который можно настраивать без программиста.</p>
+<h3 id="уровень-1-базовая-себестоимость-источники-цены">Уровень 1. Базовая себестоимость (источники цены)</h3>
+<p>Система определяет, во сколько обошёлся заказ. Источники:</p>
+<ul>
+<li><strong>Себестоимость по прайсу подрядчика</strong> (широкоформат с фикс. ценой) — простое матричное правило: цена материала из <code>vendor_prices</code> (например, баннер 500 руб/м²) × площадь + доп. работы (люверсы 15 руб/шт, резка и т.д.). Считается мгновенно.</li>
+<li><strong>Себестоимость по прайс-листу</strong> (офсет GMPrint) — прайс зависит от тиража и формата. Создаётся таблица <code>price_matrix</code>; например <code>[Формат A3, бумага 80 г, 4+0, тираж 1000 шт] = [5 руб/шт]</code>. Система делает Lookup по пересечению параметров.</li>
+<li><strong>Себестоимость своего производства</strong> (Konica) — зашиваются нормативы: себестоимость листа SRA3 = 20 руб; считается количество листов на тираж × 20 + ламинация (как доп. услуга) + время менеджера.</li>
+<li><strong>Себестоимость по запросу</strong> (ручной широкоформат) — система не может посчитать автоматически, создаёт задачу менеджеру «Запросить цену у подрядчика X». Менеджер вводит цифру в поле «Себестоимость подрядчика».</li>
+</ul>
+<h3 id="уровень-2-движок-наценки-конвейер-правил-pipeline">Уровень 2. Движок наценки (конвейер правил, Pipeline)</h3>
+<p>Наценка не одинакова: на офсет плавает от 10 до 200% в зависимости от тиража, на широкий формат — обычно 36%. Правила применяются последовательно как конвейер; каждое правило — условие + действие.</p>
+<p><strong>Пример конвейера</strong> (вход: офсет, тираж 5000 шт, срочный; базовая себестоимость из прайс-листа GMPrint 50 000 руб):</p>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Условие</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Услуга = Офсетная печать</td>
+<td>Применить прайс-лист наценок из <code>markup_rules</code> для офсета</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Тираж 4000–6000 шт</td>
+<td>Базовая наценка = 30%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Срочность = Да</td>
+<td>Увеличить наценку на 20 п.п. (итого 50%)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Итоговая маржа &lt; 15% (после скидок)</td>
+<td>Заблокировать скидку / уведомить руководителя</td>
+</tr>
+</tbody>
+</table>
+<p>Менеджер правил не видит: он вводит параметры, а система показывает «Цена клиенту — 75 000 руб. Маржа — 33%». При движении ползунка скидки маржа пересчитывается в реальном времени; если падает ниже 15%, выводится «Требуется согласование с руководителем».</p>
+<h3 id="уровень-3-хранение-правил-администрирование">Уровень 3. Хранение правил (администрирование)</h3>
+<p>Правила меняет не программист, а маркетолог/коммерческий директор через админку.</p>
+<p>Таблица <strong><code>markup_rules</code></strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Назначение</th>
+<th>Пример</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Название</td>
+<td>человекочитаемое имя</td>
+<td>«Скидка за объём wide»</td>
+</tr>
+<tr>
+<td>Условие (JSON)</td>
+<td>условие применения</td>
+<td><code>{&quot;service_type&quot;: &quot;wide&quot;, &quot;qty&quot;: &quot;&gt;100&quot;}</code></td>
+</tr>
+<tr>
+<td>Действие (JSON)</td>
+<td>что сделать</td>
+<td><code>{&quot;markup&quot;: &quot;decrease_by_5&quot;}</code></td>
+</tr>
+<tr>
+<td>Приоритет</td>
+<td>порядок выполнения правил</td>
+<td>число</td>
+</tr>
+<tr>
+<td>Дата начала/окончания</td>
+<td>для акций</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="схема-работы-rule-engine">Схема работы Rule Engine</h3>
+<ol>
+<li>Клиент/менеджер выбирает параметры (услуга, тираж, материал, срочность).</li>
+<li>Система определяет источник себестоимости (прайс подрядчика / матрица / ручной ввод).</li>
+<li>Базовая цена прогоняется через конвейер правил наценки.</li>
+<li>На выходе: цена для клиента; детализированная себестоимость; маржа (в рублях и %); флаг «Требуется согласование», если маржа ниже нормы.</li>
+</ol>
+<h3 id="защита-от-дурака-и-риски">Защита от дурака и риски</h3>
+<ul>
+<li><strong>Минимальная маржа</strong> — при марже ниже 15% после скидок блокируется применение скидки и/или уходит уведомление руководителю.</li>
+<li><strong>Сложность правил</strong> — нельзя давать менеджерам создавать правила с 10 условиями, иначе система станет непредсказуемой. Нужен визуальный конструктор с ограничениями.</li>
+<li><strong>Зацикливание</strong> — правила не должны отменять друг друга; решается приоритетами и тестированием в песочнице.</li>
+<li><strong>Прозрачность для клиента</strong> — клиенту показывается финальная цифра (возможно с детализацией «Бумага: X руб, Печать: Y руб, Допы: Z руб»), а не все слои наценки.</li>
+</ul>
+<h2 id="3-модуль-формул-универсальный-конструктор-расчётов">3. Модуль формул (универсальный конструктор расчётов)</h2>
+<p>Конструктор, позволяющий настраивать любые математические зависимости без программиста. Используется в ценообразовании для расчёта себестоимости, времени, расхода материалов и <strong>наценки</strong>. Детали визуального редактора — в <code>constructors.md</code>; здесь — роль в ценообразовании.</p>
+<p>Что позволяет: создавать формулы себестоимости / времени / расхода материалов / наценки; переиспользовать формулы в разных услугах; тестировать перед применением.</p>
+<p>Примеры формул, относящихся к цене:</p>
+<pre><code class="language-text">sheets = ceil(quantity / items_per_sheet)
+cost   = sheets × (print_price + paper_price)
+price  = cost × (1 + margin/100)
+</code></pre>
+<p>Формула маржи в каталоге формул хранится в категории «Расчёт наценки» (<code>margin-calculation</code>); тип формулы <code>margin</code>. Каждая формула имеет код, версию, доступные переменные и пример для тестирования. Привязка к сущностям (<code>formula_links</code>) позволяет одной формуле обслуживать несколько услуг.</p>
+<p>Связь с наценкой в калькуляторе (псевдокод): сначала формулой считается раскладка и себестоимость, затем отдельной формулой <code>margin_price</code> применяется маржа:</p>
+<pre><code class="language-javascript">const cost  = await formulaEngine.evaluate('digital_print_cost', { quantity, items_per_sheet, print_price, paper_price });
+const price = await formulaEngine.evaluate('margin_price', { cost: cost.result, margin_percent: getMargin(quantity) });
+</code></pre>
+<h2 id="4-модуль-маржи-универсальный-механизм">4. Модуль маржи (универсальный механизм)</h2>
+<p>Маржа — правило, применимое к печати (цифровой, офсетной, широкой), услугам (копирование, сканирование, факс), материалам (бумага, плёнка, пружины), доп. операциям (ламинация, резка, биговка) и любой их комбинации.</p>
+<p>Каждое правило маржи имеет: таблицу-контейнер, условия применения, тип наценки (процент или фикс), значение, приоритет.</p>
+<h3 id="структура-данных">Структура данных</h3>
+<pre><code class="language-sql">-- Контейнеры правил
+CREATE TABLE margin_tables (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    applies_to ENUM('printing','service','material','operation','all') DEFAULT 'printing',
+    dimension_type ENUM('sheets','pages','items','minutes','copies') DEFAULT 'sheets',
+    is_stackable BOOLEAN DEFAULT false,   -- можно ли комбинировать таблицы
+    priority INT DEFAULT 100,             -- чем меньше, тем выше
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Правила маржи
+CREATE TABLE margin_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    margin_table_id INT NOT NULL,
+    quantity_from INT NOT NULL,
+    quantity_to INT,                      -- NULL = до бесконечности
+    conditions JSON,                       -- {&quot;country_id&quot;:1,&quot;copy_method_id&quot;:2}
+    margin_type ENUM('percent','fixed') NOT NULL,
+    margin_value DECIMAL(10,2) NOT NULL,
+    apply_to ENUM('cost','price','profit') DEFAULT 'cost',
+    priority INT DEFAULT 100,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (margin_table_id) REFERENCES margin_tables(id) ON DELETE CASCADE
+);
+
+-- Привязка таблиц к сущностям
+CREATE TABLE margin_links (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    margin_table_id INT NOT NULL,
+    entity_type ENUM('constructor','service','material','operation') NOT NULL,
+    entity_id INT NOT NULL,
+    override_settings JSON,               -- переопределение параметров для сущности
+    sort_order INT DEFAULT 0,
+    UNIQUE KEY unique_link (margin_table_id, entity_type, entity_id)
+);
+</code></pre>
+<h3 id="типы-правил">Типы правил</h3>
+<p><strong>Основные (по количеству)</strong> — чем больше заказ, тем меньше наценка:</p>
+<table>
+<thead>
+<tr>
+<th>Диапазон</th>
+<th>Наценка</th>
+<th>Пример (себестоимость 1000 руб)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–10</td>
+<td>100%</td>
+<td>1000 + 1000 = 2000 руб</td>
+</tr>
+<tr>
+<td>11–50</td>
+<td>80%</td>
+<td>1000 + 800 = 1800 руб</td>
+</tr>
+<tr>
+<td>51–100</td>
+<td>60%</td>
+<td>1000 + 600 = 1600 руб</td>
+</tr>
+<tr>
+<td>101+</td>
+<td>50%</td>
+<td>1000 + 500 = 1500 руб</td>
+</tr>
+</tbody>
+</table>
+<p>Стандартная маржа для цифры (по листам): 1–10 → 100%, 11–20 → 90%, 21–30 → 80%, 31–50 → 70%, 51+ → 60%.</p>
+<p>Маржа для копирования (по копиям): 1–10 → 100%, 11–50 → 80%, 51–100 → 60%, 101+ → 50%.</p>
+<p><strong>Дополнительные (с условиями)</strong> применяются поверх основной маржи:</p>
+<table>
+<thead>
+<tr>
+<th>Тип правила</th>
+<th>Условие</th>
+<th>Наценка</th>
+<th>Когда</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Срочность</td>
+<td><code>delivery_days = 1</code></td>
+<td>+50%</td>
+<td>Заказ на завтра</td>
+</tr>
+<tr>
+<td>Сложность</td>
+<td><code>complex_layout = true</code></td>
+<td>+30%</td>
+<td>Много макетов на листе</td>
+</tr>
+<tr>
+<td>VIP-клиент</td>
+<td><code>client_id = 123</code></td>
+<td>−20%</td>
+<td>Скидка постоянному</td>
+</tr>
+<tr>
+<td>Субботняя доставка</td>
+<td><code>saturday = true</code></td>
+<td>+500 руб</td>
+<td>Доп. плата за субботу</td>
+</tr>
+<tr>
+<td>Контурная резка</td>
+<td><code>contour_cut = true</code></td>
+<td>+40%</td>
+<td>Доп. операция</td>
+</tr>
+</tbody>
+</table>
+<p>Условия с JSON-параметрами (например, тариф факса по странам): Россия 1–5 листов → 100%, Россия 6–10 → 80%, СНГ 1–5 → 100%, СНГ 6–10 → 90%.</p>
+<p>Маржа на материалы по категориям: бумага 30%, плёнка 50%, пружины 100%. Маржа на операции: ламинация 50%, резка — фикс 100 руб.</p>
+<h3 id="применение-маржи">Применение маржи</h3>
+<pre><code class="language-javascript">// percent
+margin_amount = cost × (margin_value / 100);  total = cost × (1 + margin_value/100);
+// fixed
+margin_amount = margin_value;                  total = cost + margin_value;
+</code></pre>
+<p>Если подходит несколько правил/таблиц — выбор по приоритету. Несколько таблиц можно применять последовательно (стек):</p>
+<pre><code class="language-text">Таблица 1: Базовая маржа (60–100%)
+  + Таблица 2: Срочность (+50%)
+  + Таблица 3: Сложность (+30%)
+  = Итоговая наценка
+</code></pre>
+<p>Пример стека: себестоимость 1000 руб + обычная маржа 60% (600 руб) + срочность 50% (500 руб) = 2100 руб.</p>
+<h3 id="маржа-для-операций-с-учётом-времени">Маржа для операций с учётом времени</h3>
+<p>Для операций (ламинация, биговка, резка) себестоимость зависит от расхода материала и времени:</p>
+<pre><code class="language-text">Себестоимость = (расход_материала × цена_материала × количество) + (время_операции × ставка_оператора)
+Цена для клиента = Себестоимость × (1 + маржа_процент/100) + маржа_фикс
+</code></pre>
+<ul>
+<li><code>маржа_процент</code> зависит от тиража (чем больше, тем меньше процент);</li>
+<li><code>маржа_фикс</code> может добавляться за срочность/сложность;</li>
+<li>ставка оператора по умолчанию 30 руб/мин.</li>
+</ul>
+<p>Время считается по типу операции: <code>fixed</code> (на весь заказ), <code>per_sheet</code> (<code>base + per_unit × qty</code>), <code>per_item</code>, <code>per_meter</code>.</p>
+<p><strong>Пример (ламинация A3, плёнка 10 руб/лист, базовое время 2 мин, 0.5 мин/лист, 30 руб/мин):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Тираж</th>
+<th>Материал</th>
+<th>Время</th>
+<th>Труд</th>
+<th>Себестоимость</th>
+<th>Маржа</th>
+<th>Итог</th>
+<th>За лист</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td>50 руб</td>
+<td>4.5 мин</td>
+<td>135 руб</td>
+<td>185 руб</td>
+<td>100%</td>
+<td>370 руб</td>
+<td>74 руб</td>
+</tr>
+<tr>
+<td>50</td>
+<td>500 руб</td>
+<td>27 мин</td>
+<td>810 руб</td>
+<td>1310 руб</td>
+<td>70%</td>
+<td>2227 руб</td>
+<td>44.54 руб</td>
+</tr>
+<tr>
+<td>100</td>
+<td>1000 руб</td>
+<td>52 мин</td>
+<td>1560 руб</td>
+<td>2560 руб</td>
+<td>60%</td>
+<td>4096 руб</td>
+<td>40.96 руб</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-единый-механизм-база-наценки-количество-vs-сумма-заказа">5. Единый механизм: база наценки «количество» vs «сумма заказа»</h2>
+<p>Один и тот же класс <code>MarginCalculator</code> работает для всех сценариев, по-разному интерпретируя поле «количество». В <code>margin_tables</code> вводится поле <strong><code>base_on</code></strong>:</p>
+<ul>
+<li><strong><code>quantity</code></strong> — наценка по количеству единиц (листы SRA3, копии, страницы). Для цифры и копирования.</li>
+<li><strong><code>total_price</code></strong> — наценка по итоговой сумме заказа в рублях. Для офсета (цена приходит готовой от партнёра).</li>
+</ul>
+<h3 id="исправление-для-цифровой-печати">Исправление для цифровой печати</h3>
+<p>Маржа для цифры начисляется <strong>на количество листов SRA3, а не на тираж готовых изделий</strong>. Поле в админке, ныне названное «Тираж», должно называться «Затраты листов (SRA3)» (для копирования остаётся «Количество копий», там 1:1).</p>
+<pre><code class="language-javascript">// Листовка A4, тираж изделий = 200, на SRA3 помещается 2 макета A4
+const sheets_spent = Math.ceil(тираж_изделий / макетов_на_листе); // = 100
+// В модуль маржи передаётся quantity = sheets_spent (100), а не 200
+</code></pre>
+<p>Без переименования для тиража 200 A4 система ошибочно ищет интервал 200, а не 100.</p>
+<h3 id="поток-данных-по-типам-расчёта">Поток данных по типам расчёта</h3>
+<pre><code class="language-text">[Фронтенд: параметры заказа]
+        |
+[Бэкенд: тип расчёта?]
+  |
+  +-- Цифра/Копир --&gt; себестоимость --&gt; кол-во единиц (листы SRA3 или копии) --&gt;
+  |       [Модуль маржи: таблица base_on=quantity, правило по количеству]
+  |
+  +-- Офсет --&gt; запрос цены у партнёра (ГМпринт) --&gt; сумма X руб --&gt;
+          [Модуль маржи: таблица base_on=total_price, правило по диапазону суммы]
+          |
+          v
+       Итоговая цена для клиента
+</code></pre>
+<p>Что нужно в реализации: добавить <code>margin_tables.base_on</code> (<code>quantity</code> / <code>total_price</code>); существующим таблицам цифры/копира проставить <code>quantity</code>; создать таблицу офсета с <code>total_price</code>; для офсета передавать цену партнёра как <code>total_price</code>.</p>
+<h3 id="три-типа-расчёта-метод-вычисления">Три типа расчёта (метод вычисления)</h3>
+<p>В <code>margin_tables</code> дополнительно вводится <strong><code>calculation_method</code></strong>:</p>
+<ul>
+<li><strong><code>discrete</code></strong> — старый режим: диапазоны с фикс/процентом (цифра, копирование).</li>
+<li><strong><code>linear_percent</code></strong> — новый режим: интерполяция процента по опорным точкам (офсет, см. §6).</li>
+</ul>
+<p>Для <code>linear_percent</code> поля <code>quantity_from/to</code> переиспользуются: <code>quantity_from</code> = цена точки (руб), <code>quantity_to</code> = NULL, <code>margin_type</code> = 'percent', <code>margin_value</code> = процент маржи для точки; сортировка по <code>quantity_from</code>.</p>
+<h2 id="6-тарификация-тиражей">6. Тарификация тиражей</h2>
+<h3 id="вариант-a-фиксированная-цена-на-весь-диапазон-по-нижней-границе">Вариант A. Фиксированная цена на весь диапазон (по нижней границе)</h3>
+<p>Весь диапазон тиражей считается по цене опорного тиража диапазона. Клиент не угадывает границу — платит одну ставку за весь диапазон (честно).</p>
+<p>Пример диапазонов (себестоимость 30 руб/шт):</p>
+<table>
+<thead>
+<tr>
+<th>Диапазон</th>
+<th>База расчёта</th>
+<th>Наценка</th>
+<th>Цена за шт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1–10</td>
+<td>10 шт</td>
+<td>100%</td>
+<td>60 руб</td>
+</tr>
+<tr>
+<td>11–20</td>
+<td>20 шт</td>
+<td>90%</td>
+<td>57 руб</td>
+</tr>
+<tr>
+<td>21–30</td>
+<td>30 шт</td>
+<td>80%</td>
+<td>54 руб</td>
+</tr>
+<tr>
+<td>31–40</td>
+<td>40 шт</td>
+<td>70%</td>
+<td>51 руб</td>
+</tr>
+<tr>
+<td>41–100</td>
+<td>100 шт</td>
+<td>60%</td>
+<td>48 руб</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-typescript">const rule = rules.find(r =&gt; quantity &gt;= r.rangeFrom &amp;&amp; quantity &lt;= r.rangeTo);
+const pricePerUnit = baseCost * (1 + rule.markupPercent / 100);
+const total = quantity * pricePerUnit;
+</code></pre>
+<p>Промежуточный тираж считается по ставке своего диапазона (попадание внутрь):</p>
+<table>
+<thead>
+<tr>
+<th>Тираж</th>
+<th>Расчёт по нижней границе</th>
+<th>Итого</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 шт</td>
+<td>5 × 60</td>
+<td>300 руб</td>
+</tr>
+<tr>
+<td>8 шт</td>
+<td>8 × 60</td>
+<td>480 руб</td>
+</tr>
+<tr>
+<td>9 шт</td>
+<td>9 × 60</td>
+<td>540 руб</td>
+</tr>
+<tr>
+<td>10 шт</td>
+<td>10 × 60</td>
+<td>600 руб</td>
+</tr>
+<tr>
+<td>11 шт</td>
+<td>11 × 57</td>
+<td>627 руб</td>
+</tr>
+<tr>
+<td>12 шт</td>
+<td>12 × 57</td>
+<td>684 руб</td>
+</tr>
+<tr>
+<td>15 шт</td>
+<td>15 × 57</td>
+<td>855 руб</td>
+</tr>
+<tr>
+<td>19 шт</td>
+<td>19 × 57</td>
+<td>1083 руб</td>
+</tr>
+<tr>
+<td>20 шт</td>
+<td>20 × 57</td>
+<td>1140 руб</td>
+</tr>
+<tr>
+<td>21 шт</td>
+<td>21 × 54</td>
+<td>1134 руб (дешевле 20!)</td>
+</tr>
+</tbody>
+</table>
+<p>Особенность анти-скачка: на границе диапазонов (20→21 шт) цена за штуку падает (54 вместо 57), из-за чего итог за 21 шт (1134 руб) оказывается <strong>ниже</strong>, чем за 20 шт (1140 руб). См. активный механизм «+1 экземпляр бесплатно» ниже — он автоматически предлагает клиенту лучшую цену в подобных ситуациях.</p>
+<p>Сравнение подходов:</p>
+<table>
+<thead>
+<tr>
+<th>Тираж</th>
+<th>Обычные диапазоны</th>
+<th>Плавное снижение</th>
+<th>По нижней границе</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 шт</td>
+<td>300 руб</td>
+<td>297.55 руб</td>
+<td>300 руб</td>
+</tr>
+<tr>
+<td>10 шт</td>
+<td>600 руб</td>
+<td>589.10 руб</td>
+<td>600 руб</td>
+</tr>
+<tr>
+<td>11 шт</td>
+<td>627 руб</td>
+<td>646.69 руб</td>
+<td>627 руб</td>
+</tr>
+<tr>
+<td>15 шт</td>
+<td>855 руб</td>
+<td>874.50 руб</td>
+<td>855 руб</td>
+</tr>
+<tr>
+<td>20 шт</td>
+<td>1140 руб</td>
+<td>1154 руб</td>
+<td>1140 руб</td>
+</tr>
+<tr>
+<td>21 шт</td>
+<td>1134 руб</td>
+<td>1145 руб</td>
+<td>1134 руб</td>
+</tr>
+</tbody>
+</table>
+<h3 id="анти-скачок-активный-механизм-1-экземпляр-бесплатно">Анти-скачок (активный механизм «+1 экземпляр бесплатно»)</h3>
+<p>Анти-скачок — это <strong>активное действие</strong> калькулятора, а не просто замечание. Когда тираж близок к границе и в следующем диапазоне ставка ниже, система проверяет: не выйдет ли заказ дешевле, если посчитать его как <code>N+1</code> экземпляр по правилу следующего диапазона. Если да — клиенту предлагается лучшая цена с пометкой «Спецпредложение: +1 экземпляр бесплатно (цена за N+1 шт)».</p>
+<p>В админке за это отвечает флаг <strong>«Включить анти-скачок (защита от резких цен)»</strong> / «доп. экз. беспл.»: «при пересечении диапазонов система автоматически предложит лучшую цену».</p>
+<p>Логика в <code>calculateWithRanges</code> (псевдокод):</p>
+<pre><code class="language-typescript">let total = quantity * baseCost * (1 + markup / 100);
+// Анти-скачок: проверяем, не дешевле ли взять на один экземпляр больше
+if (useAntiJump &amp;&amp; rule.quantityTo) {
+  const nextRule = findRuleForQuantity(rule.quantityTo + 1);
+  if (nextRule &amp;&amp; nextRule.markupPercent &lt; markup) {
+    const totalNext = (quantity + 1) * baseCost * (1 + nextRule.markupPercent / 100);
+    if (totalNext &lt; total) {
+      return {
+        total: totalNext,
+        pricePerUnit: totalNext / quantity,
+        appliedRule: nextRule,
+        note: `Спецпредложение: +1 экземпляр бесплатно (цена за ${quantity + 1} шт)`
+      };
+    }
+  }
+}
+</code></pre>
+<p>Пример (себестоимость 30 руб/шт): для тиража 11 шт обычная ставка диапазона 11–20 даёт 11 × 57 = 627 руб; но 11 экземпляров по ставке диапазона 1–10 (100%, 60 руб/шт за 10 шт) дают 600 руб. Анти-скачок предлагает посчитать заказ как 10 шт = 600 руб (выбрана лучшая цена), фактически отдав один экземпляр бесплатно.</p>
+<h3 id="вариант-b-плавное-снижение-наценки-по-опорным-точкам">Вариант B. Плавное снижение наценки по опорным точкам</h3>
+<p>Настраивается стартовая наценка (например, 100% при тираже 1), конечная (60% при тираже 100), тип снижения (линейное). Между опорными точками наценка интерполируется линейно, поэтому ступенек на границах нет (можно дополнительно включать «анти-скачок»).</p>
+<p>Опорные точки (пример): 1 → 100%, 10 → 100%, 20 → 90%, 30 → 80%, 40 → 70%, 1000 → 60%.</p>
+<p><strong>Пример расчёта для тиража 15 шт (себестоимость 30 руб/шт):</strong></p>
+<ul>
+<li>тираж попадает между точками 10 шт (100%) и 20 шт (90%);</li>
+<li>пропорция: <code>(15 − 10) / (20 − 10) = 0.5</code>;</li>
+<li>наценка: <code>100% − (100% − 90%) × 0.5 = 95%</code>;</li>
+<li>цена за шт: <code>30 × 1.95 = 58.5 руб</code>;</li>
+<li>итого за 15 шт: <code>15 × 58.5 = 877.5 руб</code>.</li>
+</ul>
+<pre><code class="language-typescript">// калькулятор находит отрезок и интерполирует процент
+const t = (quantity - left.quantity) / (right.quantity - left.quantity);
+const markup = left.markupPercent + (right.markupPercent - left.markupPercent) * t;
+const total = quantity * baseCost * (1 + markup / 100);
+</code></pre>
+<p>Режимы расчёта переключаются в админке (<code>Настройки калькулятора → Правила наценки</code>): фиксированные диапазоны / плавное снижение / цена по нижней границе.</p>
+<h3 id="линейная-интерполяция-маржи-по-сумме-заказа-офсет">Линейная интерполяция маржи по сумме заказа (офсет)</h3>
+<p>Для офсета наценка зависит от суммы партнёра <code>partner_price</code> нелинейно (при 1000 руб → +100%, при 4000 руб → +2000 руб, т.е. 50%). Чтобы цена менялась плавно без ступенек, маржа задаётся непрерывной функцией: администратор задаёт опорные точки <code>(price, margin_percent)</code>, между ними процент интерполируется линейно.</p>
+<pre><code class="language-text">percent(S) = P1 + (P2 - P1) × (S - S1) / (S2 - S1)
+margin           = S × percent(S) / 100
+price_before_tax = S + margin
+final_price      = price_before_tax × (1 + 0.07)   ; налог 7% поверх
+</code></pre>
+<p>Если <code>S &lt; S1</code> — берётся <code>P1</code>; если <code>S &gt; S_last</code> — фиксируется последний процент (не экстраполируется). В админке настройки маржи на опорных точках сразу отображается <strong>чистая прибыль</strong> (= <code>partner_price × margin_percent / 100</code>, без налога).</p>
+<p>Преимущества: плавность (нет ступенек), пропорциональность, простота настройки (5–7 точек вместо тысяч комбинаций формат+бумага+тираж+цветность+допы), защита от убытков на малых суммах, стимул крупных заказов.</p>
+<p>Полный профильный алгоритм <code>linear_percent</code> с примером опорных точек (0/1000/3000/5000/10000/50000/100000), таблицами расчётов для разных сумм и таблицей чистой прибыли — в <a href="04-calculators--offset.html#%D0%BF%D0%BB%D0%B0%D0%B2%D0%BD%D0%B0%D1%8F-%D0%BF%D1%80%D0%BE%D0%BF%D0%BE%D1%80%D1%86%D0%B8%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F-%D0%BD%D0%B0%D1%86%D0%B5%D0%BD%D0%BA%D0%B0-linear_percent">калькуляторе офсетной печати</a>.</p>
+<h3 id="хранение-тиражей-диапазонами-тираж-как-число-а-не-сущность">Хранение тиражей диапазонами (тираж как число, а не сущность)</h3>
+<p>Тираж — числовая величина, а не сущность с ID. Цены хранятся матрицей диапазонов; границы — числа в полях <code>quantity_from</code> / <code>quantity_to</code>.</p>
+<pre><code class="language-sql">CREATE TABLE partner_prices (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    partner_id INT NOT NULL,
+    product_type VARCHAR(50) NOT NULL,    -- 'flyer','booklet'
+    format VARCHAR(20),                   -- 'A4','A5'
+    paper_density INT,                    -- 130,200,300
+    color_type VARCHAR(10),               -- '4+4'
+    quantity_from INT NOT NULL,           -- начало диапазона
+    quantity_to INT,                      -- конец (NULL = до бесконечности)
+    price DECIMAL(10,2) NOT NULL,
+    services JSON,
+    city VARCHAR(100) DEFAULT 'Москва',
+    is_active BOOLEAN DEFAULT true,
+    INDEX idx_search (partner_id, product_type, format, paper_density, color_type, city, quantity_from)
+);
+</code></pre>
+<p>Пример матрицы (Листовки A4, 130 г, 4+4, Москва): 1–10 → 500; 11–20 → 950; 21–30 → 1400; 31–50 → 2300; 51–100 → 4500; 101–1000 → 25000; 1001–2000 → 48000; 2001–3000 → 68000; 3001+ → 120000 руб.</p>
+<p><strong>Алгоритм поиска цены для промежуточного тиража:</strong></p>
+<ol>
+<li>Сортируем диапазоны по <code>quantity_from</code>.</li>
+<li>Если тираж попал в диапазон — берём его цену (точное попадание).</li>
+<li>Если не попал — берём цену ближайшего большего диапазона (округление вверх), с пояснением «цена как за N шт».</li>
+<li>Если большего нет — берём максимальный диапазон.</li>
+</ol>
+<p>Опционально доступна интерполяция между двумя точками: <code>price = p1 + (p2 - p1) × (qty - q1) / (q2 - q1)</code>.</p>
+<p>Режимы для промежуточных тиражей в админке: всегда округлять до ближайшего большего (рекомендуется) / интерполяция (требует тестирования, может давать неожиданные цены) / блокировать промежуточные тиражи (только из списка).</p>
+<p>Преимущества: добавление нового диапазона (например, 2001–2100 → 52000) не требует менять ID — система пересортировывает по <code>quantity_from</code>; цену целого диапазона легко менять, не трогая отдельные значения.</p>
+<h2 id="7-налог-7">7. Налог 7%</h2>
+<ul>
+<li>Ставка налога <strong>7%</strong> (льготная) выносится в отдельную глобальную настройку (<code>settings.tax_rate</code>), редактируемую через админку; в правила маржи налог не входит.</li>
+<li><strong>Маржа очищается от налога</strong> — то есть наценка (чистая прибыль) начисляется только на себестоимость/<code>partner_price</code>, без налога.</li>
+<li>Налог <strong>7% добавляется поверх итога</strong> (себестоимость + маржа):</li>
+</ul>
+<pre><code class="language-text">price_before_tax = себестоимость + маржа
+final_price      = price_before_tax × (1 + 0.07)
+</code></pre>
+<p>Для офсета: <code>final_price = (partner_price + margin_amount) × 1.07</code>, где <code>margin_amount</code> — чистая прибыль без налога.</p>
+<p>Также встречается формулировка <code>Налог = (Себестоимость + Наценка + Услуги) × 7%</code>, эквивалентная начислению 7% сверху на цену без налога.</p>
+<p>При формировании цены офсета учитываются ещё расходы на доставку (до типографии либо до клиента) — наценка делается с учётом налога и доставки. Партнёров-поставщиков офсета три, у каждого свои цены и сроки.</p>
+<h2 id="8-система-коррекции-и-обоснования-цены">8. Система коррекции и обоснования цены</h2>
+<h3 id="сайт-vs-себестоимость-порог-автоутверждения">Сайт vs себестоимость, порог автоутверждения</h3>
+<p>Система сравнивает <strong>цену сайта</strong> (автоматическую) и <strong>реальную цену</strong> (с учётом нюансов производства). Параметры ценовой политики:</p>
+<pre><code class="language-javascript">priceRules = {
+    siteMarkup: 100,            // базовая наценка для сайта, %
+    minMarkup: 30,              // минимальная наценка (чтобы не уйти в минус), %
+    maxMarkup: 200,             // максимальная наценка, %
+    autoApproveThreshold: 15    // порог отклонения для автоутверждения, %
+};
+</code></pre>
+<p>Логика:</p>
+<pre><code class="language-text">sitePrice  = cost × (1 + siteMarkup/100)
+realPrice  = реальная цена с учётом производства
+deviation  = |(realPrice - sitePrice) / sitePrice| × 100
+
+action = deviation &lt; autoApproveThreshold ? 'auto_approve' : 'manager_review'
+</code></pre>
+<p>При отклонении менее ~15% цена утверждается автоматически; при большем — уходит на согласование менеджеру с тремя вариантами:</p>
+<ol>
+<li><strong>Оставить цену сайта</strong> — маржа ниже обычной, заказ принять.</li>
+<li><strong>Скорректировать под производство</strong> — реальная цена, соответствует затратам.</li>
+<li><strong>Компромисс</strong> — среднее между ценой сайта и реальной.</li>
+</ol>
+<h3 id="коэффициенты-корректировки-приладка-срочность-сложность-скидки">Коэффициенты-корректировки (приладка, срочность, сложность, скидки)</h3>
+<p>Хранятся в <code>order_adjustments</code>:</p>
+<pre><code class="language-sql">CREATE TABLE order_adjustments (
+    id INT PRIMARY KEY,
+    order_id INT,
+    adjustment_type VARCHAR(50),  -- 'make_ready','urgency','discount'
+    value DECIMAL(10,2),
+    value_type VARCHAR(20),       -- 'percent','fixed'
+    applied_to VARCHAR(20),       -- 'item','total'
+    reason TEXT,
+    created_by INT,
+    created_at TIMESTAMP
+);
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Корректировка</th>
+<th>Тип значения</th>
+<th>Пример</th>
+<th>Применяется к</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Приладка</strong> (<code>make_ready</code>) — коэффициент на сложную настройку оборудования</td>
+<td>фикс</td>
+<td>+500 руб</td>
+<td>заказ</td>
+</tr>
+<tr>
+<td><strong>Срочность</strong> (<code>urgency</code>)</td>
+<td>процент/коэф.</td>
+<td>+50% (×1.5)</td>
+<td>стоимость</td>
+</tr>
+<tr>
+<td><strong>Скидка</strong> (<code>discount</code>)</td>
+<td>процент/фикс</td>
+<td>−15% / −500 руб</td>
+<td>позиция или весь заказ</td>
+</tr>
+</tbody>
+</table>
+<p>Пример корректировки заказа: база 3500 руб + приладка 500 руб − скидка 10% (350 руб) = 3650 руб.</p>
+<h3 id="обоснование-отклонений-цены">Обоснование отклонений цены</h3>
+<p>Когда реальная цена отличается от автоматической, система генерирует объяснение, почему цена изменилась. Подсистема обоснований работает на 4 уровнях автоматизации (системные обоснования по каталогу причин <code>layout_optimization</code>/<code>material_optimization</code>/<code>operation_required</code>/<code>complexity_increased</code>/<code>urgency</code>/<code>make_ready</code>/<code>discount</code> → настраиваемые шаблоны <code>justification_templates</code> → ручной текст менеджера → комбинирование с автоматизацией ответов через <code>automation_rules</code>); итог возвращается клиенту структурированным обоснованием (JSON с <code>originalPrice</code>/<code>newPrice</code>/<code>change</code>/<code>percent</code> и списком <code>reasons</code>).</p>
+<p>Полное описание 4 уровней, каталог причин с шаблонами сообщений и эталонный JSON-пример («листовки А5», −2800 руб / −46.3%) — см. <a href="02-crm--automations.html#%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D0%BE%D0%B1%D0%BE%D1%81%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F-%D0%B8%D0%B7%D0%BC%D0%B5%D0%BD%D0%B5%D0%BD%D0%B8%D1%8F-%D1%86%D0%B5%D0%BD%D1%8B-4-%D1%83%D1%80%D0%BE%D0%B2%D0%BD%D1%8F">Автоматические обоснования изменения цены (4 уровня)</a> в <code>02-crm/automations.md</code>.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: значение порога автоутверждения указано неоднозначно. В коде <code>autoApproveThreshold = 15</code>, но в правилах автоматизации CRM стандартным считается диапазон отклонения «between −15 and 15», а правило крупного снижения срабатывает при «&lt; −30%». Нужно зафиксировать единый порог и его трактовку (абсолютное отклонение vs только снижение).</p>
+<h2 id="9-скидки">9. Скидки</h2>
+<ul>
+<li><strong>По позиции</strong> — скидка на конкретную позицию заказа (<code>applied_to = 'item'</code>), процент или фикс.</li>
+<li><strong>По всему заказу</strong> — <code>applied_to = 'total'</code>, процент или фикс.</li>
+<li><strong>Постоянным/VIP-клиентам</strong> — пониженная наценка (например, −20% по условию <code>client_id</code>).</li>
+</ul>
+<p>Скидки применяются как корректировки и обязаны проходить контроль минимальной маржи: если итоговая маржа после скидки падает ниже минимума (15%), скидка блокируется или требует согласования руководителя.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-базовый-принцип-цена-себестоимость-коэффициент-наценки">1. Базовый принцип: цена = себестоимость × коэффициент наценки</a></li><li class="lvl3"><a href="#базовая-формула">Базовая формула</a></li><li class="lvl3"><a href="#зависимость-цены-от-маржи-себестоимость-1000-руб">Зависимость цены от маржи (себестоимость 1000 руб)</a></li><li class="lvl3"><a href="#умножение-а-не-прибавление">Умножение, а не прибавление</a></li><li class="lvl3"><a href="#процентная-vs-фиксированная-наценка">Процентная vs фиксированная наценка</a></li><li class="lvl2"><a href="#2-трёхуровневая-архитектура-наценки-rule-engine">2. Трёхуровневая архитектура наценки (Rule Engine)</a></li><li class="lvl3"><a href="#уровень-1-базовая-себестоимость-источники-цены">Уровень 1. Базовая себестоимость (источники цены)</a></li><li class="lvl3"><a href="#уровень-2-движок-наценки-конвейер-правил-pipeline">Уровень 2. Движок наценки (конвейер правил, Pipeline)</a></li><li class="lvl3"><a href="#уровень-3-хранение-правил-администрирование">Уровень 3. Хранение правил (администрирование)</a></li><li class="lvl3"><a href="#схема-работы-rule-engine">Схема работы Rule Engine</a></li><li class="lvl3"><a href="#защита-от-дурака-и-риски">Защита от дурака и риски</a></li><li class="lvl2"><a href="#3-модуль-формул-универсальный-конструктор-расчётов">3. Модуль формул (универсальный конструктор расчётов)</a></li><li class="lvl2"><a href="#4-модуль-маржи-универсальный-механизм">4. Модуль маржи (универсальный механизм)</a></li><li class="lvl3"><a href="#структура-данных">Структура данных</a></li><li class="lvl3"><a href="#типы-правил">Типы правил</a></li><li class="lvl3"><a href="#применение-маржи">Применение маржи</a></li><li class="lvl3"><a href="#маржа-для-операций-с-учётом-времени">Маржа для операций с учётом времени</a></li><li class="lvl2"><a href="#5-единый-механизм-база-наценки-количество-vs-сумма-заказа">5. Единый механизм: база наценки «количество» vs «сумма заказа»</a></li><li class="lvl3"><a href="#исправление-для-цифровой-печати">Исправление для цифровой печати</a></li><li class="lvl3"><a href="#поток-данных-по-типам-расчёта">Поток данных по типам расчёта</a></li><li class="lvl3"><a href="#три-типа-расчёта-метод-вычисления">Три типа расчёта (метод вычисления)</a></li><li class="lvl2"><a href="#6-тарификация-тиражей">6. Тарификация тиражей</a></li><li class="lvl3"><a href="#вариант-a-фиксированная-цена-на-весь-диапазон-по-нижней-границе">Вариант A. Фиксированная цена на весь диапазон (по нижней границе)</a></li><li class="lvl3"><a href="#анти-скачок-активный-механизм-1-экземпляр-бесплатно">Анти-скачок (активный механизм «+1 экземпляр бесплатно»)</a></li><li class="lvl3"><a href="#вариант-b-плавное-снижение-наценки-по-опорным-точкам">Вариант B. Плавное снижение наценки по опорным точкам</a></li><li class="lvl3"><a href="#линейная-интерполяция-маржи-по-сумме-заказа-офсет">Линейная интерполяция маржи по сумме заказа (офсет)</a></li><li class="lvl3"><a href="#хранение-тиражей-диапазонами-тираж-как-число-а-не-сущность">Хранение тиражей диапазонами (тираж как число, а не сущность)</a></li><li class="lvl2"><a href="#7-налог-7">7. Налог 7%</a></li><li class="lvl2"><a href="#8-система-коррекции-и-обоснования-цены">8. Система коррекции и обоснования цены</a></li><li class="lvl3"><a href="#сайт-vs-себестоимость-порог-автоутверждения">Сайт vs себестоимость, порог автоутверждения</a></li><li class="lvl3"><a href="#коэффициенты-корректировки-приладка-срочность-сложность-скидки">Коэффициенты-корректировки (приладка, срочность, сложность, скидки)</a></li><li class="lvl3"><a href="#обоснование-отклонений-цены">Обоснование отклонений цены</a></li><li class="lvl2"><a href="#9-скидки">9. Скидки</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

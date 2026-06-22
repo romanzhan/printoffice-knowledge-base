@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Калькулятор широкоформатной печати — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--wideformat">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li class="active"><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="калькулятор-широкоформатной-печати">Калькулятор широкоформатной печати</h1>
+<p>Калькулятор широкоформатной (wide) печати рассчитывает стоимость по формуле «Ширина × Высота × цена за м² + дополнительные услуги». Часть продукции (баннер, плёнка, пластик, люверсы, выборка) поставляется подрядчиком по фиксированному прайсу с наценкой 36 %; для нестандартных конфигураций используется ручной просчёт через Telegram.</p>
+<h2 id="базовая-формула-расчёта">Базовая формула расчёта</h2>
+<p>Основная формула стоимости одного изделия:</p>
+<pre><code>стоимость = (Ширина × Высота × Цена_м²) + Допы
+</code></pre>
+<p>Эта формула применяется всегда, без исключений (нюансов нет).</p>
+<p>Развёрнутая логика расчёта (псевдокод):</p>
+<pre><code class="language-javascript">// 1. Расчёт площади
+площадь_изделия_м2 = (ширина_мм × высота_мм) / 1_000_000
+общая_площадь = площадь_изделия_м2 × количество
+
+// 2. Расчёт стоимости печати
+стоимость_печати = общая_площадь × цена_за_м2(материал, разрешение)
+
+// 3. Расчёт люверсов
+if (люверсы_по_периметру) {
+    периметр_мм = 2 × (ширина_мм + высота_мм)
+    количество_люверсов = Math.ceil(периметр_мм / шаг_люверсов_мм) × 2
+}
+стоимость_люверсов = количество_люверсов × цена_люверса
+
+// 4. Расчёт проклейки краёв
+if (проклейка_по_периметру) {
+    метраж_проклейки_м = (2 × (ширина_мм + высота_мм)) / 1000
+    стоимость_проклейки = метраж_проклейки_м × цена_проклейки_за_м
+}
+
+// 5. Расчёт накатки
+стоимость_накатки = общая_площадь × цена_накатки_за_м2
+
+// 6. Итоговая цена
+итого = стоимость_печати + стоимость_люверсов + стоимость_проклейки +
+        стоимость_отверстий + стоимость_карманов + стоимость_накатки +
+        стоимость_ламинации + стоимость_резки
+</code></pre>
+<h2 id="прайс-подрядчика-ручной-просчёт">Прайс подрядчика (ручной просчёт)</h2>
+<p>Часть позиций поставляется подрядчиком с фиксированным прайсом. Запрос подрядчику отправляется в виде ТЗ в Telegram, среднее время ответа — около 15 минут. Наценка на wide — обычно 36 %.</p>
+<table>
+<thead>
+<tr>
+<th>Услуга</th>
+<th>Цена</th>
+<th>Единица</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Печать на баннере</td>
+<td>500</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Печать на плёнке</td>
+<td>500</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Люверсы</td>
+<td>15</td>
+<td>руб/шт</td>
+<td></td>
+</tr>
+<tr>
+<td>Контурная резка</td>
+<td>—</td>
+<td>руб/м² или за изделие</td>
+<td>расчёт за м² либо за изделие</td>
+</tr>
+<tr>
+<td>Пластик 3 мм</td>
+<td>2000</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Пластик 4 мм</td>
+<td>2500</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Пластик 5 мм</td>
+<td>3000</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Выборка на самоклейке</td>
+<td>2000</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: цена люверсов в прайсе подрядчика указана 15 руб/шт, но в данных калькулятора (таблица доп. услуг и пример расчёта на бэкенде) фигурирует 30 руб/шт. Требуется уточнить актуальную цену.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: для контурной резки не определено окончательно, считается она за м² или за изделие — нужна единая единица измерения.</p>
+<h2 id="логика-расчёта-на-бэкенде-product-configurator">Логика расчёта на бэкенде (Product Configurator)</h2>
+<p>Калькулятор реализуется как интерактивный Product Configurator, а не статичная форма. При изменении любого параметра (тип материала, размеры, тираж, опции) цена пересчитывается без перезагрузки: фронтенд (React/Next.js) дёргает backend API.</p>
+<h3 id="поток-расчёта">Поток расчёта</h3>
+<p>Фронтенд отправляет запрос с параметрами (например: Баннер, Ш = 1000 мм, В = 2000 мм, Люверсы = 10 шт). Бэкенд выполняет:</p>
+<ol>
+<li><strong>Определяет услугу</strong> — ищет в таблице <code>vendor_services</code> услугу «Баннер» для wide-подрядчика.</li>
+<li><strong>Считает базовую себестоимость:</strong>
+<ul>
+<li>Площадь: 1 м × 2 м = 2 м²</li>
+<li>Печать: 2 м² × 500 ₽/м² = 1000 ₽</li>
+<li>Люверсы: 10 шт × 15 ₽/шт = 150 ₽</li>
+<li>Итого себестоимость: 1150 ₽</li>
+</ul>
+</li>
+<li><strong>Применяет Rule Engine (наценку):</strong>
+<ul>
+<li>Глобальное правило для wide: <code>markup = 36%</code></li>
+<li>Цена для клиента = 1150 ₽ × 1.36 = 1564 ₽</li>
+</ul>
+</li>
+<li><strong>Сохраняет в сессию</strong> результат расчёта с параметрами и себестоимостью (пока без создания заказа), чтобы не потерять данные при оформлении.</li>
+</ol>
+<p>Ответ фронтенду:</p>
+<pre><code class="language-json">{
+  &quot;total_price&quot;: 1564,
+  &quot;breakdown&quot;: { &quot;print&quot;: 1000, &quot;grommets&quot;: 150, &quot;tax&quot;: 414 }
+}
+</code></pre>
+<h3 id="оформление-заказа">Оформление заказа</h3>
+<p>При нажатии «Добавить в корзину» / «Заказать»:</p>
+<ul>
+<li><strong>Захват данных:</strong> минимум — Имя и Телефон (для физлиц) или Email (для юрлиц, чтобы выслать счёт). Можно добавить поле «Загрузить макет».</li>
+<li><strong>Создание заказа в CRM:</strong> статус «Новый (с сайта)»; в заказ подтягиваются рассчитанные параметры и фиксируется себестоимость (1150 ₽).</li>
+<li><strong>Менеджер видит готовый заказ:</strong> «Клиент Иванов хочет баннер 2 м² с люверсами. Себестоимость 1150 ₽, цена для клиента 1564 ₽. Маржа 414 ₽ (36 %)».</li>
+<li><strong>Связка с макетом:</strong> если макет загружен, он прогоняется через префлайт (проверку) и прикрепляется к заказу.</li>
+</ul>
+<h3 id="api-и-бд-технические-эндпоинты">API и БД (технические эндпоинты)</h3>
+<ul>
+<li><code>POST /api/calculate</code> — принимает параметры, возвращает цену.</li>
+<li><code>POST /api/orders</code> — создаёт заказ с привязкой к результатам расчёта.</li>
+<li>Таблица <code>price_rules</code> — формулы и прайсы.</li>
+<li>Таблица <code>orders</code> с полем <code>cost_price</code> (себестоимость), чтобы всегда знать маржу.</li>
+</ul>
+<h3 id="риски-и-нюансы">Риски и нюансы</h3>
+<ul>
+<li><strong>Сложные конфигурации:</strong> если нужно несколько баннеров разного размера — давать возможность добавлять несколько позиций в корзину, как в интернет-магазине.</li>
+<li><strong>Точность себестоимости:</strong> цены подрядчика зашиты в систему; нужен механизм быстрого обновления этих данных в админке без программиста.</li>
+<li><strong>Юридические лица:</strong> им может быть важнее получить счёт, а не оплатить картой сразу — система должна предлагать соответствующий флоу.</li>
+</ul>
+<h2 id="классификация-продуктов">Классификация продуктов</h2>
+<p>Контурная резка, роллап, пресвол и т. п. — это <strong>отдельные продукты</strong>, а не доп. услуги.</p>
+<h3 id="печать-на-материалах-category-printing">Печать на материалах (category = <code>printing</code>)</h3>
+<ul>
+<li>ПВХ 3 мм</li>
+<li>ПВХ 5 мм</li>
+<li>Пенокартон 3 мм</li>
+<li>Пенокартон 5 мм</li>
+<li>Плёнка самоклеющаяся (белая, прозрачная, золото, серебро)</li>
+<li>Баннерная ткань</li>
+<li>Бумага 160 г/м² матовая</li>
+</ul>
+<h3 id="печать-контурная-резка-category-cutting-отдельные-продукты">Печать + контурная резка (category = <code>cutting</code>, отдельные продукты)</h3>
+<ul>
+<li>ПВХ 3 мм с контурной резкой</li>
+<li>ПВХ 5 мм с контурной резкой</li>
+<li>Пенокартон 3 мм с контурной резкой</li>
+<li>Пенокартон 5 мм с контурной резкой</li>
+<li>Плёнка самоклеющаяся с контурной резкой</li>
+<li>Резка с выборкой (буквы)</li>
+</ul>
+<h3 id="готовые-конструкции-category-construction">Готовые конструкции (category = <code>construction</code>)</h3>
+<ul>
+<li>Роллап 85×200 (конструкция + печать)</li>
+<li>Пресвол 3×2 м (конструкция + печать)</li>
+</ul>
+<h3 id="иконки-продуктов">Иконки продуктов</h3>
+<table>
+<thead>
+<tr>
+<th>Продукт</th>
+<th>Иконка</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ПВХ 3 мм</td>
+<td>📄</td>
+<td>Простая печать на жёстком пластике</td>
+</tr>
+<tr>
+<td>ПВХ 3 мм с контурной резкой</td>
+<td>✂️📄</td>
+<td>Печать + вырезание по контуру</td>
+</tr>
+<tr>
+<td>Плёнка белая</td>
+<td>📄</td>
+<td>Печать на самоклеющейся плёнке</td>
+</tr>
+<tr>
+<td>Плёнка белая с контурной резкой</td>
+<td>✂️📄</td>
+<td>Печать + вырезание по контуру</td>
+</tr>
+<tr>
+<td>Резка с выборкой</td>
+<td>🔠</td>
+<td>Вырезание букв и фигур</td>
+</tr>
+<tr>
+<td>Роллап 85×200</td>
+<td>🖼️</td>
+<td>Готовая конструкция + печать</td>
+</tr>
+<tr>
+<td>Пресвол 3×2 м</td>
+<td>🖼️</td>
+<td>Конструкция для натяжки баннеров</td>
+</tr>
+</tbody>
+</table>
+<h2 id="структура-базы-данных">Структура базы данных</h2>
+<pre><code class="language-sql">-- 1. Основные продукты (широкоформатная печать)
+CREATE TABLE wide_products (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    category VARCHAR(50) NOT NULL,          -- 'printing', 'cutting', 'construction'
+    icon_url VARCHAR(500),
+    preview_image VARCHAR(500),
+    material_id INT,                        -- привязка к материалу (если есть)
+    has_contour_cutting BOOLEAN DEFAULT false,
+    has_cutting_selection BOOLEAN DEFAULT false,  -- резка с выборкой (буквы)
+    price_type ENUM('per_sqm', 'per_item', 'per_meter') DEFAULT 'per_sqm',
+    base_price DECIMAL(10,2),
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (material_id) REFERENCES wide_materials(id)
+);
+
+-- 2. Готовые форматы для продуктов (A4, A3, A2, A1, A0)
+CREATE TABLE wide_product_formats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    format_id INT NOT NULL,                 -- ссылка на wide_ready_formats
+    quantity_from INT NOT NULL,
+    quantity_to INT,
+    price DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (product_id) REFERENCES wide_products(id),
+    FOREIGN KEY (format_id) REFERENCES wide_ready_formats(id)
+);
+
+-- 3. Дополнительные услуги (только действительно доп.)
+CREATE TABLE wide_addons (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    code VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    hint_text TEXT,                         -- текст подсказки (при нажатии на &quot;?&quot;)
+    calculation_type ENUM('per_item', 'per_meter', 'per_sqm', 'fixed') NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0
+);
+
+-- 4. Привязка доп. услуг к продуктам
+CREATE TABLE wide_product_addons (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT NOT NULL,
+    addon_id INT NOT NULL,
+    is_available BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (product_id) REFERENCES wide_products(id),
+    FOREIGN KEY (addon_id) REFERENCES wide_addons(id)
+);
+</code></pre>
+<h3 id="примеры-данных-продукты">Примеры данных — продукты</h3>
+<pre><code class="language-sql">-- Печать на ПВХ 3 мм
+INSERT INTO wide_products (name, code, category, material_id, price_type, base_price, icon_url, sort_order)
+VALUES ('ПВХ 3 мм', 'pvc-3mm', 'printing', 8, 'per_sqm', 1800, '/icons/pvc-3mm.svg', 10);
+
+-- ПВХ 3 мм с контурной резкой
+INSERT INTO wide_products (name, code, category, material_id, has_contour_cutting, price_type, base_price, icon_url, sort_order)
+VALUES ('ПВХ 3 мм с контурной резкой', 'pvc-3mm-cut', 'cutting', 8, true, 'per_sqm', 2100, '/icons/pvc-3mm-cut.svg', 20);
+
+-- Плёнка самоклеющаяся белая
+INSERT INTO wide_products (name, code, category, material_id, price_type, base_price, icon_url, sort_order)
+VALUES ('Пленка белая', 'film-white', 'printing', 1, 'per_sqm', 900, '/icons/film-white.svg', 30);
+
+-- Плёнка самоклеющаяся с контурной резкой
+INSERT INTO wide_products (name, code, category, material_id, has_contour_cutting, price_type, base_price, icon_url, sort_order)
+VALUES ('Пленка белая с контурной резкой', 'film-white-cut', 'cutting', 1, true, 'per_sqm', 1100, '/icons/film-white-cut.svg', 40);
+
+-- Резка с выборкой (буквы)
+INSERT INTO wide_products (name, code, category, material_id, has_cutting_selection, price_type, base_price, icon_url, sort_order)
+VALUES ('Резка с выборкой (буквы)', 'cutting-selection', 'cutting', 1, true, 'per_sqm', 1400, '/icons/cutting-selection.svg', 50);
+
+-- Роллап
+INSERT INTO wide_products (name, code, category, price_type, base_price, icon_url, sort_order)
+VALUES ('Роллап 85×200 см', 'rollup-85-200', 'construction', 'per_item', 3000, '/icons/rollup.svg', 60);
+
+-- Пресвол
+INSERT INTO wide_products (name, code, category, price_type, base_price, icon_url, sort_order)
+VALUES ('Пресвол 3×2 м', 'pressvol-3x2', 'construction', 'per_item', 2000, '/icons/pressvol.svg', 70);
+</code></pre>
+<h3 id="примеры-данных-цены-на-готовые-форматы">Примеры данных — цены на готовые форматы</h3>
+<pre><code class="language-sql">-- ПВХ 3 мм, формат A3
+INSERT INTO wide_product_formats (product_id, format_id, quantity_from, quantity_to, price)
+VALUES (1, 2, 1, 1, 350), (1, 2, 2, 4, 320), (1, 2, 5, NULL, 300);
+
+-- ПВХ 3 мм с контурной резкой, формат A3
+INSERT INTO wide_product_formats (product_id, format_id, quantity_from, quantity_to, price)
+VALUES (2, 2, 1, 1, 450), (2, 2, 2, 4, 420), (2, 2, 5, NULL, 400);
+</code></pre>
+<h3 id="примеры-данных-доп-услуги">Примеры данных — доп. услуги</h3>
+<pre><code class="language-sql">-- Люверсы
+INSERT INTO wide_addons (name, code, description, hint_text, calculation_type, price)
+VALUES ('Люверсы', 'grommets', 'Металлические кольца для крепления банеров',
+'Люверсы устанавливаются по периметру баннера для крепления к стойкам или стенам. Диаметр 16 мм. Рекомендуемый шаг 30-40 см. Минимум 4 штуки.', 'per_item', 30);
+
+-- Проклейка краёв
+INSERT INTO wide_addons (name, code, description, hint_text, calculation_type, price)
+VALUES ('Проклейка краев', 'edge_reinforcement', 'Усиление краев баннера специальной лентой',
+'Проклейка краев защищает баннер от разрыва в местах установки люверсов. Рекомендуется для больших банеров и при ветровых нагрузках.', 'per_meter', 50);
+
+-- Отверстия для крепления (для ПВХ/пенокартона)
+INSERT INTO wide_addons (name, code, description, hint_text, calculation_type, price)
+VALUES ('Отверстия для крепления', 'mounting_holes', 'Отверстия для крепления к стене или конструкции',
+'Позволяет легко крепить изделие к стене с помощью саморезов или дюбелей.', 'per_item', 20);
+</code></pre>
+<h3 id="примеры-данных-привязка-доп-услуг">Примеры данных — привязка доп. услуг</h3>
+<pre><code class="language-sql">-- Для баннерной ткани доступны люверсы и проклейка
+INSERT INTO wide_product_addons (product_id, addon_id) VALUES (5, 1), (5, 2);
+
+-- Для ПВХ и пенокартона доступны отверстия
+INSERT INTO wide_product_addons (product_id, addon_id) VALUES (1, 3), (2, 3), (3, 3), (4, 3);
+</code></pre>
+<h2 id="прайс-материалов-и-услуг-расширенный-калькулятор">Прайс материалов и услуг (расширенный калькулятор)</h2>
+<p>Расширенная архитектура калькулятора предполагает выбор материала и разрешения печати (dpi).</p>
+<h3 id="базовые-цены-на-печать-рубм²">Базовые цены на печать (руб/м²)</h3>
+<table>
+<thead>
+<tr>
+<th>Материал</th>
+<th>360 dpi</th>
+<th>540 dpi</th>
+<th>720 dpi</th>
+<th>1440 dpi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Баннер Китай (ламинированный) 440 г/м²</td>
+<td>270</td>
+<td>300</td>
+<td>330</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Баннер Европейский (литой) 510 г/м²</td>
+<td>300</td>
+<td>330</td>
+<td>360</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Баннер транслюцентный 510 г/м²</td>
+<td>440</td>
+<td>470</td>
+<td>500</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Баннер Блэк-Бек 510 г/м²</td>
+<td>350</td>
+<td>380</td>
+<td>410</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Баннер Китай 360 г/м²</td>
+<td>200</td>
+<td>230</td>
+<td>280</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка ORAJET</td>
+<td>450</td>
+<td>480</td>
+<td>510</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка Китайская</td>
+<td>300</td>
+<td>330</td>
+<td>390</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка транслюцентная</td>
+<td>—</td>
+<td>—</td>
+<td>2250</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка Blackout</td>
+<td>—</td>
+<td>—</td>
+<td>500</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Бэклит ПЭТ 260 гр</td>
+<td>—</td>
+<td>—</td>
+<td>750</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка перфорированная</td>
+<td>500</td>
+<td>530</td>
+<td>560</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Плёнка Oracal removable</td>
+<td>460</td>
+<td>490</td>
+<td>520</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Сетка 320 г/м²</td>
+<td>280</td>
+<td>310</td>
+<td>340</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Бумага транслюцентная 150 гр</td>
+<td>280</td>
+<td>300</td>
+<td>350</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Фотобумага 220 гр</td>
+<td>—</td>
+<td>—</td>
+<td>400</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Холст натуральный</td>
+<td>—</td>
+<td>—</td>
+<td>1100</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="стоимость-дополнительных-услуг">Стоимость дополнительных услуг</h3>
+<table>
+<thead>
+<tr>
+<th>Услуга</th>
+<th>Стоимость</th>
+<th>Единица</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Печать + плоттерная резка</td>
+<td>800</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Плоттерная резка цветного оракала + выборка + монтажка</td>
+<td>1950</td>
+<td>руб/изделие</td>
+<td></td>
+</tr>
+<tr>
+<td>Плоттерная резка + выборка + монтажка</td>
+<td>1450</td>
+<td>руб/изделие</td>
+<td></td>
+</tr>
+<tr>
+<td>Накатка на ПВХ 3 мм</td>
+<td>1550</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Накатка на ПВХ 5 мм</td>
+<td>2050</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Накатка на пенокартон 5 мм</td>
+<td>1400</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Накатка на поликарбонат 6 мм</td>
+<td>1300</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Накатка на композит</td>
+<td>5200</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Ламинация</td>
+<td>180</td>
+<td>руб/м²</td>
+<td></td>
+</tr>
+<tr>
+<td>Послепечатная обработка (погонный метр)</td>
+<td>50</td>
+<td>руб/пог.м</td>
+<td></td>
+</tr>
+<tr>
+<td>Послепечатная обработка с верёвкой</td>
+<td>75</td>
+<td>руб/пог.м</td>
+<td></td>
+</tr>
+<tr>
+<td>Люверсы</td>
+<td>(уточнить)</td>
+<td>руб/шт</td>
+<td></td>
+</tr>
+<tr>
+<td>Проклейка краёв</td>
+<td>(уточнить)</td>
+<td>руб/пог.м</td>
+<td></td>
+</tr>
+<tr>
+<td>Отверстия для крепления</td>
+<td>(уточнить)</td>
+<td>руб/отверстие</td>
+<td></td>
+</tr>
+<tr>
+<td>Карманы для крепления</td>
+<td>(уточнить)</td>
+<td>руб/карман</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="интерфейс-калькулятора">Интерфейс калькулятора</h2>
+<h3 id="шаги-конфигуратора">Шаги конфигуратора</h3>
+<ol>
+<li><strong>Шаг 1. Тип изделия и материал.</strong> Выбор типа продукции (Баннер, ПВХ, Плёнка, Бумага, Холст, Сетка), затем конкретного материала, зависящего от типа:
+<ul>
+<li>Баннер: Китай 440 г/м² / Европейский 510 г/м² / Баннерная ткань / Блэк-Бек / Транслюцентный</li>
+<li>Плёнка: ORAJET / Китайская / Транслюцентная / Blackout / Перфорированная / Oracal</li>
+<li>ПВХ: 3 мм / 5 мм / ПВХ с резкой</li>
+<li>Бумага: Фотобумага 220 гр / Транслюцентная 150 гр</li>
+<li>Холст: натуральный</li>
+<li>Сетка: 320 г/м²</li>
+</ul>
+</li>
+<li><strong>Шаг 2. Размеры и тираж.</strong> Готовый формат (A4–A0) или свой размер (Ширина × Высота, мм); количество, шт. Автоматически считаются площадь одного изделия (м²) и общая площадь печати (м²).</li>
+<li><strong>Шаг 3. Качество печати (разрешение).</strong> Выбор dpi (влияет на цену и детализацию): 360 dpi (стандарт, для баннеров на расстоянии), 540 dpi (повышенное качество), 720 dpi (для постеров и интерьерной печати), 1440 dpi (премиум, для фотокачества).</li>
+<li><strong>Шаг 4. Дополнительная обработка</strong> (см. ниже).</li>
+</ol>
+<h3 id="готовые-форматы-мм">Готовые форматы (мм)</h3>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Размер</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A4</td>
+<td>210×297</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>297×420</td>
+</tr>
+<tr>
+<td>A2</td>
+<td>420×594</td>
+</tr>
+<tr>
+<td>A1</td>
+<td>594×841</td>
+</tr>
+<tr>
+<td>A0</td>
+<td>841×1189</td>
+</tr>
+</tbody>
+</table>
+<h3 id="дополнительная-обработка-опции">Дополнительная обработка (опции)</h3>
+<ul>
+<li><strong>Люверсы</strong> (+ руб/шт): настраиваемый шаг установки (по умолчанию 50 см; в калькуляторе показан пример шага 35 см). Стороны: по периметру / сверху / снизу / слева / справа.</li>
+<li><strong>Проклейка краёв</strong> (+ руб/пог.м): для усиления. Стороны: по периметру / сверху / снизу / слева / справа.</li>
+<li><strong>Отверстия для крепления</strong> (+ руб/отверстие): для ПВХ и жёстких материалов. Количество и расположение (По углам / Сверху / Снизу / По чертежу).</li>
+<li><strong>Карманы для крепления</strong> (+ руб/карман): количество и расположение.</li>
+<li><strong>Накатка на жёсткую основу:</strong>
+<ul>
+<li>ПВХ 3 мм: +1550 руб/м²</li>
+<li>ПВХ 5 мм: +2050 руб/м²</li>
+<li>Пенокартон 5 мм: +1400 руб/м²</li>
+<li>Поликарбонат 6 мм: +1300 руб/м²</li>
+<li>Композит: +5200 руб/м²</li>
+</ul>
+</li>
+<li><strong>Послепечатная обработка:</strong> ламинация (+ руб/м²), плоттерная резка (+ руб/м²), резка с выборкой (+ руб/м²), послепечатная обработка по погонному метру (+ руб/пог.м).</li>
+</ul>
+<p>Пример заполнения интерфейса (из макета): свой размер Ширина 500 мм × Высота 700 мм, количество 5 шт; люверсы с шагом 35 см (+ 30 руб/шт); отверстия для крепления — количество 4 шт, расположение «По углам» (+ 20 руб/шт).</p>
+<h3 id="градация-цен-по-количеству-пример">Градация цен по количеству (пример)</h3>
+<p>Пример для A3, ПВХ 3 мм с контурной резкой:</p>
+<table>
+<thead>
+<tr>
+<th>Тираж</th>
+<th>Цена за шт</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 шт</td>
+<td>450 руб/шт</td>
+</tr>
+<tr>
+<td>2–4 шт</td>
+<td>420 руб/шт</td>
+</tr>
+<tr>
+<td>5+ шт</td>
+<td>400 руб/шт</td>
+</tr>
+</tbody>
+</table>
+<p>Пример итога: 5 шт A3, ПВХ 3 мм с контурной резкой → 5 × 400 = 2000 руб. Срок готовности: 1 день (в примере интерфейса — 15.04.2026). Самовывоз: Москва, ул. Орджоникидзе 11 стр 41 (Пн-Сб 10:00–19:00); доступен расчёт доставки.</p>
+<h3 id="блок-расчёта-стоимости">Блок расчёта стоимости</h3>
+<p>Калькулятор выводит детализацию по строкам (площадь × цена/м² или количество × цена) для каждого компонента: печать, люверсы, проклейка краёв, отверстия, карманы, накатка, ламинация, плоттерная резка — и итог + цену за м².</p>
+<h2 id="попап-подсказка-при-нажатии-на">Попап-подсказка (при нажатии на «?»)</h2>
+<p>Пример подсказки «Проклейка краёв»:</p>
+<blockquote>
+<p>Проклейка краёв — это усиление краёв баннера специальной лентой.</p>
+<p>Зачем нужно:</p>
+<ul>
+<li>Защищает баннер от разрыва в местах установки люверсов</li>
+<li>Увеличивает срок службы изделия</li>
+<li>Рекомендуется для больших баннеров (более 3 м) и при ветровых нагрузках</li>
+</ul>
+<p>Как рассчитывается:</p>
+<ul>
+<li>Стоимость = периметр изделия × 50 руб/пог.м</li>
+<li>Например, для баннера 2×1 м: периметр = 6 м, стоимость = 300 руб</li>
+</ul>
+</blockquote>
+<h2 id="чек-лист-реализации-калькулятора">Чек-лист реализации калькулятора</h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Отдельные продукты для каждого типа (печать, резка, конструкции)</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Иконки для каждого продукта</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Готовые форматы (A4–A0) с градацией цен по количеству</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Свой размер (расчёт по площади)</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Доп. услуги (люверсы, проклейка, отверстия)</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Попап с подсказкой при нажатии на «?»</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Возможность менять шаг люверсов</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Возможность указать количество отверстий</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Возможность указать расположение отверстий</td>
+<td>Готово</td>
+</tr>
+</tbody>
+</table>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#базовая-формула-расчёта">Базовая формула расчёта</a></li><li class="lvl2"><a href="#прайс-подрядчика-ручной-просчёт">Прайс подрядчика (ручной просчёт)</a></li><li class="lvl2"><a href="#логика-расчёта-на-бэкенде-product-configurator">Логика расчёта на бэкенде (Product Configurator)</a></li><li class="lvl3"><a href="#поток-расчёта">Поток расчёта</a></li><li class="lvl3"><a href="#оформление-заказа">Оформление заказа</a></li><li class="lvl3"><a href="#api-и-бд-технические-эндпоинты">API и БД (технические эндпоинты)</a></li><li class="lvl3"><a href="#риски-и-нюансы">Риски и нюансы</a></li><li class="lvl2"><a href="#классификация-продуктов">Классификация продуктов</a></li><li class="lvl3"><a href="#печать-на-материалах-category-printing">Печать на материалах (category = `printing`)</a></li><li class="lvl3"><a href="#печать-контурная-резка-category-cutting-отдельные-продукты">Печать + контурная резка (category = `cutting`, отдельные продукты)</a></li><li class="lvl3"><a href="#готовые-конструкции-category-construction">Готовые конструкции (category = `construction`)</a></li><li class="lvl3"><a href="#иконки-продуктов">Иконки продуктов</a></li><li class="lvl2"><a href="#структура-базы-данных">Структура базы данных</a></li><li class="lvl3"><a href="#примеры-данных-продукты">Примеры данных — продукты</a></li><li class="lvl3"><a href="#примеры-данных-цены-на-готовые-форматы">Примеры данных — цены на готовые форматы</a></li><li class="lvl3"><a href="#примеры-данных-доп-услуги">Примеры данных — доп. услуги</a></li><li class="lvl3"><a href="#примеры-данных-привязка-доп-услуг">Примеры данных — привязка доп. услуг</a></li><li class="lvl2"><a href="#прайс-материалов-и-услуг-расширенный-калькулятор">Прайс материалов и услуг (расширенный калькулятор)</a></li><li class="lvl3"><a href="#базовые-цены-на-печать-рубм²">Базовые цены на печать (руб/м²)</a></li><li class="lvl3"><a href="#стоимость-дополнительных-услуг">Стоимость дополнительных услуг</a></li><li class="lvl2"><a href="#интерфейс-калькулятора">Интерфейс калькулятора</a></li><li class="lvl3"><a href="#шаги-конфигуратора">Шаги конфигуратора</a></li><li class="lvl3"><a href="#готовые-форматы-мм">Готовые форматы (мм)</a></li><li class="lvl3"><a href="#дополнительная-обработка-опции">Дополнительная обработка (опции)</a></li><li class="lvl3"><a href="#градация-цен-по-количеству-пример">Градация цен по количеству (пример)</a></li><li class="lvl3"><a href="#блок-расчёта-стоимости">Блок расчёта стоимости</a></li><li class="lvl2"><a href="#попап-подсказка-при-нажатии-на">Попап-подсказка (при нажатии на «?»)</a></li><li class="lvl2"><a href="#чек-лист-реализации-калькулятора">Чек-лист реализации калькулятора</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

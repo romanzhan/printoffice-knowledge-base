@@ -1,0 +1,909 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Калькулятор цифровой печати — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="04-calculators--digital-print">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li class="active"><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="калькулятор-цифровой-печати">Калькулятор цифровой печати</h1>
+<p>Полная логика расчёта стоимости цифровой печати на собственном оборудовании (Konica Minolta 6085): расчёт количества печатных листов SRA3, себестоимости (бумага + краска), применения маржи по числу потраченных листов и формирования цены для клиента.</p>
+<h2 id="назначение-и-принцип">Назначение и принцип</h2>
+<p>Цифровая печать выполняется на собственном принтере (Konica Minolta 6085) на печатном листе формата SRA3 (320×450 мм). Особенность ценообразования цифры: маржа начисляется не на тираж готовых изделий в штуках, а на <strong>количество физически потраченных листов SRA3</strong>.</p>
+<p>Общий принцип:</p>
+<ol>
+<li>Клиент выбирает формат, бумагу, цветность, тираж и допуслуги.</li>
+<li>Система рассчитывает, сколько изделий помещается на одном листе SRA3, и вычисляет число печатных листов.</li>
+<li>Считается себестоимость = листы × (печать + бумага).</li>
+<li>По числу листов SRA3 находится правило в таблице маржи и применяется наценка.</li>
+<li>Добавляются допуслуги, формируется итоговая цена.</li>
+</ol>
+<h2 id="входные-параметры-заказа">Входные параметры заказа</h2>
+<p>Параметры, которые клиент выбирает на сайте (вход калькулятора):</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значения / описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Формат готовой продукции</td>
+<td>A4 (210×297), A5 (148×210), A6 (105×148), A3 (297×420), SRA3 (320×450), Евро (98×210), либо свой размер (ширина × высота в мм)</td>
+</tr>
+<tr>
+<td>Бумага / материал</td>
+<td>из списка доступных (по плотности, типу поверхности, цвету — см. ниже)</td>
+</tr>
+<tr>
+<td>Цветность</td>
+<td>1+0, 1+1, 4+0, 4+4</td>
+</tr>
+<tr>
+<td>Тираж</td>
+<td>число готовых изделий</td>
+</tr>
+<tr>
+<td>Дополнительные услуги</td>
+<td>ламинация, биговка, скругление углов и т. п.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="бумага-материал">Бумага / материал</h3>
+<p>Клиент выбирает бумагу по трём осям параметров.</p>
+<p><strong>По плотности (с типовым назначением):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Плотность</th>
+<th>Тип</th>
+<th>Типовое назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80 г/м²</td>
+<td>офсетная</td>
+<td>для черновиков</td>
+</tr>
+<tr>
+<td>130 г/м²</td>
+<td>мелованная</td>
+<td>для листовок</td>
+</tr>
+<tr>
+<td>200 г/м²</td>
+<td>плотная</td>
+<td>для визиток</td>
+</tr>
+<tr>
+<td>250 г/м²</td>
+<td>очень плотная</td>
+<td>для обложек</td>
+</tr>
+<tr>
+<td>300 г/м²</td>
+<td>дизайнерская</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>По типу поверхности:</strong> Матовая, Глянцевая, Сатинированная.</p>
+<p><strong>По цвету:</strong> Белая, Цветная (с уточнением какого цвета), Дизайнерская (с фактурой).</p>
+<p>После выбора система проверяет наличие на складе: если есть — продолжаем, иначе — предупреждение и предложение альтернативы.</p>
+<h3 id="цветность">Цветность</h3>
+<table>
+<thead>
+<tr>
+<th>Код</th>
+<th>Расшифровка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1+0</td>
+<td>чёрно-белая односторонняя</td>
+</tr>
+<tr>
+<td>1+1</td>
+<td>чёрно-белая двусторонняя</td>
+</tr>
+<tr>
+<td>4+0</td>
+<td>цветная односторонняя</td>
+</tr>
+<tr>
+<td>4+4</td>
+<td>цветная двусторонняя</td>
+</tr>
+</tbody>
+</table>
+<h3 id="проверки-на-этапе-ввода">Проверки на этапе ввода</h3>
+<ul>
+<li><strong>Формат:</strong> если больше максимального — «нужна широкоформатная печать»; если меньше минимального — «нужна вырубка на плоттере».</li>
+<li><strong>Бумага:</strong> проверка наличия на складе; при отсутствии — предупреждение и предложение альтернативы.</li>
+<li><strong>Тираж:</strong> если меньше минимального (например, 10 шт) — сообщение о минимальном тираже; если больше максимального для цифры — рекомендация офсетной печати; если тираж промежуточный (нет в таблице цен) — расчёт по ближайшему большему тиражу.</li>
+</ul>
+<h2 id="алгоритм-расчёта">Алгоритм расчёта</h2>
+<h3 id="общая-схема">Общая схема</h3>
+<pre><code>КЛИЕНТ НА САЙТЕ
+   │
+   ▼
+1. ВЫБОР ПАРАМЕТРОВ (формат, бумага, цветность, тираж, допуслуги)
+   │
+   ▼
+2. РАСЧЁТ ПЕЧАТНЫХ ЛИСТОВ
+   sheets = ceil(тираж / items_per_sheet)
+   │
+   ▼
+3. СЕБЕСТОИМОСТЬ ПЕЧАТИ
+   total_cost = sheets × (print_price + paper_price)
+   │
+   ▼
+4. ПРИМЕНЕНИЕ МАРЖИ (правило по числу листов)
+   client_price = total_cost × (1 + margin_percent/100)
+   │
+   ▼
+5. ДОПОЛНИТЕЛЬНЫЕ УСЛУГИ (себестоимость + своя маржа)
+   │
+   ▼
+6. ИТОГОВАЯ ЦЕНА ДЛЯ КЛИЕНТА
+</code></pre>
+<h3 id="шаги-расчёта">Шаги расчёта</h3>
+<p><strong>Шаг 1. Количество печатных листов SRA3.</strong> Определяется, сколько готовых изделий помещается на одном листе SRA3 (<code>items_per_sheet</code>), затем число листов округляется всегда вверх (нельзя напечатать пол-листа):</p>
+<pre><code>sheets = ceil(тираж / items_per_sheet)
+</code></pre>
+<p><strong>Шаг 2. Себестоимость бумаги.</strong></p>
+<pre><code>paper_cost = sheets × paper_price_per_sheet
+</code></pre>
+<p><strong>Шаг 3. Себестоимость печати (краска, без бумаги).</strong> Цена за лист зависит от цветности:</p>
+<pre><code>print_cost = sheets × print_price_per_sheet
+</code></pre>
+<p><strong>Шаг 4. Общая себестоимость (наши затраты).</strong></p>
+<pre><code>total_cost = paper_cost + print_cost
+</code></pre>
+<p><strong>Шаг 5. Наценка и цена для клиента.</strong> По числу листов SRA3 ищется правило в таблице маржи. Для процентной наценки:</p>
+<pre><code>client_price = total_cost × (1 + margin_percent / 100)
+</code></pre>
+<p>Для фиксированной наценки:</p>
+<pre><code>client_price = total_cost + margin_value
+</code></pre>
+<p><strong>Шаг 6. Цена за единицу продукции.</strong></p>
+<pre><code>price_per_item = client_price / тираж
+</code></pre>
+<h3 id="сводная-бизнес-логика-краткая-запись">Сводная бизнес-логика (краткая запись)</h3>
+<pre><code>sheets = ceil(quantity / items_per_sheet)
+cost   = sheets × (print_price + paper_price)
+price  = cost × (1 + margin/100)
+</code></pre>
+<h2 id="итоговая-формула">Итоговая формула</h2>
+<pre><code>Цена для клиента = (sheets × (print_price + paper_price)) × (1 + margin/100) + Σ(services_price)
+</code></pre>
+<p>Где:</p>
+<ul>
+<li><code>sheets = ceil(тираж / items_per_sheet)</code> — число потраченных листов SRA3;</li>
+<li><code>print_price</code> — из <code>print_base_costs</code> (зависит от цветности);</li>
+<li><code>paper_price</code> — из <code>paper_costs</code> (зависит от выбранной бумаги);</li>
+<li><code>margin</code> — из <code>margin_rules</code> (зависит от <strong>количества листов SRA3</strong>, а не от тиража в штуках);</li>
+<li><code>services_price</code> — себестоимость услуги × (1 + margin_service/100).</li>
+</ul>
+<h2 id="маржа-на-потраченный-лист-sra3">Маржа на потраченный лист SRA3</h2>
+<p>Маржа начисляется на количество физически потраченных листов SRA3. Это ключевая особенность цифры: для формата A4 при тираже 200 шт (2 изделия на лист) система ищет правило для 100 листов, а не для 200 штук.</p>
+<p>Исходный концептуальный пример (как это было сформулировано изначально): клиент выбирает формат A4, на лист SRA3 помещается 2 шт, тираж 100 шт → затраты 50 листов → ищем в таблице маржи цену в диапазоне «50 и выше» и берём цену для клиента, после чего добавляем допуслуги, если они есть.</p>
+<p>Стандартная таблица маржи (цифра):</p>
+<table>
+<thead>
+<tr>
+<th>От листов</th>
+<th>До листов</th>
+<th>Тип</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>10</td>
+<td>процент</td>
+<td>100%</td>
+</tr>
+<tr>
+<td>11</td>
+<td>20</td>
+<td>процент</td>
+<td>90%</td>
+</tr>
+<tr>
+<td>21</td>
+<td>30</td>
+<td>процент</td>
+<td>80%</td>
+</tr>
+<tr>
+<td>31</td>
+<td>50</td>
+<td>процент</td>
+<td>70%</td>
+</tr>
+<tr>
+<td>51</td>
+<td>∞</td>
+<td>процент</td>
+<td>60%</td>
+</tr>
+</tbody>
+</table>
+<p>Если подходящего правила не найдено, применяется наценка по умолчанию 50%.</p>
+<p>Концепция маржи допускает несколько таблиц: помимо стандартной можно создавать таблицы с повышенной маржой и т. п. Таблица описывается доступными сущностями: принтер, формат, цветность, значение маржи в числах и в процентах. Правила могут задаваться как в процентах (умножают себестоимость), так и фиксированной суммой (прибавляются к себестоимости). Пример исходной идеи диапазонов: затраты 10–50 листов = +15 руб либо 50%, 51–100 листов = +10 руб либо 40% и т. д.</p>
+<p>Цифровая таблица маржи — это частный случай универсального модуля маржи (<code>margin_tables</code> / <code>margin_rules</code> / <code>margin_links</code>), общего для печати, копирования, офсета, услуг, материалов и операций. Концептуальное описание модуля — структура таблиц, атрибуты Margin Table / Margin Rule, база наценки <code>base_on</code> (<code>quantity</code> для цифры/копирования vs <code>total_price</code> для офсета), стек таблиц и маржа операций по времени — см. канонический раздел <a href="04-calculators--pricing-model.html#4-%D0%BC%D0%BE%D0%B4%D1%83%D0%BB%D1%8C-%D0%BC%D0%B0%D1%80%D0%B6%D0%B8-%D1%83%D0%BD%D0%B8%D0%B2%D0%B5%D1%80%D1%81%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9-%D0%BC%D0%B5%D1%85%D0%B0%D0%BD%D0%B8%D0%B7%D0%BC">Модуль маржи и единый механизм (pricing-model.md, §4–5)</a>. Для цифры <code>base_on = quantity</code>, единица — листы SRA3.</p>
+<h3 id="исходная-ошибочная-таблица-маржи-со-скриншота">Исходная (ошибочная) таблица маржи со скриншота</h3>
+<p>В первоначальной таблице маржи (по скриншоту админки) интервалы затрат листов SRA3 были заданы как строки <strong>1–41, 41–49, 50–99</strong> и т. д. Поле этого диапазона при этом было подписано «Тираж», что и вводило в заблуждение. Корректная стандартная таблица приведена выше (1–10 / 11–20 / 21–30 / 31–50 / 51+).</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: поле диапазона в админке исторически называлось «Тираж», что приводит к ошибке — для тиража 200 шт A4 система ищет правило по 200, а не по числу листов SRA3 (100). Требуется переименовать поле для цифровой печати и копирования в «Затраты листов (SRA3)» / «Количество листов (SRA3)». Технически в <code>calculateMargin()</code> для цифры передаётся <code>quantity = sheets_spent</code>, а для копирования <code>quantity = количество копий</code>.</p>
+<p>После переименования поля ошибка уйдёт: для тиража 200 шт A4 → <code>sheets_spent = 100</code> → будет взята строка диапазона <strong>100–199</strong> (значение 66 руб, как и для А3), а не строка для 200.</p>
+<h2 id="структура-базы-данных">Структура базы данных</h2>
+<h3 id="принтеры">Принтеры</h3>
+<pre><code class="language-sql">CREATE TABLE printers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    type ENUM('digital', 'offset', 'wide') DEFAULT 'digital',
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO printers (id, name, slug, type) VALUES
+(1, 'Konica Minolta 6085', 'konica-6085', 'digital');
+</code></pre>
+<h3 id="бумага-материалы">Бумага / материалы</h3>
+<pre><code class="language-sql">CREATE TABLE materials (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    category ENUM('paper', 'film', 'cardboard', 'other') DEFAULT 'paper',
+    density INT,                           -- г/м²
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO materials (id, name, category, density) VALUES
+(101, 'Мелованная 130 г/м²', 'paper', 130),
+(102, 'Мелованная 200 г/м²', 'paper', 200),
+(103, 'Мелованная 300 г/м²', 'paper', 300),
+(104, 'Офсетная 80 г/м²', 'paper', 80),
+(105, 'Дизайнерская', 'paper', 250);
+</code></pre>
+<h3 id="себестоимость-печати-без-бумаги">Себестоимость печати (без бумаги)</h3>
+<pre><code class="language-sql">CREATE TABLE print_base_costs (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    printer_id INT NOT NULL,
+    color_type VARCHAR(10) NOT NULL,       -- '1+0', '1+1', '4+0', '4+4'
+    cost_per_sheet DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (printer_id) REFERENCES printers(id)
+);
+
+INSERT INTO print_base_costs (printer_id, color_type, cost_per_sheet) VALUES
+(1, '1+0', 5.00),
+(1, '1+1', 8.00),
+(1, '4+0', 20.00),
+(1, '4+4', 25.00);
+</code></pre>
+<p>Себестоимость печати листа SRA3 по цветности (Konica 6085):</p>
+<table>
+<thead>
+<tr>
+<th>Цветность</th>
+<th>Стоимость, руб</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1+0</td>
+<td>5.00</td>
+</tr>
+<tr>
+<td>1+1</td>
+<td>8.00</td>
+</tr>
+<tr>
+<td>4+0</td>
+<td>20.00</td>
+</tr>
+<tr>
+<td>4+4</td>
+<td>25.00</td>
+</tr>
+</tbody>
+</table>
+<h3 id="себестоимость-бумаги">Себестоимость бумаги</h3>
+<pre><code class="language-sql">CREATE TABLE paper_costs (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    paper_id INT NOT NULL,
+    format VARCHAR(20) DEFAULT 'SRA3',
+    cost_per_sheet DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (paper_id) REFERENCES materials(id)
+);
+
+INSERT INTO paper_costs (paper_id, format, cost_per_sheet) VALUES
+(101, 'SRA3', 3.00),   -- мелованная 130
+(102, 'SRA3', 4.50),   -- мелованная 200
+(103, 'SRA3', 6.00),   -- мелованная 300
+(104, 'SRA3', 2.00),   -- офсетная 80
+(105, 'SRA3', 8.00);   -- дизайнерская
+</code></pre>
+<p>Себестоимость листа бумаги SRA3:</p>
+<table>
+<thead>
+<tr>
+<th>Бумага</th>
+<th>Плотность</th>
+<th>Стоимость, руб</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Мелованная 130 г/м²</td>
+<td>130</td>
+<td>3.00</td>
+</tr>
+<tr>
+<td>Мелованная 200 г/м²</td>
+<td>200</td>
+<td>4.50</td>
+</tr>
+<tr>
+<td>Мелованная 300 г/м²</td>
+<td>300</td>
+<td>6.00</td>
+</tr>
+<tr>
+<td>Офсетная 80 г/м²</td>
+<td>80</td>
+<td>2.00</td>
+</tr>
+<tr>
+<td>Дизайнерская</td>
+<td>250</td>
+<td>8.00</td>
+</tr>
+</tbody>
+</table>
+<h3 id="раскладка-на-листе">Раскладка на листе</h3>
+<pre><code class="language-sql">CREATE TABLE layout_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    product_format VARCHAR(20) NOT NULL,    -- 'A4', 'A5', 'A6', 'A3'
+    orientation ENUM('portrait', 'landscape') DEFAULT 'portrait',
+    items_per_sheet INT NOT NULL,
+    bleed INT DEFAULT 3,
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO layout_rules (product_format, orientation, items_per_sheet, bleed) VALUES
+('A4', 'portrait', 2, 3),
+('A5', 'landscape', 8, 3),
+('A6', 'portrait', 8, 3),
+('A3', 'portrait', 1, 0);
+</code></pre>
+<p>Раскладка изделий на лист SRA3:</p>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Ориентация</th>
+<th>Шт/лист</th>
+<th>Вылеты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A4</td>
+<td>книжная</td>
+<td>2</td>
+<td>3 мм</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>альбомная</td>
+<td>8</td>
+<td>3 мм</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>книжная</td>
+<td>8</td>
+<td>3 мм</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>книжная</td>
+<td>1</td>
+<td>0 мм</td>
+</tr>
+</tbody>
+</table>
+<h3 id="таблицы-и-правила-маржи">Таблицы и правила маржи</h3>
+<pre><code class="language-sql">-- Таблицы маржи
+CREATE TABLE margin_tables (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    applies_to ENUM('printing', 'service', 'total') DEFAULT 'printing',
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Правила маржи
+CREATE TABLE margin_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    margin_table_id INT NOT NULL,
+    sheets_from INT NOT NULL,
+    sheets_to INT,
+    margin_type ENUM('percent', 'fixed') NOT NULL,
+    margin_value DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (margin_table_id) REFERENCES margin_tables(id)
+);
+
+INSERT INTO margin_tables (id, name, slug, applies_to) VALUES
+(1, 'Стандартная маржа (цифра)', 'standart-margin-digital', 'printing');
+
+INSERT INTO margin_rules (margin_table_id, sheets_from, sheets_to, margin_type, margin_value) VALUES
+(1, 1, 10, 'percent', 100),
+(1, 11, 20, 'percent', 90),
+(1, 21, 30, 'percent', 80),
+(1, 31, 50, 'percent', 70),
+(1, 51, NULL, 'percent', 60);
+</code></pre>
+<h3 id="дополнительные-услуги">Дополнительные услуги</h3>
+<pre><code class="language-sql">CREATE TABLE services (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    calculation_type ENUM('per_sheet', 'per_item', 'fixed') NOT NULL,
+    cost_per_unit DECIMAL(10,2) NOT NULL,
+    is_active BOOLEAN DEFAULT true
+);
+
+INSERT INTO services (id, name, slug, calculation_type, cost_per_unit) VALUES
+(301, 'Ламинация', 'lamination', 'per_sheet', 15.00),
+(302, 'Биговка', 'scoring', 'per_item', 3.00),
+(303, 'Скругление углов', 'round-corners', 'per_item', 5.00);
+</code></pre>
+<h3 id="привязка-к-конструктору">Привязка к конструктору</h3>
+<pre><code class="language-sql">-- Конструкторы страниц
+CREATE TABLE constructors (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    margin_table_id INT,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (margin_table_id) REFERENCES margin_tables(id)
+);
+
+-- Доступные бумаги в конструкторе
+CREATE TABLE constructor_papers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    constructor_id INT NOT NULL,
+    paper_id INT NOT NULL,
+    is_default BOOLEAN DEFAULT false,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (constructor_id) REFERENCES constructors(id),
+    FOREIGN KEY (paper_id) REFERENCES materials(id)
+);
+</code></pre>
+<h2 id="класс-расчёта-digitalprintcalculator">Класс расчёта (DigitalPrintCalculator)</h2>
+<pre><code class="language-javascript">class DigitalPrintCalculator {
+    constructor() {
+        this.printerId = 1;
+        this.sheetFormat = 'SRA3';
+        this.sheetSize = { width: 320, height: 450 };
+    }
+
+    // Главный метод расчёта
+    async calculate(params) {
+        const {
+            format,           // 'A4', 'A5', 'A6', 'custom'
+            customWidth,
+            customHeight,
+            colorType,        // '1+0', '1+1', '4+0', '4+4'
+            paperId,          // ID выбранной бумаги
+            quantity,
+            services = []
+        } = params;
+
+        // 1. Раскладка на листе
+        const layout = await this.getLayout(format, customWidth, customHeight);
+        const sheets = Math.ceil(quantity / layout.items_per_sheet);
+
+        // 2. Себестоимость печати (без бумаги)
+        const printCostPerSheet = await this.getPrintCost(colorType);
+        const printCost = sheets * printCostPerSheet;
+
+        // 3. Себестоимость бумаги
+        const paperCostPerSheet = await this.getPaperCost(paperId);
+        const paperCost = sheets * paperCostPerSheet;
+
+        // 4. Общая себестоимость
+        const totalCost = printCost + paperCost;
+
+        // 5. Маржа
+        const margin = await this.getMargin(sheets);
+        let clientPrice;
+        if (margin.margin_type === 'percent') {
+            clientPrice = totalCost * (1 + margin.margin_value / 100);
+        } else {
+            clientPrice = totalCost + margin.margin_value;
+        }
+
+        // 6. Дополнительные услуги
+        let servicesTotal = 0;
+        const servicesBreakdown = [];
+        for (const service of services) {
+            const serviceCalc = await this.calculateService(service, { sheets, quantity });
+            servicesTotal += serviceCalc.clientPrice;
+            servicesBreakdown.push(serviceCalc);
+        }
+
+        // 7. Итог
+        const finalPrice = clientPrice + servicesTotal;
+
+        return {
+            success: true,
+            breakdown: {
+                sheets,
+                items_per_sheet: layout.items_per_sheet,
+                print_cost: printCost,
+                paper_cost: paperCost,
+                paper_name: await this.getPaperName(paperId),
+                total_cost: totalCost,
+                margin: {
+                    sheets_range: margin.sheets_range,
+                    margin_type: margin.margin_type,
+                    margin_value: margin.margin_value,
+                    margin_amount: clientPrice - totalCost
+                },
+                client_print_price: clientPrice,
+                services: servicesBreakdown,
+                final_price: finalPrice
+            },
+            summary: {
+                sheets,
+                price_per_sheet: (clientPrice / sheets).toFixed(2),
+                price_per_item: (finalPrice / quantity).toFixed(2),
+                total: finalPrice
+            }
+        };
+    }
+
+    // Раскладка на листе
+    async getLayout(format, customWidth, customHeight) {
+        if (format === 'custom') {
+            return this.calculateCustomLayout(customWidth, customHeight);
+        }
+        const query = `
+            SELECT items_per_sheet, orientation
+            FROM layout_rules
+            WHERE product_format = $1 AND is_active = true
+            ORDER BY items_per_sheet DESC
+            LIMIT 1
+        `;
+        const result = await db.query(query, [format]);
+        if (result.rows.length === 0) {
+            throw new Error(`Нет раскладки для формата ${format}`);
+        }
+        return {
+            items_per_sheet: result.rows[0].items_per_sheet,
+            orientation: result.rows[0].orientation,
+            sheet_format: this.sheetFormat,
+            sheet_size: this.sheetSize
+        };
+    }
+
+    // Раскладка для нестандартного размера
+    calculateCustomLayout(width, height) {
+        const bleed = 3;
+        const itemWidth = width + bleed * 2;
+        const itemHeight = height + bleed * 2;
+
+        const portraitCols = Math.floor(this.sheetSize.width / itemWidth);
+        const portraitRows = Math.floor(this.sheetSize.height / itemHeight);
+        const portraitItems = portraitCols * portraitRows;
+
+        const landscapeCols = Math.floor(this.sheetSize.width / itemHeight);
+        const landscapeRows = Math.floor(this.sheetSize.height / itemWidth);
+        const landscapeItems = landscapeCols * landscapeRows;
+
+        let best;
+        if (portraitItems &gt;= landscapeItems) {
+            best = { items_per_sheet: portraitItems, orientation: 'portrait', cols: portraitCols, rows: portraitRows };
+        } else {
+            best = { items_per_sheet: landscapeItems, orientation: 'landscape', cols: landscapeCols, rows: landscapeRows };
+        }
+
+        return {
+            ...best,
+            sheet_format: this.sheetFormat,
+            sheet_size: this.sheetSize,
+            item_size: { width: itemWidth, height: itemHeight }
+        };
+    }
+
+    // Себестоимость печати (без бумаги)
+    async getPrintCost(colorType) {
+        const query = `
+            SELECT cost_per_sheet
+            FROM print_base_costs
+            WHERE printer_id = $1 AND color_type = $2 AND is_active = true
+        `;
+        const result = await db.query(query, [this.printerId, colorType]);
+        if (result.rows.length === 0) {
+            throw new Error(`Нет цены печати для цветности ${colorType}`);
+        }
+        return parseFloat(result.rows[0].cost_per_sheet);
+    }
+
+    // Себестоимость бумаги
+    async getPaperCost(paperId) {
+        const query = `
+            SELECT cost_per_sheet
+            FROM paper_costs
+            WHERE paper_id = $1 AND format = $2 AND is_active = true
+        `;
+        const result = await db.query(query, [paperId, this.sheetFormat]);
+        if (result.rows.length === 0) {
+            throw new Error(`Нет цены для бумаги ID ${paperId}`);
+        }
+        return parseFloat(result.rows[0].cost_per_sheet);
+    }
+
+    // Название бумаги
+    async getPaperName(paperId) {
+        const query = `SELECT name FROM materials WHERE id = $1`;
+        const result = await db.query(query, [paperId]);
+        return result.rows[0]?.name || 'Бумага';
+    }
+
+    // Маржа по количеству листов
+    async getMargin(sheets) {
+        const query = `
+            SELECT mr.*, mt.name as table_name
+            FROM margin_rules mr
+            JOIN margin_tables mt ON mt.id = mr.margin_table_id
+            WHERE mt.applies_to = 'printing'
+                AND mt.is_active = true
+                AND mr.is_active = true
+                AND mr.sheets_from &lt;= $1
+                AND (mr.sheets_to &gt;= $1 OR mr.sheets_to IS NULL)
+            ORDER BY mr.sheets_from DESC
+            LIMIT 1
+        `;
+        const result = await db.query(query, [sheets]);
+        if (result.rows.length === 0) {
+            return {
+                margin_type: 'percent',
+                margin_value: 50,
+                sheets_range: 'default',
+                description: 'Стандартная наценка 50%'
+            };
+        }
+        const rule = result.rows[0];
+        return {
+            margin_type: rule.margin_type,
+            margin_value: parseFloat(rule.margin_value),
+            sheets_range: `${rule.sheets_from}${rule.sheets_to ? '-' + rule.sheets_to : '+'}`,
+            description: `${rule.margin_type === 'percent' ? rule.margin_value + '%' : rule.margin_value + ' руб'} (тираж ${rule.sheets_from}${rule.sheets_to ? '-' + rule.sheets_to : '+'} листов)`
+        };
+    }
+
+    // Расчёт дополнительной услуги
+    async calculateService(service, context) {
+        const { sheets, quantity } = context;
+        const serviceInfo = await db.query(`SELECT * FROM services WHERE id = $1 AND is_active = true`, [service.id]);
+        if (serviceInfo.rows.length === 0) {
+            throw new Error(`Услуга ${service.id} не найдена`);
+        }
+        const serviceData = serviceInfo.rows[0];
+
+        let cost = 0;
+        if (serviceData.calculation_type === 'per_sheet') {
+            cost = serviceData.cost_per_unit * sheets;
+        } else if (serviceData.calculation_type === 'per_item') {
+            cost = serviceData.cost_per_unit * quantity;
+        } else {
+            cost = serviceData.cost_per_unit;
+        }
+
+        const serviceMargin = await this.getServiceMargin(service.id);
+        let clientPrice;
+        if (serviceMargin.margin_type === 'percent') {
+            clientPrice = cost * (1 + serviceMargin.margin_value / 100);
+        } else {
+            clientPrice = cost + serviceMargin.margin_value;
+        }
+
+        return {
+            id: service.id,
+            name: serviceData.name,
+            calculation_type: serviceData.calculation_type,
+            cost: cost,
+            margin: serviceMargin,
+            clientPrice: clientPrice
+        };
+    }
+
+    // Маржа для услуги (по умолчанию 50%)
+    async getServiceMargin(serviceId) {
+        return {
+            margin_type: 'percent',
+            margin_value: 50,
+            description: 'Стандартная наценка 50%'
+        };
+    }
+}
+</code></pre>
+<p>Примечание по бэкенду: при вызове <code>calculateMargin()</code> для цифровой печати передаётся <code>quantity = sheets_spent</code> (число листов SRA3), а для копировальных услуг — <code>quantity = количество копий</code>.</p>
+<pre><code class="language-javascript">// Пример: листовка А4, тираж готовых изделий = 200 шт
+// На листе SRA3 помещается 2 макета А4
+const sheets_spent = Math.ceil(тираж_изделий / сколько_макетов_на_листе);
+// sheets_spent = 100
+// Затем идём в таблицу маржи и ищем правило по sheets_spent, а не по тиражу.
+</code></pre>
+<h2 id="примеры-расчётов">Примеры расчётов</h2>
+<h3 id="пример-1-листовки-a6-44-мелованная-130-пошагово">Пример 1. Листовки A6, 4+4, мелованная 130 (пошагово)</h3>
+<p>Исходные данные:</p>
+<pre><code>Принтер:                  Konica Minolta 6085
+Формат печати:            SRA3 (320×450 мм)
+Формат готовой продукции: А6 (105×148 мм)
+Тип продукции:            Листовки
+Бумага:                   130 г/м², мелованная
+Цена бумаги:              3 руб/лист SRA3
+Печать:                   Цветная двусторонняя (4+4)
+Себестоимость печати:     22 руб/лист SRA3
+Тираж:                    100 шт А6
+Наценка:                  100%
+</code></pre>
+<p>Расчёт:</p>
+<pre><code>Шаг 1. Печатные листы = ОКРУГЛВВЕРХ(100 / 6) = 17 листов SRA3
+Шаг 2. Себестоимость бумаги = 17 × 3 = 51 руб
+Шаг 3. Себестоимость печати = 17 × 22 = 374 руб
+Шаг 4. Себестоимость общая = 51 + 374 = 425 руб
+Шаг 5. Цена для клиента = 425 × (1 + 100/100) = 425 × 2 = 850 руб
+Шаг 6. Цена за единицу = 850 / 100 = 8.50 руб/шт
+</code></pre>
+<p>Детализация для клиента (на сайте):</p>
+<pre><code>ЛИСТОВКИ А6, 4+4, 130 гр/м²
+Тираж: 100 шт
+Цена за 1 листовку: 8.50 руб
+ИТОГО: 850 руб
+</code></pre>
+<p>Детализация для менеджера (CRM):</p>
+<pre><code>ЗАКАЗ №123
+Продукция:          Листовки А6 (105×148 мм)
+Тираж:              100 шт
+
+ПРОИЗВОДСТВЕННЫЙ РАСЧЁТ:
+Печатная машина:    Konica Minolta 6085
+Формат печати:      SRA3 (320×450 мм)
+Раскладка:          6 шт на листе
+Печатных листов:    17 листов SRA3
+
+СЕБЕСТОИМОСТЬ (НАШИ ЗАТРАТЫ):
+Бумага SRA3 130г:   17 л × 3 руб  = 51 руб
+Печать 4+4:         17 л × 22 руб = 374 руб
+Итого себестоимость:              425 руб
+
+РАСЧЁТ ДЛЯ КЛИЕНТА:
+Себестоимость:      425 руб
+Наценка (100%):     425 руб
+Цена для клиента:   850 руб
+Цена за 1 листовку: 8.50 руб
+
+ПРОВЕРКА РЕНТАБЕЛЬНОСТИ:
+Прибыль:            425 руб
+Маржинальность:     50%
+</code></pre>
+<p>Проверка граничных условий:</p>
+<ul>
+<li><strong>Остаток на листе.</strong> На 17 листах помещается 17 × 6 = 102 листовки А6 — на 2 шт больше тиража. Лишние 2 листовки можно отдать клиенту (бонус) или оставить на складе (нестандартная продукция).</li>
+<li><strong>Один или несколько макетов.</strong> Если все 100 листовок с одним дизайном — резка простая (режем стопкой). Если разные дизайны (например, 10 дизайнов по 10 шт) — применяется коэффициент сложности.</li>
+<li><strong>Цена за единицу.</strong> 8.50 руб за А6 — проверить на соответствие рынку; при необходимости корректировать наценкой.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: расхождение по раскладке A6 на лист SRA3. В пошаговом примере используется 6 шт/лист, при этом отмечено, что по факту получается 8 шт. Таблица <code>layout_rules</code> задаёт для A6 значение 8 шт/лист. Нужно зафиксировать корректную раскладку A6 (6 или 8) и пересчитать пример.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: расхождение себестоимости печати 4+4. В пошаговом примере используется 22 руб/лист, а в справочнике <code>print_base_costs</code> для 4+4 указано 25.00 руб/лист. Также требуется подтвердить реальность цен бумаги (3 руб) и печати.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: не зафиксировано, как поступать с остатком изделий на последнем листе (отдавать клиенту или списывать), и не учтена послепечатная обработка (резка, упаковка) в базовой формуле себестоимости.</p>
+<h3 id="пример-2-листовки-a4-44-мелованная-130-с-ламинацией-сквозной">Пример 2. Листовки A4, 4+4, мелованная 130, с ламинацией (сквозной)</h3>
+<p>Входные данные:</p>
+<pre><code class="language-javascript">const params = {
+    format: 'A4',
+    colorType: '4+4',
+    paperId: 101,          // мелованная 130 г/м²
+    quantity: 100,
+    services: [{ id: 301 }] // ламинация
+};
+</code></pre>
+<p>Результат расчёта:</p>
+<pre><code class="language-javascript">{
+    success: true,
+    breakdown: {
+        sheets: 50,                    // 100 / 2 = 50 листов SRA3
+        items_per_sheet: 2,
+        print_cost: 1250,              // 50 × 25
+        paper_cost: 150,               // 50 × 3
+        paper_name: 'Мелованная 130 г/м²',
+        total_cost: 1400,
+        margin: {
+            sheets_range: '51+',
+            margin_type: 'percent',
+            margin_value: 60,
+            margin_amount: 840         // 1400 × 0.6
+        },
+        client_print_price: 2240,      // 1400 + 840
+        services: [
+            {
+                id: 301,
+                name: 'Ламинация',
+                calculation_type: 'per_sheet',
+                cost: 750,             // 50 × 15
+                margin: { margin_type: 'percent', margin_value: 50 },
+                clientPrice: 1125      // 750 × 1.5
+            }
+        ],
+        final_price: 3365              // 2240 + 1125
+    },
+    summary: {
+        sheets: 50,
+        price_per_sheet: 44.80,
+        price_per_item: 33.65,
+        total: 3365
+    }
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в сквозном примере для 50 листов указан диапазон маржи <code>51+</code> (60%), но 50 листов попадают в правило <code>31–50</code> (70%) согласно таблице <code>margin_rules</code>. Нужно уточнить корректный диапазон и пересчитать <code>margin_amount</code> и итог.</p>
+<h2 id="интерфейс-админки-настройка-цифровой-печати">Интерфейс админки (настройка цифровой печати)</h2>
+<p>Экран «Настройка цифровой печати (Konica 6085)» содержит четыре редактируемых блока:</p>
+<ol>
+<li><strong>Раскладка на листе (SRA3)</strong> — формат, ориентация, шт/лист, вылеты.</li>
+<li><strong>Себестоимость печати (лист SRA3, без бумаги)</strong> — цветность, стоимость.</li>
+<li><strong>Себестоимость бумаги (лист SRA3)</strong> — бумага, плотность, стоимость.</li>
+<li><strong>Таблица маржи (по количеству листов)</strong> — от листов, до листов, тип, значение.</li>
+</ol>
+<p>Все сущности имеют свои ID и настраиваются в админке без переписывания кода при изменении цен или добавлении новой бумаги.</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#назначение-и-принцип">Назначение и принцип</a></li><li class="lvl2"><a href="#входные-параметры-заказа">Входные параметры заказа</a></li><li class="lvl3"><a href="#бумага-материал">Бумага / материал</a></li><li class="lvl3"><a href="#цветность">Цветность</a></li><li class="lvl3"><a href="#проверки-на-этапе-ввода">Проверки на этапе ввода</a></li><li class="lvl2"><a href="#алгоритм-расчёта">Алгоритм расчёта</a></li><li class="lvl3"><a href="#общая-схема">Общая схема</a></li><li class="lvl3"><a href="#шаги-расчёта">Шаги расчёта</a></li><li class="lvl3"><a href="#сводная-бизнес-логика-краткая-запись">Сводная бизнес-логика (краткая запись)</a></li><li class="lvl2"><a href="#итоговая-формула">Итоговая формула</a></li><li class="lvl2"><a href="#маржа-на-потраченный-лист-sra3">Маржа на потраченный лист SRA3</a></li><li class="lvl3"><a href="#исходная-ошибочная-таблица-маржи-со-скриншота">Исходная (ошибочная) таблица маржи со скриншота</a></li><li class="lvl2"><a href="#структура-базы-данных">Структура базы данных</a></li><li class="lvl3"><a href="#принтеры">Принтеры</a></li><li class="lvl3"><a href="#бумага-материалы">Бумага / материалы</a></li><li class="lvl3"><a href="#себестоимость-печати-без-бумаги">Себестоимость печати (без бумаги)</a></li><li class="lvl3"><a href="#себестоимость-бумаги">Себестоимость бумаги</a></li><li class="lvl3"><a href="#раскладка-на-листе">Раскладка на листе</a></li><li class="lvl3"><a href="#таблицы-и-правила-маржи">Таблицы и правила маржи</a></li><li class="lvl3"><a href="#дополнительные-услуги">Дополнительные услуги</a></li><li class="lvl3"><a href="#привязка-к-конструктору">Привязка к конструктору</a></li><li class="lvl2"><a href="#класс-расчёта-digitalprintcalculator">Класс расчёта (DigitalPrintCalculator)</a></li><li class="lvl2"><a href="#примеры-расчётов">Примеры расчётов</a></li><li class="lvl3"><a href="#пример-1-листовки-a6-44-мелованная-130-пошагово">Пример 1. Листовки A6, 4+4, мелованная 130 (пошагово)</a></li><li class="lvl3"><a href="#пример-2-листовки-a4-44-мелованная-130-с-ламинацией-сквозной">Пример 2. Листовки A4, 4+4, мелованная 130, с ламинацией (сквозной)</a></li><li class="lvl2"><a href="#интерфейс-админки-настройка-цифровой-печати">Интерфейс админки (настройка цифровой печати)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

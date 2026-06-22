@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Vendor Engine (маршрутизация подрядчиков) — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="07-partners-delivery--vendor-engine">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li class="active"><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="vendor-engine-маршрутизация-подрядчиков">Vendor Engine (маршрутизация подрядчиков)</h1>
+<p>Модуль маршрутизации заказов между собственным производством и внешними подрядчиками. Принцип: единая универсальная форма ввода → правила маршрутизации «если-то» → варианты исполнения с ценами, при этом конкретные подрядчики скрыты от менеджера. Дополнительно описан модуль валидации зависимостей (совместимость материал / формат / оборудование / операция).</p>
+<h2 id="1-принцип-унификации">1. Принцип унификации</h2>
+<p>Ключевая идея: не создавать отдельный интерфейс или отдельную логику под каждого подрядчика. Если для каждого подрядчика делать свою форму и свою логику, менеджер не сможет работать. Задача — создать единое пространство заказа, где подрядчик является лишь одним из параметров, который система подставляет автоматически или с минимальным участием человека.</p>
+<p>Уровни унификации:</p>
+<ol>
+<li>Единая маска ввода (универсальная форма заказа).</li>
+<li>Система-маршрутизатор (виджет «Подрядчик», модуль Vendor Engine).</li>
+<li>Вывод вариантов исполнения с ценами (подрядчики скрыты от менеджера).</li>
+</ol>
+<h2 id="2-единая-маска-ввода-универсальная-форма-заказа">2. Единая маска ввода (универсальная форма заказа)</h2>
+<p>Создаётся одна универсальная форма «Услуга» вместо отдельных форм под каждого подрядчика (например, без разделения на форму для GMPrint и для широкоформатной печати). Форма содержит все возможные параметры продукции, разделённые на две группы.</p>
+<h3 id="21-обязательные-параметры-для-всех-услуг">2.1. Обязательные параметры (для всех услуг)</h3>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Тираж</td>
+<td>Количество единиц</td>
+</tr>
+<tr>
+<td>Срок</td>
+<td>Срок исполнения</td>
+</tr>
+<tr>
+<td>Наличие макета</td>
+<td>Есть готовый макет или нет</td>
+</tr>
+<tr>
+<td>Формат</td>
+<td>Ширина × Высота (Ш × В)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-динамические-параметры-появляются-по-выбору-услуги">2.2. Динамические параметры (появляются по выбору услуги)</h3>
+<table>
+<thead>
+<tr>
+<th>Условие (выбранная услуга)</th>
+<th>Появляющиеся поля</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Офсетная печать</td>
+<td>«Плотность бумаги», «Цветность» (4+0, 4+4)</td>
+</tr>
+<tr>
+<td>Широкоформатная печать</td>
+<td>«Тип материала» (Баннер / Плёнка), чекбоксы «Люверсы», «Карман», «Резка»</td>
+</tr>
+</tbody>
+</table>
+<p>Менеджер заполняет единую форму, не задумываясь, какому подрядчику уйдёт заказ.</p>
+<h2 id="3-система-маршрутизатор-vendor-engine">3. Система-маршрутизатор (Vendor Engine)</h2>
+<p>После заполнения параметров и нажатия «Рассчитать» в работу вступает модуль Vendor Engine. Он работает по принципу «если-то» (правила маршрутизации).</p>
+<h3 id="31-правила-маршрутизации-примеры">3.1. Правила маршрутизации (примеры)</h3>
+<table>
+<thead>
+<tr>
+<th>№</th>
+<th>Условие</th>
+<th>Кандидат на исполнение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Правило 1</td>
+<td>Услуга = Офсетная печать И Тираж &gt; 500 И бюджет не критичен</td>
+<td>Кандидат #1: GMPrint</td>
+</tr>
+<tr>
+<td>Правило 2</td>
+<td>Услуга = Широкоформатка И Материал = Баннер</td>
+<td>Кандидат #1: WideFormatVendor (есть прайс)</td>
+</tr>
+<tr>
+<td>Правило 3</td>
+<td>Услуга = Широкоформатка И Материал = Пластик 10 мм (нет в прайсе)</td>
+<td>Кандидат #1: WideFormatVendor2 (ручной просчёт)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-представление-для-менеджера">3.2. Представление для менеджера</h3>
+<p>Менеджер видит не список подрядчиков, а список <strong>вариантов исполнения</strong> с ценами. Конкретные подрядчики скрыты — система подставляет их автоматически на основании правил.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В исходнике фраза «Он видит не список подрядчиков, а список вариантов исполнения:» обрывается — сам перечень вариантов исполнения (как именно отображаются строки: название варианта, цена, срок) в источнике не приведён.</p>
+<h2 id="4-расчёт-себестоимости-по-подрядчику">4. Расчёт себестоимости по подрядчику</h2>
+<p>Себестоимость варианта исполнения формируется в зависимости от типа подрядчика и наличия прайса.</p>
+<h3 id="41-себестоимость-по-прайсу-подрядчика-широкоформат-с-фиксированной-ценой">4.1. Себестоимость по прайсу подрядчика (широкоформат с фиксированной ценой)</h3>
+<p>Простое матричное правило. Если выбран материал «Баннер», система берёт цену из таблицы <code>vendor_prices</code> и считает мгновенно:</p>
+<pre><code>cost = price_per_m2 * area + additional_works
+</code></pre>
+<p>Параметры расчёта (на примере баннера):</p>
+<table>
+<thead>
+<tr>
+<th>Позиция</th>
+<th>Значение</th>
+<th>Роль в формуле</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Баннер (цена за м²)</td>
+<td>500 ₽/м²</td>
+<td><code>price_per_m2</code> × <code>area</code> (площадь)</td>
+</tr>
+<tr>
+<td>Люверсы</td>
+<td>15 ₽/шт</td>
+<td>слагаемое <code>additional_works</code></td>
+</tr>
+<tr>
+<td>Резка</td>
+<td>входит в доп. работы</td>
+<td>слагаемое <code>additional_works</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-себестоимость-по-прайс-листу-офсет-gmprint">4.2. Себестоимость по прайс-листу (офсет, GMPrint)</h3>
+<p>У офсетных партнёров цена, как правило, зависит от тиража и формата, поэтому простой расчёт «цена × площадь» не подходит. Используется матричный прайс-лист — таблица <code>price_matrix</code>, где себестоимость хранится на пересечении параметров заказа. Система выполняет простой Lookup (поиск по таблице): находит ячейку, соответствующую сочетанию формата, бумаги, цветности и диапазона тиража.</p>
+<p>Пример строки матрицы:</p>
+<table>
+<thead>
+<tr>
+<th>Формат</th>
+<th>Бумага</th>
+<th>Цветность</th>
+<th>Тираж</th>
+<th>Себестоимость</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>А3</td>
+<td>80 г</td>
+<td>4+0</td>
+<td>1000 шт</td>
+<td>5 ₽/шт</td>
+</tr>
+</tbody>
+</table>
+<p>Детали хранения, импорта/экспорта и интерполяции для промежуточных тиражей описаны в модуле офсетных партнёров (раздел 5).</p>
+<h2 id="5-модуль-офсетных-партнёров-маршрутизация">5. Модуль офсетных партнёров / маршрутизация</h2>
+<p>Спроектированные компоненты модуля офсетных партнёров:</p>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Описание</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Хранение цен в матрице</td>
+<td>Таблица с диапазонами тиражей</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Импорт/экспорт Excel</td>
+<td>Массовое обновление цен</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Интерполяция цен</td>
+<td>Расчёт для промежуточных тиражей</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Настройка доставки</td>
+<td>По городам (Москва, МО, регионы)</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Правила маржи</td>
+<td>Отдельно для офсетных заказов</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Автовыбор технологии</td>
+<td>Цифра / офсет / широкоформат</td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-модуль-валидации-зависимостей">6. Модуль валидации зависимостей</h2>
+<p>Система проверки совместимости, предотвращающая производственные ошибки ещё на этапе расчёта. Проверяет: можно ли выполнить заказ на выбранном оборудовании с заданными материалами.</p>
+<pre><code>ЗАКАЗ                  →     ПРОВЕРКА        →     РЕЗУЛЬТАТ
+├── Оборудование             Совместимо?           ✅ Можно печатать
+├── Материал                                       ⚠️ С ограничениями
+├── Формат                                         ❌ Невозможно
+└── Доп. операции
+</code></pre>
+<h3 id="61-типы-зависимостей">6.1. Типы зависимостей</h3>
+<table>
+<thead>
+<tr>
+<th>Тип зависимости</th>
+<th>Пример</th>
+<th>Проверка</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Оборудование ↔ Материал</td>
+<td>Принтер C3070L не печатает на бумаге 400 г/м²</td>
+<td>Плотность в допустимом диапазоне</td>
+</tr>
+<tr>
+<td>Оборудование ↔ Формат</td>
+<td>Резак Boway режет только до 490 мм</td>
+<td>Ширина/высота ≤ макс. значения</td>
+</tr>
+<tr>
+<td>Оборудование ↔ Операция</td>
+<td>Не все плоттеры режут картон</td>
+<td>Тип материала в списке совместимых</td>
+</tr>
+<tr>
+<td>Материал ↔ Операция</td>
+<td>Не все плёнки ламинируются при низкой температуре</td>
+<td>Температурный режим</td>
+</tr>
+<tr>
+<td>Последовательность операций</td>
+<td>Нельзя ламинировать после контурной резки</td>
+<td>Порядок выполнения</td>
+</tr>
+<tr>
+<td>Временные ограничения</td>
+<td>Оборудование занято в это время</td>
+<td>Производственный календарь</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-архитектура-системы-валидации">6.2. Архитектура системы валидации</h3>
+<pre><code>┌─────────────────────────────────────────────────────────────────┐
+│                     СИСТЕМА ВАЛИДАЦИИ                              │
+├─────────────────────────────────────────────────────────────────┤
+│  УРОВЕНЬ 1: Правила совместимости                                 │
+│  ├── Глобальные правила (для всего оборудования)                  │
+│  ├── Специфические правила (для конкретных моделей)               │
+│  └── Исключения (ручные настройки менеджера)                      │
+│                                                                   │
+│  УРОВЕНЬ 2: Проверка в реальном времени                           │
+│  ├── При выборе оборудования                                      │
+│  ├── При изменении материала                                      │
+│  ├── При добавлении операции                                      │
+│  └── При изменении формата/тиража                                 │
+│                                                                   │
+│  УРОВЕНЬ 3: Результаты проверки                                    │
+│  ├── ✅ Всё хорошо                                                │
+│  ├── ⚠️ Предупреждение (можно продолжить, но осторожно)           │
+│  └── ❌ Ошибка (невозможно выполнить)                             │
+│                                                                   │
+│  УРОВЕНЬ 4: Объяснение и рекомендации                             │
+│  ├── Почему нельзя                                                │
+│  └── Что изменить, чтобы стало можно                              │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="63-структура-бд-для-правил-валидации">6.3. Структура БД для правил валидации</h3>
+<pre><code class="language-sql">-- 1. Типы проверок
+CREATE TABLE validation_check_types (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(50) UNIQUE,        -- 'material_equipment_compatibility'
+    name VARCHAR(255),              -- &quot;Совместимость материала и оборудования&quot;
+    description TEXT,
+    category VARCHAR(50)            -- 'hard_limit', 'soft_limit', 'sequence'
+);
+
+-- 2. Правила валидации
+CREATE TABLE validation_rules (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    -- К чему применяется правило
+    entity_type ENUM('equipment', 'material', 'operation', 'global') NOT NULL,
+    entity_id INT,                  -- ID оборудования/материала/операции или NULL для global
+    -- Тип проверки
+    check_type_id INT NOT NULL,
+    -- Параметры проверки (JSON с условиями)
+    check_parameters JSON NOT NULL,
+    -- Пример: {&quot;density&quot;: {&quot;min&quot;: 60, &quot;max&quot;: 300}}
+    -- Пример: {&quot;format_width&quot;: {&quot;max&quot;: 490}}
+    -- Пример: {&quot;required_operations&quot;: [&quot;cutting&quot;, &quot;lamination&quot;]}
+    -- Уровень серьёзности
+    severity ENUM('error', 'warning', 'info') DEFAULT 'error',
+    -- Сообщение для пользователя
+    message_template TEXT NOT NULL,
+    -- &quot;Бумага плотностью {density} г/м² не подходит для принтера {printer_name}&quot;
+    -- Рекомендация (что сделать)
+    recommendation_template TEXT,
+    -- &quot;Используйте бумагу плотностью до {max_density} г/м²&quot;
+    -- Приоритет (какое правило применять первым)
+    priority INT DEFAULT 100,
+    -- Активно ли правило
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (check_type_id) REFERENCES validation_check_types(id),
+    INDEX idx_entity (entity_type, entity_id, is_active)
+);
+
+-- 3. Исключения из правил (для особых случаев)
+CREATE TABLE validation_exceptions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    rule_id INT NOT NULL,
+    -- Условия исключения
+    condition_type VARCHAR(50),     -- 'client_specific', 'order_specific', 'manual'
+    condition_value JSON,           -- {&quot;client_id&quot;: 123, &quot;valid_until&quot;: &quot;2026-12-31&quot;}
+    -- Разрешить или заменить правило
+    action ENUM('allow', 'replace', 'ignore') DEFAULT 'allow',
+    replacement_message TEXT,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valid_until DATE,
+    FOREIGN KEY (rule_id) REFERENCES validation_rules(id),
+    INDEX idx_rule (rule_id, valid_until)
+);
+
+-- 4. История проверок (для аналитики)
+CREATE TABLE validation_history (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    -- Что проверяли
+    entity_checked VARCHAR(50),     -- 'equipment', 'material', 'operation'
+    entity_id INT,
+    -- Результат
+    result ENUM('success', 'warning', 'error') NOT NULL,
+    rule_id INT,                    -- какое правило сработало
+    message TEXT,
+    -- Контекст проверки
+    context JSON,                   -- значения параметров в момент проверки
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (rule_id) REFERENCES validation_rules(id),
+    INDEX idx_order (order_id, created_at)
+);
+</code></pre>
+<h3 id="64-примеры-правил-валидации">6.4. Примеры правил валидации</h3>
+<pre><code class="language-sql">-- 1. Принтер C3070L не печатает на бумаге &gt;350 г/м²
+INSERT INTO validation_rules (entity_type, entity_id, check_type_id, check_parameters, severity, message_template, recommendation_template)
+VALUES ('equipment', 2, 1, '{&quot;density&quot;: {&quot;max&quot;: 350}}', 'error',
+  'Принтер {equipment_name} не печатает на бумаге плотностью {density} г/м² (макс. 350 г/м²)',
+  'Используйте бумагу плотностью до 350 г/м² или выберите другой принтер');
+
+-- 2. Резак Boway режет только до ширины 490 мм
+INSERT INTO validation_rules (entity_type, entity_id, check_type_id, check_parameters, severity, message_template, recommendation_template)
+VALUES ('equipment', 1, 2, '{&quot;format_width&quot;: {&quot;max&quot;: 490}, &quot;format_height&quot;: {&quot;max&quot;: 450}}', 'error',
+  'Формат {width}×{height} мм превышает максимальный размер резака {equipment_name} ({max_width}×{max_height} мм)',
+  'Используйте формат не более {max_width}×{max_height} мм');
+
+-- 3. Плоттер режет картон медленнее (предупреждение)
+INSERT INTO validation_rules (entity_type, entity_id, check_type_id, check_parameters, severity, message_template, recommendation_template)
+VALUES ('equipment', 3, 3, '{&quot;material_type&quot;: &quot;cardboard&quot;, &quot;speed_warning&quot;: true}', 'warning',
+  'Резка картона на плоттере {equipment_name} будет выполняться медленнее (скорость снижена до {actual_speed} мм/сек)',
+  'Увеличьте время на резку в 2 раза');
+
+-- 4. Ламинация требует определённой температуры
+INSERT INTO validation_rules (entity_type, entity_id, check_type_id, check_parameters, severity, message_template, recommendation_template)
+VALUES ('operation', 5, 4, '{&quot;film_thickness&quot;: {&quot;min&quot;: 75, &quot;max&quot;: 175}, &quot;temperature&quot;: {&quot;min&quot;: 100, &quot;max&quot;: 130}}', 'warning',
+  'Плёнка толщиной {film_thickness} мкм требует температуры {required_temp}°C (текущая настройка: {current_temp}°C)',
+  'Отрегулируйте температуру ламинатора');
+</code></pre>
+<h3 id="65-класс-валидации-validationengine">6.5. Класс валидации (ValidationEngine)</h3>
+<p>Класс загружает активные правила из БД (отсортированные по <code>priority</code>) и выполняет последовательную проверку заказа: оборудование+материал, формат, операции, последовательность операций, затем сохраняет историю проверки. Заказ считается валидным, если <code>errors.length === 0</code>.</p>
+<pre><code class="language-javascript">class ValidationEngine {
+    constructor() {
+        this.rules = [];
+        this.loadRules();
+    }
+
+    /** Загрузка активных правил из БД */
+    async loadRules() {
+        const query = `
+            SELECT vr.*, vct.code as check_code, vct.name as check_name
+            FROM validation_rules vr
+            JOIN validation_check_types vct ON vct.id = vr.check_type_id
+            WHERE vr.is_active = true
+            ORDER BY vr.priority
+        `;
+        this.rules = await db.query(query);
+    }
+
+    /** Проверка заказа на совместимость */
+    async validateOrder(order) {
+        const results = { success: true, errors: [], warnings: [], infos: [] };
+
+        // 1. Проверяем оборудование и материалы
+        if (order.equipmentId &amp;&amp; order.material) {
+            const eqResult = await this.validateEquipmentMaterial(order.equipmentId, order.material);
+            this.mergeResults(results, eqResult);
+        }
+        // 2. Проверяем формат
+        if (order.equipmentId &amp;&amp; order.format) {
+            const formatResult = await this.validateEquipmentFormat(order.equipmentId, order.format);
+            this.mergeResults(results, formatResult);
+        }
+        // 3. Проверяем операции
+        if (order.operations) {
+            for (const op of order.operations) {
+                const opResult = await this.validateOperation(op, order.equipmentId, order.material);
+                this.mergeResults(results, opResult);
+            }
+        }
+        // 4. Проверяем последовательность операций
+        if (order.operations &amp;&amp; order.operations.length &gt; 1) {
+            const seqResult = await this.validateSequence(order.operations);
+            this.mergeResults(results, seqResult);
+        }
+        // 5. Сохраняем историю
+        await this.saveValidationHistory(order.id, results);
+
+        results.success = results.errors.length === 0;
+        return results;
+    }
+
+    /** Проверка совместимости оборудования и материала */
+    async validateEquipmentMaterial(equipmentId, material) {
+        const result = { errors: [], warnings: [], infos: [] };
+        const rules = this.rules.filter(r =&gt;
+            r.entity_type === 'equipment' &amp;&amp;
+            r.entity_id === equipmentId &amp;&amp;
+            r.check_parameters.density
+        );
+        for (const rule of rules) {
+            const { density } = rule.check_parameters;
+            if (density.max &amp;&amp; material.density &gt; density.max) {
+                const message = this.formatMessage(rule.message_template,
+                    { equipment_name: await this.getEquipmentName(equipmentId), density: material.density });
+                if (rule.severity === 'error') result.errors.push({ rule, message });
+                else if (rule.severity === 'warning') result.warnings.push({ rule, message });
+            }
+            if (density.min &amp;&amp; material.density &lt; density.min) {
+                // аналогично
+            }
+        }
+        return result;
+    }
+
+    /** Проверка совместимости оборудования и формата */
+    async validateEquipmentFormat(equipmentId, format) {
+        const result = { errors: [], warnings: [], infos: [] };
+        const rules = this.rules.filter(r =&gt;
+            r.entity_type === 'equipment' &amp;&amp;
+            r.entity_id === equipmentId &amp;&amp;
+            r.check_parameters.format_width
+        );
+        for (const rule of rules) {
+            const { format_width, format_height } = rule.check_parameters;
+            if (format_width?.max &amp;&amp; format.width &gt; format_width.max) {
+                result.errors.push({ rule, message: this.formatMessage(rule.message_template, {
+                    width: format.width, height: format.height,
+                    max_width: format_width.max, max_height: format_height?.max || 'любая'
+                })});
+            }
+            if (format_height?.max &amp;&amp; format.height &gt; format_height.max) {
+                // аналогично
+            }
+        }
+        return result;
+    }
+
+    /** Проверка операции */
+    async validateOperation(operation, equipmentId, material) {
+        const result = { errors: [], warnings: [], infos: [] };
+        const opRules = this.rules.filter(r =&gt;
+            r.entity_type === 'operation' &amp;&amp; r.entity_id === operation.id);
+        for (const rule of opRules) {
+            const params = rule.check_parameters;
+            if (params.material_type &amp;&amp; material.type !== params.material_type) {
+                result.warnings.push({ rule,
+                    message: `Операция ${operation.name} не оптимизирована для материала ${material.type}` });
+            }
+            if (params.film_thickness &amp;&amp; material.thickness) {
+                if (material.thickness &gt; params.film_thickness.max) {
+                    result.errors.push({ rule,
+                        message: `Плёнка толщиной ${material.thickness} мкм слишком толстая для ламинатора` });
+                }
+            }
+        }
+        return result;
+    }
+
+    /** Проверка последовательности операций */
+    async validateSequence(operations) {
+        const result = { errors: [], warnings: [], infos: [] };
+        // Нельзя ламинировать после контурной резки
+        const laminationIndex = operations.findIndex(op =&gt; op.type === 'lamination');
+        const cuttingIndex = operations.findIndex(op =&gt; op.type === 'contour_cutting');
+        if (laminationIndex &gt; -1 &amp;&amp; cuttingIndex &gt; -1 &amp;&amp; cuttingIndex &lt; laminationIndex) {
+            result.errors.push({
+                message: 'Нельзя выполнять контурную резку до ламинации. Сначала ламинация, потом резка.' });
+        }
+        // Нельзя резать гильотиной после плоттерной резки (изделия уже разделены)
+        const guillotineIndex = operations.findIndex(op =&gt; op.type === 'guillotine_cutting');
+        const plotterIndex = operations.findIndex(op =&gt; op.type === 'plotter_cutting');
+        if (guillotineIndex &gt; -1 &amp;&amp; plotterIndex &gt; -1 &amp;&amp; plotterIndex &lt; guillotineIndex) {
+            result.errors.push({
+                message: 'Нельзя резать гильотиной после плоттерной резки - изделия уже разделены' });
+        }
+        return result;
+    }
+
+    /** Объединение результатов */
+    mergeResults(main, additional) {
+        main.errors.push(...additional.errors);
+        main.warnings.push(...additional.warnings);
+        main.infos.push(...additional.infos);
+    }
+
+    /** Форматирование сообщения с подстановкой переменных */
+    formatMessage(template, variables) {
+        let message = template;
+        for (let [key, value] of Object.entries(variables)) {
+            message = message.replace(new RegExp(`{${key}}`, 'g'), value);
+        }
+        return message;
+    }
+
+    /** Сохранение истории проверки */
+    async saveValidationHistory(orderId, results) {
+        const history = [];
+        for (const error of results.errors) {
+            history.push({ order_id: orderId, result: 'error', message: error.message,
+                rule_id: error.rule?.id, context: JSON.stringify(error.rule?.check_parameters || {}) });
+        }
+        for (const warning of results.warnings) {
+            history.push({ order_id: orderId, result: 'warning',
+                message: warning.message, rule_id: warning.rule?.id });
+        }
+        if (history.length &gt; 0) {
+            await db.query(
+                'INSERT INTO validation_history (order_id, result, message, rule_id, context) VALUES ?',
+                [history.map(h =&gt; [h.order_id, h.result, h.message, h.rule_id, h.context])]);
+        }
+    }
+}
+</code></pre>
+<h3 id="66-интерфейс-валидации-в-реальном-времени">6.6. Интерфейс валидации в реальном времени</h3>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│  ПРОВЕРКА СОВМЕСТИМОСТИ                                │
+├─────────────────────────────────────────────────────┤
+│  ОБОРУДОВАНИЕ: Konica Minolta C3070L                  │
+│  МАТЕРИАЛ: Бумага 400 г/м²                            │
+│                                                       │
+│  ┌─────────────────────────────────────────────────┐ │
+│  │  ❌ ОШИБКА                                        │ │
+│  │  Принтер C3070L не печатает на бумаге             │ │
+│  │  плотностью 400 г/м² (макс. 350 г/м²)             │ │
+│  │  Рекомендация:                                    │ │
+│  │  Используйте бумагу плотностью до 350 г/м²        │ │
+│  │  или выберите другой принтер (например, C6085)    │ │
+│  │  [ ВЫБРАТЬ C6085 ] [ ИЗМЕНИТЬ МАТЕРИАЛ ]           │ │
+│  └─────────────────────────────────────────────────┘ │
+│  ДРУГИЕ ПРОВЕРКИ:                                      │
+│  ┌─────────────────────────────────────────────────┐ │
+│  │  ✅ Формат А4 (210×297) - подходит                │ │
+│  │  ✅ Операция печати - доступна                    │ │
+│  │  ⚠️  Операция ламинации - требует проверки        │ │
+│  │     Плёнка 125 мкм подходит, температура 120°C    │ │
+│  └─────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="67-интерфейс-настройки-правил-без-программиста">6.7. Интерфейс настройки правил (без программиста)</h3>
+<p>Конструктор правил позволяет менеджеру создавать правила без участия разработчика: выбор типа правила, оборудования, условий, уровня результата (Ошибка / Предупреждение / Информация), шаблона сообщения и рекомендации.</p>
+<pre><code>┌─────────────────────────────────────────────────────┐
+│  КОНСТРУКТОР ПРАВИЛ ВАЛИДАЦИИ                          │
+├─────────────────────────────────────────────────────┤
+│  НОВОЕ ПРАВИЛО:                                       │
+│  ┌─────────────────────────────────────────────────┐ │
+│  │  Тип правила: [ Оборудование ↔ Материал   ▼ ]    │ │
+│  │  Оборудование: [ Konica C3070L           ▼ ]     │ │
+│  │  Условие:                                         │ │
+│  │  [ Плотность бумаги ] [ &gt; ] [ 350 ] г/м²          │ │
+│  │  + ДОБАВИТЬ УСЛОВИЕ                                │ │
+│  │  Результат:                                       │ │
+│  │  (•) Ошибка - нельзя продолжить                   │ │
+│  │  ( ) Предупреждение - можно, но осторожно         │ │
+│  │  ( ) Информация - просто уведомить                │ │
+│  │  Сообщение:                                       │ │
+│  │  [ Принтер {equipment} не печатает на бумаге      │ │
+│  │    плотностью {density} г/м² ]                    │ │
+│  │  Рекомендация:                                    │ │
+│  │  [ Используйте бумагу до 350 г/м² ]               │ │
+│  │  [ СОХРАНИТЬ ПРАВИЛО ]                             │ │
+│  └─────────────────────────────────────────────────┘ │
+│  СПИСОК ПРАВИЛ:                                        │
+│  ┌─────────────────────────────────────────────────┐ │
+│  │  ✓ C3070L: плотность &gt;350 → ошибка                │ │
+│  │  ✓ Boway: ширина &gt;490 → ошибка                    │ │
+│  │  ✓ Mimaki: картон → предупреждение                │ │
+│  │  ✓ Ламинация: плёнка &gt;175 → ошибка                │ │
+│  │  [РЕДАКТИРОВАТЬ] [УДАЛИТЬ] [ОТКЛЮЧИТЬ]             │ │
+│  └─────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<h3 id="68-интеграция-с-производственным-процессом">6.8. Интеграция с производственным процессом</h3>
+<p>При создании производственного задания сначала выполняется валидация. Если есть ошибки — заказ не передаётся в производство. Если есть предупреждения — уведомляется менеджер. Только при успешной проверке создаётся задание.</p>
+<pre><code class="language-javascript">// При создании производственного задания
+async function createProductionTask(order) {
+    // 1. Сначала валидация
+    const validation = await validationEngine.validateOrder(order);
+    if (!validation.success) {
+        return {
+            success: false,
+            errors: validation.errors,
+            task: null,
+            message: 'Заказ не может быть передан в производство из-за ошибок совместимости'
+        };
+    }
+    // 2. Если есть предупреждения - показываем менеджеру
+    if (validation.warnings.length &gt; 0) {
+        await notifyManager({
+            type: 'validation_warning',
+            orderId: order.id,
+            warnings: validation.warnings
+        });
+    }
+    // 3. Создаём задание
+    const task = {
+        orderId: order.id,
+        equipmentId: order.equipmentId,
+        operations: order.operations,
+        estimatedTime: await calculateTime(order),
+        validationResult: validation,
+        status: 'pending'
+    };
+    return { success: true, task, warnings: validation.warnings };
+}
+</code></pre>
+<h3 id="69-преимущества-системы-валидации">6.9. Преимущества системы валидации</h3>
+<ul>
+<li>Предотвращение ошибок — невозможные заказы не попадают в производство.</li>
+<li>Экономия времени — не нужно переделывать брак.</li>
+<li>Прозрачность — менеджер сразу видит проблемы.</li>
+<li>Гибкость — правила настраиваются без программиста.</li>
+<li>История — можно анализировать частые проблемы.</li>
+<li>Рекомендации — система подсказывает, как исправить.</li>
+</ul>
+<h2 id="7-открытые-вопросы">7. Открытые вопросы</h2>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Перечень вариантов исполнения, который видит менеджер вместо списка подрядчиков, в источнике не детализирован (фраза обрывается на двоеточии).</p>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-принцип-унификации">1. Принцип унификации</a></li><li class="lvl2"><a href="#2-единая-маска-ввода-универсальная-форма-заказа">2. Единая маска ввода (универсальная форма заказа)</a></li><li class="lvl3"><a href="#21-обязательные-параметры-для-всех-услуг">2.1. Обязательные параметры (для всех услуг)</a></li><li class="lvl3"><a href="#22-динамические-параметры-появляются-по-выбору-услуги">2.2. Динамические параметры (появляются по выбору услуги)</a></li><li class="lvl2"><a href="#3-система-маршрутизатор-vendor-engine">3. Система-маршрутизатор (Vendor Engine)</a></li><li class="lvl3"><a href="#31-правила-маршрутизации-примеры">3.1. Правила маршрутизации (примеры)</a></li><li class="lvl3"><a href="#32-представление-для-менеджера">3.2. Представление для менеджера</a></li><li class="lvl2"><a href="#4-расчёт-себестоимости-по-подрядчику">4. Расчёт себестоимости по подрядчику</a></li><li class="lvl3"><a href="#41-себестоимость-по-прайсу-подрядчика-широкоформат-с-фиксированной-ценой">4.1. Себестоимость по прайсу подрядчика (широкоформат с фиксированной ценой)</a></li><li class="lvl3"><a href="#42-себестоимость-по-прайс-листу-офсет-gmprint">4.2. Себестоимость по прайс-листу (офсет, GMPrint)</a></li><li class="lvl2"><a href="#5-модуль-офсетных-партнёров-маршрутизация">5. Модуль офсетных партнёров / маршрутизация</a></li><li class="lvl2"><a href="#6-модуль-валидации-зависимостей">6. Модуль валидации зависимостей</a></li><li class="lvl3"><a href="#61-типы-зависимостей">6.1. Типы зависимостей</a></li><li class="lvl3"><a href="#62-архитектура-системы-валидации">6.2. Архитектура системы валидации</a></li><li class="lvl3"><a href="#63-структура-бд-для-правил-валидации">6.3. Структура БД для правил валидации</a></li><li class="lvl3"><a href="#64-примеры-правил-валидации">6.4. Примеры правил валидации</a></li><li class="lvl3"><a href="#65-класс-валидации-validationengine">6.5. Класс валидации (ValidationEngine)</a></li><li class="lvl3"><a href="#66-интерфейс-валидации-в-реальном-времени">6.6. Интерфейс валидации в реальном времени</a></li><li class="lvl3"><a href="#67-интерфейс-настройки-правил-без-программиста">6.7. Интерфейс настройки правил (без программиста)</a></li><li class="lvl3"><a href="#68-интеграция-с-производственным-процессом">6.8. Интеграция с производственным процессом</a></li><li class="lvl3"><a href="#69-преимущества-системы-валидации">6.9. Преимущества системы валидации</a></li><li class="lvl2"><a href="#7-открытые-вопросы">7. Открытые вопросы</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

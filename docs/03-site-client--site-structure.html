@@ -1,0 +1,982 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Сайт: структура и витрина — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="03-site-client--site-structure">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li class="active"><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="сайт-структура-и-витрина">Сайт: структура и витрина</h1>
+<p>Документ описывает движок сайта типографии PrintOffice: информационную архитектуру и URL-схему, техническую архитектуру (Next.js + TypeScript + Tailwind), SEO-фундамент, а также универсальную систему витрины (семейства товаров, варианты, кросс/ап-селл, бандлы) с многоуровневой системой отображения (глобально → категория → страница → исключения).</p>
+<hr>
+<h2 id="1-информационная-архитектура-и-подход">1. Информационная архитектура и подход</h2>
+<p>Построение сайта ведётся по трёхуровневой стратегии:</p>
+<ol>
+<li><strong>Структура сайта (IA — Information Architecture)</strong> — анализ аудитории (B2C/B2B), карта сайта (URL-структура, иерархия), типовые страницы (категории, товары, услуги, статьи), навигация (меню, хлебные крошки, фильтры).</li>
+<li><strong>Техническая архитектура</strong> — выбор фреймворка (Next.js + Strapi/Prismic как опция CMS), модульная структура (компоненты, API, БД), система управления контентом (админка), интеграция с калькуляторами.</li>
+<li><strong>SEO-фундамент</strong> — технический SEO (мета-теги, URL, sitemap, robots.txt), семантическое ядро (кластеризация запросов), контентная стратегия, внутренняя перелинковка, внешние факторы (скорость, мобильная адаптация, микроразметка).</li>
+</ol>
+<hr>
+<h2 id="2-url-схема-сайта">2. URL-схема сайта</h2>
+<p>Базовый домен: <code>printoffice.ru</code> (в SEO-константах также фигурирует <code>printoffice.moscow</code> — см. открытый вопрос ниже).</p>
+<pre><code>printoffice.ru/
+│
+├── /catalog/                         # Каталог услуг
+│   ├── /digital-printing/            # Цифровая печать
+│   │   ├── /flyers/                  # Листовки
+│   │   │   ├── /a4/                  # Листовки A4
+│   │   │   ├── /a5/                  # Листовки A5
+│   │   │   └── /custom/              # Свой размер
+│   │   ├── /business-cards/          # Визитки
+│   │   └── /posters/                 # Плакаты
+│   │
+│   ├── /offset-printing/             # Офсетная печать
+│   │   ├── /flyers/                  # Листовки офсет
+│   │   ├── /booklets/                # Буклеты
+│   │   └── /brochures/               # Брошюры
+│   │
+│   ├── /wide-format/                 # Широкоформатная печать
+│   │   ├── /pvc/                     # Печать на ПВХ
+│   │   ├── /banner/                  # Баннеры
+│   │   └── /self-adhesive/           # Самоклейка
+│   │
+│   ├── /brochures/                   # Брошюры
+│   │   ├── /staple/                  # На скобе
+│   │   ├── /spring/                  # На пружине
+│   │   └── /kbs/                     # КБС
+│   │
+│   └── /stickers/                    # Наклейки
+│       ├── /simple/                  # Простые
+│       ├── /stickerpack/             # Стикерпаки
+│       └── /shaped/                  # Фигурные
+│
+├── /calculator/                      # Универсальный калькулятор
+│   ├── /digital/                     # Калькулятор цифровой печати
+│   ├── /offset/                      # Калькулятор офсетной печати
+│   ├── /wide/                        # Калькулятор широкоформата
+│   ├── /brochure/                    # Калькулятор брошюр
+│   └── /sticker/                     # Калькулятор наклеек
+│
+├── /services/                        # Услуги
+│   ├── /copying/                     # Копирование
+│   ├── /scanning/                    # Сканирование
+│   ├── /lamination/                  # Ламинация
+│   └── /binding/                     # Переплёт
+│
+├── /blog/                            # Блог (SEO-контент)
+│   ├── /how-to-choose-paper/         # Как выбрать бумагу
+│   ├── /printing-technologies/       # Технологии печати
+│   └── /design-tips/                 # Советы по дизайну
+│
+├── /about/                           # О компании
+│   ├── /contacts/                    # Контакты
+│   ├── /delivery/                    # Доставка и оплата
+│   └── /reviews/                     # Отзывы
+│
+└── /account/                         # Личный кабинет
+    ├── /orders/                      # Мои заказы
+    ├── /profile/                     # Профиль
+    └── /briefs/                      # Мои брифы
+</code></pre>
+<hr>
+<h2 id="3-техническая-архитектура-движка">3. Техническая архитектура движка</h2>
+<p>Многослойная архитектура: Frontend (Next.js) → API Layer (Next.js API Routes) → Backend (NestJS / сервисы) → Database (PostgreSQL + Prisma).</p>
+<h3 id="frontend-nextjs">Frontend (Next.js)</h3>
+<pre><code>pages/
+├── _app.tsx               # Корневой компонент, провайдеры
+├── _document.tsx          # HTML-шаблон, мета-теги
+├── index.tsx              # Главная страница
+├── catalog/               # Каталог (динамические страницы)
+├── calculator/            # Калькуляторы
+├── account/               # Личный кабинет
+└── api/                   # API-эндпоинты
+
+components/
+├── common/                # Общие компоненты (Header, Footer, Layout)
+├── calculator/            # Компоненты калькуляторов
+├── catalog/               # Компоненты каталога
+├── account/               # Компоненты личного кабинета
+└── seo/                   # SEO-компоненты (Meta, Schema.org)
+</code></pre>
+<h3 id="api-layer-nextjs-api-routes">API Layer (Next.js API Routes)</h3>
+<pre><code>pages/api/
+├── auth/                  # Аутентификация (JWT, Telegram, email)
+├── calculator/            # API калькуляторов
+├── orders/                # API заказов
+├── clients/               # API клиентов
+├── production/            # API производства
+└── admin/                 # API администрирования
+</code></pre>
+<h3 id="backend-nestjs-services">Backend (NestJS / Services)</h3>
+<pre><code>modules/
+├── calculator/            # Бизнес-логика калькуляторов
+│   ├── digital/           # Цифровая печать
+│   ├── offset/            # Офсетная печать
+│   ├── wide/              # Широкоформат
+│   ├── brochure/          # Брошюры
+│   └── sticker/           # Наклейки
+├── crm/                   # CRM
+├── production/            # Производство
+└── admin/                 # Администрирование
+</code></pre>
+<h3 id="database-postgresql-prisma">Database (PostgreSQL + Prisma)</h3>
+<pre><code>prisma/
+├── schema.prisma          # Схема БД (все таблицы)
+└── migrations/            # Миграции
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: на уровне диаграммы Backend заявлен на NestJS, при этом проектная настройка (раздел 4) поднимает API через Next.js API Routes без NestJS. Нужно зафиксировать единый стек бэкенда (Next.js API Routes vs. отдельный NestJS-сервис).</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: SQL-схемы витрины (раздел 6) написаны под MySQL (<code>AUTO_INCREMENT</code>, <code>ENUM</code>, <code>UNIQUE KEY</code>), а базовый стек проекта — PostgreSQL + Prisma. Требуется привести схему витрины к PostgreSQL/Prisma либо подтвердить выбор СУБД.</p>
+<hr>
+<h2 id="4-настройка-проекта-nextjs-typescript-tailwind">4. Настройка проекта Next.js + TypeScript + Tailwind</h2>
+<h3 id="41-инициализация">4.1. Инициализация</h3>
+<pre><code class="language-bash"># Создание проекта Next.js с TypeScript и Tailwind
+npx create-next-app@latest printoffice --typescript --tailwind --eslint
+cd printoffice
+
+# Установка дополнительных зависимостей
+npm install @prisma/client @tanstack/react-query axios zod react-hook-form
+npm install -D prisma @types/node
+
+# Установка UI-компонентов (опционально)
+npm install @headlessui/react @heroicons/react
+</code></pre>
+<h3 id="42-структура-проекта">4.2. Структура проекта</h3>
+<p>Полный листинг стартовой структуры каталогов Next.js-проекта приведён в Структура проекта Next.js (детализированная, стартовая) (раздел документа «Структура проекта»). Там же — структура репозитория для GitHub по мере роста.</p>
+<h3 id="43-ключевые-версии-зависимостей-packagejson">4.3. Ключевые версии зависимостей (package.json)</h3>
+<p>Полный <code>package.json</code> с версиями зависимостей приведён в разделе Конфигурационные файлы → package.json документа «Структура проекта». Ключевые ориентиры: Next.js <code>14.1.0</code>, React <code>^18.2.0</code>, Prisma/<code>@prisma/client</code> <code>^5.10.2</code>, <code>@tanstack/react-query</code> <code>^5.22.2</code>, <code>react-hook-form</code> <code>^7.51.0</code>, <code>zod</code> <code>^3.22.4</code>, TypeScript <code>^5.3.3</code>, Tailwind <code>^3.4.1</code>. Скрипт <code>postinstall: prisma generate</code> гарантирует генерацию Prisma-клиента после установки.</p>
+<h3 id="44-конфигурация">4.4. Конфигурация</h3>
+<p>Полные листинги конфигурационных файлов (<code>package.json</code>, <code>tsconfig.json</code>, <code>next.config.js</code>, <code>tailwind.config.js</code>, <code>postcss.config.js</code>, <code>.gitignore</code>) приведены в разделе Конфигурационные файлы документа «Структура проекта». Краткое содержание:</p>
+<p><strong>tsconfig.json</strong> — <code>target: ES2017</code>, <code>strict: true</code>, <code>moduleResolution: bundler</code>, алиас путей <code>&quot;@/*&quot;: [&quot;./src/*&quot;]</code>.</p>
+<p><strong>next.config.js</strong> — <code>reactStrictMode: true</code>, <code>swcMinify: true</code>, оптимизация изображений (<code>formats: ['image/avif', 'image/webp']</code> — современные форматы для производительности), удаление <code>console</code> в production.</p>
+<p><strong>tailwind.config.js</strong> — кастомные палитры <code>primary</code> (синий, 50…900, основной <code>#0066ff</code>) и <code>secondary</code> (зелёный, основной <code>#22c55e</code>), шрифт <code>Inter</code>, центрированный контейнер с паддингом <code>1rem</code>.</p>
+<p><strong>postcss.config.js</strong> — плагины <code>tailwindcss</code> и <code>autoprefixer</code>.</p>
+<h3 id="45-переменные-окружения-envlocal">4.5. Переменные окружения (.env.local)</h3>
+<p>Полный листинг <code>.env.local</code> приведён в разделе Конфигурационные файлы → .env.local документа «Структура проекта». Состав переменных: <code>DATABASE_URL</code> (PostgreSQL), <code>NEXT_PUBLIC_APP_URL</code>, <code>NODE_ENV</code>, <code>JWT_SECRET</code>, <code>TELEGRAM_BOT_TOKEN</code> (опционально).</p>
+<h3 id="46-ключевые-файлы">4.6. Ключевые файлы</h3>
+<ul>
+<li><strong><code>src/pages/_app.tsx</code></strong> — оборачивает приложение в <code>QueryClientProvider</code> (react-query) и общий <code>Layout</code>.</li>
+<li><strong><code>src/pages/_document.tsx</code></strong> — <code>&lt;Html lang=&quot;ru&quot;&gt;</code>, preconnect к Google Fonts, подключение шрифта <code>Inter</code>.</li>
+<li><strong><code>src/components/layout/Layout.tsx</code></strong> — <code>min-h-screen flex flex-col</code> с <code>Header</code>, <code>main</code> и <code>Footer</code>.</li>
+<li><strong><code>src/components/layout/Header.tsx</code></strong> — sticky-шапка с десктопной навигацией (Главная, Каталог, Калькулятор, Контакты) и мобильным бургер-меню (<code>md:hidden</code>).</li>
+<li><strong><code>src/components/layout/Footer.tsx</code></strong> — копирайт с автоматическим годом.</li>
+<li><strong><code>src/lib/prisma.ts</code></strong> — singleton <code>PrismaClient</code> через <code>globalThis</code> (защита от множественных подключений в dev).</li>
+<li><strong><code>prisma/schema.prisma</code></strong> — provider <code>postgresql</code>, базовые модели <code>User</code> (role по умолчанию <code>client</code>) и <code>Format</code> (name/width/height).</li>
+<li><strong><code>src/pages/api/health.ts</code></strong> — health-check эндпоинт, возвращает <code>{ status: 'ok', timestamp, environment }</code>.</li>
+</ul>
+<h3 id="47-запуск-проекта">4.7. Запуск проекта</h3>
+<pre><code class="language-bash">npm install
+npx prisma db push
+npx prisma generate
+npm run dev
+# http://localhost:3000
+</code></pre>
+<hr>
+<h2 id="5-seo-фундамент">5. SEO-фундамент</h2>
+<h3 id="51-чек-лист-seo-требований">5.1. Чек-лист SEO-требований</h3>
+<p><strong>Технический SEO:</strong></p>
+<ul>
+<li>Динамическое формирование мета-тегов (title, description, keywords) для каждой страницы.</li>
+<li>ЧПУ-URL (человекопонятные ссылки) на русском/английском.</li>
+<li>Автоматическая генерация <code>sitemap.xml</code> (приоритеты, частота обновления).</li>
+<li><code>robots.txt</code> (правила индексации, запреты).</li>
+<li>Canonical-ссылки (предотвращение дублей).</li>
+<li><code>hreflang</code> (мультиязычность).</li>
+<li>Open Graph (<code>og:title</code>, <code>og:description</code>, <code>og:image</code>) и Twitter Cards.</li>
+<li>Структурированные данные Schema.org: <code>Product</code> (услуги), <code>LocalBusiness</code> (компания), <code>BreadcrumbList</code> (хлебные крошки), <code>Review</code> (отзывы), <code>FAQ</code> (вопросы-ответы).</li>
+</ul>
+<p><strong>Производительность:</strong></p>
+<ul>
+<li>Core Web Vitals: LCP &lt; 2.5 c, FID &lt; 100 мс, CLS &lt; 0.1.</li>
+<li>Ленивая загрузка изображений (<code>loading=&quot;lazy&quot;</code>).</li>
+<li>Оптимизация изображений (WebP/AVIF, корректные размеры).</li>
+<li>Минификация CSS/JS, кэширование (браузерное, серверное), CDN для статики.</li>
+</ul>
+<p><strong>Мобильная адаптация:</strong></p>
+<ul>
+<li>Responsive design (mobile-first).</li>
+<li>Мобильное бургер-меню.</li>
+<li>Touch-friendly элементы (кнопки не менее 44 px).</li>
+<li>Адаптивные калькуляторы.</li>
+</ul>
+<p><strong>Контент:</strong></p>
+<ul>
+<li>Уникальные H1 для каждой страницы; правильная иерархия заголовков (H1 → H2 → H3).</li>
+<li>Alt-теги для изображений.</li>
+<li>Внутренняя перелинковка (связанные товары, статьи).</li>
+<li>Хлебные крошки (Breadcrumbs).</li>
+</ul>
+<p><strong>Индексация:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Раздел</th>
+<th>robots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Страницы каталога</td>
+<td>index, follow</td>
+</tr>
+<tr>
+<td>Корзина</td>
+<td>noindex, nofollow</td>
+</tr>
+<tr>
+<td>Личный кабинет</td>
+<td>noindex, nofollow</td>
+</tr>
+<tr>
+<td>Админка</td>
+<td>noindex, nofollow + авторизация</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Аналитика:</strong> Яндекс.Метрика (цели, события), Google Analytics 4, верификация в Яндекс.Вебмастер и Google Search Console.</p>
+<h3 id="52-структура-seo-модуля">5.2. Структура SEO-модуля</h3>
+<pre><code>src/
+├── components/
+│   └── seo/
+│       ├── MetaTags.tsx          # Основной компонент мета-тегов
+│       ├── SchemaMarkup.tsx      # Структурированные данные
+│       ├── Breadcrumbs.tsx       # Хлебные крошки
+│       └── index.ts              # Экспорт
+├── lib/
+│   └── seo/
+│       ├── constants.ts          # SEO-константы (дефолты)
+│       └── helpers.ts            # Вспомогательные функции
+└── types/
+    └── seo.ts                    # TypeScript-типы
+</code></pre>
+<h3 id="53-типы-seo-srctypesseots">5.3. Типы SEO (src/types/seo.ts)</h3>
+<pre><code class="language-typescript">export interface SeoProps {
+  title: string;
+  description: string;
+  keywords?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+  nofollow?: boolean;
+  alternates?: { ru?: string; en?: string };
+  breadcrumbs?: BreadcrumbItem[];
+  product?: ProductSchema;
+  organization?: OrganizationSchema;
+}
+
+export interface BreadcrumbItem { name: string; url: string; }
+
+export interface ProductSchema {
+  name: string;
+  description: string;
+  image?: string;
+  price?: number;
+  priceCurrency?: string;
+  availability?: 'InStock' | 'OutOfStock' | 'PreOrder';
+  brand?: string;
+  sku?: string;
+}
+
+export interface OrganizationSchema {
+  name: string;
+  url: string;
+  logo?: string;
+  sameAs?: string[];
+  email?: string;
+  phone?: string;
+  address?: {
+    streetAddress: string;
+    addressLocality: string;
+    addressRegion: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+}
+</code></pre>
+<h3 id="54-константы-и-данные-организации-srclibseoconstantsts">5.4. Константы и данные организации (src/lib/seo/constants.ts)</h3>
+<table>
+<thead>
+<tr>
+<th>Поле</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Title по умолчанию</td>
+<td>Типография PrintOffice.Moscow</td>
+</tr>
+<tr>
+<td>siteName</td>
+<td>PrintOffice</td>
+</tr>
+<tr>
+<td>twitterHandle</td>
+<td>@printofficemoscow</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>ru_RU</td>
+</tr>
+<tr>
+<td>ogImage</td>
+<td>/images/og-image.jpg</td>
+</tr>
+<tr>
+<td>siteUrl</td>
+<td><code>process.env.NEXT_PUBLIC_APP_URL</code> или <code>https://printoffice.ru</code></td>
+</tr>
+<tr>
+<td>Email организации</td>
+<td>zakaz@printoffice.moscow</td>
+</tr>
+<tr>
+<td>Телефон</td>
+<td>+7 (977) 366-44-01</td>
+</tr>
+<tr>
+<td>Адрес</td>
+<td>ул. Орджоникидзе 11 стр 41, Москва, 115419, RU</td>
+</tr>
+<tr>
+<td>sameAs</td>
+<td><code>https://t.me/printofficemoscow</code>, <code>https://vk.com/printoffice.moscow</code></td>
+</tr>
+</tbody>
+</table>
+<p>Описание (description) по умолчанию: «Цифровая и офсетная, оперативная печать, широкоформатная. Расчёт стоимости онлайн. Быстрое изготовление и доставка по Москве.»
+Keywords по умолчанию: печать, типография, листовки, визитки, брошюры, широкоформатная печать, офсетная печать, цифровая печать.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: домен сайта указан неоднозначно — в SEO_DEFAULTS используется <code>https://printoffice.ru</code>, в helpers фолбэк <code>https://printoffice.moscow</code>, контактный email/Telegram/VK — на домене <code>printoffice.moscow</code>. Нужно зафиксировать основной домен и привести все ссылки/мета к нему.</p>
+<h3 id="55-вспомогательные-функции-srclibseohelpersts">5.5. Вспомогательные функции (src/lib/seo/helpers.ts)</h3>
+<ul>
+<li><code>formatPageTitle(title, includeSiteName=true)</code> — добавляет суффикс <code>| Типография PrintOffice</code>.</li>
+<li><code>truncateDescription(description, maxLength=160)</code> — обрезает описание до 160 символов с многоточием.</li>
+<li><code>getFullImageUrl(path)</code> — собирает абсолютный URL изображения (внешние URL не трогает).</li>
+<li><code>getCurrentUrl(asPath)</code> — текущий URL без query-параметров.</li>
+</ul>
+<h3 id="56-компонент-metatags-srccomponentsseometatagstsx">5.6. Компонент MetaTags (src/components/seo/MetaTags.tsx)</h3>
+<p>Формирует полный набор мета-тегов: базовые (title, description, keywords, robots), canonical, hreflang (ru/en/x-default), Open Graph (<code>og:title/description/url/type/image/site_name/locale</code>), Twitter Cards (<code>summary_large_image</code>), технические (viewport, content-type, <code>format-detection: telephone=no</code>), favicon/apple-touch-icon/manifest, DNS-prefetch к шрифтам, а также вставляет <code>SchemaMarkup</code>.</p>
+<p>Логика robots:</p>
+<pre><code class="language-javascript">const robots = [];
+if (noindex) robots.push('noindex');
+if (nofollow) robots.push('nofollow');
+const robotsContent = robots.length &gt; 0 ? robots.join(', ') : 'index, follow';
+</code></pre>
+<h3 id="57-компонент-schemamarkup-schemaorg">5.7. Компонент SchemaMarkup (Schema.org)</h3>
+<p>Генерирует массив JSON-LD блоков и рендерит их через <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code>:</p>
+<ol>
+<li><strong>Organization</strong> — name, url, logo, email, telephone, sameAs, PostalAddress. При отсутствии данных подставляются дефолты из <code>SEO_DEFAULTS</code>.</li>
+<li><strong>BreadcrumbList</strong> — <code>itemListElement</code> из переданных хлебных крошек (position = index + 1).</li>
+<li><strong>Product</strong> — name, description, image, brand, sku и <code>Offer</code> (<code>price</code>, <code>priceCurrency</code> по умолчанию <code>RUB</code>, <code>availability</code> <code>https://schema.org/{InStock|OutOfStock|PreOrder}</code>).</li>
+</ol>
+<h3 id="58-хлебные-крошки-breadcrumbstsx">5.8. Хлебные крошки (Breadcrumbs.tsx)</h3>
+<p>Компонент строит крошки либо из переданного массива <code>items</code>, либо автоматически из сегментов <code>router.asPath</code> (капитализация и замена дефисов на пробелы). Последний элемент — текущая страница (без ссылки), остальные — кликабельны.</p>
+<h3 id="59-примеры-использования-metatags">5.9. Примеры использования MetaTags</h3>
+<table>
+<thead>
+<tr>
+<th>Страница</th>
+<th>ogType</th>
+<th>Особенности</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Главная (<code>/</code>)</td>
+<td>website</td>
+<td>базовые мета без product</td>
+</tr>
+<tr>
+<td>Листовки A5 (<code>/catalog/flyers/a5</code>)</td>
+<td>product</td>
+<td>breadcrumbs + ProductSchema (price 2500 ₽, sku FLYER-A5-100, бумага 130–300 г/м²)</td>
+</tr>
+<tr>
+<td>Статья блога (<code>/blog/how-to-choose-paper</code>)</td>
+<td>article</td>
+<td>breadcrumbs без product</td>
+</tr>
+</tbody>
+</table>
+<h3 id="510-инструменты-проверки-seo">5.10. Инструменты проверки SEO</h3>
+<ul>
+<li>Мета-теги — инструменты разработчика (Elements → head).</li>
+<li>Open Graph — <code>https://developers.facebook.com/tools/debug/</code>.</li>
+<li>Twitter Cards — <code>https://cards-dev.twitter.com/validator</code>.</li>
+<li>Schema.org — <code>https://search.google.com/test/rich-results</code>.</li>
+<li>Яндекс.Вебмастер — <code>https://webmaster.yandex.ru/</code>.</li>
+</ul>
+<hr>
+<h2 id="6-универсальная-система-витрины-и-кросс-продаж">6. Универсальная система витрины и кросс-продаж</h2>
+<p>Витрина — единый механизм для любых типов товаров, настраиваемый из админки без программиста.</p>
+<h3 id="61-три-типа-взаимодействия-с-товарами">6.1. Три типа взаимодействия с товарами</h3>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Назначение</th>
+<th>Примеры</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Тип 1: Варианты одного товара</strong> (переключение)</td>
+<td>Выбор разновидности внутри страницы</td>
+<td>Брошюры: скоба / пружина / КБС; Буклеты: евро / гармошка / улитка; Наклейки: простые / стикерпак / фигурные; Визитки: одно-/двусторонние / с ламинацией</td>
+</tr>
+<tr>
+<td><strong>Тип 2: Сопутствующие товары</strong> (кросс-селлинг)</td>
+<td>Дополняющие товары</td>
+<td>Визитки → блокноты, ручки, конверты; Листовки → брошюры, плакаты; Наклейки → магниты, брелоки</td>
+</tr>
+<tr>
+<td><strong>Тип 3: Популярные / рекомендуемые</strong> (апселлинг)</td>
+<td>Повышение чека</td>
+<td>«Чаще всего заказывают вместе», персональные рекомендации по истории клиента, акционные товары</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-структура-базы-данных">6.2. Структура базы данных</h3>
+<blockquote>
+<p>Примечание: схемы приведены в исходном синтаксисе (MySQL). См. открытый вопрос о приведении к PostgreSQL/Prisma в разделе 3.</p>
+</blockquote>
+<pre><code class="language-sql">-- Семейства товаров (группы вариантов)
+CREATE TABLE product_families (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    description TEXT,
+    display_type ENUM('tabs', 'icons', 'cards', 'buttons') DEFAULT 'icons',
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Варианты товаров в семействе
+CREATE TABLE product_variants (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    family_id INT NOT NULL,
+    constructor_id INT NOT NULL,        -- ссылка на конструктор услуг
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    description TEXT,
+    icon VARCHAR(255),                  -- путь к иконке
+    preview_image VARCHAR(255),         -- превью-изображение
+    badge VARCHAR(100),                 -- бейдж (&quot;Популярный&quot;, &quot;Эконом&quot;)
+    is_default BOOLEAN DEFAULT false,   -- выбран по умолчанию
+    is_recommended BOOLEAN DEFAULT false,
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (family_id) REFERENCES product_families(id),
+    FOREIGN KEY (constructor_id) REFERENCES service_constructors(id),
+    INDEX idx_family (family_id)
+);
+
+-- Связи между товарами (кросс-селлинг / ап-селл / бандл)
+CREATE TABLE product_relations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    source_constructor_id INT NOT NULL,         -- исходный товар
+    target_constructor_id INT NOT NULL,         -- рекомендуемый товар
+    relation_type ENUM('cross_sell', 'up_sell', 'bundle') DEFAULT 'cross_sell',
+    title VARCHAR(255),                         -- &quot;Часто заказывают вместе&quot;
+    description TEXT,
+    discount_percent DECIMAL(5,2),              -- скидка при покупке вместе
+    weight INT DEFAULT 100,                     -- вес рекомендации (выше = выше в списке)
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (source_constructor_id) REFERENCES service_constructors(id),
+    FOREIGN KEY (target_constructor_id) REFERENCES service_constructors(id),
+    UNIQUE KEY unique_relation (source_constructor_id, target_constructor_id)
+);
+
+-- Статистика кросс-продаж (для автоматических рекомендаций)
+CREATE TABLE cross_sell_stats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    source_constructor_id INT NOT NULL,
+    target_constructor_id INT NOT NULL,
+    view_count INT DEFAULT 0,                   -- показы
+    click_count INT DEFAULT 0,                  -- клики
+    conversion_count INT DEFAULT 0,             -- добавления в корзину
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (source_constructor_id) REFERENCES service_constructors(id),
+    FOREIGN KEY (target_constructor_id) REFERENCES service_constructors(id),
+    UNIQUE KEY unique_stat (source_constructor_id, target_constructor_id)
+);
+
+-- Блоки (виджеты) на странице
+CREATE TABLE page_widgets (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    page_id INT NOT NULL,
+    widget_type ENUM('product_variants', 'cross_sell', 'upsell', 'popular') NOT NULL,
+    title VARCHAR(255),
+    settings JSON,                              -- настройки отображения
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (page_id) REFERENCES pages(id)
+);
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в исходнике DDL виджетов записан как <code>CREATE INTO page_widgets (...)</code> — синтаксическая ошибка; должно быть <code>CREATE TABLE page_widgets (...)</code> (исправлено в этом документе).</p>
+<h3 id="63-примеры-данных">6.3. Примеры данных</h3>
+<pre><code class="language-sql">-- Семейство &quot;Брошюры&quot; + варианты
+INSERT INTO product_families (id, name, slug, display_type) VALUES
+(1, 'Брошюры', 'brochures', 'icons');
+
+INSERT INTO product_variants (family_id, constructor_id, name, slug, icon, is_default, sort_order) VALUES
+(1, 101, 'На скобе',   'staple', '/icons/staple.svg', true,  10),
+(1, 102, 'На пружине', 'spring', '/icons/spring.svg', false, 20),
+(1, 103, 'КБС (клей)', 'kbs',    '/icons/kbs.svg',    false, 30);
+
+-- Семейство &quot;Буклеты&quot; + варианты
+INSERT INTO product_families (id, name, slug, display_type) VALUES
+(2, 'Буклеты', 'booklets', 'cards');
+
+INSERT INTO product_variants (family_id, constructor_id, name, slug, preview_image, is_default, sort_order) VALUES
+(2, 201, 'Евробуклет',        'euro-booklet', '/images/euro-booklet.jpg', true,  10),
+(2, 202, 'Гармошка 2 сгиба',  'accordion-2',  '/images/accordion-2.jpg',  false, 20),
+(2, 203, 'Гармошка 3 сгиба',  'accordion-3',  '/images/accordion-3.jpg',  false, 30),
+(2, 204, 'Улитка',            'snail',        '/images/snail.jpg',        false, 40);
+
+-- Кросс-продажи для визиток (source 301)
+INSERT INTO product_relations (source_constructor_id, target_constructor_id, relation_type, title, discount_percent, weight) VALUES
+(301, 401, 'cross_sell', 'Часто заказывают вместе', 10, 100),  -- визитки + блокноты
+(301, 402, 'cross_sell', 'Часто заказывают вместе', 15, 80),   -- визитки + ручки
+(301, 403, 'cross_sell', 'Часто заказывают вместе',  5, 70);   -- визитки + конверты
+
+-- Кросс/ап-продажи для листовок (source 101)
+INSERT INTO product_relations (source_constructor_id, target_constructor_id, relation_type, title, discount_percent, weight) VALUES
+(101, 201, 'up_sell',    'Перейти к брошюре',  0, 100),        -- листовки → брошюры
+(101, 501, 'cross_sell', 'Добавить плакаты',  10,  80);        -- листовки + плакаты
+</code></pre>
+<h3 id="64-отображение-вариантов-на-фронтенде">6.4. Отображение вариантов на фронтенде</h3>
+<p>Способы отображения вариантов (задаются в <code>display_type</code> / настройках):</p>
+<ul>
+<li><strong>Иконки</strong> — компактная сетка иконок с подписями (пример: брошюры). Поддерживает бейдж «Популярный».</li>
+<li><strong>Карточки</strong> — крупные карточки с превью-макетом (пример: буклеты — евробуклет (1 сгиб), гармошка (2 сгиба), улитка (3 сгиба)).</li>
+<li><strong>Кнопки</strong> — горизонтальный ряд кнопок (пример: наклейки — Простые / Стикерпак / Фигурные / Контурные).</li>
+<li><strong>Вкладки (tabs)</strong> — табы с иконкой, названием и бейджем.</li>
+</ul>
+<h3 id="65-блоки-кросс-продаж-на-фронтенде">6.5. Блоки кросс-продаж на фронтенде</h3>
+<ul>
+<li><strong>«Часто заказывают вместе»</strong> (на странице товара) — карточки рекомендуемых товаров с ценой «от …», кнопкой «Добавить» и плашкой скидки при совместной покупке (например, «При покупке вместе скидка 10%»). Пример на странице визиток (односторонние, 500 шт — 1 500 руб): Блокноты A5 — от 250 руб (скидка 10%), Ручки — от 150 руб, Конверты C6 — от 100 руб.</li>
+<li><strong>«Вместе дешевле» (бандл)</strong> — готовый комплект с суммарной ценой и экономией. Пример: Визитки (500 шт) + Блокноты A5 (10 шт) = 2 500 руб (экономия 250 руб), кнопка «Добавить комплект в корзину».</li>
+<li><strong>«Вам может понравиться» / «С этим также заказывают»</strong> (в корзине) — карточки сопутствующих товаров: Брошюры A5 — от 3 000 руб, Плакаты A3 — от 1 500 руб, Наклейки — от 800 руб.</li>
+</ul>
+<p>Сценарий кросс-продаж со страницы «Листовки» (<code>/catalog/flyers</code>): клиент выбрал формат A5, тираж 1000 шт, цена 2 500 руб. В блоке «Часто заказывают вместе» рекомендуются Визитки (от 1 500 ₽, скидка 10%), Блокноты A5 (от 250 ₽, скидка 15%), Ручки (от 150 ₽). Связи настраиваются один раз в разделе «Кросс-продажи» админки и работают на всех страницах, где есть калькулятор листовок.</p>
+<p>Пример состояния корзины <strong>без скидки</strong> за комплект (промежуточная сумма):</p>
+<pre><code>ВАШ ЗАКАЗ:
+• Листовки A5, 1000 шт — 2 500 руб
+• Визитки, 500 шт — 1 500 руб
+──────────────────────────────
+ИТОГО: 4 000 руб
+</code></pre>
+<p>Пример отображения <strong>скидки за комплект</strong> в корзине (комплект «Листовки + Визитки», скидка -400 руб):</p>
+<pre><code>ВАШ ЗАКАЗ:
+• Листовки A5, 1000 шт — 2 500 руб
+• Визитки, 500 шт — 1 500 руб
+──────────────────────────────
+Скидка за комплект: -400 руб
+──────────────────────────────
+ИТОГО: 3 600 руб
+</code></pre>
+<h3 id="66-api-витрины-и-кросс-продаж">6.6. API витрины и кросс-продаж</h3>
+<pre><code class="language-javascript">// Варианты товара по семейству
+router.get('/api/product/family/:familySlug', async (req, res) =&gt; {
+    const { familySlug } = req.params;
+    const family = await db.query(
+        `SELECT * FROM product_families WHERE slug = $1 AND is_active = true`, [familySlug]);
+    const variants = await db.query(`
+        SELECT pv.*, sc.name as constructor_name
+        FROM product_variants pv
+        JOIN service_constructors sc ON sc.id = pv.constructor_id
+        WHERE pv.family_id = $1 AND pv.is_active = true
+        ORDER BY pv.sort_order`, [family.rows[0].id]);
+    res.json({ family: family.rows[0], variants: variants.rows });
+});
+
+// Кросс-продажи по конструктору
+router.get('/api/product/cross-sell/:constructorId', async (req, res) =&gt; {
+    const { constructorId } = req.params;
+    const relations = await db.query(`
+        SELECT pr.*, sc.name, sc.slug, sc.default_price as price, sc.preview_image
+        FROM product_relations pr
+        JOIN service_constructors sc ON sc.id = pr.target_constructor_id
+        WHERE pr.source_constructor_id = $1 AND pr.is_active = true AND sc.is_active = true
+        ORDER BY pr.weight DESC
+        LIMIT 6`, [constructorId]);
+    res.json(relations.rows);
+});
+
+// Расчёт цены комплекта (бандла)
+router.post('/api/bundle/price', async (req, res) =&gt; {
+    const { items } = req.body; // [{constructorId, quantity, params}]
+    let total = 0;
+    const breakdown = [];
+    for (const item of items) {
+        const calculator = new UniversalCalculator();
+        const result = await calculator.calculate(item.constructorId, item.params);
+        total += result.total;
+        breakdown.push({ constructorId: item.constructorId, price: result.total, quantity: item.quantity });
+    }
+    const bundleDiscount = await getBundleDiscount(items);
+    const finalTotal = total * (1 - bundleDiscount / 100);
+    res.json({ total: finalTotal, originalTotal: total, discount: bundleDiscount, breakdown });
+});
+</code></pre>
+<p>Формула итоговой цены комплекта:</p>
+<pre><code>finalTotal = total * (1 - bundleDiscount / 100)
+</code></pre>
+<h3 id="67-эндпоинт-рекомендаций-с-добором-популярных">6.7. Эндпоинт рекомендаций с добором популярных</h3>
+<p>API <code>/api/product/recommendations/:constructorId</code> возвращает ручные связи <code>cross_sell</code> (сортировка по <code>weight DESC</code>, лимит 6). Если найдено менее 4 связей, недостающие позиции добираются популярными товарами:</p>
+<pre><code class="language-javascript">if (relations.rows.length &lt; 4) {
+    const popular = await getPopularProducts(constructorId, 6 - relations.rows.length);
+    relations.rows.push(...popular);
+}
+</code></pre>
+<h3 id="68-ключевые-возможности-витрины">6.8. Ключевые возможности витрины</h3>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Семейства товаров</td>
+<td>Группировка похожих товаров (брошюры, буклеты, наклейки)</td>
+</tr>
+<tr>
+<td>Варианты отображения</td>
+<td>Иконки, карточки, кнопки, табы — на выбор в админке</td>
+</tr>
+<tr>
+<td>Кросс-продажи</td>
+<td>Ручная настройка связей между товарами</td>
+</tr>
+<tr>
+<td>Автоматические рекомендации</td>
+<td>На основе статистики продаж</td>
+</tr>
+<tr>
+<td>Комплекты со скидкой</td>
+<td>Покупка нескольких товаров вместе</td>
+</tr>
+<tr>
+<td>Гибкая настройка</td>
+<td>Всё в админке без программиста</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="7-многоуровневая-система-отображения-вариантов">7. Многоуровневая система отображения вариантов</h2>
+<p>Настройки отображения наследуются и переопределяются по уровням приоритета (низший → высший):</p>
+<pre><code>УРОВЕНЬ 1: ГЛОБАЛЬНЫЕ НАСТРОЙКИ (весь сайт)
+        ↓
+УРОВЕНЬ 2: НАСТРОЙКИ КАТЕГОРИИ (раздел &quot;Брошюры&quot;, &quot;Наклейки&quot;)
+        ↓
+УРОВЕНЬ 3: НАСТРОЙКИ СТРАНИЦЫ (конкретный URL)
+        ↓
+УРОВЕНЬ 4: ИСКЛЮЧЕНИЯ (скрыть конкретный вариант)
+</code></pre>
+<p>Логика разрешения: настройки страницы переопределяют настройки категории, а те — глобальные. Значения <code>0</code> / <code>NULL</code> / <code>'default'</code> означают «наследовать с верхнего уровня».</p>
+<h3 id="71-структура-бд-уровни-настроек">7.1. Структура БД (уровни настроек)</h3>
+<pre><code class="language-sql">-- 1. Глобальные настройки отображения
+CREATE TABLE display_settings_global (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    setting_key VARCHAR(100) UNIQUE NOT NULL,
+    setting_value JSON NOT NULL,
+    description TEXT,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+INSERT INTO display_settings_global (setting_key, setting_value, description) VALUES
+('default_variant_display', '{&quot;type&quot;: &quot;icons&quot;, &quot;columns&quot;: 4, &quot;show_badges&quot;: true}', 'Отображение вариантов по умолчанию'),
+('cross_sell_display',      '{&quot;type&quot;: &quot;cards&quot;, &quot;columns&quot;: 3, &quot;show_discount&quot;: true}', 'Отображение кросс-продаж по умолчанию'),
+('max_recommendations',     '{&quot;value&quot;: 6}', 'Максимум рекомендаций на странице');
+
+-- 2. Настройки категории
+CREATE TABLE category_display_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT NOT NULL,
+    variant_display_type ENUM('icons','cards','tabs','buttons','grid','list') DEFAULT 'icons',
+    variant_columns INT DEFAULT 4,
+    show_badges BOOLEAN DEFAULT true,
+    show_prices BOOLEAN DEFAULT true,
+    cross_sell_enabled BOOLEAN DEFAULT true,
+    cross_sell_display_type ENUM('cards','list') DEFAULT 'cards',
+    cross_sell_columns INT DEFAULT 3,
+    sort_by ENUM('sort_order','price_asc','price_desc','popularity') DEFAULT 'sort_order',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id),
+    UNIQUE KEY unique_category (category_id)
+);
+
+-- 3. Настройки страницы (переопределяют категорию)
+CREATE TABLE page_display_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    page_id INT NOT NULL,
+    variant_display_type ENUM('icons','cards','tabs','buttons','grid','list','default') DEFAULT 'default',
+    variant_columns INT DEFAULT 0,        -- 0 = из категории
+    show_badges BOOLEAN DEFAULT NULL,     -- NULL = из категории
+    show_prices BOOLEAN DEFAULT NULL,
+    cross_sell_enabled BOOLEAN DEFAULT NULL,
+    cross_sell_display_type ENUM('cards','list','default') DEFAULT 'default',
+    cross_sell_columns INT DEFAULT 0,
+    hidden_variants JSON,                 -- ID вариантов, которые скрыть
+    visible_variants JSON,                -- если не пусто — показывать только их
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (page_id) REFERENCES pages(id),
+    UNIQUE KEY unique_page (page_id)
+);
+
+-- 4. Индивидуальные настройки варианта
+CREATE TABLE variant_settings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    variant_id INT NOT NULL,
+    allow_hide BOOLEAN DEFAULT true,
+    custom_icon VARCHAR(255),
+    custom_preview VARCHAR(255),
+    custom_badge VARCHAR(100),
+    is_visible BOOLEAN DEFAULT true,      -- глобальная видимость варианта
+    recommendation_weight INT DEFAULT 100,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (variant_id) REFERENCES product_variants(id)
+);
+
+-- 5. Статистика по вариантам (для автоматической сортировки)
+CREATE TABLE variant_stats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    variant_id INT NOT NULL,
+    view_count INT DEFAULT 0,
+    click_count INT DEFAULT 0,
+    order_count INT DEFAULT 0,
+    revenue DECIMAL(10,2) DEFAULT 0,
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (variant_id) REFERENCES product_variants(id)
+);
+</code></pre>
+<h3 id="72-логика-разрешения-настроек-api">7.2. Логика разрешения настроек (API)</h3>
+<p>Класс <code>VariantDisplayManager</code> отвечает за выбор актуальных настроек и фильтрацию вариантов.</p>
+<p><strong><code>getDisplaySettings(pageId, categoryId)</code></strong> — приоритет: настройки страницы → настройки категории → глобальные дефолты.</p>
+<p><strong><code>getVariantsForPage(pageId, familyId)</code></strong> — алгоритм фильтрации:</p>
+<ol>
+<li>Выбрать все активные варианты семейства (с подмешиванием <code>variant_settings</code>: <code>custom_visible</code>, <code>custom_icon</code>, <code>custom_badge</code>).</li>
+<li>Применить настройки страницы:
+<ul>
+<li>если задан <code>visible_variants</code> (не пуст) — показывать <strong>только</strong> перечисленные;</li>
+<li>если задан <code>hidden_variants</code> — <strong>исключить</strong> перечисленные.</li>
+</ul>
+</li>
+<li>Отфильтровать по глобальной видимости (<code>custom_visible !== false</code>).</li>
+</ol>
+<pre><code class="language-javascript">let variants = allVariants.rows;
+if (pageSettings.rows.length &gt; 0) {
+    const { hidden_variants, visible_variants } = pageSettings.rows[0];
+    if (visible_variants &amp;&amp; visible_variants.length &gt; 0) {
+        variants = variants.filter(v =&gt; visible_variants.includes(v.id));
+    }
+    if (hidden_variants &amp;&amp; hidden_variants.length &gt; 0) {
+        variants = variants.filter(v =&gt; !hidden_variants.includes(v.id));
+    }
+}
+variants = variants.filter(v =&gt; v.custom_visible !== false);
+</code></pre>
+<p><strong><code>getCrossSellForPage(pageId, constructorId)</code></strong> — если на странице <code>cross_sell_enabled === false</code>, вернуть пустой массив; иначе выбрать ручные связи <code>cross_sell</code> (по <code>weight DESC</code>, лимит 6) и при недоборе (&lt;4) добавить популярные.</p>
+<p><strong><code>getPopularProducts(excludeConstructorId, limit)</code></strong> — выбор по статистике (<code>view_count</code>), исключая текущий конструктор и товары <code>type = 'complex'</code>.</p>
+<h3 id="73-компоненты-фронтенда">7.3. Компоненты фронтенда</h3>
+<p><strong><code>VariantSelector</code></strong> — универсальный селектор: загружает варианты (<code>/api/product/family/:familySlug</code>) и настройки отображения (<code>/api/display/settings?page=...</code>), затем рендерит по <code>variant_display_type</code>:</p>
+<ul>
+<li><code>icons</code> → сетка <code>VariantIcon</code> с CSS <code>gridTemplateColumns: repeat(${columns}, 1fr)</code>;</li>
+<li><code>cards</code> → сетка <code>VariantCard</code>;</li>
+<li><code>tabs</code> → кнопки-табы с иконкой/названием/бейджем.</li>
+</ul>
+<p><strong><code>VariantIcon</code></strong> — иконка варианта с подписью; при <code>showBadge</code> показывает бейдж, при <code>showPrice</code> — цену «от {default_price} ₽»; класс <code>active</code> для выбранного.</p>
+<h3 id="74-примеры-сценариев-настройки">7.4. Примеры сценариев настройки</h3>
+<p><strong>Сценарий 1 — Брошюры (иконки, все варианты):</strong> категория «Брошюры», тип <code>icons</code>, 4 колонки, бейджи и цены включены, показываются все варианты (На скобе «Популярный» от 1000, Пружина от 1200, КБС от 1500, А5 от 800).</p>
+<p><strong>Сценарий 2 — Буклеты (карточки, скрыть улитку):</strong> страница <code>/catalog/booklets/accordion</code>, тип <code>cards</code>, 3 колонки, режим «показывать только выбранные»: евробуклет (от 500 ₽), гармошка 2 сгиба (от 700 ₽), гармошка 3 сгиба (от 900 ₽); улитка скрыта.</p>
+<p><strong>Сценарий 3 — Наклейки (кнопки, скрыть ручную резку):</strong> страница <code>/catalog/stickers/shaped</code>, тип <code>buttons</code>, режим «скрыть выбранные»: скрыта «ручная резка без насечек»; видимы Простые / Стикерпак / Фигурные / Контурные.</p>
+<h3 id="75-массовые-операции-sql">7.5. Массовые операции (SQL)</h3>
+<pre><code class="language-sql">-- Скрыть все варианты определённого семейства
+UPDATE product_variants SET is_active = false WHERE family_id IN (
+    SELECT id FROM product_families WHERE name = 'Брошюры'
+);
+
+-- Применить настройки отображения ко всем страницам категории
+UPDATE page_display_settings SET variant_display_type = 'cards', variant_columns = 4
+WHERE page_id IN (SELECT id FROM pages WHERE category_id = 1);
+
+-- Удалить все исключения для конкретной страницы
+UPDATE page_display_settings SET hidden_variants = '[]', visible_variants = '[]'
+WHERE page_id = 101;
+</code></pre>
+<hr>
+<h2 id="8-админка-настройка-витрины">8. Админка: настройка витрины</h2>
+<h3 id="81-меню-админки-cms">8.1. Меню админки (CMS)</h3>
+<table>
+<thead>
+<tr>
+<th>Раздел</th>
+<th>Содержание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Дашборд</td>
+<td>Статистика (заказы, прибыль, клиенты), уведомления, последние заказы</td>
+</tr>
+<tr>
+<td>Калькуляторы</td>
+<td>Цифровая печать, офсет (матрица цен, маржа), широкоформат (материалы, цены), брошюры (конструктор, блоки), наклейки (типы резки, материалы)</td>
+</tr>
+<tr>
+<td>Заказы</td>
+<td>Все / новые / в работе / завершённые / отменённые (списки, фильтры)</td>
+</tr>
+<tr>
+<td>Клиенты</td>
+<td>Список, B2C/B2B, сегменты (постоянные, новые, VIP)</td>
+</tr>
+<tr>
+<td>Производство</td>
+<td>Загрузка оборудования, ТЗ для участков, обратная связь, склад</td>
+</tr>
+<tr>
+<td>Настройки</td>
+<td>Конструкторы страниц, маржа и цены, формулы и правила, справочники (оборудование, материалы, форматы), пользователи (роли, права), SEO (мета-теги, sitemap)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="82-семейства-товаров">8.2. Семейства товаров</h3>
+<p>Раздел «Семейства товаров» отображает активные семейства с типом отображения (Иконки / Карточки / Кнопки / Вкладки) и числом вариантов. Действия: Редактировать, Клонировать, Отключить, Удалить.</p>
+<p><strong>Редактирование варианта</strong> содержит:</p>
+<ul>
+<li>Основные настройки: Название, Системный код (slug), Семейство, Конструктор (привязка к конструктору услуг), Описание.</li>
+<li>Визуальное представление: Иконка, Превью, Бейдж.</li>
+<li>Флаги: «Отображать по умолчанию», «Рекомендуемый», Порядок сортировки.</li>
+<li>Кнопки: Сохранить, Предпросмотр, Отмена.</li>
+</ul>
+<h3 id="83-настройка-кросс-продаж">8.3. Настройка кросс-продаж</h3>
+<p>Раздел «Кросс-продажи»: выбирается исходный товар, к нему добавляются целевые товары с параметрами: Тип (<code>cross_sell</code> / <code>up_sell</code> / <code>bundle</code>), Заголовок, Скидка %, Вес. Блок «Автоматические рекомендации» позволяет включить: рекомендации на основе статистики, популярные товары, акционные товары; и задать максимум рекомендаций (по умолчанию 4).</p>
+<p>Пример настройки для визиток (ID 301):</p>
+<table>
+<thead>
+<tr>
+<th>Целевой товар</th>
+<th>Тип</th>
+<th>Скидка</th>
+<th>Вес</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Блокноты A5 (401)</td>
+<td>cross_sell</td>
+<td>10%</td>
+<td>100</td>
+</tr>
+<tr>
+<td>Ручки (402)</td>
+<td>cross_sell</td>
+<td>15%</td>
+<td>80</td>
+</tr>
+<tr>
+<td>Конверты C6 (403)</td>
+<td>cross_sell</td>
+<td>5%</td>
+<td>70</td>
+</tr>
+</tbody>
+</table>
+<h3 id="84-настройки-отображения-по-уровням-ui">8.4. Настройки отображения по уровням (UI)</h3>
+<ul>
+<li><strong>Глобальные настройки</strong> — тип отображения вариантов (иконки/карточки/вкладки/кнопки/сетка), число колонок, показ бейджей/цен; для кросс-продаж — тип (карточки/список), колонки, показ скидки, максимум рекомендаций.</li>
+<li><strong>Настройки категории</strong> — чекбокс «Использовать глобальные настройки» либо переопределение тех же параметров + сортировка вариантов (по порядку / цена ↑ / цена ↓ / популярность).</li>
+<li><strong>Настройки страницы</strong> — переопределение отображения; блок «Видимые варианты» с режимами: «Показывать все активные» / «Показывать только выбранные» / «Скрыть выбранные»; блок «Исключения» (например, не показывать услугу «Ламинация» на странице брошюр на скобе, «Подложку» — только для пружины); блок «Кросс-продажи на этой странице» (выбор связанных товаров из <code>product_relations</code>).</li>
+<li><strong>Массовое управление вариантами</strong> — действия для выбранных строк: скрыть/показать на всех страницах, установить порядок сортировки, применить настройки отображения; с фильтром по категории.</li>
+</ul>
+<h3 id="85-инструкция-администратору-по-кросс-продажам">8.5. Инструкция администратору по кросс-продажам</h3>
+<ol>
+<li>Зайти в раздел «Кросс-продажи» админки.</li>
+<li>Нажать «+ Добавить связь».</li>
+<li>Выбрать исходную услугу (например, «Листовки»).</li>
+<li>Выбрать целевую услугу (например, «Визитки»).</li>
+<li>Указать скидку (например, 10%).</li>
+<li>Сохранить.</li>
+</ol>
+<p>После сохранения на странице исходной услуги автоматически появляется блок рекомендации.</p>
+<p>Где какие настройки доступны:</p>
+<table>
+<thead>
+<tr>
+<th>Где настраивается</th>
+<th>Что можно настроить</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Глобально</td>
+<td>Тип отображения (карточки/иконки), количество колонок</td>
+</tr>
+<tr>
+<td>Для категории</td>
+<td>Переопределить глобальные настройки для всех страниц категории</td>
+</tr>
+<tr>
+<td>Для конкретной страницы</td>
+<td>Скрыть конкретные рекомендации, изменить порядок</td>
+</tr>
+<tr>
+<td>Для конкретной связи</td>
+<td>Заголовок, скидка, тип связи, вес/позиция, активность</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="9-привязка-вариантов-товара-к-страницам">9. Привязка вариантов товара к страницам</h2>
+<p>Витрина связана с конструктором услуг: каждый <code>product_variant</code> ссылается на <code>constructor_id</code> (конструктор услуги). Это позволяет одной услуге («Визитки») выводиться как рекомендация на странице другой («Листовки») через таблицу <code>product_relations</code>, а одному семейству — отображаться на странице-обзоре в виде переключателя вариантов. Видимость вариантов на конкретном URL управляется через <code>page_display_settings</code> (<code>visible_variants</code> / <code>hidden_variants</code>) и индивидуальные <code>variant_settings</code>.</p>
+<hr>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-информационная-архитектура-и-подход">1. Информационная архитектура и подход</a></li><li class="lvl2"><a href="#2-url-схема-сайта">2. URL-схема сайта</a></li><li class="lvl2"><a href="#3-техническая-архитектура-движка">3. Техническая архитектура движка</a></li><li class="lvl3"><a href="#frontend-nextjs">Frontend (Next.js)</a></li><li class="lvl3"><a href="#api-layer-nextjs-api-routes">API Layer (Next.js API Routes)</a></li><li class="lvl3"><a href="#backend-nestjs-services">Backend (NestJS / Services)</a></li><li class="lvl3"><a href="#database-postgresql-prisma">Database (PostgreSQL + Prisma)</a></li><li class="lvl2"><a href="#4-настройка-проекта-nextjs-typescript-tailwind">4. Настройка проекта Next.js + TypeScript + Tailwind</a></li><li class="lvl3"><a href="#41-инициализация">4.1. Инициализация</a></li><li class="lvl3"><a href="#42-структура-проекта">4.2. Структура проекта</a></li><li class="lvl3"><a href="#43-ключевые-версии-зависимостей-packagejson">4.3. Ключевые версии зависимостей (package.json)</a></li><li class="lvl3"><a href="#44-конфигурация">4.4. Конфигурация</a></li><li class="lvl3"><a href="#45-переменные-окружения-envlocal">4.5. Переменные окружения (.env.local)</a></li><li class="lvl3"><a href="#46-ключевые-файлы">4.6. Ключевые файлы</a></li><li class="lvl3"><a href="#47-запуск-проекта">4.7. Запуск проекта</a></li><li class="lvl2"><a href="#5-seo-фундамент">5. SEO-фундамент</a></li><li class="lvl3"><a href="#51-чек-лист-seo-требований">5.1. Чек-лист SEO-требований</a></li><li class="lvl3"><a href="#52-структура-seo-модуля">5.2. Структура SEO-модуля</a></li><li class="lvl3"><a href="#53-типы-seo-srctypesseots">5.3. Типы SEO (src/types/seo.ts)</a></li><li class="lvl3"><a href="#54-константы-и-данные-организации-srclibseoconstantsts">5.4. Константы и данные организации (src/lib/seo/constants.ts)</a></li><li class="lvl3"><a href="#55-вспомогательные-функции-srclibseohelpersts">5.5. Вспомогательные функции (src/lib/seo/helpers.ts)</a></li><li class="lvl3"><a href="#56-компонент-metatags-srccomponentsseometatagstsx">5.6. Компонент MetaTags (src/components/seo/MetaTags.tsx)</a></li><li class="lvl3"><a href="#57-компонент-schemamarkup-schemaorg">5.7. Компонент SchemaMarkup (Schema.org)</a></li><li class="lvl3"><a href="#58-хлебные-крошки-breadcrumbstsx">5.8. Хлебные крошки (Breadcrumbs.tsx)</a></li><li class="lvl3"><a href="#59-примеры-использования-metatags">5.9. Примеры использования MetaTags</a></li><li class="lvl3"><a href="#510-инструменты-проверки-seo">5.10. Инструменты проверки SEO</a></li><li class="lvl2"><a href="#6-универсальная-система-витрины-и-кросс-продаж">6. Универсальная система витрины и кросс-продаж</a></li><li class="lvl3"><a href="#61-три-типа-взаимодействия-с-товарами">6.1. Три типа взаимодействия с товарами</a></li><li class="lvl3"><a href="#62-структура-базы-данных">6.2. Структура базы данных</a></li><li class="lvl3"><a href="#63-примеры-данных">6.3. Примеры данных</a></li><li class="lvl3"><a href="#64-отображение-вариантов-на-фронтенде">6.4. Отображение вариантов на фронтенде</a></li><li class="lvl3"><a href="#65-блоки-кросс-продаж-на-фронтенде">6.5. Блоки кросс-продаж на фронтенде</a></li><li class="lvl3"><a href="#66-api-витрины-и-кросс-продаж">6.6. API витрины и кросс-продаж</a></li><li class="lvl3"><a href="#67-эндпоинт-рекомендаций-с-добором-популярных">6.7. Эндпоинт рекомендаций с добором популярных</a></li><li class="lvl3"><a href="#68-ключевые-возможности-витрины">6.8. Ключевые возможности витрины</a></li><li class="lvl2"><a href="#7-многоуровневая-система-отображения-вариантов">7. Многоуровневая система отображения вариантов</a></li><li class="lvl3"><a href="#71-структура-бд-уровни-настроек">7.1. Структура БД (уровни настроек)</a></li><li class="lvl3"><a href="#72-логика-разрешения-настроек-api">7.2. Логика разрешения настроек (API)</a></li><li class="lvl3"><a href="#73-компоненты-фронтенда">7.3. Компоненты фронтенда</a></li><li class="lvl3"><a href="#74-примеры-сценариев-настройки">7.4. Примеры сценариев настройки</a></li><li class="lvl3"><a href="#75-массовые-операции-sql">7.5. Массовые операции (SQL)</a></li><li class="lvl2"><a href="#8-админка-настройка-витрины">8. Админка: настройка витрины</a></li><li class="lvl3"><a href="#81-меню-админки-cms">8.1. Меню админки (CMS)</a></li><li class="lvl3"><a href="#82-семейства-товаров">8.2. Семейства товаров</a></li><li class="lvl3"><a href="#83-настройка-кросс-продаж">8.3. Настройка кросс-продаж</a></li><li class="lvl3"><a href="#84-настройки-отображения-по-уровням-ui">8.4. Настройки отображения по уровням (UI)</a></li><li class="lvl3"><a href="#85-инструкция-администратору-по-кросс-продажам">8.5. Инструкция администратору по кросс-продажам</a></li><li class="lvl2"><a href="#9-привязка-вариантов-товара-к-страницам">9. Привязка вариантов товара к страницам</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

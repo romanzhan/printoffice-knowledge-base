@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Интеграции — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="08-integrations">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li class="active"><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="интеграции">Интеграции</h1>
+<p>Полный реестр внешних систем, с которыми интегрируется CRM/сайт типографии PrintOffice: мессенджеры, email, ЭДО, бухгалтерия, облачное хранилище, курьерские службы, платёжные сервисы, аналитика, система пропусков — с назначением, известными деталями API и открытыми вопросами.</p>
+<h2 id="сводный-реестр-интеграций">Сводный реестр интеграций</h2>
+<table>
+<thead>
+<tr>
+<th>Система</th>
+<th>Что интегрируем</th>
+<th>Как (API/протокол)</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Яндекс.Диск</td>
+<td>Папки заказов, синхронизация файлов</td>
+<td>API Яндекс.Диска</td>
+<td>Хранение макетов и файлов заказов</td>
+</tr>
+<tr>
+<td>Эльба (бухгалтерия)</td>
+<td>Экспорт заказов для счетов, УПД; синхронизация номеров счетов</td>
+<td>API Эльбы (или экспорт/импорт XML)</td>
+<td>Выставление счетов, закрывающие документы</td>
+</tr>
+<tr>
+<td>ЭДО Диадок</td>
+<td>Электронное подписание договоров и УПД</td>
+<td>API Диадок</td>
+<td>Юридически значимый документооборот с B2B</td>
+</tr>
+<tr>
+<td>Яндекс Доставка</td>
+<td>Создание заявок, получение трек-номера</td>
+<td>API Яндекс.Доставки</td>
+<td>Курьерская доставка</td>
+</tr>
+<tr>
+<td>Достависта</td>
+<td>Создание заявок, получение трек-номера</td>
+<td>API Достависты</td>
+<td>Курьерская доставка</td>
+</tr>
+<tr>
+<td>СДЭК</td>
+<td>Доставка</td>
+<td>API СДЭК</td>
+<td>Курьерская доставка (упомянута заказчиком)</td>
+</tr>
+<tr>
+<td>Макс (мессенджер)</td>
+<td>Отправка/получение сообщений, создание заказов через бота</td>
+<td>API Макс (если есть), иначе вебхуки</td>
+<td>Канал коммуникации с клиентами</td>
+</tr>
+<tr>
+<td>Telegram</td>
+<td>Бот для вопросов и создания заказов</td>
+<td>Telegram Bot API</td>
+<td>Канал коммуникации, бот, калькулятор</td>
+</tr>
+<tr>
+<td>WhatsApp</td>
+<td>Переписка с клиентами</td>
+<td>—</td>
+<td>Канал коммуникации</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>Парсинг входящих (от ГМ Принт и клиентов), отправка уведомлений</td>
+<td>IMAP, SMTP (или сервисы типа Mailgun)</td>
+<td>Приём заказов, уведомления</td>
+</tr>
+<tr>
+<td>Сайт</td>
+<td>Передача заказов из калькулятора в CRM</td>
+<td>REST API</td>
+<td>Лиды и заказы с сайта</td>
+</tr>
+<tr>
+<td>Платежи</td>
+<td>Онлайн-оплата</td>
+<td>ЮKassa / CloudPayments / Т-Банк</td>
+<td>Эквайринг, онлайн-кассы 54-ФЗ</td>
+</tr>
+<tr>
+<td>Аналитика/маркетинг</td>
+<td>Источники лидов</td>
+<td>Яндекс.Метрика / Google Analytics / Bitrix24</td>
+<td>Маркетинг, атрибуция лидов</td>
+</tr>
+<tr>
+<td>Карты</td>
+<td>Привлечение клиентов, отзывы</td>
+<td>Яндекс.Карты, 2ГИС, Google Карты</td>
+<td>Лидогенерация, сбор отзывов</td>
+</tr>
+<tr>
+<td>Система пропусков</td>
+<td>Запрос пропуска для офиса на Орджоникидзе (QR для авто, SMS-код для пешего)</td>
+<td>API системы пропусков (если есть) или ручная заявка охране</td>
+<td>Контроль доступа на объект выдачи/доставки</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="1-мессенджеры-макс-telegram">1. Мессенджеры (Макс / Telegram)</h2>
+<h3 id="11-проблема-и-цель">1.1. Проблема и цель</h3>
+<p>Переписка с клиентами идёт в разных чатах (Макс, Telegram, WhatsApp). Информация дублируется, единого канала нет. Цель — интегрировать мессенджер (Макс или Telegram) с CRM, чтобы вся коммуникация была в одном месте.</p>
+<p>Типовой текущий путь клиента: клиент приходит с сайта (из поиска Яндекс/Google, Яндекс.Карт, 2ГИС, Google Карт, Яндекс.Директа), затем переходит по ссылке в Telegram-чат с менеджером, где ведётся диалог, расчёты, уточнение сроков, ТЗ и стоимости. Желаемое изменение: перенести расчёт стандартных заказов на сайт/бот, освободив менеджера от рутины и подключая его только когда ресурсов сайта/бота недостаточно.</p>
+<h3 id="12-что-нужно-видеть-в-crm-из-мессенджеров">1.2. Что нужно видеть в CRM из мессенджеров</h3>
+<ul>
+<li>Историю сообщений (для аналитики).</li>
+<li>Возможность отправлять сообщения прямо из CRM (требуется бот).</li>
+<li>Автоматическое создание заказа по сообщению (например, клиент написал «Хочу листовки» → CRM создаёт сделку).</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Какой мессенджер является основным каналом для общения с клиентами — Telegram, WhatsApp или Макс (специализированное приложение)? Это определяет приоритет и техническую реализацию интеграции.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Наличие и возможности публичного API у мессенджера Макс не подтверждены. Если API нет — интеграция реализуется через вебхуки.</p>
+<hr>
+<h2 id="2-telegram-бот">2. Telegram-бот</h2>
+<p>Telegram — один из ключевых каналов коммуникации. Бот @print_bot обрабатывает первый контакт, выполняет расчёт стоимости, показывает заказы клиента и связывает с менеджером.</p>
+<h3 id="21-общая-схема-первого-контакта">2.1. Общая схема первого контакта</h3>
+<ol>
+<li>Клиент находит сайт, видит кнопку «Telegram» и кликает.</li>
+<li>Открывается Telegram, запускается бот @print_bot.</li>
+<li>Бот отправляет приветствие (текст + кнопки).</li>
+<li>Далее три ветки:
+<ul>
+<li>Клиент пишет текстом («здравствуйте») → менеджер отвечает вручную.</li>
+<li>Клиент нажимает «Рассчитать» → калькулятор в Telegram (WebView).</li>
+<li>Клиент нажимает «Мои заказы» → авторизация через сайт.</li>
+</ul>
+</li>
+</ol>
+<h3 id="22-сценарии-бота">2.2. Сценарии бота</h3>
+<p><strong>Инициализация.</strong> Бот отправляет приветственное сообщение:</p>
+<blockquote>
+<p>Здравствуйте! Я бот типографии PrintOffice. Чем могу помочь?
+✅ Рассчитать стоимость печати  📦 Мои заказы  📞 Связаться с менеджером  ❓ Часто задаваемые вопросы</p>
+</blockquote>
+<p>И показывает клавиатуру с кнопками: <code>Рассчитать стоимость</code>, <code>Мои заказы</code>, <code>Связаться</code>, <code>FAQ</code>, <code>Оставить заявку</code>, <code>Статус заказа</code>.</p>
+<p><strong>Сценарий «Рассчитать стоимость»:</strong></p>
+<ol>
+<li>Бот открывает WebView (встроенный браузер) по URL <code>https://printoffice.ru/calculator?tg=1&amp;user_id={user_id}</code>.</li>
+<li>Клиент видит калькулятор (как на сайте): выбирает тип продукции, формат, бумагу, цветность, вводит тираж, нажимает «Рассчитать».</li>
+<li>Калькулятор показывает цену.</li>
+<li>Клиент нажимает «Отправить заявку» → заявка попадает в CRM (статус «Новая (из Telegram)», привязка к chat_id клиента, уведомление менеджеру).</li>
+<li>Бот отправляет подтверждение: «Ваша заявка №123 принята. Менеджер свяжется с вами в этом чате.»</li>
+</ol>
+<p><strong>Сценарий «Клиент пишет текстом» (NLP / ключевые слова):</strong></p>
+<ul>
+<li>«здравствуйте», «цену», «сколько стоит» → распознавание намерения.</li>
+<li>«печать», «листовки», «визитки» → распознавание продукта.</li>
+<li>«1000», «500», «тираж» → распознавание тиража.</li>
+</ul>
+<p>Логика обработки:</p>
+<ul>
+<li>IF распознан запрос на расчёт → перейти к калькулятору.</li>
+<li>ELSE IF распознан запрос статуса заказа → запросить номер заказа.</li>
+<li>ELSE → перевести на менеджера.</li>
+</ul>
+<p>Примеры ответных реплик бота:</p>
+<blockquote>
+<p>Я вас понял. Давайте рассчитаем стоимость.
+Какой формат вам нужен? (A4, A5, A6)
+Соединяю с менеджером...</p>
+</blockquote>
+<p><strong>Сценарий «Мои заказы»:</strong></p>
+<ul>
+<li>Бот проверяет авторизацию (связан ли chat_id с аккаунтом).</li>
+<li>IF авторизован → показать список заказов.</li>
+<li>ELSE → запросить привязку аккаунта по ссылке <code>https://printoffice.ru/link_tg?chat_id={chat_id}</code>.</li>
+</ul>
+<p>Пример списка заказов:</p>
+<pre><code>№12345 | Листовки А4 | 1000 шт | 15.03.2026 | ✅ Готов
+№12346 | Визитки     | 500 шт  | 20.03.2026 | 🚚 В доставке
+№12347 | Брошюры     | 50 шт   | 25.03.2026 | ⏳ В работе
+</code></pre>
+<h3 id="23-архитектура-бота">2.3. Архитектура бота</h3>
+<ul>
+<li><strong>Telegram Bot API (BotFather)</strong> → <strong>Webhook</strong> (получение сообщений) → <strong>Backend</strong> (обработка).</li>
+<li><strong>PostgreSQL</strong> — chat_id, история сообщений.</li>
+<li><strong>Redis</strong> — сессии, кэш.</li>
+<li><strong>NLP-модуль</strong> — распознавание намерений.</li>
+<li><strong>Калькулятор</strong> — расчёт стоимости.</li>
+<li><strong>WebView</strong> — встроенный браузер для калькулятора.</li>
+<li><strong>CRM</strong> — заказы.</li>
+</ul>
+<h3 id="24-структура-бд-для-telegram">2.4. Структура БД для Telegram</h3>
+<pre><code class="language-sql">-- Связь пользователя с Telegram
+CREATE TABLE tg_connections (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,                    -- ID пользователя в CRM
+    chat_id BIGINT NOT NULL,                 -- Telegram chat_id
+    username VARCHAR(255),                   -- Telegram username
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    phone_number VARCHAR(20),
+    is_active BOOLEAN DEFAULT true,
+    linked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    last_activity TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    UNIQUE KEY unique_chat (chat_id),
+    UNIQUE KEY unique_user (user_id)
+);
+
+-- История сообщений
+CREATE TABLE tg_messages (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    chat_id BIGINT NOT NULL,
+    message_id INT NOT NULL,                 -- ID сообщения в Telegram
+    direction ENUM('incoming', 'outgoing') NOT NULL,
+    message_text TEXT,
+    intent VARCHAR(50),                      -- распознанное намерение
+    entities JSON,                           -- извлечённые сущности
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_chat (chat_id, created_at)
+);
+
+-- Сессии диалогов
+CREATE TABLE tg_sessions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    chat_id BIGINT NOT NULL,
+    current_state VARCHAR(50),               -- 'awaiting_format', 'awaiting_quantity'
+    context JSON,                            -- {format: &quot;A4&quot;, quantity: 1000}
+    expires_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_chat (chat_id),
+    INDEX idx_expires (expires_at)
+);
+</code></pre>
+<h3 id="25-обработка-сообщений-псевдокодjs">2.5. Обработка сообщений (псевдокод/JS)</h3>
+<pre><code class="language-javascript">class TelegramBotHandler {
+    constructor() {
+        this.botToken = process.env.TELEGRAM_BOT_TOKEN;
+        this.webhookUrl = process.env.WEBHOOK_URL;
+    }
+
+    // Обработка входящего сообщения
+    async handleMessage(chatId, messageText, messageId) {
+        // 1. Сохраняем сообщение в историю
+        await this.saveMessage(chatId, messageId, 'incoming', messageText);
+        // 2. Распознаём намерение
+        const intent = await this.recognizeIntent(messageText);
+        // 3. Получаем текущую сессию
+        let session = await this.getSession(chatId);
+        // 4. Обрабатываем в зависимости от намерения
+        let response;
+        switch (intent.intent) {
+            case 'greeting':          response = this.getGreetingResponse(); break;
+            case 'price_calculation': response = await this.handlePriceCalculation(chatId, intent.entities, session); break;
+            case 'order_status':      response = await this.handleOrderStatus(chatId, intent.entities); break;
+            case 'my_orders':         response = await this.handleMyOrders(chatId); break;
+            case 'contact_manager':   response = this.getContactManagerResponse(); break;
+            case 'faq':               response = this.getFaqResponse(); break;
+            default:                  response = this.getDefaultResponse();
+        }
+        // 5. Отправляем ответ
+        await this.sendMessage(chatId, response.text, response.keyboard);
+        // 6. Сохраняем ответ в историю
+        await this.saveMessage(chatId, null, 'outgoing', response.text);
+        // 7. Обновляем сессию
+        await this.updateSession(chatId, intent.nextState, intent.context);
+    }
+}
+</code></pre>
+<p><strong>Словарь ключевых слов для NLP (recognizeIntent):</strong></p>
+<pre><code class="language-javascript">const keywords = {
+    greeting: ['здравствуй', 'привет', 'добрый день', 'добрый вечер', 'доброе утро'],
+    price:    ['цена', 'стоимость', 'сколько стоит', 'расчет', 'рассчитать', 'почем'],
+    product:  ['печать', 'листовки', 'визитки', 'брошюры', 'наклейки', 'буклеты'],
+    quantity: ['тираж', 'штук', 'экземпляр', 'шт'],
+    format:   ['а4', 'а5', 'а6', 'а3', 'sra3', 'формат'],
+    order:    ['заказ', 'номер заказа', 'статус']
+};
+</code></pre>
+<p><strong>Логика распознавания:</strong> приветствие → intent <code>greeting</code>; запрос цены → intent <code>price_calculation</code> (если формат не извлечён, nextState = <code>awaiting_format</code>); запрос заказа → если найден номер, intent <code>order_status</code>, иначе <code>my_orders</code>; прочее → <code>unknown</code>.</p>
+<h3 id="26-расчёт-стоимости-в-боте-handlepricecalculation">2.6. Расчёт стоимости в боте (handlePriceCalculation)</h3>
+<ul>
+<li>Если есть все параметры (формат + тираж) → рассчитываем цену и показываем карточку с общей суммой и ценой за 1 шт, кнопками «✅ Оформить заказ» и «📞 Связаться с менеджером».</li>
+<li>Если нет формата → предлагаем выбор: <code>A4 (210×297 мм)</code>, <code>A5 (148×210 мм)</code>, <code>A6 (105×148 мм)</code>, «Свой размер».</li>
+<li>Если нет тиража → предлагаем: <code>100</code>, <code>500</code>, <code>1000</code>, <code>5000</code> шт, «Ввести свой».</li>
+</ul>
+<h3 id="27-отправка-сообщения-telegram-api">2.7. Отправка сообщения (Telegram API)</h3>
+<pre><code class="language-javascript">async sendMessage(chatId, text, keyboard = null) {
+    const url = `https://api.telegram.org/bot${this.botToken}/sendMessage`;
+    const payload = { chat_id: chatId, text: text, parse_mode: 'Markdown' };
+    if (keyboard) payload.reply_markup = JSON.stringify(keyboard);
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+    return response.json();
+}
+</code></pre>
+<h3 id="28-главное-меню-и-webview-калькулятор">2.8. Главное меню и WebView-калькулятор</h3>
+<p><strong>Главное меню (кнопки):</strong> <code>🧮 Рассчитать стоимость</code>, <code>📦 Мои заказы</code>, <code>📞 Менеджер</code>, <code>❓ FAQ</code>, <code>📝 Оставить заявку</code>, <code>🔍 Статус заказа</code>.</p>
+<p><strong>WebView-калькулятор</strong> (встроенный браузер) воспроизводит калькулятор сайта. Пример полей и расчёта:</p>
+<ul>
+<li>Формат: <code>A4</code></li>
+<li>Бумага: <code>130 г/м² мелованная</code></li>
+<li>Цветность: <code>4+4</code></li>
+<li>Тираж: <code>1000 шт</code></li>
+<li>Результат: <strong>2 500 руб (2.50 руб/шт)</strong></li>
+<li>Кнопки: «Отправить заявку», «Закрыть».</li>
+</ul>
+<h3 id="29-интеграция-с-crm-создание-заказа-из-telegram">2.9. Интеграция с CRM (создание заказа из Telegram)</h3>
+<pre><code class="language-javascript">async function createOrderFromTelegram(chatId, orderData) {
+    // 1. Находим или создаём пользователя
+    let user = await findUserByChatId(chatId);
+    if (!user) {
+        user = await createUser({
+            name: orderData.name || `Telegram_${chatId}`,
+            source: 'telegram',
+            chat_id: chatId
+        });
+    }
+    // 2. Создаём заказ
+    const order = await db.query(`
+        INSERT INTO orders (user_id, source, status, items, total_price, created_at)
+        VALUES ($1, 'telegram', 'new', $2, $3, NOW())
+        RETURNING id
+    `, [user.id, JSON.stringify(orderData.items), orderData.total]);
+    // 3. Уведомляем менеджера
+    await notifyManager({ type: 'new_order', source: 'telegram', orderId: order.id, chatId });
+    // 4. Подтверждение клиенту
+    await sendTelegramMessage(chatId, `✅ Заказ №${order.id} принят! Сумма: ${orderData.total} руб ...`);
+    return order;
+}
+</code></pre>
+<h3 id="210-возможности-схемы">2.10. Возможности схемы</h3>
+<table>
+<thead>
+<tr>
+<th>Функция</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Автоматическое приветствие</td>
+<td>Бот сразу реагирует и предлагает варианты</td>
+</tr>
+<tr>
+<td>Распознавание намерений</td>
+<td>Бот понимает запрос (расчёт, заказ, статус)</td>
+</tr>
+<tr>
+<td>Калькулятор в WebView</td>
+<td>Полный расчёт без выхода из Telegram</td>
+</tr>
+<tr>
+<td>Авторизация через сайт</td>
+<td>Привязка Telegram к личному кабинету</td>
+</tr>
+<tr>
+<td>История заказов</td>
+<td>Клиент видит заказы прямо в Telegram</td>
+</tr>
+<tr>
+<td>Уведомления</td>
+<td>Менеджер получает алерт о новом заказе из Telegram</td>
+</tr>
+<tr>
+<td>Сохранение сессий</td>
+<td>Бот помнит этап диалога</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-email-imap-smtp-парсер-входящих">3. Email (IMAP / SMTP, парсер входящих)</h2>
+<h3 id="31-назначение">3.1. Назначение</h3>
+<p>Приём заказов по email (от клиентов и от партнёра ГМ Принт), автоматический парсинг входящих писем с созданием сделки в CRM, отправка уведомлений и закрывающих документов.</p>
+<h3 id="32-общая-схема-обработки-email-заказов">3.2. Общая схема обработки email-заказов</h3>
+<ol>
+<li>Клиент отправляет файлы на <code>print@printoffice.ru</code> (тема, например, «Заказ на печать»).</li>
+<li>Система автоматически: распознаёт email, извлекает вложения, создаёт сделку в CRM, привязывает файлы к сделке.</li>
+<li>Менеджер получает уведомление о новой сделке.</li>
+<li>Менеджер определяет тип клиента: B2C (частное лицо) / B2B (организация).</li>
+<li>Менеджер делает расчёт (формат, бумага, цветность, тираж, доп. услуги).</li>
+<li>Берёт оплату: B2C — ссылка / QR-код; B2B — счёт на email.</li>
+<li>Передаёт заказ в производство.</li>
+<li>Сообщает о готовности (обычно на следующий день, при срочности — в день заказа).</li>
+<li>Выдача: самовывоз из офиса или доставка.</li>
+<li>Закрывает сделку (статус <code>completed</code>).</li>
+</ol>
+<h4 id="детальный-event-map-обработка-менеджером">Детальный event map: обработка менеджером</h4>
+<p>Логика ручной обработки сделки менеджером (граничные условия из event map):</p>
+<ul>
+<li><strong>Просмотр файлов (макетов):</strong>
+<ul>
+<li>IF макет в правильном формате → OK.</li>
+<li>ELSE IF макет требует конвертации → конвертируем.</li>
+<li>ELSE → запросить правильный формат у клиента.</li>
+</ul>
+</li>
+<li><strong>Определение типа клиента:</strong>
+<ul>
+<li>IF клиент новый → уточнить, физическое или юридическое лицо:
+<ul>
+<li>B2C: запросить ФИО, телефон.</li>
+<li>B2B: запросить название организации, ИНН, контактное лицо.</li>
+</ul>
+</li>
+<li>ELSE IF клиент существующий → берём из базы.</li>
+</ul>
+</li>
+<li><strong>Расчёт:</strong> калькулятор в CRM, ввод параметров (формат, бумага, цветность, тираж) → система показывает цену.</li>
+<li><strong>Отправка расчёта клиенту:</strong>
+<ul>
+<li>IF B2C → ссылка на оплату в ответном email.</li>
+<li>IF B2B → счёт на email.</li>
+</ul>
+</li>
+<li><strong>Ожидание оплаты:</strong>
+<ul>
+<li>IF оплачено → запуск производства.</li>
+<li>ELSE → напоминание через 24 часа.</li>
+</ul>
+</li>
+<li>Далее: производство выполняет заказ → менеджер сообщает о готовности → клиент забирает (самовывоз) или получает доставку → менеджер закрывает сделку (статус «Выполнен»).</li>
+</ul>
+<h3 id="33-источники-получения-писем">3.3. Источники получения писем</h3>
+<ul>
+<li>IMAP/POP3-подключение.</li>
+<li>Webhook от почтового сервиса (SendGrid, Mailgun).</li>
+<li>Яндекс.Почта API.</li>
+</ul>
+<h3 id="34-извлекаемые-данные">3.4. Извлекаемые данные</h3>
+<ul>
+<li>Отправитель: email, имя (если есть).</li>
+<li>Тема письма, тело письма.</li>
+<li>Вложения (макеты PDF, CDR, AI, PNG, JPG) — сохраняются в S3 / облачное хранилище.</li>
+</ul>
+<p>Поиск клиента: IF email найден в БД → привязываем к существующему; ELSE → создаём нового (тип «не определён»).</p>
+<p>При создании сделки (лида) в CRM проставляются:</p>
+<ul>
+<li>Статус: «Новый (из email)».</li>
+<li>Источник: «email».</li>
+<li>Приоритет: «срочный», если в теме есть «срочно», иначе «обычный».</li>
+<li>Вложения: привязаны к сделке.</li>
+<li>Параметры: (если удалось распознать) — попытка автораспознавания параметров заказа (формат, тираж, бумага) из тела письма.</li>
+</ul>
+<h3 id="35-структура-бд-для-email-заказов">3.5. Структура БД для email-заказов</h3>
+<pre><code class="language-sql">-- Таблица входящих email
+CREATE TABLE incoming_emails (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    message_id VARCHAR(255) UNIQUE,          -- ID письма в почтовом ящике
+    from_email VARCHAR(255) NOT NULL,
+    from_name VARCHAR(255),
+    subject VARCHAR(500),
+    body TEXT,
+    received_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('new', 'processing', 'processed', 'failed') DEFAULT 'new',
+    deal_id INT,
+    error_message TEXT,
+    INDEX idx_status (status),
+    INDEX idx_from (from_email),
+    INDEX idx_received (received_at)
+);
+
+-- Таблица вложений
+CREATE TABLE email_attachments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    email_id INT NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    file_size INT,
+    file_type VARCHAR(100),
+    file_url VARCHAR(500),                   -- ссылка в S3
+    is_maket BOOLEAN DEFAULT false,          -- является ли макетом
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (email_id) REFERENCES incoming_emails(id),
+    INDEX idx_email (email_id)
+);
+
+-- Связь email с клиентом
+ALTER TABLE clients ADD COLUMN email VARCHAR(255);
+ALTER TABLE clients ADD COLUMN email_verified BOOLEAN DEFAULT false;
+CREATE INDEX idx_client_email ON clients(email);
+</code></pre>
+<h3 id="36-класс-парсинга-email-imap">3.6. Класс парсинга email (IMAP)</h3>
+<pre><code class="language-javascript">class EmailParser {
+    constructor() {
+        this.imapConfig = {
+            host: 'imap.yandex.ru',
+            port: 993,
+            secure: true,
+            user: 'print@printoffice.ru',
+            password: process.env.EMAIL_PASSWORD
+        };
+    }
+
+    // Проверка новых писем: подключение по IMAP, openBox('INBOX'),
+    // поиск непрочитанных ['UNSEEN'], fetch и обработка каждого письма.
+    async checkNewEmails() { /* ... Imap.search(['UNSEEN'], ...) ... */ }
+
+    // Обработка одного письма
+    async processEmail(stream, imap) {
+        const mail = await simpleParser(buffer);
+        // 1. Сохраняем письмо в incoming_emails
+        // 2. Сохраняем вложения в S3 + email_attachments
+        // 3. Создаём/находим клиента (findOrCreateClient)
+        // 4. Создаём сделку (createDeal)
+        // 5. Помечаем письмо processed, проставляем deal_id
+        // 6. Уведомляем менеджера (notifyManager)
+        // 7. Помечаем письмо прочитанным: imap.addFlags(mail.messageId, '\\Seen')
+    }
+
+    // Извлечение email из строки &quot;Имя &lt;email@domain.com&gt;&quot;, поиск/создание клиента (type 'unknown')
+    async findOrCreateClient(fromEmail) { /* ... regex /&lt;(.+?)&gt;/ ... */ }
+
+    // Создание сделки: срочность определяется по слову &quot;срочно&quot; в теме,
+    // вложения привязываются к сделке (deal_attachments)
+    async createDeal(clientId, emailId, subject, attachments) { /* ... */ }
+
+    // Уведомление: Telegram менеджеру + создание задачи в CRM (type 'process_email')
+    async notifyManager(deal, client, mail) { /* ... */ }
+}
+</code></pre>
+<p>Шаблон уведомления менеджеру:</p>
+<pre><code>📧 НОВАЯ СДЕЛКА ИЗ EMAIL!
+Клиент: {name/email}
+Email: {email}
+Тема: {subject}
+Приоритет: 🔴 СРОЧНО | 🟢 Обычный
+Ссылка на сделку: https://crm.printoffice.ru/deals/{id}
+</code></pre>
+<h3 id="37-интерфейс-менеджера-для-обработки-email-сделки">3.7. Интерфейс менеджера для обработки email-сделки</h3>
+<p>Карточка сделки (пример — «Сделка №12345 (из email)», статус «Новая») содержит блоки:</p>
+<ul>
+<li><strong>Информация о письме:</strong> От (напр. <code>Иван Иванов &lt;ivan@example.com&gt;</code>), Тема (<code>Заказ на печать листовок</code>), Получено (<code>15.03.2026 14:30</code>), Приоритет (<code>🔴 СРОЧНО</code>).</li>
+<li><strong>Вложения:</strong> список файлов с действиями, например:
+<ul>
+<li><code>📄 maket.pdf (2.5 MB)</code> — <code>СКАЧАТЬ</code>, <code>ПРЕДПРОСМОТР</code>, <code>ОТКРЫТЬ В РЕДАКТОРЕ</code>.</li>
+<li><code>📄 logo.png (0.5 MB)</code> — <code>СКАЧАТЬ</code>.</li>
+</ul>
+</li>
+<li><strong>Клиент:</strong> Имя (<code>Иван Иванов</code>), Email (<code>ivan@example.com</code>), Телефон, Тип клиента (<code>Не определён</code> / B2C / B2B), кнопка <code>СОХРАНИТЬ КЛИЕНТА</code>.</li>
+<li><strong>Параметры заказа:</strong> Продукция (<code>Листовки</code>), Формат (<code>A5</code>), Бумага (<code>130 г/м² мелованная</code>), Цветность (<code>4+4</code>), Тираж (<code>1000</code> шт), кнопка <code>РАССЧИТАТЬ</code>, поле Стоимость (<code>2 500 руб (2.50 руб/шт)</code>).</li>
+<li><strong>Оплата:</strong> способ (<code>Ссылка на оплату</code> и др.), кнопки <code>ОТПРАВИТЬ ССЫЛКУ</code>, <code>ОТПРАВИТЬ СЧЁТ</code>, <code>ОПЛАЧЕНО</code>.</li>
+<li><strong>История:</strong> хронология событий по сделке, например:
+<ul>
+<li><code>14:30 | Система: Сделка создана из email</code></li>
+<li><code>14:35 | Менеджер: Расчёт выполнен, отправлена ссылка на оплату</code></li>
+</ul>
+</li>
+<li>Действия: <code>ПЕРЕЙТИ К ПРОИЗВОДСТВУ</code>, <code>ЗАКРЫТЬ СДЕЛКУ</code>, <code>ОТМЕНА</code>.</li>
+</ul>
+<h3 id="38-упрощённый-вариант-для-b2c-быстрый-заказ">3.8. Упрощённый вариант для B2C (быстрый заказ)</h3>
+<p>Для быстрых B2C-заказов (копирование, распечатка) — минимальная форма (пример — «Быстрый заказ (B2C) из email», статус «Новый»):</p>
+<ul>
+<li><strong>Клиент:</strong> Имя (<code>Иван Иванов</code>), Телефон (<code>+7 999 123 45 67</code>), Email (<code>ivan@example.com</code>).</li>
+<li><strong>Файлы:</strong> список с действием <code>СКАЧАТЬ</code>, например <code>📄 документ.pdf (1.2 MB)</code>.</li>
+<li><strong>Услуга:</strong> напр. <code>Копирование A4</code>, Кол-во, Сумма (пример: 20 шт = 100 руб).</li>
+<li><strong>Оплата:</strong> Сумма (<code>100 руб</code>), кнопка <code>ОПЛАЧЕНО</code>.</li>
+<li>Действия: <code>ВЫПОЛНИТЬ ЗАКАЗ</code>, <code>УВЕДОМИТЬ О ГОТОВНОСТИ</code>, <code>ЗАКРЫТЬ</code>.</li>
+</ul>
+<hr>
+<h2 id="4-whatsapp">4. WhatsApp</h2>
+<p><strong>Назначение:</strong> один из текущих каналов переписки с клиентами. Включён в общую задачу объединения коммуникаций в CRM (наряду с Telegram и Макс), чтобы устранить дублирование информации по разным чатам.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Способ интеграции WhatsApp (официальный WhatsApp Business API, провайдер или иное) не определён. Не указано, является ли WhatsApp основным каналом.</p>
+<hr>
+<h2 id="5-эдо-диадок">5. ЭДО Диадок</h2>
+<p><strong>Назначение:</strong> юридически значимый электронный документооборот с юридическими лицами.</p>
+<ul>
+<li>Электронное подписание договоров: некоторые B2B-клиенты просят составить договор — он подписывается электронно через ЭДО Диадок.</li>
+<li>Отправка закрывающих документов (УПД) после выполнения заказа — также по ЭДО Диадок.</li>
+</ul>
+<p><strong>Интеграционная часть:</strong> CRM должна формировать и отправлять договоры и УПД через Диадок, отслеживая статус подписания.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Детали API Диадок (метод интеграции, объём автоматизации формирования и отправки документов) не специфицированы.</p>
+<hr>
+<h2 id="6-бухгалтерия-эльба-вопрос-1с">6. Бухгалтерия (Эльба, вопрос 1С)</h2>
+<p><strong>Назначение:</strong> выставление счетов и формирование закрывающих документов.</p>
+<ul>
+<li><strong>Эльба:</strong> экспорт заказов для счетов и УПД; синхронизация номеров счетов.</li>
+<li><strong>Способ:</strong> API Эльбы или экспорт/импорт XML.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Выбор бухгалтерской системы — Эльба или 1С (или иное). В разных частях источника фигурируют оба варианта; окончательный выбор не зафиксирован.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Доступен ли API Эльбы для нужных операций или интеграция будет реализована через файловый обмен XML.</p>
+<hr>
+<h2 id="7-яндексдиск">7. Яндекс.Диск</h2>
+<p><strong>Назначение:</strong> хранение файлов заказов — папки заказов и синхронизация файлов (макетов).
+<strong>Способ:</strong> API Яндекс.Диска.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: В разных частях проекта как хранилище фигурирует также S3 (для вложений email и макетов). Требуется согласовать единое решение по хранению файлов (Яндекс.Диск vs S3).</p>
+<hr>
+<h2 id="8-курьерские-службы-доставка">8. Курьерские службы (доставка)</h2>
+<p><strong>Назначение:</strong> создание заявок на доставку и получение трек-номеров.</p>
+<table>
+<thead>
+<tr>
+<th>Служба</th>
+<th>Что интегрируем</th>
+<th>Способ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Яндекс Доставка</td>
+<td>Создание заявок, получение трек-номера</td>
+<td>API Яндекс.Доставки</td>
+</tr>
+<tr>
+<td>Достависта</td>
+<td>Создание заявок, получение трек-номера</td>
+<td>API Достависты</td>
+</tr>
+<tr>
+<td>СДЭК</td>
+<td>Доставка</td>
+<td>API СДЭК</td>
+</tr>
+</tbody>
+</table>
+<p>Контекст доставки: согласовываются дата самовывоза и пункт получения (три офиса на выбор) либо доставка с указанием времени, получателя, телефона. Курьерские заявки создаются для варианта доставки.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Финальный набор курьерских служб для интеграции (Яндекс / Достависта / СДЭК) не зафиксирован — перечислены как варианты.</p>
+<hr>
+<h2 id="9-платежи-cloudpayments-юkassa-т-банк-54-фз">9. Платежи (CloudPayments / ЮKassa / Т-Банк, 54-ФЗ)</h2>
+<p><strong>Назначение:</strong> онлайн-оплата заказов (преимущественно B2C), соблюдение 54-ФЗ (онлайн-кассы).</p>
+<p><strong>Рекомендуемые готовые модули для CRM:</strong></p>
+<ul>
+<li><strong>CloudPayments</strong> (есть интеграция с Битрикс24).</li>
+<li><strong>Yandex.Kassa (ЮKassa)</strong> — много готовых решений.</li>
+<li><strong>Т-Банк</strong> (T-Pay, SberPay).</li>
+</ul>
+<p>Эти сервисы уже поддерживают:</p>
+<ul>
+<li>Онлайн-кассы (54-ФЗ).</li>
+<li>Все способы оплаты.</li>
+<li>Чековые ленты.</li>
+<li>Возвраты.</li>
+</ul>
+<p><strong>Способы оплаты у клиента:</strong></p>
+<ul>
+<li>Физлицо: картой на сайте либо переводом на карту.</li>
+<li>Юрлицо: по счёту (запрашивается ИНН для выставления счёта).</li>
+<li>В email-сценарии B2C — ссылка на оплату или QR-код.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Конкретный платёжный провайдер (ЮKassa / CloudPayments / Т-Банк) не выбран. Онлайн-оплата отмечена как функциональность, внедряемая позже («позже»).</p>
+<hr>
+<h2 id="10-аналитика-и-маркетинг">10. Аналитика и маркетинг</h2>
+<p><strong>Назначение:</strong> атрибуция и учёт источников лидов.</p>
+<ul>
+<li><strong>Яндекс.Метрика.</strong></li>
+<li><strong>Google Analytics.</strong></li>
+<li><strong>Bitrix24</strong> — как источник лидов.</li>
+</ul>
+<p>Сопутствующие источники привлечения (для маркетинга и отзывов):</p>
+<ul>
+<li>Поиск Яндекс и Google.</li>
+<li><strong>Карты:</strong> Яндекс.Карты, 2ГИС, Google Карты (лидогенерация; после выполнения заказа клиента просят оставить отзыв на Яндекс.Картах и 2ГИС).</li>
+<li>Яндекс.Директ (настраивается владельцем).</li>
+</ul>
+<hr>
+<h2 id="11-уведомления">11. Уведомления</h2>
+<p>Каналы уведомлений (клиентам и менеджерам):</p>
+<ul>
+<li><strong>Email</strong> (свой сервер / SMTP).</li>
+<li><strong>Telegram</strong> (бот).</li>
+<li><strong>SMS</strong> — необходимость под вопросом.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Нужны ли SMS-уведомления — не определено.</p>
+<hr>
+<h2 id="12-dadata-карты">12. DaData / Карты</h2>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Интеграция с DaData (автозаполнение реквизитов по ИНН, подсказки адресов) в проработанных источниках по интеграциям явно не описана, хотя подразумевается сценарием выставления счетов B2B (запрос ИНН для выставления счёта). Требуется уточнить необходимость и способ интеграции DaData.</p>
+<p>Картографические сервисы (Яндекс.Карты, 2ГИС, Google Карты) используются как канал лидогенерации и сбора отзывов — см. раздел «Аналитика и маркетинг».</p>
+<hr>
+<h2 id="13-система-пропусков-и-контроля-доступа">13. Система пропусков и контроля доступа</h2>
+<p><strong>Назначение:</strong> контроль доступа на охраняемый объект выдачи/доставки — офис на Орджоникидзе.</p>
+<p>Полная механика пропусков (блок «Пропуск» в карточке заказа, QR-код для авто, SMS-код для пешего курьера, поля и кнопка «Запросить пропуск», AS-IS-процесс выдачи) описана в профильном документе — см. <a href="07-partners-delivery--delivery.html#6-%D1%83%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BF%D1%80%D0%BE%D0%BF%D1%83%D1%81%D0%BA%D0%B0%D0%BC%D0%B8-%D0%B8-%D0%BA%D0%BE%D0%B4%D0%B0%D0%BC%D0%B8-%D0%B4%D0%BE%D1%81%D1%82%D1%83%D0%BF%D0%B0">delivery.md, раздел «Управление пропусками и кодами доступа»</a>. Здесь фиксируется только интеграционный аспект.</p>
+<p><strong>Способ интеграции:</strong> кнопка «Запросить пропуск» вызывает API системы пропусков (если доступен) либо инициирует ручную заявку охране с заполнением данных в CRM. Пропуск выдаётся через сторонний сайт, наличие у которого API неизвестно.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: Выдаются ли пропуска через какую-то систему (API) или всё вручную через заявку охране? Метод интеграции не подтверждён.</p>
+<hr>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#сводный-реестр-интеграций">Сводный реестр интеграций</a></li><li class="lvl2"><a href="#1-мессенджеры-макс-telegram">1. Мессенджеры (Макс / Telegram)</a></li><li class="lvl3"><a href="#11-проблема-и-цель">1.1. Проблема и цель</a></li><li class="lvl3"><a href="#12-что-нужно-видеть-в-crm-из-мессенджеров">1.2. Что нужно видеть в CRM из мессенджеров</a></li><li class="lvl2"><a href="#2-telegram-бот">2. Telegram-бот</a></li><li class="lvl3"><a href="#21-общая-схема-первого-контакта">2.1. Общая схема первого контакта</a></li><li class="lvl3"><a href="#22-сценарии-бота">2.2. Сценарии бота</a></li><li class="lvl3"><a href="#23-архитектура-бота">2.3. Архитектура бота</a></li><li class="lvl3"><a href="#24-структура-бд-для-telegram">2.4. Структура БД для Telegram</a></li><li class="lvl3"><a href="#25-обработка-сообщений-псевдокодjs">2.5. Обработка сообщений (псевдокод/JS)</a></li><li class="lvl3"><a href="#26-расчёт-стоимости-в-боте-handlepricecalculation">2.6. Расчёт стоимости в боте (handlePriceCalculation)</a></li><li class="lvl3"><a href="#27-отправка-сообщения-telegram-api">2.7. Отправка сообщения (Telegram API)</a></li><li class="lvl3"><a href="#28-главное-меню-и-webview-калькулятор">2.8. Главное меню и WebView-калькулятор</a></li><li class="lvl3"><a href="#29-интеграция-с-crm-создание-заказа-из-telegram">2.9. Интеграция с CRM (создание заказа из Telegram)</a></li><li class="lvl3"><a href="#210-возможности-схемы">2.10. Возможности схемы</a></li><li class="lvl2"><a href="#3-email-imap-smtp-парсер-входящих">3. Email (IMAP / SMTP, парсер входящих)</a></li><li class="lvl3"><a href="#31-назначение">3.1. Назначение</a></li><li class="lvl3"><a href="#32-общая-схема-обработки-email-заказов">3.2. Общая схема обработки email-заказов</a></li><li class="lvl3"><a href="#33-источники-получения-писем">3.3. Источники получения писем</a></li><li class="lvl3"><a href="#34-извлекаемые-данные">3.4. Извлекаемые данные</a></li><li class="lvl3"><a href="#35-структура-бд-для-email-заказов">3.5. Структура БД для email-заказов</a></li><li class="lvl3"><a href="#36-класс-парсинга-email-imap">3.6. Класс парсинга email (IMAP)</a></li><li class="lvl3"><a href="#37-интерфейс-менеджера-для-обработки-email-сделки">3.7. Интерфейс менеджера для обработки email-сделки</a></li><li class="lvl3"><a href="#38-упрощённый-вариант-для-b2c-быстрый-заказ">3.8. Упрощённый вариант для B2C (быстрый заказ)</a></li><li class="lvl2"><a href="#4-whatsapp">4. WhatsApp</a></li><li class="lvl2"><a href="#5-эдо-диадок">5. ЭДО Диадок</a></li><li class="lvl2"><a href="#6-бухгалтерия-эльба-вопрос-1с">6. Бухгалтерия (Эльба, вопрос 1С)</a></li><li class="lvl2"><a href="#7-яндексдиск">7. Яндекс.Диск</a></li><li class="lvl2"><a href="#8-курьерские-службы-доставка">8. Курьерские службы (доставка)</a></li><li class="lvl2"><a href="#9-платежи-cloudpayments-юkassa-т-банк-54-фз">9. Платежи (CloudPayments / ЮKassa / Т-Банк, 54-ФЗ)</a></li><li class="lvl2"><a href="#10-аналитика-и-маркетинг">10. Аналитика и маркетинг</a></li><li class="lvl2"><a href="#11-уведомления">11. Уведомления</a></li><li class="lvl2"><a href="#12-dadata-карты">12. DaData / Карты</a></li><li class="lvl2"><a href="#13-система-пропусков-и-контроля-доступа">13. Система пропусков и контроля доступа</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

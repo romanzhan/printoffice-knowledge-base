@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Производственный модуль — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="06-production--production-module">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li class="active"><a href="06-production--production-module.html">Производственный модуль</a></li><li><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="производственный-модуль">Производственный модуль</h1>
+<p>Производственный модуль превращает CRM из «калькулятора» в инструмент реального планирования: ведёт производственный календарь и загрузку оборудования, генерирует технические задания для участков, собирает обратную связь с производства (факт vs расчёт, брак, простои, комментарии) и на её основе самообучается, корректируя нормативы и формулы.</p>
+<h2 id="состав-модуля-что-спроектировано">Состав модуля (что спроектировано)</h2>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Описание</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Планирование загрузки</td>
+<td>Календари оборудования, расчёт доступных слотов, приоритезация, автоперепланирование при сбоях</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Обратная связь</td>
+<td>Фактическое время, расход материалов, простои, брак</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Производственные комментарии</td>
+<td>Адресные сообщения для печатников, резчиков, операторов плоттера</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>Самообучение</td>
+<td>Корректировка формул на основе реальных данных, версионирование нормативов</td>
+<td>Готово</td>
+</tr>
+<tr>
+<td>ТЗ для участков</td>
+<td>Генерация детальных заданий (печатник / резчик / оператор плоттера)</td>
+<td>Готово</td>
+</tr>
+</tbody>
+</table>
+<p>Полный производственный цикл, реализуемый модулем:</p>
+<pre><code>Расчёт → Планирование → Выполнение → Анализ → Корректировка
+</code></pre>
+<p>Система становится точнее с каждым выполненным заказом.</p>
+<hr>
+<h2 id="1-производственный-календарь-и-планировщик-загрузки">1. Производственный календарь и планировщик загрузки</h2>
+<h3 id="11-понятие-производственного-календаря">1.1. Понятие производственного календаря</h3>
+<p>Производственный календарь описывает участки, оборудование и режим их работы.</p>
+<pre><code>ПРОИЗВОДСТВЕННЫЙ КАЛЕНДАРЬ
+
+УЧАСТОК 1: Печатный цех
+├── Konica C6085 (доступность, загрузка, плановые ТО)
+├── Konica C3070L
+└── Смены: 2 смены по 8 часов
+
+УЧАСТОК 2: Послепечатка
+├── Резак Boway (загрузка, очереди)
+├── Плоттер Mimaki
+├── Ламинатор
+└── Смены: 1 смена
+
+УЧАСТОК 3: Упаковка и отгрузка
+└── Ручной труд
+</code></pre>
+<h3 id="12-архитектура-системы-планирования">1.2. Архитектура системы планирования</h3>
+<p>Планирование строится из четырёх уровней:</p>
+<pre><code>УРОВЕНЬ 1: Календари
+├── Глобальный календарь (праздники, выходные)
+├── Календари участков (смены, перерывы)
+└── Календари оборудования (ТО, ремонты)
+
+УРОВЕНЬ 2: Загрузка
+├── Текущие заказы (в работе)
+├── Запланированные заказы
+└── Очереди на оборудование
+
+УРОВЕНЬ 3: Расчёт сроков
+├── С учётом загрузки
+├── С учётом приоритетов
+└── С учётом параллельных операций
+
+УРОВЕНЬ 4: Интерфейсы
+├── Для менеджера (сроки клиенту)
+├── Для производства (задания по часам)
+└── Для администратора (загрузка цехов)
+</code></pre>
+<h3 id="13-структура-бд-производственного-календаря">1.3. Структура БД производственного календаря</h3>
+<pre><code class="language-sql">-- 1. Календари (рабочее время)
+CREATE TABLE production_calendars (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,                    -- &quot;Основной календарь типографии&quot;
+    type ENUM('global', 'department', 'equipment') DEFAULT 'global',
+    entity_id INT,                                 -- ID отдела или оборудования (если type = equipment)
+    -- Параметры календаря
+    work_days JSON,                                -- [1,2,3,4,5] (пн-пт)
+    work_hours_start TIME DEFAULT '09:00:00',
+    work_hours_end TIME DEFAULT '18:00:00',
+    break_hours JSON,                              -- [{&quot;start&quot;: &quot;13:00&quot;, &quot;end&quot;: &quot;14:00&quot;}]
+    -- Часовой пояс
+    timezone VARCHAR(50) DEFAULT 'Europe/Moscow',
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_entity (type, entity_id)
+);
+
+-- 2. Исключения (праздники, ремонты, ТО)
+CREATE TABLE calendar_exceptions (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    calendar_id INT NOT NULL,
+    exception_type ENUM('holiday', 'maintenance', 'breakdown', 'custom') NOT NULL,
+    name VARCHAR(255),                             -- &quot;Новый год&quot;, &quot;Плановое ТО&quot;
+    -- Период
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    start_time TIME,                               -- NULL = весь день
+    end_time TIME,
+    -- Влияние на доступность
+    availability ENUM('closed', 'reduced', 'custom') DEFAULT 'closed',
+    custom_hours JSON,                             -- если reduced, можно задать часы
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (calendar_id) REFERENCES production_calendars(id),
+    INDEX idx_dates (start_date, end_date)
+);
+
+-- 3. Смены и сотрудники
+CREATE TABLE production_shifts (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    department_id INT,                             -- ID участка
+    name VARCHAR(100),                             -- &quot;Смена А&quot;, &quot;Смена Б&quot;
+    -- Расписание смены
+    shift_type ENUM('day', 'night', 'custom') DEFAULT 'day',
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    -- Сотрудники в смене
+    employees JSON,                                -- [1,2,3] ID сотрудников
+    is_active BOOLEAN DEFAULT true,
+    valid_from DATE,
+    valid_to DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 4. Запланированные задачи (основная таблица)
+CREATE TABLE production_schedule (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    equipment_id INT NOT NULL,
+    -- Тип задачи
+    task_type ENUM('printing', 'cutting_guillotine', 'cutting_plotter',
+                   'lamination', 'binding', 'packaging') NOT NULL,
+    -- Временные параметры
+    planned_duration_minutes INT NOT NULL,         -- расчётное время
+    setup_time_minutes INT DEFAULT 0,              -- время на настройку
+    -- Статус в планировании
+    status ENUM('scheduled', 'in_progress', 'completed', 'cancelled', 'delayed') DEFAULT 'scheduled',
+    -- Приоритет (для очереди)
+    priority INT DEFAULT 100,                      -- меньше = выше приоритет
+    -- Запланированные даты
+    scheduled_start TIMESTAMP NULL,
+    scheduled_end TIMESTAMP NULL,
+    actual_start TIMESTAMP NULL,
+    actual_end TIMESTAMP NULL,
+    -- Зависимости (операции, которые должны быть выполнены до)
+    dependencies JSON,                             -- [id_задачи1, id_задачи2]
+    -- Кто назначил
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    INDEX idx_equipment_status (equipment_id, status, scheduled_start),
+    INDEX idx_order (order_id),
+    INDEX idx_dates (scheduled_start, scheduled_end)
+);
+
+-- 5. Очереди на оборудование
+CREATE TABLE equipment_queues (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id INT NOT NULL,
+    task_id INT NOT NULL,
+    queue_position INT,                            -- позиция в очереди
+    estimated_start TIMESTAMP,                     -- расчётное время начала
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    INDEX idx_equipment_queue (equipment_id, queue_position)
+);
+
+-- 6. История простоев
+CREATE TABLE equipment_downtime (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id INT NOT NULL,
+    downtime_type ENUM('breakdown', 'maintenance', 'no_materials', 'no_operator', 'other') NOT NULL,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP,
+    duration_minutes INT,                          -- вычисляется при end_time
+    reason TEXT,
+    reported_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    INDEX idx_equipment_dates (equipment_id, start_time, end_time)
+);
+</code></pre>
+<h3 id="14-класс-планировщика-производства">1.4. Класс планировщика производства</h3>
+<p>Класс <code>ProductionScheduler</code> отвечает за загрузку календарей, расчёт доступного времени оборудования, планирование заказов, поиск свободных слотов с учётом приоритетов и визуализацию загрузки.</p>
+<p>Ключевые методы:</p>
+<ul>
+<li><code>loadCalendars()</code> — загружает все активные календари (<code>production_calendars</code> + <code>calendar_exceptions</code>).</li>
+<li><code>calculateAvailableTime(equipmentId, startDate, endDate)</code> — строит сетку доступного времени: берёт календарь оборудования, уже запланированные задачи (<code>status IN ('scheduled','in_progress')</code>), исключения (ремонты/праздники) и формирует список свободных слотов с учётом рабочих дней и часов.</li>
+<li><code>scheduleOrder(order, priority = 100)</code> — последовательно планирует все операции заказа: подбирает доступное оборудование, рассчитывает длительность операции, находит свободный слот, создаёт задачу в <code>production_schedule</code>. Следующая операция начинается после окончания предыдущей. По завершении обновляет заказ (<code>scheduled_completion</code>, <code>status = 'scheduled'</code>).</li>
+<li><code>findFreeSlot(equipmentId, startFrom, durationMinutes, priority)</code> — ищет свободный слот с учётом очереди и приоритетов. Если время занято, но приоритет новой задачи выше (число меньше) приоритета конфликтующей — конфликтующая задача переносится (<code>rescheduleTask</code> на <code>scheduled_end + 30 минут</code>).</li>
+<li><code>calculateCompletionDate(order)</code> — рассчитывает дату готовности заказа для клиента и добавляет буфер на непредвиденные обстоятельства.</li>
+<li><code>isWorkingTime(calendar, date)</code> — проверка рабочего времени с учётом рабочих дней, рабочих часов и перерывов.</li>
+<li><code>getEquipmentLoadView(equipmentId, startDate, endDate)</code> — строит тепловую карту загрузки по дням с процентом загрузки.</li>
+</ul>
+<p>Параметры расчёта:</p>
+<ul>
+<li><strong>Буфер на непредвиденные обстоятельства</strong> при расчёте даты готовности: <code>bufferHours = 4</code> (4 часа).</li>
+<li><strong>Сдвиг при перепланировании</strong> конфликтующей задачи: <code>+30 минут</code> после её окончания.</li>
+</ul>
+<pre><code class="language-javascript">class ProductionScheduler {
+    constructor() {
+        this.calendars = {};
+        this.tasks = [];
+    }
+
+    // Инициализация календарей
+    async loadCalendars() {
+        const calendars = await db.query(`
+            SELECT pc.*, ce.*
+            FROM production_calendars pc
+            LEFT JOIN calendar_exceptions ce ON ce.calendar_id = pc.id
+            WHERE pc.is_active = true
+        `);
+        for (const cal of calendars) {
+            this.calendars[cal.id] = cal;
+        }
+    }
+
+    // Планирование нового заказа
+    async scheduleOrder(order, priority = 100) {
+        const operations = await this.getOrderOperations(order);
+        const scheduledTasks = [];
+        let currentDate = new Date();
+
+        for (const op of operations) {
+            const availableEquipment = await this.findAvailableEquipment(op, currentDate);
+            if (!availableEquipment) {
+                throw new Error(`Нет доступного оборудования для операции ${op.type} в ближайшее время`);
+            }
+            const duration = await this.calculateOperationDuration(op, order);
+            const slot = await this.findFreeSlot(availableEquipment.id, currentDate, duration, priority);
+            const task = await this.createScheduledTask({
+                orderId: order.id,
+                equipmentId: availableEquipment.id,
+                taskType: op.type,
+                duration,
+                scheduledStart: slot.start,
+                scheduledEnd: slot.end,
+                priority,
+                dependencies: op.dependencies
+            });
+            scheduledTasks.push(task);
+            currentDate = slot.end; // следующая операция после этой
+        }
+
+        await db.query(
+            'UPDATE orders SET scheduled_completion = $1, status = $2 WHERE id = $3',
+            [currentDate, 'scheduled', order.id]
+        );
+        return { orderId: order.id, scheduledCompletion: currentDate, tasks: scheduledTasks };
+    }
+
+    // Поиск свободного слота с учётом очереди и приоритетов
+    async findFreeSlot(equipmentId, startFrom, durationMinutes, priority) {
+        const scheduled = await db.query(`
+            SELECT * FROM production_schedule
+            WHERE equipment_id = $1
+                AND status IN ('scheduled', 'in_progress')
+                AND scheduled_end &gt;= $2
+            ORDER BY scheduled_start, priority
+        `, [equipmentId, startFrom]);
+
+        const calendar = await this.getEquipmentCalendar(equipmentId);
+        let currentSlot = new Date(startFrom);
+
+        while (true) {
+            if (!this.isWorkingTime(calendar, currentSlot)) {
+                currentSlot = this.nextWorkingTime(calendar, currentSlot);
+                continue;
+            }
+            const conflicting = scheduled.find(task =&gt;
+                task.scheduled_start &lt;= this.addMinutes(currentSlot, durationMinutes) &amp;&amp;
+                task.scheduled_end &gt;= currentSlot
+            );
+            if (!conflicting) {
+                return { start: currentSlot, end: this.addMinutes(currentSlot, durationMinutes) };
+            }
+            // Если приоритет выше — сдвигаем менее приоритетную задачу
+            if (priority &lt; conflicting.priority) {
+                await this.rescheduleTask(conflicting.id, this.addMinutes(conflicting.scheduled_end, 30));
+                return { start: currentSlot, end: this.addMinutes(currentSlot, durationMinutes) };
+            }
+            currentSlot = conflicting.scheduled_end;
+        }
+    }
+
+    // Расчёт даты выполнения для клиента (с буфером)
+    async calculateCompletionDate(order) {
+        const scheduled = await this.scheduleOrder(order);
+        const bufferHours = 4;
+        const completionWithBuffer = new Date(scheduled.scheduledCompletion);
+        completionWithBuffer.setHours(completionWithBuffer.getHours() + bufferHours);
+        return {
+            plannedDate: scheduled.scheduledCompletion,
+            guaranteedDate: completionWithBuffer,
+            workingDays: await this.calculateWorkingDays(order.created_at, completionWithBuffer)
+        };
+    }
+}
+</code></pre>
+<p>Формула загрузки дня в визуализации:</p>
+<pre><code>loadPercent = totalMinutes / availableMinutes * 100
+availableMinutes = work_hours_end - work_hours_start (в минутах)
+</code></pre>
+<h3 id="15-интерфейс-планировщика-календарь-загрузки">1.5. Интерфейс планировщика (календарь загрузки)</h3>
+<p>Для администратора/мастера выводится календарь загрузки по выбранному участку и оборудованию с тепловой картой загрузки по дням и детализацией по часам.</p>
+<pre><code>ПЛАНИРОВЩИК ПРОИЗВОДСТВА
+Участок: [ Печатный цех ▼ ]  Оборудование: [ Konica C6085 ▼ ]
+Период: [ Март 2026 ▼ ]
+
+ Пн 10     Вт 11     Ср 12     Чт 13     Пт 14     Сб 15
+ ██████    ██████    ██████    ██████    ██████    ░░░░░░
+ Заказ123  Заказ124  Заказ125  Заказ126  Заказ127  Выходной
+   80%       85%       75%       90%       70%
+
+ДЕТАЛИ НА 11.03.2026:
+ 08:00 - 09:00 │ Плановое ТО
+ 09:00 - 11:30 │ Заказ 124: Листовки А4, 5000 шт
+ 11:30 - 12:00 │ Перерыв
+ 12:00 - 14:30 │ Заказ 128: Наклейки, 1000 шт
+ 14:30 - 15:00 │ Свободно
+ 15:00 - 17:00 │ Заказ 129: Брошюры, 200 шт
+
+[ + НОВЫЙ ЗАКАЗ ] [ ПЕРЕПЛАНИРОВАТЬ ] [ ОТЧЁТЫ ]
+</code></pre>
+<h3 id="16-интерфейс-менеджера-расчёт-сроков">1.6. Интерфейс менеджера: расчёт сроков</h3>
+<p>При расчёте сроков менеджер видит текущую загрузку оборудования, ближайшие свободные слоты и варианты планирования с разными приоритетами.</p>
+<pre><code>РАСЧЁТ СРОКОВ ВЫПОЛНЕНИЯ
+Заказ: Листовки А5, 5000 шт
+
+ТЕКУЩАЯ ЗАГРУЗКА:
+ Оборудование    │ Загрузка │ Ближайший слот
+ Konica C6085    │ 85%      │ 13.03.2026 09:00
+ Резак Boway     │ 60%      │ 12.03.2026 14:00
+ Плоттер Mimaki  │ 30%      │ 11.03.2026 15:00
+
+ВАРИАНТЫ ПЛАНИРОВАНИЯ:
+ ● Приоритет: срочный (1.5×)
+   Печать: 13.03 09:00 | Резка: 13.03 14:00 | Готово: 13.03 18:00 (сегодня-завтра)
+ ○ Приоритет: обычный
+   Печать: 14.03 09:00 | Резка: 15.03 10:00 | Готово: 15.03 14:00
+ ○ Приоритет: эконом
+   Печать: 16.03 09:00 | Резка: 17.03 11:00 | Готово: 17.03 15:00
+
+ВЫБРАННЫЙ ВАРИАНТ: Срочный
+Дата готовности: 13.03.2026 18:00
+(с учётом буфера 4ч: 14.03.2026 10:00)
+
+[ ПОДТВЕРДИТЬ КЛИЕНТУ ] [ ИЗМЕНИТЬ ПРИОРИТЕТ ]
+</code></pre>
+<p>Соответствие приоритетов уровню очереди (<code>priority</code>, меньше = выше):</p>
+<table>
+<thead>
+<tr>
+<th>Вариант</th>
+<th>Значение <code>priority</code></th>
+<th>Коэффициент</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Срочный</td>
+<td>50</td>
+<td>1.5×</td>
+</tr>
+<tr>
+<td>Обычный</td>
+<td>100</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Эконом</td>
+<td>200</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="17-api-планировщика">1.7. API планировщика</h3>
+<pre><code class="language-javascript">const schedulerAPI = {
+    // Получить загрузку оборудования
+    getEquipmentLoad: async (req, res) =&gt; {
+        const { equipmentId, startDate, endDate } = req.query;
+        const scheduler = new ProductionScheduler();
+        const load = await scheduler.getEquipmentLoadView(equipmentId, startDate, endDate);
+        res.json(load);
+    },
+
+    // Рассчитать сроки для нового заказа (несколько приоритетов)
+    calculateDeadline: async (req, res) =&gt; {
+        const { order } = req.body;
+        const scheduler = new ProductionScheduler();
+        const options = await Promise.all([
+            scheduler.calculateCompletionDate({ ...order, priority: 50 }),  // срочный
+            scheduler.calculateCompletionDate({ ...order, priority: 100 }), // обычный
+            scheduler.calculateCompletionDate({ ...order, priority: 200 })  // эконом
+        ]);
+        res.json({ urgent: options[0], normal: options[1], economy: options[2] });
+    },
+
+    // Запланировать заказ
+    scheduleOrder: async (req, res) =&gt; {
+        const { order, priority } = req.body;
+        const scheduler = new ProductionScheduler();
+        res.json(await scheduler.scheduleOrder(order, priority));
+    },
+
+    // Перепланировать (при сбоях)
+    rescheduleTask: async (req, res) =&gt; {
+        const { taskId, newStartTime } = req.body;
+        const scheduler = new ProductionScheduler();
+        res.json(await scheduler.rescheduleTask(taskId, newStartTime));
+    }
+};
+</code></pre>
+<h3 id="18-уведомления-планировщика">1.8. Уведомления планировщика</h3>
+<p>Класс <code>ProductionNotifier</code>:</p>
+<ul>
+<li><code>notifyStartTask(task)</code> — уведомляет оператора, что задача готова к выполнению.</li>
+<li><code>notifyDelay(task, delayMinutes)</code> — уведомляет менеджера о задержке и запускает пересчёт всех последующих задач (<code>rescheduleDependentTasks</code>).</li>
+<li><code>notifyCompletion(task)</code> — уведомляет о завершении и активирует следующую задачу в цепочке (<code>activateNextTask</code>).</li>
+</ul>
+<h3 id="19-что-даёт-система-планирования">1.9. Что даёт система планирования</h3>
+<ul>
+<li>Реалистичные сроки — клиент получает дату с учётом реальной загрузки.</li>
+<li>Оптимизация загрузки — оборудование не простаивает, нет авралов.</li>
+<li>Приоритезация — срочные заказы можно поставить вперёд.</li>
+<li>Прозрачность — менеджер видит, когда освободится оборудование.</li>
+<li>Контроль — история простоев и загрузки для анализа.</li>
+<li>Автоматизация — система сама перепланирует при сбоях.</li>
+</ul>
+<hr>
+<h2 id="2-генерация-тз-для-участков-производства">2. Генерация ТЗ для участков производства</h2>
+<p>При переходе заказа на участок система генерирует чёткое техническое задание для исполнителя. Для каждого участка формируется свой набор параметров.</p>
+<h3 id="21-состав-тз-по-участкам">2.1. Состав ТЗ по участкам</h3>
+<p><strong>Для печатника:</strong></p>
+<ul>
+<li>Принтер, бумага, тираж</li>
+<li>Раскладка на листе</li>
+<li>Цветность, вылеты</li>
+</ul>
+<p><strong>Для резчика:</strong></p>
+<ul>
+<li>Схема резов</li>
+<li>Высота стопы</li>
+<li>Допуски</li>
+</ul>
+<p><strong>Для оператора плоттера:</strong></p>
+<ul>
+<li>Тип резки (контурная / линейная)</li>
+<li>Скорость резки</li>
+<li>Расположение меток</li>
+</ul>
+<h3 id="22-пример-тз-на-участок-резки">2.2. Пример ТЗ на участок резки</h3>
+<pre><code>ТЕХНИЧЕСКОЕ ЗАДАНИЕ №123-РЕЗКА
+Заказ: Листовки А5, 5000 шт
+
+УЧАСТОК: Резка
+ОБОРУДОВАНИЕ: Boway BW-4908 V9
+ИСПОЛНИТЕЛЬ: Иванов П.Р.
+СРОК: 11.03.2026 18:00
+
+ИСХОДНЫЕ ДАННЫЕ
+  Материал: Бумага 250 г/м²
+  Формат листа: SRA3 (320×450)
+  Количество листов: 625
+  Раскладка: 4×2 (8 шт/лист)
+  Размер готового: А5 (148×210)
+
+ПАРАМЕТРЫ РЕЗКИ
+  Толщина бумаги: 0.30 мм
+  Макс. листов в стопе: 313
+  Рекомендуемая стопа: 313 листов
+  Количество стоп: 2
+  Высота стопы: 79.8 мм
+  Схема резов:
+  • 3 вертикальных реза
+  • 4 горизонтальных реза на каждую полосу
+  • Всего резов: 7 на стопу
+
+НАСТРОЙКИ ОБОРУДОВАНИЯ
+  Давление прижима: среднее
+  Скорость реза: 0.5 мин/рез
+  Точность: 0.1 мм
+  Дополнительно: использовать задний упор
+
+КОНТРОЛЬ КАЧЕСТВА
+  Проверить первую стопу
+  Допуск: ±0.5 мм
+  Проверить 5% готовой продукции
+
+[ ПОДТВЕРДИТЬ ВЫПОЛНЕНИЕ ] [ СООБЩИТЬ О ПРОБЛЕМЕ ]
+</code></pre>
+<p>ТЗ можно отправить в Telegram или распечатать.</p>
+<blockquote>
+<p>Примечание: это пример ТЗ, а не вывод формулы. Параметры резака Boway BW-4908 V9 задаются в конструкторе оборудования (карточка модели — см. <a href="06-production--equipment.html#41-%D1%80%D0%B5%D0%B7%D0%B0%D0%BA-%D0%B3%D0%B8%D0%BB%D1%8C%D0%BE%D1%82%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9-boway-bw-4908-v9">Оборудование и нормативы, раздел 4.1</a>). Каноническое описание гильотины, таблица толщины по плотности, коэффициент уплотнения 0.85, число резов <code>cutsForGrid</code> и вывод итоговой формулы времени резки — в <a href="04-calculators--cutting-lamination-services.html#2-%D0%B3%D0%B8%D0%BB%D1%8C%D0%BE%D1%82%D0%B8%D0%BD%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%B7%D0%BA%D0%B0-boway-bw-4908-v9">Резка, ламинация и доп. услуги, раздел 2 «Гильотинная резка»</a>. Базовая формула: <code>setup_time + (stacks * cuts * speed * (1 + (stack_height / max_height) * 0.5))</code>.</p>
+</blockquote>
+<hr>
+<h2 id="3-обратная-связь-от-производства">3. Обратная связь от производства</h2>
+<p>Без обратной связи расчёты остаются теорией; с обратной связью они становятся точными и постоянно улучшаются. Эта подсистема делает CRM самообучающейся.</p>
+<h3 id="31-что-собирает-система">3.1. Что собирает система</h3>
+<p>Цикл данных:</p>
+<pre><code>ЗАКАЗ → ПЛАНИРОВАНИЕ → ВЫПОЛНЕНИЕ → ФАКТ → АНАЛИЗ → КОРРЕКТИРОВКА
+        (расчёт)                    (данные)      (формул, нормативов)
+</code></pre>
+<p>Собираемые данные:</p>
+<ul>
+<li>Фактическое время выполнения операций</li>
+<li>Фактический расход материалов</li>
+<li>Простои и их причины</li>
+<li>Брак и его причины</li>
+<li>Комментарии операторов</li>
+<li>Отклонения от плана</li>
+</ul>
+<h3 id="32-архитектура-обратной-связи">3.2. Архитектура обратной связи</h3>
+<pre><code>УРОВЕНЬ 1: Сбор данных
+├── С терминалов на производстве
+├── С мобильных устройств операторов
+├── Автоматически с оборудования (датчики)
+└── Ручной ввод (мастера, технологи)
+
+УРОВЕНЬ 2: Обработка и валидация
+├── Проверка на аномалии
+├── Привязка к заказам и операциям
+└── Категоризация отклонений
+
+УРОВЕНЬ 3: Анализ и отчётность
+├── Сравнение план/факт
+├── Тренды и закономерности
+├── Выявление узких мест
+└── Прогнозирование с учётом истории
+
+УРОВЕНЬ 4: Обратное влияние на расчёты
+├── Автокорректировка нормативов
+├── Ручное утверждение изменений
+└── Версионирование формул
+</code></pre>
+<h3 id="33-структура-бд-обратной-связи">3.3. Структура БД обратной связи</h3>
+<pre><code class="language-sql">-- 1. Фактическое выполнение задач
+CREATE TABLE production_task_execution (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT NOT NULL,                          -- ссылка на production_schedule
+    -- Временные метки (факт)
+    actual_start TIMESTAMP NOT NULL,
+    actual_end TIMESTAMP NOT NULL,
+    actual_duration_minutes INT GENERATED ALWAYS AS (TIMESTAMPDIFF(MINUTE, actual_start, actual_end)) STORED,
+    -- Расхождение с планом
+    planned_duration_minutes INT NOT NULL,
+    deviation_minutes INT GENERATED ALWAYS AS (actual_duration_minutes - planned_duration_minutes) STORED,
+    deviation_percent DECIMAL(5,2) GENERATED ALWAYS AS ((actual_duration_minutes - planned_duration_minutes) / planned_duration_minutes * 100) STORED,
+    -- Кто выполнял
+    operator_id INT,
+    operator_comment TEXT,
+    -- Статус выполнения
+    execution_status ENUM('completed', 'partial', 'failed', 'reworked') DEFAULT 'completed',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    INDEX idx_task (task_id),
+    INDEX idx_dates (actual_start, actual_end)
+);
+
+-- 2. Фактический расход материалов
+CREATE TABLE production_material_usage (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT NOT NULL,
+    material_id INT NOT NULL,
+    -- Плановый расход
+    planned_quantity DECIMAL(10,2) NOT NULL,
+    planned_unit VARCHAR(20) NOT NULL,             -- 'лист', 'кг', 'м'
+    -- Фактический расход
+    actual_quantity DECIMAL(10,2) NOT NULL,
+    waste_quantity DECIMAL(10,2) DEFAULT 0,        -- отходы/брак
+    -- Отклонение
+    deviation_quantity DECIMAL(10,2) GENERATED ALWAYS AS (actual_quantity - planned_quantity) STORED,
+    deviation_percent DECIMAL(5,2) GENERATED ALWAYS AS ((actual_quantity - planned_quantity) / planned_quantity * 100) STORED,
+    -- Причины отклонения
+    waste_reason VARCHAR(255),
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    FOREIGN KEY (material_id) REFERENCES materials(id),
+    INDEX idx_task_material (task_id, material_id)
+);
+
+-- 3. Простои и инциденты
+CREATE TABLE production_incidents (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT,
+    equipment_id INT NOT NULL,
+    incident_type ENUM(
+        'breakdown',        -- поломка
+        'setup_issue',      -- проблемы с настройкой
+        'material_issue',   -- проблемы с материалом
+        'quality_issue',    -- проблемы с качеством
+        'operator_absence', -- отсутствие оператора
+        'power_outage',     -- отключение электричества
+        'other'
+    ) NOT NULL,
+    -- Время инцидента
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP,
+    duration_minutes INT,                          -- вычисляется при end_time
+    -- Описание
+    description TEXT,
+    severity ENUM('low', 'medium', 'high', 'critical') DEFAULT 'medium',
+    -- Действия
+    actions_taken TEXT,
+    -- Кто зафиксировал
+    reported_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    INDEX idx_equipment_dates (equipment_id, start_time)
+);
+
+-- 4. Брак и его причины
+CREATE TABLE production_defects (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT NOT NULL,
+    defect_type ENUM(
+        'printing',        -- проблемы печати
+        'cutting',         -- проблемы резки
+        'lamination',      -- проблемы ламинации
+        'binding',         -- проблемы переплёта
+        'color_mismatch',  -- несовпадение цвета
+        'misregistration', -- несовмещение
+        'damage',          -- повреждение
+        'other'
+    ) NOT NULL,
+    -- Количество бракованных единиц
+    defect_quantity INT NOT NULL,
+    total_quantity INT NOT NULL,                   -- всего в задании
+    defect_percent DECIMAL(5,2) GENERATED ALWAYS AS (defect_quantity / total_quantity * 100) STORED,
+    -- Причина
+    cause VARCHAR(255),
+    responsible_party ENUM('client', 'production', 'material', 'unknown') DEFAULT 'unknown',
+    -- Можно ли переделать
+    rework_possible BOOLEAN DEFAULT false,
+    rework_time_minutes INT,
+    -- Фото/документация
+    attachments JSON,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id)
+);
+
+-- 5. Оценка точности расчётов (для самообучения)
+CREATE TABLE calculation_accuracy (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    formula_id INT,                                -- какая формула использовалась
+    task_id INT NOT NULL,
+    -- Что рассчитывали
+    calculation_type ENUM('time', 'material', 'cost') NOT NULL,
+    predicted_value DECIMAL(10,2) NOT NULL,
+    actual_value DECIMAL(10,2) NOT NULL,
+    error_percent DECIMAL(5,2) GENERATED ALWAYS AS (ABS(actual_value - predicted_value) / predicted_value * 100) STORED,
+    -- Контекст (параметры заказа)
+    context JSON,
+    -- Рекомендация по корректировке
+    recommended_adjustment DECIMAL(5,2),           -- на сколько % изменить формулу
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (formula_id) REFERENCES equipment_formulas(id),
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    INDEX idx_formula (formula_id, error_percent)
+);
+
+-- 6. Комментарии операторов (свободная форма)
+CREATE TABLE operator_feedback (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    task_id INT NOT NULL,
+    operator_id INT NOT NULL,
+    -- Тип обратной связи
+    feedback_type ENUM('suggestion', 'problem', 'improvement', 'note') DEFAULT 'note',
+    -- Текст
+    comment TEXT NOT NULL,
+    -- Важность
+    importance ENUM('low', 'medium', 'high') DEFAULT 'medium',
+    -- Принятые меры
+    actions_taken TEXT,
+    resolved_by INT,
+    resolved_at TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES production_schedule(id),
+    INDEX idx_task_feedback (task_id)
+);
+</code></pre>
+<h3 id="34-класс-сбора-и-анализа-обратной-связи">3.4. Класс сбора и анализа обратной связи</h3>
+<p>Класс <code>ProductionFeedbackCollector</code> фиксирует факт выполнения, расход материалов, инциденты, брак, ведёт оценку точности расчётов и строит дашборд руководителя.</p>
+<p><strong>Пороги отклонений (в %):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Warning</th>
+<th>Critical</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Время (<code>time</code>)</td>
+<td>15</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Материал (<code>material</code>)</td>
+<td>5</td>
+<td>10</td>
+</tr>
+</tbody>
+</table>
+<p>Логика обработки:</p>
+<ul>
+<li>При фиксации выполнения (<code>recordTaskCompletion</code>): если <code>|deviation_percent| &gt; 30</code> — уведомление о критическом отклонении (<code>notifyCriticalDeviation</code>); если <code>&gt; 15</code> — запись в лог отклонений (<code>logDeviation</code>); в любом случае записывается история точности расчётов.</li>
+<li>При фиксации расхода (<code>recordMaterialUsage</code>): если перерасход <code>deviation_percent &gt; 10</code> (critical) — уведомление о перерасходе материала.</li>
+<li>При фиксации инцидента (<code>recordIncident</code>): если инцидент связан с задачей — перепланирование последующих задач (<code>rescheduleAffectedTasks</code>). Длительность вычисляется как <code>EXTRACT(EPOCH FROM (end_time - start_time))/60</code>.</li>
+<li>При фиксации брака (<code>recordDefects</code>): если <code>responsible_party = 'production'</code> — создаётся задача на анализ качества (<code>createQualityTask</code>).</li>
+</ul>
+<pre><code class="language-javascript">class ProductionFeedbackCollector {
+    constructor() {
+        this.deviationThresholds = {
+            time: { warning: 15, critical: 30 },      // % отклонения
+            material: { warning: 5, critical: 10 }    // % отклонения
+        };
+    }
+
+    // Фиксация выполнения задачи
+    async recordTaskCompletion(taskId, data) {
+        const { actualStart, actualEnd, operatorId, comment } = data;
+        const task = await db.query('SELECT * FROM production_schedule WHERE id = $1', [taskId]);
+        const execution = await db.query(`
+            INSERT INTO production_task_execution
+            (task_id, actual_start, actual_end, planned_duration_minutes, operator_id, operator_comment)
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING *
+        `, [taskId, actualStart, actualEnd, task.planned_duration_minutes, operatorId, comment]);
+
+        const deviation = execution.deviation_percent;
+        if (Math.abs(deviation) &gt; this.deviationThresholds.time.critical) {
+            await this.notifyCriticalDeviation(task, execution);
+        } else if (Math.abs(deviation) &gt; this.deviationThresholds.time.warning) {
+            await this.logDeviation(task, execution);
+        }
+        await this.recordCalculationAccuracy(task, execution);
+        return execution;
+    }
+
+    // Анализ точности формул и предложение корректировок
+    async analyzeFormulaAccuracy(formulaId, days = 30) {
+        const stats = await db.query(`
+            SELECT
+                AVG(error_percent) as avg_error,
+                STDDEV(error_percent) as stddev_error,
+                MIN(error_percent) as min_error,
+                MAX(error_percent) as max_error,
+                COUNT(*) as samples,
+                PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY error_percent) as median_error
+            FROM calculation_accuracy
+            WHERE formula_id = $1
+                AND created_at &gt;= NOW() - INTERVAL '${days} days'
+        `, [formulaId]);
+
+        const recommendation = {
+            formulaId,
+            avgError: stats.avg_error,
+            stability: stats.stddev_error / stats.avg_error, // чем меньше, тем стабильнее
+            samples: stats.samples,
+            suggestedAdjustment: this.calculateAdjustment(stats),
+            confidence: this.calculateConfidence(stats.samples, stats.stddev_error)
+        };
+        // Достаточно данных и систематическая ошибка — предлагаем корректировку
+        if (recommendation.samples &gt;= 10 &amp;&amp; Math.abs(stats.avg_error) &gt; 10) {
+            await this.createAdjustmentProposal(recommendation);
+        }
+        return recommendation;
+    }
+
+    // Расчёт рекомендуемой корректировки формулы
+    calculateAdjustment(stats) {
+        if (Math.abs(stats.avg_error) &gt; 15 &amp;&amp; stats.samples &gt; 20) {
+            return {
+                type: 'multiplier',
+                value: 1 - (stats.avg_error / 100),
+                description: `Уменьшить расчётное время на ${Math.abs(stats.avg_error).toFixed(1)}%`
+            };
+        }
+        return null;
+    }
+}
+</code></pre>
+<p><strong>Дашборд руководителя производства</strong> (<code>getProductionDashboard</code>) включает:</p>
+<ul>
+<li>Общую статистику: всего задач, среднее отклонение, число критических отклонений (<code>|deviation_percent| &gt; 30</code>), число проваленных задач (<code>execution_status = 'failed'</code>).</li>
+<li>ТОП-5 проблемного оборудования по суммарному простою (<code>production_incidents</code>).</li>
+<li>Основные причины брака с группировкой по <code>defect_type</code>.</li>
+<li>Точность планирования по дням (среднее отклонение).</li>
+<li>Автоматические рекомендации.</li>
+</ul>
+<h3 id="35-формулы-обратной-связи">3.5. Формулы обратной связи</h3>
+<pre><code># Отклонение по времени
+deviation_minutes = actual_duration_minutes - planned_duration_minutes
+deviation_percent = (actual_duration_minutes - planned_duration_minutes) / planned_duration_minutes * 100
+
+# Отклонение по материалу
+deviation_quantity = actual_quantity - planned_quantity
+deviation_percent  = (actual_quantity - planned_quantity) / planned_quantity * 100
+
+# Процент брака
+defect_percent = defect_quantity / total_quantity * 100
+
+# Ошибка расчёта (точность формулы)
+error_percent = ABS(actual_value - predicted_value) / predicted_value * 100
+
+# Длительность инцидента
+duration_minutes = (end_time - start_time) в минутах
+</code></pre>
+<h3 id="36-терминал-оператора-на-производстве">3.6. Терминал оператора на производстве</h3>
+<pre><code>ТЕРМИНАЛ УЧАСТКА: Печатный цех
+ОПЕРАТОР: Иванов П. (смена А)
+
+ТЕКУЩЕЕ ЗАДАНИЕ:
+ Заказ №124 | Листовки А5, 5000 шт
+ Оборудование: Konica C6085
+ План: 09:00 - 11:30 (150 мин)
+ Текущее время: 10:45
+ Прогресс: ███████████░░░░░░░ 70%
+ [ ЗАВЕРШИТЬ ЗАДАНИЕ ] [ ПРОБЛЕМА ] [ ПЕРЕРЫВ ]
+
+СЛЕДУЮЩЕЕ ЗАДАНИЕ:
+ Заказ №125 | Наклейки, 1000 шт
+ Оборудование: Konica C6085
+ План: 11:45 - 13:15
+ Материалы: Плёнка ORAJET 3552
+
+СООБЩИТЬ О ПРОБЛЕМЕ:
+ Тип: [ Поломка оборудования ▼ ]
+ Описание: ____________________
+ [ ] Остановить задание
+ [ ОТПРАВИТЬ ]
+</code></pre>
+<h3 id="37-интерфейс-мастера-технолога-аналитика">3.7. Интерфейс мастера / технолога (аналитика)</h3>
+<pre><code>АНАЛИТИКА ПРОИЗВОДСТВА за Март 2026
+
+ОСНОВНЫЕ ПОКАЗАТЕЛИ:
+ Выполнено задач: 245
+ Среднее отклонение: +8.3% (перерасход времени)
+ Критических отклонений (&gt;30%): 12
+ Брак: 2.4%
+
+ГРАФИК ОТКЛОНЕНИЙ ПО ДНЯМ:
+  +20% ┼          ●
+  +10% ┼     ●    │  ●          ●
+    0% ┼────●─────┼────●────●───┼────●────●─────
+  -10% ┼          │         ●    │
+       └──────────┴──────────────┴──────────►
+         1-7      8-14        15-21       22-28
+
+ПРОБЛЕМНОЕ ОБОРУДОВАНИЕ:
+ Оборудование    │ Простои (ч) │ Причина
+ Konica C3070L   │ 12.5        │ Поломка узла подачи
+ Резак Boway     │ 8.2         │ Замена ножа
+ Плоттер Mimaki  │ 5.1         │ Калибровка
+
+ОСНОВНЫЕ ПРИЧИНЫ БРАКА:
+ ● Несовмещение цветов: 35%
+ ● Проблемы резки: 28%
+ ● Дефекты ламинации: 22%
+ ● Прочее: 15%
+
+РЕКОМЕНДАЦИИ ПО КОРРЕКТИРОВКЕ:
+ ⚠ Формула времени для Konica C3070L занижена на 15%
+   [ ПРИНЯТЬ КОРРЕКТИРОВКУ ] [ ОТКЛОНИТЬ ]
+ ⚠ Расход плёнки для наклеек завышен на 8%
+   [ ПРИНЯТЬ КОРРЕКТИРОВКУ ] [ ОТКЛОНИТЬ ]
+</code></pre>
+<h3 id="38-уведомления-о-критических-отклонениях">3.8. Уведомления о критических отклонениях</h3>
+<p>Класс <code>DeviationNotifier</code>:</p>
+<ul>
+<li><code>notifyCriticalDeviation(task, execution)</code> — формирует сообщение (заказ, операция, план/факт в минутах, отклонение в %, оператор), отправляет руководителю с приоритетом <code>high</code> и создаёт задачу на анализ (<code>createAnalysisTask</code>).</li>
+<li><code>notifyMaterialOveruse(usage)</code> — формирует сообщение о перерасходе (материал, план/факт, отклонение, причина) и отправляет на склад (<code>sendToWarehouse</code>).</li>
+</ul>
+<hr>
+<h2 id="4-самообучение-системы">4. Самообучение системы</h2>
+<p>Подсистема <code>SelfLearningSystem</code> анализирует точность формул на реальных данных и предлагает корректировки нормативов с версионированием.</p>
+<h3 id="41-логика-анализа-и-корректировки">4.1. Логика анализа и корректировки</h3>
+<p>Отбор неточных формул за последние 30 дней:</p>
+<pre><code class="language-sql">SELECT formula_id, AVG(error_percent) as avg_error, COUNT(*) as samples
+FROM calculation_accuracy
+WHERE created_at &gt;= NOW() - INTERVAL '30 days'
+GROUP BY formula_id
+HAVING AVG(error_percent) &gt; 15 AND COUNT(*) &gt; 20
+</code></pre>
+<p>Условия для предложения корректировки:</p>
+<ul>
+<li>Средняя ошибка <code>avg_error &gt; 15%</code> И число замеров <code>samples &gt; 20</code>.</li>
+<li>Альтернативный порог в <code>analyzeFormulaAccuracy</code>: <code>samples &gt;= 10</code> И <code>|avg_error| &gt; 10%</code>.</li>
+</ul>
+<p>Расчёт корректирующего множителя и уверенности:</p>
+<pre><code>suggestedMultiplier = 1 - (avg_error / 100)
+confidence = min(samples / 50, 0.95)   # чем больше данных, тем выше уверенность
+</code></pre>
+<h3 id="42-применение-корректировки-версионирование-формул">4.2. Применение корректировки (версионирование формул)</h3>
+<p>При утверждении (<code>applyAdjustment(adjustmentId, approvedBy)</code>) создаётся новая версия формулы: <code>version + 1</code>, текст формулы домножается на <code>suggestedMultiplier</code>, проставляется автор, ссылка на родительскую формулу (<code>parent_formula_id</code>), а старая версия помечается как неактивная (<code>is_current = false</code>).</p>
+<pre><code class="language-javascript">class SelfLearningSystem {
+    async analyzeAndAdjust() {
+        const inaccurateFormulas = await db.query(`
+            SELECT formula_id, AVG(error_percent) as avg_error, COUNT(*) as samples
+            FROM calculation_accuracy
+            WHERE created_at &gt;= NOW() - INTERVAL '30 days'
+            GROUP BY formula_id
+            HAVING AVG(error_percent) &gt; 15 AND COUNT(*) &gt; 20
+        `);
+        for (const formula of inaccurateFormulas) {
+            const adjustment = {
+                formulaId: formula.formula_id,
+                currentAvgError: formula.avg_error,
+                suggestedMultiplier: 1 - (formula.avg_error / 100),
+                confidence: Math.min(formula.samples / 50, 0.95)
+            };
+            await this.createAdjustmentProposal(adjustment);
+        }
+    }
+
+    async applyAdjustment(adjustmentId, approvedBy) {
+        const proposal = await db.query('SELECT * FROM formula_adjustments WHERE id = $1', [adjustmentId]);
+        await db.query(`
+            INSERT INTO equipment_formulas
+            (equipment_id, version, formula_text, variables, description, changed_by, parent_formula_id)
+            SELECT equipment_id, version + 1, formula_text * $1, variables, $2, $3, id
+            FROM equipment_formulas WHERE id = $4
+        `, [
+            proposal.suggestedMultiplier,
+            `Автокорректировка на основе фактических данных (ошибка была ${proposal.currentAvgError}%)`,
+            approvedBy,
+            proposal.formulaId
+        ]);
+        await db.query('UPDATE equipment_formulas SET is_current = false WHERE id = $1', [proposal.formulaId]);
+    }
+}
+</code></pre>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: применение корректировки формулы реализовано упрощённо — <code>formula_text * $1</code> домножает текст формулы на множитель напрямую. В исходнике отмечено: «упрощённо, реально нужно парсить формулу». Механизм корректного применения множителя к текстовой формуле не определён.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: таблица <code>formula_adjustments</code> (источник предложений корректировок) и таблица <code>equipment_formulas</code> с полями <code>version</code>, <code>is_current</code>, <code>parent_formula_id</code>, <code>variables</code>, <code>changed_by</code> используются в коде самообучения, но их DDL в данном разделе не приведён (относятся к модулю конструктора оборудования/формул).</p>
+<h3 id="43-что-даёт-самообучение-и-обратная-связь">4.3. Что даёт самообучение и обратная связь</h3>
+<ul>
+<li>Точность расчётов — формулы самообучаются на реальных данных.</li>
+<li>Прозрачность производства — видно, где и почему возникают проблемы.</li>
+<li>Контроль качества — учёт брака и его причин.</li>
+<li>Оптимизация — выявление узких мест.</li>
+<li>Мотивация — операторы видят влияние своей работы.</li>
+<li>История — база знаний о реальных возможностях оборудования.</li>
+<li>Прогнозирование — с учётом исторических данных.</li>
+</ul>
+<hr>
+<h2 id="5-производственный-модуль-в-интерфейсе-менеджера-просмотр">5. Производственный модуль в интерфейсе менеджера (просмотр)</h2>
+<p>Менеджеру доступен раздел производственного модуля в режиме просмотра. Детальный разбор прототипа интерфейса — в документации по прототипу CRM-интерфейса; здесь зафиксирована производственная суть просмотра.</p>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Календарь загрузки оборудования</td>
+<td>По дням, по станкам (принтеры, резаки, плоттеры)</td>
+</tr>
+<tr>
+<td>Очередь заданий</td>
+<td>Список активных производственных задач с привязкой к заказам</td>
+</tr>
+<tr>
+<td>ТЗ для цеха</td>
+<td>Детальные инструкции (формат, бумага, раскладка, параметры резки, срок); можно отправить в Telegram или распечатать</td>
+</tr>
+<tr>
+<td>Комментарии операторов</td>
+<td>Обратная связь от производства (фактическое время, брак, проблемы)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#состав-модуля-что-спроектировано">Состав модуля (что спроектировано)</a></li><li class="lvl2"><a href="#1-производственный-календарь-и-планировщик-загрузки">1. Производственный календарь и планировщик загрузки</a></li><li class="lvl3"><a href="#11-понятие-производственного-календаря">1.1. Понятие производственного календаря</a></li><li class="lvl3"><a href="#12-архитектура-системы-планирования">1.2. Архитектура системы планирования</a></li><li class="lvl3"><a href="#13-структура-бд-производственного-календаря">1.3. Структура БД производственного календаря</a></li><li class="lvl3"><a href="#14-класс-планировщика-производства">1.4. Класс планировщика производства</a></li><li class="lvl3"><a href="#15-интерфейс-планировщика-календарь-загрузки">1.5. Интерфейс планировщика (календарь загрузки)</a></li><li class="lvl3"><a href="#16-интерфейс-менеджера-расчёт-сроков">1.6. Интерфейс менеджера: расчёт сроков</a></li><li class="lvl3"><a href="#17-api-планировщика">1.7. API планировщика</a></li><li class="lvl3"><a href="#18-уведомления-планировщика">1.8. Уведомления планировщика</a></li><li class="lvl3"><a href="#19-что-даёт-система-планирования">1.9. Что даёт система планирования</a></li><li class="lvl2"><a href="#2-генерация-тз-для-участков-производства">2. Генерация ТЗ для участков производства</a></li><li class="lvl3"><a href="#21-состав-тз-по-участкам">2.1. Состав ТЗ по участкам</a></li><li class="lvl3"><a href="#22-пример-тз-на-участок-резки">2.2. Пример ТЗ на участок резки</a></li><li class="lvl2"><a href="#3-обратная-связь-от-производства">3. Обратная связь от производства</a></li><li class="lvl3"><a href="#31-что-собирает-система">3.1. Что собирает система</a></li><li class="lvl3"><a href="#32-архитектура-обратной-связи">3.2. Архитектура обратной связи</a></li><li class="lvl3"><a href="#33-структура-бд-обратной-связи">3.3. Структура БД обратной связи</a></li><li class="lvl3"><a href="#34-класс-сбора-и-анализа-обратной-связи">3.4. Класс сбора и анализа обратной связи</a></li><li class="lvl3"><a href="#35-формулы-обратной-связи">3.5. Формулы обратной связи</a></li><li class="lvl3"><a href="#36-терминал-оператора-на-производстве">3.6. Терминал оператора на производстве</a></li><li class="lvl3"><a href="#37-интерфейс-мастера-технолога-аналитика">3.7. Интерфейс мастера / технолога (аналитика)</a></li><li class="lvl3"><a href="#38-уведомления-о-критических-отклонениях">3.8. Уведомления о критических отклонениях</a></li><li class="lvl2"><a href="#4-самообучение-системы">4. Самообучение системы</a></li><li class="lvl3"><a href="#41-логика-анализа-и-корректировки">4.1. Логика анализа и корректировки</a></li><li class="lvl3"><a href="#42-применение-корректировки-версионирование-формул">4.2. Применение корректировки (версионирование формул)</a></li><li class="lvl3"><a href="#43-что-даёт-самообучение-и-обратная-связь">4.3. Что даёт самообучение и обратная связь</a></li><li class="lvl2"><a href="#5-производственный-модуль-в-интерфейсе-менеджера-просмотр">5. Производственный модуль в интерфейсе менеджера (просмотр)</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>

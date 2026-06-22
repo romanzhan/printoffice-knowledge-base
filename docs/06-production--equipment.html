@@ -1,0 +1,1425 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Оборудование и нормативы — PrintOffice</title>
+<link rel="preconnect" href="">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body data-page="06-production--equipment">
+<header class="topbar"><div class="topbar__inner">
+  <button class="burger" aria-label="Меню" onclick="document.body.classList.toggle('nav-open')">☰</button>
+  <a class="brand" href="index.html"><span class="brand__name">PrintOffice</span><span class="brand__sub">Система управления типографией</span></a>
+  <button class="search-trigger" id="searchBtn" type="button" aria-label="Поиск (Ctrl K)">
+    <svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+    <span class="search-trigger__label">Поиск по базе знаний…</span>
+    <span class="kbd"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+  </button>
+</div></header>
+<div class="layout">
+  <aside class="sidebar"><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧭</span><span>Обзор</span></div><ul><li><a href="00-overview.html">О продукте</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔄</span><span>Бизнес-процессы</span></div><ul><li><a href="01-business-processes.html">Путь клиента (Event Map)</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">👥</span><span>CRM</span></div><ul><li><a href="02-crm--crm-overview.html">Обзор CRM</a></li><li><a href="02-crm--orders.html">Заказы</a></li><li><a href="02-crm--clients.html">Клиенты</a></li><li><a href="02-crm--communications.html">Коммуникации</a></li><li><a href="02-crm--roles-permissions.html">Роли и права</a></li><li><a href="02-crm--automations.html">Автоматизации</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🌐</span><span>Сайт и клиент</span></div><ul><li><a href="03-site-client--site-structure.html">Структура сайта</a></li><li><a href="03-site-client--homepage-ux.html">Главная и UX</a></li><li><a href="03-site-client--client-cabinet.html">Кабинет клиента</a></li><li><a href="03-site-client--brief-constructor.html">Конструктор брифов</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🧮</span><span>Калькуляторы</span></div><ul><li><a href="04-calculators--pricing-model.html">Модель цены и маржи</a></li><li><a href="04-calculators--digital-print.html">Цифровая печать</a></li><li><a href="04-calculators--offset.html">Офсетная печать</a></li><li><a href="04-calculators--wideformat.html">Широкоформат</a></li><li><a href="04-calculators--brochures.html">Брошюры</a></li><li><a href="04-calculators--stickers.html">Наклейки</a></li><li><a href="04-calculators--imposition-bleeds.html">Раскладка и вылеты</a></li><li><a href="04-calculators--cutting-lamination-services.html">Резка, ламинация, услуги</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">📐</span><span>Препресс</span></div><ul><li><a href="05-prepress--preflight.html">Проверка макета</a></li><li><a href="05-prepress--preview-markup.html">Превью с метками</a></li><li><a href="05-prepress--file-management.html">Управление файлами</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🏭</span><span>Производство</span></div><ul><li><a href="06-production--production-module.html">Производственный модуль</a></li><li class="active"><a href="06-production--equipment.html">Оборудование и нормативы</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🚚</span><span>Партнёры и доставка</span></div><ul><li><a href="07-partners-delivery--vendor-engine.html">Подбор подрядчика</a></li><li><a href="07-partners-delivery--partners.html">Партнёры</a></li><li><a href="07-partners-delivery--delivery.html">Доставка</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">🔌</span><span>Интеграции</span></div><ul><li><a href="08-integrations.html">Интеграции</a></li></ul></div><div class="nav-group"><div class="nav-group__title"><span class="gi" aria-hidden="true">⚙️</span><span>Администрирование</span></div><ul><li><a href="09-admin-interface--admin-overview.html">Обзор админки</a></li><li><a href="09-admin-interface--constructors.html">Конструкторы</a></li><li><a href="09-admin-interface--crm-interface-prototype.html">Прототип интерфейса CRM</a></li></ul></div></aside>
+  <main class="content">
+    <article class="md"><h1 id="оборудование-и-нормативы">Оборудование и нормативы</h1>
+<p>Справочник оборудования типографии PrintOffice (печатное и послепечатное), его характеристик и нормативов времени/скоростей, а также универсальный конструктор оборудования и связанные справочники материалов, форматов и цветности. Документ описывает, как из набора параметров и формул собирается расчёт времени производственных операций без участия программиста.</p>
+<h2 id="1-базовые-справочники-статус">1. Базовые справочники (статус)</h2>
+<p>Базовые справочники — это «сырые данные» без привязки к конкретным услугам. Они переиспользуются в конструкторах услуг.</p>
+<table>
+<thead>
+<tr>
+<th>Справочник</th>
+<th>Описание</th>
+<th>Статус</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Оборудование</td>
+<td>Принтеры, резаки, плоттеры, ламинаторы с их характеристиками</td>
+<td>Настроено</td>
+</tr>
+<tr>
+<td>Материалы</td>
+<td>Бумага, плёнки, пружины, картон, самоклейка (каждый вариант — отдельная запись)</td>
+<td>Настроено</td>
+</tr>
+<tr>
+<td>Форматы</td>
+<td>A4, A5, A6, A3, SRA3, евро, нестандартные</td>
+<td>Настроено</td>
+</tr>
+<tr>
+<td>Цветность</td>
+<td>1+0, 1+1, 4+0, 4+4</td>
+<td>Настроено</td>
+</tr>
+<tr>
+<td>Операции</td>
+<td>Ламинация, биговка, фальцовка, резка</td>
+<td>Настроено</td>
+</tr>
+<tr>
+<td>Типы услуг</td>
+<td>Цифровая печать, офсет, широкоформат</td>
+<td>Настроено</td>
+</tr>
+</tbody>
+</table>
+<h3 id="11-структура-базовых-справочников-sql">1.1. Структура базовых справочников (SQL)</h3>
+<pre><code class="language-sql">-- 1.1. Принтеры (оборудование)
+CREATE TABLE printers (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    slug VARCHAR(100),
+    type VARCHAR(50),              -- 'color' или 'bw'
+    max_format_width INT,
+    max_format_height INT,
+    speed_ppm INT,                 -- скорость, листов в минуту
+    cost_per_hour DECIMAL(10,2),   -- стоимость часа работы
+    is_active BOOLEAN
+);
+
+-- 1.2. Материалы (бумага, плёнка и т.д.)
+CREATE TABLE materials (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    category VARCHAR(50),          -- 'paper', 'film', 'binding' и т.д.
+    unit VARCHAR(20),              -- 'лист', 'пачка', 'кв_м', 'рулон'
+    cost_per_unit DECIMAL(10,2),   -- закупочная цена
+    stock_balance INT              -- остаток на складе
+);
+
+-- 1.3. Форматы (стандартные и нестандартные)
+CREATE TABLE formats (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),              -- 'A4', 'A5', 'SRA3', 'custom'
+    width INT,
+    height INT,
+    is_standard BOOLEAN DEFAULT true,
+    description VARCHAR(255)
+);
+
+-- 1.4. Цветность (типы печати)
+CREATE TABLE color_types (
+    id INT PRIMARY KEY,
+    code VARCHAR(10),              -- '1+0', '1+1', '4+0', '4+4'
+    description VARCHAR(255)
+);
+
+-- 1.5. Технологические операции
+CREATE TABLE tech_operations (
+    id INT PRIMARY KEY,
+    name VARCHAR(100),             -- 'резка', 'биговка', 'фальцовка', 'ламинация'
+    unit VARCHAR(20),              -- 'операция', 'минута', 'лист'
+    cost_per_unit DECIMAL(10,2),   -- базовая стоимость
+    time_per_unit INT              -- время в минутах на единицу
+);
+</code></pre>
+<h3 id="12-привязка-к-принтерам-цены-и-возможности">1.2. Привязка к принтерам (цены и возможности)</h3>
+<pre><code class="language-sql">-- 2.1. Цены печати (принтер + материал + формат + цветность)
+CREATE TABLE print_prices (
+    id INT PRIMARY KEY,
+    printer_id INT,
+    material_id INT,
+    format_id INT,
+    color_type_id INT,
+    cost_per_print DECIMAL(10,2),  -- себестоимость одного отпечатка
+    is_active BOOLEAN DEFAULT true,
+    valid_from DATE,
+    valid_to DATE
+);
+
+-- 2.2. Доступные форматы для принтера (с ограничениями)
+CREATE TABLE printer_formats (
+    printer_id INT,
+    format_id INT,
+    max_sheets_per_run INT,        -- макс. листов в прогоне
+    default_bleed INT DEFAULT 3    -- вылеты по умолчанию для этого формата
+);
+
+-- 2.3. Стоимость технологических операций для принтера
+CREATE TABLE printer_operations (
+    printer_id INT,
+    operation_id INT,
+    cost_multiplier DECIMAL(3,2) DEFAULT 1.0,  -- коэффициент к базовой стоимости
+    time_multiplier DECIMAL(3,2) DEFAULT 1.0   -- коэффициент к времени
+);
+</code></pre>
+<h2 id="2-печатное-оборудование-konica-c6085-и-c3070l">2. Печатное оборудование: Konica C6085 и C3070L</h2>
+<blockquote>
+<p>Этот раздел — единственный владелец матрицы скоростей печати и коэффициентов форматов. Калькуляторные файлы (<code>../04-calculators/cutting-lamination-services.md</code>, <code>../04-calculators/imposition-bleeds.md</code>) ссылаются сюда за значениями скоростей и не дублируют таблицы.</p>
+</blockquote>
+<h3 id="21-матрица-скоростей-печати-printer_speed_matrix">2.1. Матрица скоростей печати (<code>printer_speed_matrix</code>)</h3>
+<p>Скорость печати зависит от модели принтера, плотности и типа бумаги (обычная/глянец) и формата. За базу принят A4; хранится в таблице <code>printer_speed_matrix</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Принтер</th>
+<th>Плотность, г/м²</th>
+<th>Тип</th>
+<th>Формат</th>
+<th>Скорость, стр/мин</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C6085</td>
+<td>52–400</td>
+<td>любой</td>
+<td>A4</td>
+<td>85</td>
+</tr>
+<tr>
+<td>C6085</td>
+<td>52–400</td>
+<td>любой</td>
+<td>A3</td>
+<td>85</td>
+</tr>
+<tr>
+<td>C6085</td>
+<td>52–400</td>
+<td>любой</td>
+<td>SRA3</td>
+<td>85</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>62–216</td>
+<td>обычная</td>
+<td>A4</td>
+<td>71</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>62–216</td>
+<td>глянец</td>
+<td>A4</td>
+<td>50</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>217–350</td>
+<td>обычная</td>
+<td>A4</td>
+<td>50</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>217–350</td>
+<td>глянец</td>
+<td>A4</td>
+<td>36</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>52–61</td>
+<td>любой</td>
+<td>A4</td>
+<td>недоступно</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>350–400</td>
+<td>любой</td>
+<td>A4</td>
+<td>недоступно</td>
+</tr>
+</tbody>
+</table>
+<p>Ключевые выводы из матрицы:</p>
+<ul>
+<li><strong>Konica C6085</strong> держит постоянную скорость 85 стр/мин во всём диапазоне плотностей 52–400 г/м² и для всех форматов (A4, A3, SRA3) — большой формат не снижает скорость, просто содержит больше изделий на лист.</li>
+<li><strong>Konica C3070L</strong> имеет переменную скорость, зависящую от плотности и типа поверхности: 71 → 50 → 36 стр/мин; недоступна для очень тонкой (52–61) и очень плотной (350–400) бумаги.</li>
+</ul>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: для C3070L матрица скоростей приведена только для формата A4. Скорости для A3/SRA3 на C3070L не заданы.</p>
+<pre><code class="language-sql">CREATE TABLE printer_speed_matrix (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    printer_id INT NOT NULL,
+    paper_density_from INT,           -- минимальная плотность (г/м²)
+    paper_density_to INT,             -- максимальная плотность (г/м²)
+    paper_type VARCHAR(50),           -- 'обычная','глянец','любая'
+    format_id INT,                    -- ссылка на formats (NULL = все)
+    format_category VARCHAR(20),      -- 'A4','A3','SRA3','все'
+    speed_ppm INT NOT NULL,           -- листов в минуту
+    notes VARCHAR(255),
+    valid_from DATE DEFAULT '2026-01-01',
+    valid_to DATE NULL,
+    FOREIGN KEY (printer_id) REFERENCES printers(id),
+    FOREIGN KEY (format_id) REFERENCES formats(id)
+);
+</code></pre>
+<h3 id="22-коэффициенты-форматов-format_speed_coefficients">2.2. Коэффициенты форматов (<code>format_speed_coefficients</code>)</h3>
+<p>Производительность указывается для A4, поэтому для других форматов хранится коэффициент пересчёта относительно A4 (<code>1.0</code> = как A4; <code>&gt;1.0</code> = медленнее; <code>&lt;1.0</code> = быстрее):</p>
+<table>
+<thead>
+<tr>
+<th>Принтер</th>
+<th>Формат</th>
+<th>Коэффициент</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C6085</td>
+<td>A4</td>
+<td>1.0</td>
+<td>базовый формат</td>
+</tr>
+<tr>
+<td>C6085</td>
+<td>A5</td>
+<td>1.0</td>
+<td>A5 на том же листе A4</td>
+</tr>
+<tr>
+<td>C6085</td>
+<td>A3</td>
+<td>1.0</td>
+<td>A3 = два A4, но скорость та же</td>
+</tr>
+<tr>
+<td>C6085</td>
+<td>SRA3</td>
+<td>1.0</td>
+<td>SRA3 чуть больше A3</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>A4</td>
+<td>1.0</td>
+<td>базовый формат</td>
+</tr>
+<tr>
+<td>C3070L</td>
+<td>A3</td>
+<td>1.2</td>
+<td>A3 медленнее из-за большего размера</td>
+</tr>
+</tbody>
+</table>
+<p>Итоговая скорость для формата: <code>speed = baseSpeed_A4 / coefficient</code> (при коэффициенте &gt;1 скорость снижается).</p>
+<p>Расчёт времени печати (класс <code>PrintTimeCalculator</code>, формула <code>время = листы × копии / скорость + приладка</code>) описан в калькуляторе послепечатных операций — см. <code>../04-calculators/cutting-lamination-services.md</code>, раздел 5.</p>
+<h3 id="23-спецформаты-для-c6085">2.3. Спецформаты для C6085</h3>
+<p>Помимо стандартных форматов, для Konica C6085 поддерживаются спецформаты увеличенной длины:</p>
+<ul>
+<li>330×487 мм</li>
+<li>330×762 мм</li>
+</ul>
+<h2 id="3-универсальный-конструктор-оборудования">3. Универсальный конструктор оборудования</h2>
+<p>Задача конструктора — гибко описывать любое оборудование с его характеристиками и зависимостями (влияющими на скорость работ и расчёт времени) без привлечения программиста для каждого нового станка или зависимости.</p>
+<p>Каждый конструктор привязан к странице сайта: один конструктор = своя страница, страниц может быть несколько.</p>
+<h3 id="31-четыре-уровня-конструктора">3.1. Четыре уровня конструктора</h3>
+<pre><code>УРОВЕНЬ 1: Категории оборудования
+  ├── Печатное оборудование (принтеры)
+  ├── Послепечатное оборудование
+  │    ├── Резаки (гильотинные)
+  │    ├── Ламинаторы (пакетные/рулонные)
+  │    ├── Плоттеры
+  │    ├── Биговальные/фальцовальные машины
+  │    └── ...
+  └── Вспомогательное оборудование
+
+УРОВЕНЬ 2: Типовые параметры для категории
+  ├── Для каждой категории свой набор параметров
+  ├── Типы параметров: числовые, списковые, логические
+  └── Единицы измерения (мм, мин, % и т.д.)
+
+УРОВЕНЬ 3: Конкретные модели оборудования
+  ├── Заполняются значениями параметров
+  └── Привязка к материалам и зависимостям
+
+УРОВЕНЬ 4: Правила расчёта времени
+  ├── Формулы, использующие параметры
+  └── Зависимости от материалов/форматов
+</code></pre>
+<h3 id="32-параметры-по-категориям-требования">3.2. Параметры по категориям (требования)</h3>
+<ul>
+<li><strong>Резак (гильотинный)</strong>: скорость реза, макс. ширина реза, глубина реза, высота стопы.</li>
+<li><strong>Ламинатор пакетный</strong>: максимальный формат; температурные характеристики (влияют на толщину плёнки и вид плёнки — матовая/глянец); скорость ламинации, зависящая от плотности и формата плёнки.</li>
+<li><strong>Ламинатор рулонный</strong>: максимальная ширина ламинации, минимальная ширина, температура, плотность плёнки (влияет на скорость ламинации).</li>
+<li><strong>Плоттер</strong>: максимальный формат, скорость реза, давление ножа на материалах разной плотности.</li>
+</ul>
+<p>У одного оборудования есть привязка к материалу, у другого её может не быть. Скорость выполнения работ может зависеть от формата и/или плотности материала.</p>
+<h3 id="33-структура-бд-конструктора">3.3. Структура БД конструктора</h3>
+<pre><code class="language-sql">-- 1. Категории оборудования
+CREATE TABLE equipment_categories (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,        -- &quot;Резаки гильотинные&quot;
+    code VARCHAR(50) UNIQUE,           -- &quot;guillotine_cutters&quot;
+    description TEXT,
+    icon VARCHAR(255),                 -- иконка для интерфейса
+    sort_order INT DEFAULT 0,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- 2. Типы параметров для категорий
+CREATE TABLE equipment_param_templates (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT NOT NULL,
+    param_name VARCHAR(100) NOT NULL,  -- &quot;Макс. ширина реза&quot;
+    param_code VARCHAR(50) NOT NULL,   -- &quot;max_cut_width&quot;
+    param_type ENUM('number','string','boolean','select') DEFAULT 'number',
+    unit VARCHAR(20),                  -- &quot;мм&quot;, &quot;мин&quot;, &quot;г/м²&quot;
+    select_options JSON,               -- [&quot;глянец&quot;,&quot;мат&quot;,&quot;софт-тач&quot;] (для типа 'select')
+    affects_time BOOLEAN DEFAULT false,-- критичен ли параметр для расчёта времени
+    is_required BOOLEAN DEFAULT true,
+    placeholder VARCHAR(255),
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (category_id) REFERENCES equipment_categories(id),
+    INDEX idx_category (category_id)
+);
+
+-- 3. Конкретные модели оборудования
+CREATE TABLE equipment_models (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    category_id INT NOT NULL,
+    name VARCHAR(255) NOT NULL,        -- &quot;Boway BW-4908 V9&quot;
+    manufacturer VARCHAR(100),         -- &quot;Boway&quot;
+    model_year INT,
+    parameters JSON NOT NULL,          -- {&quot;max_cut_width&quot;:490,&quot;max_stack_height&quot;:80}
+    compatible_materials JSON,         -- [&quot;paper_density:80-300&quot;,&quot;film_type:any&quot;]
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES equipment_categories(id),
+    INDEX idx_category_model (category_id, is_active)
+);
+
+-- 4. Формулы расчёта времени
+CREATE TABLE equipment_time_formulas (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id INT NOT NULL,
+    applies_to VARCHAR(50),            -- &quot;all&quot;,&quot;material_specific&quot;,&quot;format_specific&quot;
+    material_condition JSON,           -- {&quot;density_from&quot;:80,&quot;density_to&quot;:300}
+    format_condition JSON,             -- {&quot;width_from&quot;:0,&quot;height_from&quot;:0}
+    formula_text TEXT NOT NULL,        -- &quot;base_time + (cuts * time_per_cut * (stack_height/80))&quot;
+    available_variables JSON,          -- [&quot;cuts&quot;,&quot;stack_height&quot;,&quot;sheets&quot;]
+    result_unit VARCHAR(20) DEFAULT 'minutes',  -- &quot;minutes&quot;,&quot;seconds&quot;
+    priority INT DEFAULT 100,          -- какую формулу применять первой
+    is_active BOOLEAN DEFAULT true,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id)
+);
+
+-- 5. Зависимости скорость/материал (матрица скоростей)
+CREATE TABLE equipment_speed_matrix (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    equipment_id INT NOT NULL,
+    material_type VARCHAR(50),         -- &quot;paper&quot;,&quot;film&quot;,&quot;any&quot;
+    material_density_from INT,
+    material_density_to INT,
+    material_finish VARCHAR(50),       -- &quot;glossy&quot;,&quot;matte&quot;,&quot;any&quot;
+    format_width INT,                  -- 0 = любой
+    speed_value DECIMAL(10,2) NOT NULL,
+    speed_unit VARCHAR(20) DEFAULT 'mm/sec',  -- &quot;mm/sec&quot;,&quot;sheets/min&quot;,&quot;m/min&quot;
+    notes TEXT,
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    INDEX idx_equipment_material (equipment_id, material_type)
+);
+</code></pre>
+<h3 id="34-привязка-конструктора-к-оборудованию-и-операциям">3.4. Привязка конструктора к оборудованию и операциям</h3>
+<pre><code class="language-sql">-- Связь конструкторов с оборудованием
+CREATE TABLE constructor_equipment (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    constructor_id INT NOT NULL,
+    equipment_id INT NOT NULL,
+    usage_type ENUM('primary','optional','alternative') DEFAULT 'primary',
+    priority INT DEFAULT 100,
+    default_settings JSON,             -- {&quot;use_for&quot;:&quot;all&quot;,&quot;auto_select&quot;:true}
+    FOREIGN KEY (constructor_id) REFERENCES service_constructors(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    UNIQUE KEY unique_constructor_equipment (constructor_id, equipment_id)
+);
+
+-- Связь конструкторов с операциями
+CREATE TABLE constructor_operations (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    constructor_id INT NOT NULL,
+    operation_id INT NOT NULL,         -- ссылка на tech_operations
+    equipment_id INT,                  -- конкретное оборудование или NULL (любое)
+    default_params JSON,               -- {&quot;bleed&quot;:3,&quot;gap&quot;:0}
+    is_default BOOLEAN DEFAULT false,
+    is_optional BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    FOREIGN KEY (constructor_id) REFERENCES service_constructors(id),
+    FOREIGN KEY (operation_id) REFERENCES tech_operations(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id)
+);
+</code></pre>
+<h2 id="4-единицы-оборудования-характеристики-и-нормативы">4. Единицы оборудования: характеристики и нормативы</h2>
+<h3 id="41-резак-гильотинный-boway-bw-4908-v9">4.1. Резак гильотинный Boway BW-4908 V9</h3>
+<p>Категория: «Резаки гильотинные» (<code>guillotine_cutters</code>).</p>
+<p><strong>Шаблон параметров категории:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Код</th>
+<th>Тип</th>
+<th>Единица</th>
+<th>Влияет на время</th>
+<th>Обязателен</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. ширина реза</td>
+<td><code>max_cut_width</code></td>
+<td>number</td>
+<td>мм</td>
+<td>да</td>
+<td>да</td>
+</tr>
+<tr>
+<td>Макс. глубина реза</td>
+<td><code>max_cut_depth</code></td>
+<td>number</td>
+<td>мм</td>
+<td>да</td>
+<td>да</td>
+</tr>
+<tr>
+<td>Макс. высота стопы</td>
+<td><code>max_stack_height</code></td>
+<td>number</td>
+<td>мм</td>
+<td>да</td>
+<td>да</td>
+</tr>
+<tr>
+<td>Скорость реза</td>
+<td><code>cut_speed</code></td>
+<td>number</td>
+<td>мин/рез</td>
+<td>да</td>
+<td>да</td>
+</tr>
+<tr>
+<td>Точность позиционирования</td>
+<td><code>accuracy</code></td>
+<td>number</td>
+<td>мм</td>
+<td>нет</td>
+<td>нет</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Характеристики модели Boway BW-4908 V9</strong> (Boway, 2022):</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. ширина реза</td>
+<td>490 мм</td>
+</tr>
+<tr>
+<td>Макс. глубина реза</td>
+<td>450 мм</td>
+</tr>
+<tr>
+<td>Макс. высота стопы</td>
+<td>80 мм</td>
+</tr>
+<tr>
+<td>Скорость реза</td>
+<td>0.5 мин/рез</td>
+</tr>
+<tr>
+<td>Точность</td>
+<td>0.1 мм</td>
+</tr>
+<tr>
+<td>Совместимые материалы</td>
+<td>бумага плотностью 60–400 г/м²</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Формула расчёта времени резки</strong> (<code>applies_to = all</code>, результат в минутах):</p>
+<pre><code>time = setup_time + (stacks * cuts * cut_speed * (1 + (stack_height / max_stack_height) * 0.5))
+</code></pre>
+<p>Доступные переменные: <code>setup_time</code>, <code>stacks</code>, <code>cuts</code>, <code>cut_speed</code>, <code>stack_height</code>, <code>max_stack_height</code>.</p>
+<p>Полный вывод формулы, коэффициент уплотнения 0.85, расчёт высоты и числа стоп, число резов <code>cutsForGrid(cols, rows)</code> и примеры — в каноническом описании: <a href="04-calculators--cutting-lamination-services.html#2-%D0%B3%D0%B8%D0%BB%D1%8C%D0%BE%D1%82%D0%B8%D0%BD%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%B7%D0%BA%D0%B0-boway-bw-4908-v9">Резка, ламинация и доп. услуги, раздел 2 «Гильотинная резка»</a>. Таблица толщины бумаги по плотности (80=0.10 … 400=0.48) и формула <code>density × 0.0011</code> — в каноническом справочнике толщин ниже, раздел 8.1. Здесь приведена только карточка оборудования (характеристики модели).</p>
+<p><strong>Матрица скорости реза по плотности бумаги</strong> (пример из интерфейса настройки):</p>
+<table>
+<thead>
+<tr>
+<th>Материал</th>
+<th>Плотность, г/м²</th>
+<th>Скорость, мин/рез</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Бумага</td>
+<td>80–150</td>
+<td>0.5</td>
+</tr>
+<tr>
+<td>Бумага</td>
+<td>150–250</td>
+<td>0.4</td>
+</tr>
+<tr>
+<td>Бумага</td>
+<td>250–400</td>
+<td>0.3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-ламинатор-пакетный-fellowes-saturn-3-a3">4.2. Ламинатор пакетный Fellowes Saturn 3 A3</h3>
+<p>Категория: «Ламинаторы пакетные».</p>
+<p><strong>Шаблон параметров категории:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Код</th>
+<th>Тип</th>
+<th>Единица</th>
+<th>Возможные значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. формат</td>
+<td><code>max_format</code></td>
+<td>select</td>
+<td>—</td>
+<td>A3, A2, A1</td>
+</tr>
+<tr>
+<td>Мин. формат</td>
+<td><code>min_format</code></td>
+<td>select</td>
+<td>—</td>
+<td>A5, A4, A3</td>
+</tr>
+<tr>
+<td>Макс. толщина плёнки</td>
+<td><code>max_film_thickness</code></td>
+<td>number</td>
+<td>мкм</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Скорость ламинации</td>
+<td><code>lamination_speed</code></td>
+<td>number</td>
+<td>м/мин</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Температура макс.</td>
+<td><code>max_temperature</code></td>
+<td>number</td>
+<td>°C</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Типы плёнки</td>
+<td><code>film_types</code></td>
+<td>select</td>
+<td>—</td>
+<td>глянец, мат, софт-тач</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Характеристики модели Fellowes Saturn 3 A3</strong> (Fellowes, 2021):</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. формат</td>
+<td>A3</td>
+</tr>
+<tr>
+<td>Мин. формат</td>
+<td>A5</td>
+</tr>
+<tr>
+<td>Макс. толщина плёнки</td>
+<td>125 мкм</td>
+</tr>
+<tr>
+<td>Скорость ламинации</td>
+<td>0.8 м/мин</td>
+</tr>
+<tr>
+<td>Макс. температура</td>
+<td>130 °C</td>
+</tr>
+<tr>
+<td>Типы плёнки</td>
+<td>глянец, мат</td>
+</tr>
+<tr>
+<td>Совместимые материалы</td>
+<td>плёнка пакетная A3, A4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Матрица скорости ламинации</strong> (зависит от плотности и поверхности плёнки):</p>
+<table>
+<thead>
+<tr>
+<th>Тип</th>
+<th>Плотность плёнки, мкм</th>
+<th>Поверхность</th>
+<th>Ширина, мм</th>
+<th>Скорость, м/мин</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>film</td>
+<td>75–100</td>
+<td>глянец</td>
+<td>210</td>
+<td>0.9</td>
+<td>Тонкая глянцевая плёнка</td>
+</tr>
+<tr>
+<td>film</td>
+<td>100–125</td>
+<td>глянец</td>
+<td>210</td>
+<td>0.7</td>
+<td>Средняя глянцевая</td>
+</tr>
+<tr>
+<td>film</td>
+<td>125–175</td>
+<td>глянец</td>
+<td>210</td>
+<td>0.5</td>
+<td>Толстая глянцевая</td>
+</tr>
+<tr>
+<td>film</td>
+<td>75–125</td>
+<td>мат</td>
+<td>210</td>
+<td>0.6</td>
+<td>Матовая плёнка</td>
+</tr>
+</tbody>
+</table>
+<p>Примечание о столбце «Ширина, мм»: значение 210 — это поле <code>format_width</code> из таблицы скоростей (<code>equipment_speed_matrix</code>), которое в конструкторе задаёт условие «формат не уже указанной ширины» для применения строки скорости (210 ≈ ширина A4). Это не физический размер пакета: реальный размер пакета A3 по разделу 7.3 — 303×426 мм, A4 — 223×315 мм. То есть <code>format_width = 210</code> в матрице — параметр сопоставления формата, а не габарит плёнки.</p>
+<h3 id="43-плоттер-mimaki-cg-130">4.3. Плоттер Mimaki CG-130</h3>
+<p>Категория: «Плоттеры».</p>
+<p><strong>Шаблон параметров категории:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Код</th>
+<th>Тип</th>
+<th>Единица</th>
+<th>Возможные значения</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. ширина</td>
+<td><code>max_width</code></td>
+<td>number</td>
+<td>мм</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Макс. длина</td>
+<td><code>max_length</code></td>
+<td>number</td>
+<td>мм</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Макс. скорость</td>
+<td><code>max_speed</code></td>
+<td>number</td>
+<td>мм/сек</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Давление ножа</td>
+<td><code>knife_pressure</code></td>
+<td>number</td>
+<td>г</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Типы материалов</td>
+<td><code>material_types</code></td>
+<td>select</td>
+<td>—</td>
+<td>paper, film, vinyl, cardboard</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Характеристики модели Mimaki CG-130</strong> (Mimaki, 2022):</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Значение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Макс. ширина</td>
+<td>1300 мм</td>
+</tr>
+<tr>
+<td>Макс. длина</td>
+<td>2500 мм</td>
+</tr>
+<tr>
+<td>Макс. скорость</td>
+<td>800 мм/сек</td>
+</tr>
+<tr>
+<td>Давление ножа</td>
+<td>300 г</td>
+</tr>
+<tr>
+<td>Типы материалов</td>
+<td>paper, film, vinyl</td>
+</tr>
+<tr>
+<td>Совместимые материалы</td>
+<td>любые (<code>any</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Матрица скорости реза по материалам:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Материал</th>
+<th>Плотность</th>
+<th>Скорость, мм/сек</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>paper</td>
+<td>80–200</td>
+<td>500</td>
+<td>Бумага обычная</td>
+</tr>
+<tr>
+<td>film</td>
+<td>50–150</td>
+<td>350</td>
+<td>Плёнка</td>
+</tr>
+<tr>
+<td>vinyl</td>
+<td>100–300</td>
+<td>250</td>
+<td>Винил</td>
+</tr>
+<tr>
+<td>cardboard</td>
+<td>200–400</td>
+<td>150</td>
+<td>Картон</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Дополнительные временные параметры (штрафы на операции).</strong> Помимо скорости перемещения (макс. 800 мм/сек) и скорости реза, время плоттерной резки зависит от штрафов на повороты и переходы ножа. Эти значения — характеристики оборудования и используются в формуле времени:</p>
+<table>
+<thead>
+<tr>
+<th>Параметр</th>
+<th>Код</th>
+<th>Значение</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Разгон/торможение</td>
+<td><code>acceleration</code></td>
+<td>0.5 сек</td>
+<td>На каждом ускорении/замедлении</td>
+</tr>
+<tr>
+<td>Замедление на углу</td>
+<td><code>cornerSlowdown</code></td>
+<td>0.3 сек</td>
+<td>На каждый угол/поворот контура</td>
+</tr>
+<tr>
+<td>Переход между элементами</td>
+<td><code>moveBetweenItems</code></td>
+<td>1.0 сек</td>
+<td>Холостое перемещение ножа между контурами</td>
+</tr>
+<tr>
+<td>Стартовый прокол</td>
+<td><code>pierceStart</code></td>
+<td>2.0 сек</td>
+<td>Прокол материала в начале, один раз на лист</td>
+</tr>
+</tbody>
+</table>
+<p>Скорость реза дополнительно зависит от сложности контура (простая 500 / средняя 350 / сложная 250 / очень сложная 150 мм/сек), с собственным штрафом на углы (<code>cornerPenalty</code> 1.2 / 1.5 / 2.0 / 3.0). Полная формула времени плоттерной резки (<code>time_per_sheet = totalPathLength / speed + corners × 0.3 + (items − 1) × 1.0 + 2.0</code>, посекундно на лист, время настройки 5 мин) и примеры расчёта — в каноническом описании: <a href="04-calculators--cutting-lamination-services.html#3-%D0%BF%D0%BB%D0%BE%D1%82%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F-%D0%BA%D0%BE%D0%BD%D1%82%D1%83%D1%80%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%B7%D0%BA%D0%B0-mimaki-cg-130">Резка, ламинация и доп. услуги, раздел 3 «Плоттерная контурная резка»</a>.</p>
+<h3 id="44-ламинатор-рулонный-требования-к-параметрам">4.4. Ламинатор рулонный (требования к параметрам)</h3>
+<p>Конкретная модель в источнике не задана; перечислены требуемые характеристики: максимальная ширина ламинации, минимальная ширина, температура, плотность плёнки (влияет на скорость ламинации).</p>
+<h2 id="5-генерация-тз-для-производства">5. Генерация ТЗ для производства</h2>
+<p>При переходе заказа на участок система генерирует чёткое техническое задание с параметрами оборудования. Пример ТЗ на участок резки:</p>
+<pre><code>ТЕХНИЧЕСКОЕ ЗАДАНИЕ №123-РЕЗКА
+Заказ: Листовки А5, 5000 шт
+
+УЧАСТОК: Резка
+ОБОРУДОВАНИЕ: Boway BW-4908 V9
+ИСПОЛНИТЕЛЬ: Иванов П.Р.
+СРОК: 11.03.2026 18:00
+
+ИСХОДНЫЕ ДАННЫЕ
+  Материал: Бумага 250 г/м²
+  Формат листа: SRA3 (320×450)
+  Количество листов: 625
+  Раскладка: 4×2 (8 шт/лист)
+  Размер готового: А5 (148×210)
+
+ПАРАМЕТРЫ РЕЗКИ
+  Толщина бумаги: 0.30 мм
+  Макс. листов в стопе: 313
+  Рекомендуемая стопа: 313 листов
+  Количество стоп: 2
+  Высота стопы: 79.8 мм
+  Схема резов:
+    • 3 вертикальных реза
+    • 4 горизонтальных реза на каждую полосу
+    • Всего резов: 7 на стопу
+
+НАСТРОЙКИ ОБОРУДОВАНИЯ
+  Давление прижима: среднее
+  Скорость реза: 0.5 мин/рез
+  Точность: 0.1 мм
+  Дополнительно: использовать задний упор
+
+КОНТРОЛЬ КАЧЕСТВА
+  Проверить первую стопу
+  Допуск: ±0.5 мм
+  Проверить 5% готовой продукции
+</code></pre>
+<p>В этом примере высота стопы 313 листов × 0.30 мм ≈ 93.9 мм превышает макс. высоту стопы Boway 80 мм, однако в ТЗ указана высота 79.8 мм.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в примере ТЗ количество резов и «макс. листов в стопе 313» не согласуются с заявленной макс. высотой стопы Boway BW-4908 (80 мм при толщине бумаги 0.30 мм фактически даёт ~266 листов, а высота для 313 листов составила бы ~93.9 мм, а не 79.8 мм). Параметры примера требуют проверки.</p>
+<h2 id="6-привязка-оборудования-к-страницам-сайта-примеры-конструкторов">6. Привязка оборудования к страницам сайта (примеры конструкторов)</h2>
+<pre><code>САЙТ:
+├── /listovki-a4
+│   └── Конструктор: Листовки А4
+│       ├── Оборудование: Konica C6085
+│       ├── Операции: печать, резка гильотинная
+│       └── Параметры: вылеты 3 мм
+│
+├── /listovki-a5
+│   └── Конструктор: Листовки А5
+│       ├── Оборудование: Konica C6085
+│       ├── Операции: печать, резка гильотинная
+│       └── Параметры: вылеты 3 мм
+│
+├── /nakleiki-figurnye
+│   └── Конструктор: Наклейки фигурные
+│       ├── Оборудование: Konica C6085, Mimaki CG-130
+│       ├── Операции: печать, резка плоттерная
+│       └── Параметры: вылеты 2 мм, метки 8 мм
+│
+├── /laminirovanie-dokumentov
+│   └── Конструктор: Ламинирование документов
+│       ├── Оборудование: Fellowes Saturn 3
+│       ├── Операции: ламинация пакетная
+│       └── Параметры: обрезка краёв опционально
+</code></pre>
+<h2 id="7-справочник-материалов">7. Справочник материалов</h2>
+<p>Универсальная гибкая система: любой материал хранится с характеристиками, привязывается к оборудованию и форматам, используется в калькуляторах, контролируется по остаткам на складе.</p>
+<h3 id="71-категории-материалов">7.1. Категории материалов</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Категория (code)</th>
+<th>Назначение</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>PAPER</td>
+<td>Бумага для цифровой и офсетной печати</td>
+</tr>
+<tr>
+<td>2</td>
+<td>SPRING</td>
+<td>Пружины для брошюровки</td>
+</tr>
+<tr>
+<td>3</td>
+<td>GROMMET</td>
+<td>Люверсы для креплений</td>
+</tr>
+<tr>
+<td>4</td>
+<td>LAMINATION_PACKET</td>
+<td>Пакетная ламинация</td>
+</tr>
+<tr>
+<td>5</td>
+<td>LAMINATION_ROLL</td>
+<td>Рулонная ламинация</td>
+</tr>
+<tr>
+<td>6</td>
+<td>STAPLE</td>
+<td>Скобы для буклетмейкера</td>
+</tr>
+<tr>
+<td>7</td>
+<td>PHOTO_PAPER</td>
+<td>Бумага для фотопринтеров</td>
+</tr>
+<tr>
+<td>8</td>
+<td>STICKER_FILM</td>
+<td>Самоклеящаяся плёнка</td>
+</tr>
+<tr>
+<td>9</td>
+<td>WIDE_FORMAT_FILM</td>
+<td>Плёнка для широкоформатной печати</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CD_DISC</td>
+<td>Диски для печати</td>
+</tr>
+</tbody>
+</table>
+<p>Ключевое решение: каждый вариант материала — отдельная запись в БД (например, отдельные записи для глянцевой и матовой плёнки A3 125 мкм).</p>
+<h3 id="72-структура-бд-материалов">7.2. Структура БД материалов</h3>
+<pre><code class="language-sql">-- Главная таблица материалов
+CREATE TABLE materials (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    slug VARCHAR(100) UNIQUE,
+    category VARCHAR(50) NOT NULL,
+    description TEXT,
+    cost_price DECIMAL(10,2) NOT NULL,   -- закупочная цена
+    selling_price DECIMAL(10,2),         -- цена для клиента (если продаём как услугу)
+    unit VARCHAR(20) DEFAULT 'шт',       -- шт, лист, м, кг
+    stock_quantity DECIMAL(10,2) DEFAULT 0,
+    reserved_quantity DECIMAL(10,2) DEFAULT 0,
+    reorder_point DECIMAL(10,2) DEFAULT 0,  -- точка заказа
+    calculation_type ENUM('per_sheet','per_item','per_meter','per_set') DEFAULT 'per_item',
+    is_active BOOLEAN DEFAULT true,
+    sort_order INT DEFAULT 0,
+    attributes JSON,                     -- специфические атрибуты категории
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_category (category),
+    INDEX idx_active (is_active)
+);
+
+-- Привязка материалов к оборудованию
+CREATE TABLE material_equipment_compatibility (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    material_id INT NOT NULL,
+    equipment_id INT NOT NULL,
+    max_speed INT,                       -- ограничение скорости для материала
+    waste_coefficient DECIMAL(3,2) DEFAULT 1.0,  -- коэффициент отходов
+    notes TEXT,
+    is_active BOOLEAN DEFAULT true,
+    FOREIGN KEY (material_id) REFERENCES materials(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment_models(id),
+    UNIQUE KEY unique_compatibility (material_id, equipment_id)
+);
+
+-- Привязка материалов к форматам
+CREATE TABLE material_formats (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    material_id INT NOT NULL,
+    format_name VARCHAR(50) NOT NULL,    -- 'SRA3','A4','A3','custom'
+    width INT,
+    height INT,
+    cost_price DECIMAL(10,2),            -- цена для формата (если отличается)
+    is_default BOOLEAN DEFAULT false,
+    FOREIGN KEY (material_id) REFERENCES materials(id),
+    INDEX idx_material_format (material_id, format_name)
+);
+</code></pre>
+<h3 id="73-примеры-материалов-с-атрибутами-и-ценами">7.3. Примеры материалов с атрибутами и ценами</h3>
+<p><strong>Бумага (PAPER):</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Название</th>
+<th>Закупка, руб</th>
+<th>Цена клиенту, руб</th>
+<th>Ед.</th>
+<th>Тип расчёта</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>101</td>
+<td>Мелованная 130 г/м²</td>
+<td>3.00</td>
+<td>5.00</td>
+<td>лист</td>
+<td>per_sheet</td>
+<td>density 130, glossy, coated, white</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Мелованная 200 г/м²</td>
+<td>4.50</td>
+<td>—</td>
+<td>лист</td>
+<td>per_sheet</td>
+<td>density 200, glossy, coated, white</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Офсетная 80 г/м²</td>
+<td>2.00</td>
+<td>—</td>
+<td>лист</td>
+<td>per_sheet</td>
+<td>density 80, matte, offset, white</td>
+</tr>
+<tr>
+<td>104</td>
+<td>Дизайнерская бумага</td>
+<td>8.00</td>
+<td>—</td>
+<td>лист</td>
+<td>per_sheet</td>
+<td>density 250, textured, designer, cream</td>
+</tr>
+</tbody>
+</table>
+<p>Поле «Цена клиенту» — это <code>selling_price</code> из DDL (стр. 513), используется, когда материал продаётся как отдельная услуга. Для Мелованной 130 г/м² в интерфейсе настройки материала задана закупочная цена 3.00 руб и цена для клиента 5.00 руб. В карточке материала для менеджера (CRM) та же бумага показана через наценку: закупочная цена 3.00 руб/лист, наценка 100% → цена для клиента 6.00 руб/лист.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: цена для клиента по Мелованной 130 г/м² расходится между экранами — в форме настройки материала задано поле <code>selling_price</code> = 5.00 руб, а карточка менеджера выводит 6.00 руб/лист (закупка 3.00 + наценка 100%). Нужно определить, что является источником истины: явно заданная <code>selling_price</code> или цена, рассчитанная по наценке.</p>
+<p>Привязка к форматам для бумаги 101: SRA3 (320×450) — 3.00 руб (по умолчанию); A4 (210×297) — 1.50 руб; A3 (297×420) — 2.50 руб.</p>
+<p><strong>Пружины (SPRING):</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Название</th>
+<th>Закупка, руб</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>200</td>
+<td>Пружина металл 6 мм</td>
+<td>15.00</td>
+<td>diameter 6, metal, листов(80г): 10–20</td>
+</tr>
+<tr>
+<td>201</td>
+<td>Пружина металл 8 мм</td>
+<td>18.00</td>
+<td>diameter 8, metal, black, листов(80г): 21–35, толщина блока(80г): 3.6–5.5 мм</td>
+</tr>
+<tr>
+<td>202</td>
+<td>Пружина пластик 10 мм</td>
+<td>22.00</td>
+<td>diameter 10, plastic, white, листов(80г): 36–50</td>
+</tr>
+</tbody>
+</table>
+<p>Базовые характеристики пружины металл 8 мм (для бумаги 80 г/м²): мин. листов 21, макс. листов 35; мин. толщина блока 3.6 мм, макс. толщина блока 5.5 мм. Эти толщинные границы — базовые (для 80 г/м²) и используются вместе с диапазоном листов при автоматическом подборе пружины (раздел 8.2).</p>
+<p>Металлическая пружина 6 мм (ID 200, 15.00 руб, диапазон 10–20 листов для 80 г/м²) фигурирует как альтернативный вариант в калькуляторе брошюр (раздел 8.2), но в исходном каталоге материалов отдельной полной карточки не имела.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: пружина металл 6 мм встречается только как альтернативный вариант в калькуляторе подбора, без полной карточки в каталоге материалов (цвет, slug, остатки не заданы). Нужно завести её как полноценную запись справочника наравне с 8 мм и 10 мм.</p>
+<p><strong>Люверсы (GROMMET):</strong> 301 — 8 мм, 2.50 руб (silver, brass); 302 — 12 мм, 3.50 руб (gold, brass).</p>
+<p><strong>Ламинация пакетная (LAMINATION_PACKET):</strong></p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Название</th>
+<th>Закупка, руб</th>
+<th>Атрибуты</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>401</td>
+<td>Плёнка A3 глянцевая 125 мкм</td>
+<td>18.00</td>
+<td>реальный размер 303×426, thickness 125, glossy</td>
+</tr>
+<tr>
+<td>402</td>
+<td>Плёнка A4 матовая 100 мкм</td>
+<td>12.00</td>
+<td>реальный размер 223×315, thickness 100, matte</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: закупочные цены пакетной плёнки расходятся между разделами. В одном месте «Плёнка A3 125 мкм глянцевая» = 18.00 руб, «Плёнка A4 125 мкм глянцевая» = 5.00, «Плёнка A3 125 мкм матовая» = 15.00; в другом фрагменте используются те же названия с ценами 10.00 (A3 глянец), 5.00 (A4 глянец), 15.00 (A3 мат). Требуется единый прайс.</p>
+<p><strong>Ламинация рулонная (LAMINATION_ROLL):</strong> 501 — рулон 610 мм глянец, 150.00 руб/пог.м (thickness 80); 502 — рулон 914 мм матовая, 220.00 руб/пог.м (thickness 125).</p>
+<p><strong>Скобы (STAPLE):</strong> 601 — 24/6, 0.50 руб (макс. 30 листов); 602 — 24/8, 0.70 руб (макс. 50 листов).</p>
+<p><strong>Фотобумага (PHOTO_PAPER):</strong> 701 — A4 глянец 230 г/м², 15.00 руб; 702 — A4 матовая 200 г/м², 12.00 руб (односторонняя).</p>
+<p><strong>Самоклеящаяся плёнка (STICKER_FILM):</strong> 801 — белая SRA3, 25.00 руб (backing with_notches, thickness 0.1); 802 — прозрачная SRA3, 35.00 руб (without_notches, thickness 0.12).</p>
+<p><strong>Плёнка широкоформатная (WIDE_FORMAT_FILM):</strong> 901 — 1060 мм матовая, 350.00 руб/пог.м (self-adhesive); 902 — баннерная ткань 1500 мм, 250.00 руб (banner, вес 440).</p>
+<p><strong>Диски (CD_DISC):</strong> 1001 — CD-R, 15.00 руб (700MB, printable); 1002 — DVD-R, 25.00 руб (4.7GB, printable).</p>
+<h2 id="8-расчётные-параметры-материалов-нормативы-и-формулы">8. Расчётные параметры материалов (нормативы и формулы)</h2>
+<h3 id="81-толщина-и-вес-бумаги-канонический-справочник-толщин">8.1. Толщина и вес бумаги (канонический справочник толщин)</h3>
+<p>Это единый справочник толщины бумаги по плотности для всей системы. На него ссылаются все расчёты, использующие толщину листа: высота стопы при гильотинной резке (<a href="04-calculators--cutting-lamination-services.html#2-%D0%B3%D0%B8%D0%BB%D1%8C%D0%BE%D1%82%D0%B8%D0%BD%D0%BD%D0%B0%D1%8F-%D1%80%D0%B5%D0%B7%D0%BA%D0%B0-boway-bw-4908-v9">Резка, ламинация и доп. услуги, раздел 2</a>) и подбор пружины / автоёмкость брошюры (<a href="04-calculators--brochures.html#8-%D0%BF%D0%BE%D0%B4%D0%B1%D0%BE%D1%80-%D0%BF%D1%80%D1%83%D0%B6%D0%B8%D0%BD%D1%8B">Калькулятор брошюр, раздел 8</a>).</p>
+<p><strong>Толщина листа задаётся двумя способами.</strong></p>
+<p><strong>(1) По формуле</strong> (используется при подборе пружины и автоёмкости брошюры):</p>
+<pre><code>толщина_листа_мм = плотность * 0.0011
+</code></pre>
+<p>Примеры: 130 г/м² → 130 × 0.0011 = 0.143 мм; 80 г/м² → 0.088 мм.</p>
+<p><strong>(2) По предустановленной таблице</strong> <code>paper_density_thickness</code> (используется при расчёте высоты стопы для гильотины и в карточках материалов). Значение по умолчанию при отсутствии плотности в таблице — <code>0.15 мм</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Плотность, г/м²</th>
+<th>Толщина, мм</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>80</td>
+<td>0.10</td>
+</tr>
+<tr>
+<td>90</td>
+<td>0.11</td>
+</tr>
+<tr>
+<td>100</td>
+<td>0.12</td>
+</tr>
+<tr>
+<td>115</td>
+<td>0.14</td>
+</tr>
+<tr>
+<td>130</td>
+<td>0.16</td>
+</tr>
+<tr>
+<td>150</td>
+<td>0.18</td>
+</tr>
+<tr>
+<td>170</td>
+<td>0.20</td>
+</tr>
+<tr>
+<td>200</td>
+<td>0.24</td>
+</tr>
+<tr>
+<td>250</td>
+<td>0.30</td>
+</tr>
+<tr>
+<td>300</td>
+<td>0.36</td>
+</tr>
+<tr>
+<td>350</td>
+<td>0.42</td>
+</tr>
+<tr>
+<td>400</td>
+<td>0.48</td>
+</tr>
+</tbody>
+</table>
+<p>Формула веса листа:</p>
+<pre><code>вес_листа_г = площадь_листа_м2 * плотность
+</code></pre>
+<p>Размеры форматов (для расчёта площади): SRA3 0.32×0.45 м, A4 0.21×0.297 м, A3 0.297×0.42 м, A5 0.148×0.21 м, A6 0.105×0.148 м.</p>
+<p>Пример для SRA3 130 г/м²: (0.32 × 0.45) × 130 = 18.72 г на лист; вес 1000 листов ≈ 18.7 кг.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС (единый, сведён сюда из brochures.md и cutting-lamination-services.md): формула и таблица дают несовместимые значения толщины одного листа — для 80 г/м² формула даёт 0.088 мм, таблица 0.10 мм; для 130 г/м² формула даёт 0.143 мм, таблица 0.16 мм. При расчёте корешка пружины и высоты стопы значения расходятся. Нужно выбрать единый источник толщины (формула <code>density × 0.0011</code> либо таблица <code>paper_density_thickness</code>) и применять его во всех модулях.</p>
+<h3 id="82-автоматический-подбор-пружины">8.2. Автоматический подбор пружины</h3>
+<p>Логика подбора пружины по количеству листов и плотности бумаги:</p>
+<pre><code>sheet_thickness  = paper_density * 0.0011        # толщина одного листа, мм
+spine_thickness  = sheets * sheet_thickness      # толщина корешка (блока)
+required_thickness = spine_thickness * 1.1       # с запасом (10%)
+
+# Пересчёт лимитов листов пружины под текущую плотность (база 80 г/м²)
+ratio        = paper_density / 80
+adjusted_min = ceil(min_sheets_80g / ratio)
+adjusted_max = floor(max_sheets_80g / ratio)
+# Пружина подходит, если adjusted_min &lt;= sheets &lt;= adjusted_max
+</code></pre>
+<p>Предупреждение: при <code>spine_thickness &gt; 8</code> мм рекомендуется металлическая пружина.</p>
+<p>Пример (30 листов, бумага 130 г/м²):</p>
+<ul>
+<li>толщина корешка: 30 × 0.16 = 4.8 мм;</li>
+<li>коэффициент пересчёта плотности 80→130: 1.6;</li>
+<li>эффективное количество листов: 30 / 1.6 = 19 листов (эквивалент 80 г/м²);</li>
+<li>пересчёт диапазона металлической пружины 8 мм (21–35 листов для 80 г/м²) под 130 г/м² → 13–22 листа (по другому расчёту 14–24).</li>
+</ul>
+<p>Тираж 30 листов укладывается в исходный диапазон 80 г/м², пружина 8 мм подбирается.</p>
+<p><strong>Альтернативные варианты, которые калькулятор отбраковывает</strong> (для тех же 30 листов 130 г/м²):</p>
+<table>
+<thead>
+<tr>
+<th>Пружина</th>
+<th>Цена, руб</th>
+<th>Диапазон (80 г/м²), листов</th>
+<th>Диапазон под 130 г/м², листов</th>
+<th>Итог</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Металлическая 8 мм</td>
+<td>18</td>
+<td>21–35</td>
+<td>13–22</td>
+<td>подходит</td>
+</tr>
+<tr>
+<td>Пластиковая 10 мм</td>
+<td>22</td>
+<td>36–50</td>
+<td>23–31</td>
+<td>не подходит (тираж 30 ниже диапазона)</td>
+</tr>
+<tr>
+<td>Металлическая 6 мм</td>
+<td>15</td>
+<td>10–20</td>
+<td>6–12</td>
+<td>не подходит (тираж 30 выше диапазона)</td>
+</tr>
+</tbody>
+</table>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в примерах подбора пружины используются разные коэффициенты пересчёта плотности: один раз 80→130 даёт коэффициент 1.45 (по толщине 0.16/0.11), другой раз — коэффициент 1.6 (80→130 напрямую как 130/80). Это даёт разные пересчитанные диапазоны (14–24 против 13–22 листов). Нужно унифицировать метод пересчёта.</p>
+<h3 id="83-расход-рулонной-плёнки">8.3. Расход рулонной плёнки</h3>
+<pre><code>area_per_item_m2 = (item_width_mm * item_height_mm) / 1_000_000
+total_area_m2    = area_per_item_m2 * quantity * waste_coefficient   # waste = 1.1
+linear_meters    = total_area_m2 / (roll_width_mm / 1000)
+cost             = linear_meters * cost_price
+</code></pre>
+<h3 id="84-совместимость-пакетной-плёнки-a3-с-форматами-изделий">8.4. Совместимость пакетной плёнки A3 с форматами изделий</h3>
+<p>Для пакета A3 (303×426 мм):</p>
+<table>
+<thead>
+<tr>
+<th>Формат изделия</th>
+<th>Влезает, шт</th>
+<th>Требуется резка</th>
+<th>Примечание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A4</td>
+<td>2</td>
+<td>да</td>
+<td>Режется пополам</td>
+</tr>
+<tr>
+<td>A5</td>
+<td>4</td>
+<td>да</td>
+<td>—</td>
+</tr>
+<tr>
+<td>A6</td>
+<td>8</td>
+<td>да</td>
+<td>—</td>
+</tr>
+<tr>
+<td>A3</td>
+<td>1</td>
+<td>нет</td>
+<td>Точное совпадение</td>
+</tr>
+</tbody>
+</table>
+<h3 id="85-расчёт-количества-листов-и-веса-заказа-для-доставки">8.5. Расчёт количества листов и веса заказа (для доставки)</h3>
+<p>Это каноническое описание расчёта веса заказа для доставки. Из калькулятора резки/ламинации на него даётся ссылка (см. <a href="04-calculators--cutting-lamination-services.html#8-%D1%80%D0%B0%D1%81%D1%87%D1%91%D1%82-%D0%B2%D0%B5%D1%81%D0%B0-%D0%B8-%D0%BF%D0%BB%D0%BE%D1%82%D0%BD%D0%BE%D1%81%D1%82%D0%B8-%D0%B1%D1%83%D0%BC%D0%B0%D0%B3%D0%B8-%D0%B4%D0%BB%D1%8F-%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B8">Резка, ламинация и доп. услуги, раздел 8</a>).</p>
+<pre><code>sheets      = ceil(qty / items_per_sheet)
+sheetArea   = (width × height) / 1 000 000        # м²
+sheetWeight = sheetArea × density                 # граммы
+вес_заказа_г = sum( sheetWeight × sheets )         # = площадь_листа_м2 × плотность × sheets
+totalKg     = вес_заказа_г / 1000
+</code></pre>
+<p>Справочные размеры листа: A4 210×297, A5 148×210, A6 105×148, SRA3 320×450 (мм).</p>
+<p>Пример отображения клиенту: листовки A4 130 г/м², 100 шт → 50 листов SRA3; вес одного листа SRA3 ≈ 18.7 г; общий вес 50 × 18.7 = 935 г ≈ 0.94 кг.</p>
+<p>Расчёт стоимости доставки по весу (демо-логика): до 100 кг — бесплатно; свыше — 50 руб за каждые начатые 10 кг.</p>
+<p>Дополнительная опция доставки в интерфейсе клиента: срочная доставка в субботу (+500 руб) — отдельный платный чекбокс, не зависящий от веса заказа.</p>
+<p>⚠️ ОТКРЫТЫЙ ВОПРОС: в примере вес считается по площади SRA3 (320×450), хотя изделие — листовки А4; при этом порог бесплатной доставки 100 кг для печатной продукции выглядит нереалистично высоким (вероятно, демо-значение). Параметры доставки требуют уточнения.</p>
+<h2 id="9-справочник-форматов">9. Справочник форматов</h2>
+<ul>
+<li><strong>Стандартные</strong>: A4, A3, SRA3, A5, A6, евро.</li>
+<li><strong>Нестандартные</strong>: произвольные размеры (custom).</li>
+<li><strong>Спецформаты для C6085</strong>: 330×487, 330×762.</li>
+</ul>
+<p>Размеры стандартных форматов (мм): A4 210×297, A3 297×420, A5 148×210, A6 105×148, SRA3 320×450.</p>
+<p>Учёт вылетов настраивается на уровне конструктора услуги (правила <code>bleed_rules</code>): вылеты могут быть 0 мм (печать на готовый формат, совпадающий с бумагой), 3 мм (резка под стандарт меньшего размера) или 2 мм (нестандартный размер). Само управление вылетами и формулы относятся к разделу конструкторов услуг (admin/constructors) и здесь приводятся только как справочная база форматов.</p>
+<h2 id="10-справочник-цветности">10. Справочник цветности</h2>
+<p>Типы печати (цветность): 1+0, 1+1, 4+0, 4+4.</p>
+<h2 id="11-справочник-операций">11. Справочник операций</h2>
+<ul>
+<li><strong>Печатные</strong>: цветность 1+0, 1+1, 4+0, 4+4.</li>
+<li><strong>Послепечатные</strong>: резка, биговка, фальцовка, ламинация.</li>
+<li><strong>Сборочные</strong>: брошюровка на скобу/пружину (в разработке).</li>
+</ul>
+<h2 id="12-что-требует-доработки">12. Что требует доработки</h2>
+<ul>
+<li>Интерфейс ввода формул — чтобы менеджер мог писать простые выражения без программиста.</li>
+<li>Валидация зависимостей — проверка совместимости материалов и оборудования.</li>
+<li>Интеграция с производственным календарём — загрузка оборудования.</li>
+<li>Обратная связь от производства — фактическое время vs расчётное.</li>
+</ul>
+</article>
+  </main>
+  <aside class="toc-col"><nav class="toc"><div class="toc__title">На этой странице</div><ul><li class="lvl2"><a href="#1-базовые-справочники-статус">1. Базовые справочники (статус)</a></li><li class="lvl3"><a href="#11-структура-базовых-справочников-sql">1.1. Структура базовых справочников (SQL)</a></li><li class="lvl3"><a href="#12-привязка-к-принтерам-цены-и-возможности">1.2. Привязка к принтерам (цены и возможности)</a></li><li class="lvl2"><a href="#2-печатное-оборудование-konica-c6085-и-c3070l">2. Печатное оборудование: Konica C6085 и C3070L</a></li><li class="lvl3"><a href="#21-матрица-скоростей-печати-printer_speed_matrix">2.1. Матрица скоростей печати (`printer_speed_matrix`)</a></li><li class="lvl3"><a href="#22-коэффициенты-форматов-format_speed_coefficients">2.2. Коэффициенты форматов (`format_speed_coefficients`)</a></li><li class="lvl3"><a href="#23-спецформаты-для-c6085">2.3. Спецформаты для C6085</a></li><li class="lvl2"><a href="#3-универсальный-конструктор-оборудования">3. Универсальный конструктор оборудования</a></li><li class="lvl3"><a href="#31-четыре-уровня-конструктора">3.1. Четыре уровня конструктора</a></li><li class="lvl3"><a href="#32-параметры-по-категориям-требования">3.2. Параметры по категориям (требования)</a></li><li class="lvl3"><a href="#33-структура-бд-конструктора">3.3. Структура БД конструктора</a></li><li class="lvl3"><a href="#34-привязка-конструктора-к-оборудованию-и-операциям">3.4. Привязка конструктора к оборудованию и операциям</a></li><li class="lvl2"><a href="#4-единицы-оборудования-характеристики-и-нормативы">4. Единицы оборудования: характеристики и нормативы</a></li><li class="lvl3"><a href="#41-резак-гильотинный-boway-bw-4908-v9">4.1. Резак гильотинный Boway BW-4908 V9</a></li><li class="lvl3"><a href="#42-ламинатор-пакетный-fellowes-saturn-3-a3">4.2. Ламинатор пакетный Fellowes Saturn 3 A3</a></li><li class="lvl3"><a href="#43-плоттер-mimaki-cg-130">4.3. Плоттер Mimaki CG-130</a></li><li class="lvl3"><a href="#44-ламинатор-рулонный-требования-к-параметрам">4.4. Ламинатор рулонный (требования к параметрам)</a></li><li class="lvl2"><a href="#5-генерация-тз-для-производства">5. Генерация ТЗ для производства</a></li><li class="lvl2"><a href="#6-привязка-оборудования-к-страницам-сайта-примеры-конструкторов">6. Привязка оборудования к страницам сайта (примеры конструкторов)</a></li><li class="lvl2"><a href="#7-справочник-материалов">7. Справочник материалов</a></li><li class="lvl3"><a href="#71-категории-материалов">7.1. Категории материалов</a></li><li class="lvl3"><a href="#72-структура-бд-материалов">7.2. Структура БД материалов</a></li><li class="lvl3"><a href="#73-примеры-материалов-с-атрибутами-и-ценами">7.3. Примеры материалов с атрибутами и ценами</a></li><li class="lvl2"><a href="#8-расчётные-параметры-материалов-нормативы-и-формулы">8. Расчётные параметры материалов (нормативы и формулы)</a></li><li class="lvl3"><a href="#81-толщина-и-вес-бумаги-канонический-справочник-толщин">8.1. Толщина и вес бумаги (канонический справочник толщин)</a></li><li class="lvl3"><a href="#82-автоматический-подбор-пружины">8.2. Автоматический подбор пружины</a></li><li class="lvl3"><a href="#83-расход-рулонной-плёнки">8.3. Расход рулонной плёнки</a></li><li class="lvl3"><a href="#84-совместимость-пакетной-плёнки-a3-с-форматами-изделий">8.4. Совместимость пакетной плёнки A3 с форматами изделий</a></li><li class="lvl3"><a href="#85-расчёт-количества-листов-и-веса-заказа-для-доставки">8.5. Расчёт количества листов и веса заказа (для доставки)</a></li><li class="lvl2"><a href="#9-справочник-форматов">9. Справочник форматов</a></li><li class="lvl2"><a href="#10-справочник-цветности">10. Справочник цветности</a></li><li class="lvl2"><a href="#11-справочник-операций">11. Справочник операций</a></li><li class="lvl2"><a href="#12-что-требует-доработки">12. Что требует доработки</a></li></ul></nav></aside>
+</div>
+<div class="scrim" onclick="document.body.classList.remove('nav-open')"></div>
+<div class="cmdk" id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Поиск по базе знаний">
+  <div class="cmdk__backdrop" data-close></div>
+  <div class="cmdk__panel" role="combobox" aria-expanded="true" aria-haspopup="listbox">
+    <div class="cmdk__head">
+      <svg class="ico" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+      <input id="q" class="cmdk__input" type="text" placeholder="Поиск по разделам и подзаголовкам…" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Поисковый запрос">
+      <button class="cmdk__esc" type="button" data-close aria-label="Закрыть">esc</button>
+    </div>
+    <div id="results" class="cmdk__results" role="listbox"></div>
+    <div class="cmdk__foot">
+      <span class="cmdk__hintkey"><kbd>↑</kbd><kbd>↓</kbd> навигация</span>
+      <span class="cmdk__hintkey"><kbd>↵</kbd> открыть</span>
+      <span class="cmdk__hintkey"><kbd>esc</kbd> закрыть</span>
+      <span class="cmdk__powered">поиск MiniSearch</span>
+    </div>
+  </div>
+</div>
+<script src="assets/minisearch.js" defer></script>
+<script src="assets/search.js" defer></script>
+</body>
+</html>
